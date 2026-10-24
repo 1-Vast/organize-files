@@ -1,0 +1,4 @@
+interface:
+  display_name: "文件科学整理"
+  short_description: "深度分类文件与文件夹，整合报告和导航，形成科学有序、可追溯的资料结构"
+  default_prompt: "使用 $organize-files 深度整理指定文件或文件夹：深入分类混杂内容，整合零散报告，优化命名和导航，保留核心配套并验证其他 agent 能理解和使用；仅在已有授权内清理文件。"
