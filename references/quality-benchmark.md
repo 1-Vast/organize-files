@@ -89,16 +89,57 @@ python scripts/benchmark_organization.py --operations 100 --baseline-ops "$env:T
 
 ## 端到端耗时与重复工作
 
-先定义本轮任务和固定输入：深度重构、功能开发、只读维护、软件测试及远端发布分别计时。不能把一次包含开发/调试/等待CI的任务，与已整理项目的轻量检查比较并宣称提速。50%端到端降时是待验证目标；同一模型、预算、输入及质量约束的对照未做时不报达标。
+先定义本轮任务和固定输入：深度重构、功能开发、只读维护、软件测试及远端发布分别计时。不能把一次包含开发/调试/等待CI的任务，与已整理项目的轻量检查比较并宣称提速。30%–50%端到端降时是待验证目标；同一模型、预算、输入及质量约束的对照未做时不报达标。
+
+### 动态阅读与快速收口
+
+从用户目标、完整变化清单、已有核验及未解决问题决定深度，不用固定文件数量阈值。下表是决策条件，无需另建永久任务规划数据库：
+
+| 深度 | 进入条件 | 必要工作与停止条件 |
+|---|---|---|
+| 深度重构 | 用户明确要求，或现有综合/依赖/覆盖不足以完成目标 | 理解拟替代资料，按科研问题综合并核对独有事实；完整覆盖、现行调用及恢复验收通过才收口 |
+| 局部增量 | 局部内容/依赖变化，出现矛盾，或仍有影响本轮目标的问题 | 深读变化及影响闭包；相关结论、引用和行为已核验，未解决差异有明确状态后收口 |
+| 快速结束 | 仅维护或检查；范围/保护策略/目标一致；相关已有结果仍有效；无新增影响且无本轮待处理问题 | 复用有效检查，简要交付范围与结果；不重新综合、改写稳定报告或为本轮增加永久文件 |
+
+元数据无变化只支持候选筛选，不能单独证明上述快速结束条件。排除范围外的来源、环境变化、未核验来源及未完成的既定整理不能被“零变化”隐藏；不确定时只补足该项证据。深度重构请求即使没有新增文件也照常完成，不以快速结束代替用户目标。无变化检查的结论也不自动证明项目已经全量科学整理。
+
+阅读采用入口→来源定位/检索→相关段落→必要全文。每次深入应对应一个会改变处置的疑问，例如条件是否不同、数值属于哪个端点、阴性结果是否其实为执行失败。优先重要结论及其反证，不因扩展名或篇幅机械全读。拟删除或语义替代资料仍须全文理解，主动尝试找出目标报告未正确保留的任一独有事实；找到反例就补齐或保留源件。任务内只复用绑定当前内容身份、事实及位置的记录（`scripts/task_context.py`），矛盾、来源变化、范围/依赖改变或破坏性动作触发相关复核；摘要缓存不能代替删除前哈希和语义覆盖。
+
+独立查询合批返回带来源身份的紧凑记录，让模型集中处理冲突和取舍。用户授权多代理时，只并行互不依赖主题的读取/分析，交付事实位置、反例及未决问题，由一个执行者修改共享报告、计划与索引。先判断启动开销和共享依赖是否抵消收益，不为凑代理数重复阅读相同全文。
+
+`task_context.py`是同一Python进程内的短期工作结果，不是后台服务或跨会话数据库。将`scripts`放入Python模块路径后使用：
+
+```python
+from task_context import TaskContext
+context = TaskContext(root, opaque=('data/raw', 'sealed'))
+batch = context.batch([
+    {'source_id': 'reports/result.md', 'start_line': 12, 'end_line': 26},
+    {'source_id': 'reports/protocol.md', 'start_line': 1, 'end_line': 20},
+])
+if batch['complete']:
+    context.record('finding', ['reports/result.md', 'reports/protocol.md'],
+                   facts={'interpretation': '已实际阅读摘录后填写的事实声明'},
+                   unresolved_questions=['尚未核对误差条口径'])
+    context.result('finding')              # 复用固定快照；未决项保持needs_review
+    context.result('finding', fresh=True)  # 重读所选来源及依赖，变化则stale
+```
+
+`excerpt`/`batch`返回source_id、字节哈希、行号及限长原文；`record`保留这些位置、事实声明、记录依赖与未决问题，不执行LLM自动抽取。`snapshot_reusable`只指已读快照，不能声明磁盘当前无变化；`fresh=True`失败或字节改变不会回退到旧缓存。根及opaque策略固定，改变目标/范围另建context。可信`source_resolver(id)->bytes`仅显式传入，保护项在调用前拒绝；其内部I/O无法计量，大小限制也不能阻止任意外部回调先行读取大文件。缓存不跨进程自动保存；多个工具往返使用同一个已持有context的会话，或将读/抽取/复核合批在一次进程内，不能重新启动Python后声称缓存命中。拟删除仍单独完成当前哈希、全来源覆盖和恢复验收。
+
+真实比较分别固定首次深度整理、无变化二次检查、局部增量三个任务。每类用同一初始快照、模型、工具/质量约束和预算，对比原版与新版，评价者单独持有事实答案；记录从接收任务到验收的墙钟、实际调用/Token、重复读取、事实覆盖、证据恢复与当前行为。局部增量应检查受影响对象没有漏查、无关主题没有重写；快速结束应检查未决问题和深度请求不会被跳过。未执行同条件Agent对照时，工具计时与人工策略描述不能填作端到端收益。
 
 先读入口与存储政策，明确 `--opaque` 后盘点一次；本轮无目录变化就复用结果。示例快照必须在项目外，包含文件元数据及必要排除范围，不能上传原始会话日志：
 
 ```powershell
 python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --snapshot-out C:/temporary/before.json
 python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --previous C:/temporary/before.json --snapshot-out C:/temporary/after.json
+# 超出stdout预览的全部变化写到项目外，不覆盖previous或snapshot
+python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --previous C:/temporary/before.json --changes-out C:/temporary/changes.json
 ```
 
 第二次仍遍历未排除目录，变化报告只用于挑选候选。`entry_stat_calls` 是目录项stat接口调用次数，未等价于底层磁盘I/O；`source_payload_files_opened=0`仅针对盘点。默认保护不能识别项目所有语义，必须先显式排除数据/包/环境；快照大小写按平台规则处理，不能借父级链接写回项目内。
+
+默认stdout只保留`change_preview`及每类`change_preview_truncated`，截断不是变化范围。API调用`delta(..., include_changes=True)`取得完整`change_paths`，或读取`--changes-out`中的`changes`；仅含baseline/added/metadata_changed/missing，不把未变全量路径再次送入上下文。敏感文件、目录和链接均仅计数，不记录敏感相对名。
 
 将实际流程分段记录在外部任务目录：盘点/快照，来源读取与哈希，Agent理解/综合，计划执行/恢复同步，质量检查及发布等待。记录工具调用、分析对象和重复读取；没有可靠的文件读取/模型计量时，相关指标写N/A，不用字符数推算Token。只重查变化对象及依赖；批量读必要引文并保留来源/行号，避免先输出整份报告、随后逐段重读。严格快照、事实门控可在同一短进程共享已固定身份的来源字节；活文件、删除前或无法证实稳定时仍重新核验。源读取器调用数、唯一源读取数及缓存命中分别记录，不能混为零读取。
 

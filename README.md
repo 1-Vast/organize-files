@@ -205,6 +205,7 @@ gh repo clone 1-Vast/organize-files $skillPath
 - `scripts/organization_ops.py`：显式文件计划的 `dry-run`、`apply` 和 `rollback`；修改前验证外置恢复包，回滚拒绝覆盖后续改动。`protected_sources` 限制源、目标和替代源，默认敏感路径也在读取前拒绝。它是可恢复的逐文件执行，不是跨文件原子事务或完整 NTFS 备份，仍受环境审批约束。
 - `scripts/evidence_index.py`：`validate`、`snapshot` 严格校验，`scan` 只筛选元数据候选并保持未验证，`impact` 只接受严格快照、传播变化/错误及保护依赖。不能用大小或时间相同代替完整性验证。
 - `scripts/workspace_scout.py`：一次元数据盘点及外部快照；后续输出变化候选，仍遍历未排除目录。先声明项目保护/opaque范围，不读payload，不用元数据相同授权删除。
+- `scripts/task_context.py`：单进程任务内批量摘录和事实结果复用，绑定哈希、来源行号、依赖及未决问题；固定快照不代表当前文件，`fresh=True`重读后检查失效，不跨任务自动保存。
 - `scripts/research_navigation.py`：检查登记研究、索引和正文章节的身份对应；静态候选须结合内容复核，不能自动判为科学错误。
 - `scripts/claim_coverage.py`：Python API 将选定事实的六维契约、来源字节与报告引文绑定到审阅记录；字段匹配不能证明语义蕴含、全量覆盖或授权删除。
 - `scripts/benchmark_organization.py`：对显式索引测严格校验与筛选的耗时/I/O，或在外部合成目录测文件预演；`--trace`汇总显式本地Codex日志的实际用量和运行时区间，不输出原文。只输出JSON，不改项目报告；操作示例及计量边界见[质量基准](references/quality-benchmark.md)。
@@ -222,6 +223,13 @@ gh repo clone 1-Vast/organize-files $skillPath
 `blocked by policy` 与操作系统“权限不足”不同。应检查实际审批配置及规则，按工具返回处理；本 skill 不绕过平台审批，也不承诺通过更换命令消除未知拒绝。受阻部分保留并明确说明，其余独立工作继续。
 
 ## 更新日志
+
+### 2026-10-25 · Agent工作过程优化
+
+- 三名代理各负责一个问题：动态阅读及快速收口、任务内证据复用、完整增量清单及敏感元数据脱敏。按影响和未决问题选择深度重构／局部增量／快速结束；元数据无变化不能跳过明确的深度请求或未完成工作。独立主题只并行分析，共享产物由一人执行。
+- 新增短生命周期`TaskContext` API，一次合批读取有界文本，后续复用事实声明、精确位置与依赖；发现变化、读取失败或依赖修订则待复核。保留未知问题、同尺寸/mtime变化检查和删除前独立核验；不搭数据库，不自动证明语义。
+- `workspace_scout`增加`--changes-out`及`include_changes=True`：完整输出所有变化候选，stdout标记预览截断，避免第21项以后被漏查。防止覆盖previous/其他输出，敏感目录、文件和链接统一只计数。
+- 实际MAESTRO的7项已发布文本在同进程三轮摘录中仅读取7次／55,306字节，复用14次；6条选定事实绑定仍通过。外部探针中同大小且恢复mtime的字节变化使依赖记录失效。当前项目940文件无变化，业务报告、索引、登记的哈希及mtime未改。此为工具复用验证，不能填作Agent端到端提速。
 
 ### 2026-10-25 · 速度专项：先测端到端成本
 

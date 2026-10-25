@@ -90,6 +90,10 @@ def inventory(root: Path, opaque: tuple[str, ...] = ()) -> dict:
         dirs += 1
         for item in children:
             relative = f'{prefix}/{item.name}' if prefix else item.name
+            # Sensitive names are count-only for files, directories and links.
+            if _sensitive(item.name):
+                excluded['sensitive'] += 1
+                continue
             # Do not inspect payload or traverse linked/reparse-point subtrees.
             entry_stat_calls += 1
             info = item.stat(follow_symlinks=False)
@@ -134,7 +138,12 @@ def inventory(root: Path, opaque: tuple[str, ...] = ()) -> dict:
             'scope': 'METADATA ONLY: unchanged metadata is not byte identity; excluded subtrees are not counted. No conclusions or deletions are verified.'}
 
 
-def delta(current: dict, previous: dict | None, max_preview: int = 20) -> dict:
+def delta(current: dict, previous: dict | None, max_preview: int = 20, *, include_changes: bool = False) -> dict:
+    """Return bounded previews; opt in to complete changed/baseline path lists.
+
+    Complete paths exclude metadata_unchanged entries and remain review candidates,
+    never byte-identity or scientific-validity assertions.
+    """
     if max_preview < 0:
         raise ValueError('max_preview must be nonnegative')
     if previous is not None and (previous.get('schema') != 1 or previous.get('root') != current['root']
@@ -150,7 +159,7 @@ def delta(current: dict, previous: dict | None, max_preview: int = 20) -> dict:
                    'metadata_changed': sorted(k for k in set(now) & set(old) if now[k] != old[k]),
                    'metadata_unchanged': sorted(k for k in set(now) & set(old) if now[k] == old[k]),
                    'missing': sorted(set(old) - set(now))}
-    return {'schema': 1, 'root': current['root'], 'opaque': current['opaque'],
+    result = {'schema': 1, 'root': current['root'], 'opaque': current['opaque'],
             'scan_seconds': current['seconds'],
             'files_seen': current['stats']['files'], 'dirs_visited': current['stats']['visited_directories'],
             'logical_bytes': current['stats']['logical_bytes'],
@@ -161,10 +170,14 @@ def delta(current: dict, previous: dict | None, max_preview: int = 20) -> dict:
                                  key=lambda x: (-x['files'], x['ext']))[:12],
             'change_counts': {k: len(v) for k, v in changes.items()},
             'change_preview': {k: v[:max_preview] for k, v in changes.items() if k != 'metadata_unchanged'},
+            'change_preview_truncated': {k: len(v) > max_preview for k, v in changes.items() if k != 'metadata_unchanged'},
             'scope': current['scope']}
+    if include_changes:
+        result['change_paths'] = {k: v for k, v in changes.items() if k != 'metadata_unchanged'}
+    return result
 
 
-def write_snapshot(target: Path, root: Path, snapshot: dict) -> None:
+def _output_path(target: Path, root: Path) -> Path:
     target = target.absolute()
     root = checked_root(root)
     for candidate in (target, *target.parents):
@@ -175,6 +188,15 @@ def write_snapshot(target: Path, root: Path, snapshot: dict) -> None:
         raise ValueError('Snapshot must stay outside the project root')
     if not target.parent.is_dir():
         raise ValueError('Snapshot parent must exist')
+    return target
+
+
+def _same_file(left: Path, right: Path) -> bool:
+    return left.resolve() == right.resolve() or (left.exists() and right.exists() and os.path.samefile(left, right))
+
+
+def write_snapshot(target: Path, root: Path, snapshot: dict) -> None:
+    target = _output_path(target, root)
     staging = None
     try:
         with tempfile.NamedTemporaryFile('w', encoding='utf-8', dir=target.parent,
@@ -195,13 +217,24 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--root', type=Path, required=True)
     parser.add_argument('--previous', type=Path)
     parser.add_argument('--snapshot-out', type=Path)
+    parser.add_argument('--changes-out', type=Path, help='External JSON with every baseline/added/changed/missing path, excluding unchanged paths')
     parser.add_argument('--opaque', action='append', default=[])
     parser.add_argument('--max-preview', type=int, default=20)
     args = parser.parse_args(argv)
     try:
+        root = checked_root(args.root)
+        outputs = [_output_path(path, root) for path in (args.snapshot_out, args.changes_out) if path is not None]
+        if len(outputs) == 2 and _same_file(*outputs):
+            raise ValueError('Snapshot and changes outputs must differ')
+        if args.previous and any(_same_file(path, args.previous) for path in outputs):
+            raise ValueError('Outputs must not overwrite the previous snapshot')
         previous = json.loads(args.previous.read_text(encoding='utf-8')) if args.previous else None
-        result = inventory(args.root, tuple(args.opaque))
-        summary = delta(result, previous, max_preview=args.max_preview)
+        result = inventory(root, tuple(args.opaque))
+        summary = delta(result, previous, max_preview=args.max_preview, include_changes=args.changes_out is not None)
+        if args.changes_out:
+            changes = {key: summary[key] for key in ('schema', 'root', 'opaque', 'change_counts', 'scope')}
+            changes['changes'] = summary.pop('change_paths')
+            write_snapshot(args.changes_out, root, changes)
         if args.snapshot_out:
             write_snapshot(args.snapshot_out, Path(result['root']), result)
         print(json.dumps(summary, ensure_ascii=False, indent=2))

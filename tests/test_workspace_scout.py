@@ -1,4 +1,5 @@
 import importlib.util
+import json
 from pathlib import Path
 import pytest
 
@@ -110,3 +111,127 @@ def test_opaque_invalid_prefix_is_checked_without_symlink_support(tmp_path):
     root.mkdir()
     with pytest.raises(ValueError, match='Unsafe'):
         scout.inventory(root, ('../outside',))
+
+
+def test_full_delta_includes_changes_beyond_preview_without_unchanged_paths(tmp_path):
+    root = tmp_path / 'project'
+    root.mkdir()
+    for number in range(27):
+        (root / f'old_{number:02}.txt').write_text('old')
+    (root / 'stable.txt').write_text('stable')
+    before = scout.inventory(root)
+    baseline = scout.delta(before, None, include_changes=True)
+    assert len(baseline['change_paths']['baseline']) == 28
+    assert baseline['change_preview_truncated']['baseline'] is True
+    for number in range(27):
+        (root / f'new_{number:02}.txt').write_text('new')
+        if number < 23:
+            (root / f'old_{number:02}.txt').write_text('changed content')
+        else:
+            (root / f'old_{number:02}.txt').unlink()
+    after = scout.inventory(root)
+    summary = scout.delta(after, before)
+    assert 'change_paths' not in summary
+    assert len(summary['change_preview']['added']) == 20
+    assert summary['change_preview_truncated']['added'] is True
+    assert summary['change_preview_truncated']['metadata_changed'] is True
+    complete = scout.delta(after, before, max_preview=0, include_changes=True)
+    paths = complete['change_paths']
+    assert len(paths['added']) == 27 and 'new_26.txt' in paths['added']
+    assert len(paths['metadata_changed']) == 23
+    assert paths['missing'] == [f'old_{number:02}.txt' for number in range(23, 27)]
+    assert 'metadata_unchanged' not in paths and 'stable.txt' not in json.dumps(paths)
+    assert complete['change_counts']['metadata_unchanged'] == 1
+
+
+def test_sensitive_directory_and_link_names_are_count_only(tmp_path, monkeypatch):
+    root = tmp_path / 'project'
+    root.mkdir()
+    (root / 'sealed_private_experiment').mkdir()
+    (root / 'sealed_private_experiment' / 'result.bin').write_bytes(b'do not read')
+    (root / 'secret_payload.txt').write_text('do not read')
+    (root / '.git').mkdir()
+    scandir = scout.os.scandir
+    def guarded_scan(directory):
+        assert Path(directory) == root, 'Protected directory was descended into'
+        return scandir(directory)
+    monkeypatch.setattr(scout.os, 'scandir', guarded_scan)
+    result = scout.inventory(root)
+    assert result['stats']['excluded_counts']['sensitive'] == 2
+    assert 'sealed_private_experiment' not in json.dumps(result)
+    assert 'secret_payload.txt' not in json.dumps(result)
+    assert result['stats']['excluded_paths'] == [{'path': '.git', 'reason': 'managed'}]
+    class SensitiveLink:
+        name = 'sealed_link'
+        def stat(self, **kwargs):
+            pytest.fail('Sensitive link metadata was accessed')
+    class Scan:
+        def __enter__(self):
+            return iter([SensitiveLink()])
+        def __exit__(self, *args):
+            pass
+    monkeypatch.setattr(scout.os, 'scandir', lambda directory: Scan())
+    result = scout.inventory(root)
+    assert result['stats']['excluded_counts'] == {'sensitive': 1}
+    assert 'sealed_link' not in json.dumps(result)
+
+
+def test_cli_writes_all_changes_externally_but_keeps_stdout_bounded(tmp_path, capsys):
+    root = tmp_path / 'project'
+    root.mkdir()
+    for number in range(27):
+        (root / f'item_{number:02}.txt').write_text('synthetic')
+    snapshot, changes = tmp_path / 'snapshot.json', tmp_path / 'changes.json'
+    assert scout.main(['--root', str(root), '--snapshot-out', str(snapshot),
+                       '--changes-out', str(changes), '--max-preview', '2']) == 0
+    summary = json.loads(capsys.readouterr().out)
+    full = json.loads(changes.read_text(encoding='utf-8'))
+    assert len(summary['change_preview']['baseline']) == 2
+    assert 'change_paths' not in summary
+    assert len(full['changes']['baseline']) == 27
+    assert full['change_counts']['baseline'] == 27 and snapshot.exists()
+    assert scout.main(['--root', str(root), '--previous', str(snapshot),
+                       '--changes-out', str(changes)]) == 0
+    capsys.readouterr()
+    repeat = json.loads(changes.read_text(encoding='utf-8'))
+    assert repeat['change_counts']['metadata_unchanged'] == 27
+    assert all(not value for value in repeat['changes'].values())
+
+
+@pytest.mark.parametrize('collision', ['outputs', 'previous_snapshot', 'previous_changes'])
+def test_cli_rejects_output_collisions_before_any_writes(tmp_path, capsys, collision):
+    root = tmp_path / 'project'
+    root.mkdir()
+    previous = tmp_path / 'previous.json'
+    previous.write_text(json.dumps(scout.inventory(root)), encoding='utf-8')
+    original = previous.read_bytes()
+    snapshot, changes = tmp_path / 'snapshot.json', tmp_path / 'changes.json'
+    if collision == 'outputs':
+        changes = snapshot
+    elif collision == 'previous_snapshot':
+        snapshot = previous
+    else:
+        changes = previous
+    with pytest.raises(SystemExit) as error:
+        scout.main(['--root', str(root), '--previous', str(previous),
+                    '--snapshot-out', str(snapshot), '--changes-out', str(changes)])
+    assert error.value.code == 2
+    capsys.readouterr()
+    assert previous.read_bytes() == original
+    assert not (tmp_path / 'snapshot.json').exists()
+    assert not (tmp_path / 'changes.json').exists()
+
+
+def test_cli_rejects_hardlink_alias_of_previous_snapshot(tmp_path, capsys):
+    root = tmp_path / 'project'
+    root.mkdir()
+    previous = tmp_path / 'previous.json'
+    previous.write_text(json.dumps(scout.inventory(root)), encoding='utf-8')
+    alias = tmp_path / 'alias.json'
+    scout.os.link(previous, alias)
+    original = previous.read_bytes()
+    with pytest.raises(SystemExit) as error:
+        scout.main(['--root', str(root), '--previous', str(previous), '--changes-out', str(alias)])
+    assert error.value.code == 2
+    capsys.readouterr()
+    assert previous.read_bytes() == alias.read_bytes() == original
