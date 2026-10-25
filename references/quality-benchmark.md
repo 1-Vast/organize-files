@@ -16,63 +16,9 @@ python -m pytest tests/test_research_benchmark.py tests/test_organization_ops.py
 
 **自动验收边界**：参考报告由测试预设，工具不会自行判断每句话是否完整、结论是否正确或接手者是否理解。结构化 `coverage` / `review` 字段只是审查声明；不是独立审查已经发生的证明。回滚包能恢复原文，也不能证明综合报告覆盖了原文。
 
-## 工具的最小输入与调用
+## 工具性能与工程回归
 
-需要精确文件操作时，准备 JSON 计划。下例中的哈希必须替换为实际源文件 SHA256；工作根必须为真实绝对目录。目标不能覆盖既有文件：
-
-```json
-{
-  "schema": 1,
-  "root": "D:/Research",
-  "protected_sources": ["data/raw", "frozen", "reserved"],
-  "operations": [{
-    "op": "move", "source": "notes/result.md", "target": "reports/result.md",
-    "sha256": "<64位小写SHA256>", "reason": "归入现行报告位置"
-  }]
-}
-```
-
-`remove` 不需 target，但必须增加 `evidence: {"coverage": "保留位置与逐项覆盖依据", "review": "审查记录"}`；`replace` 还需 `replacement` 和 `replacement_sha256`，指向工作根内预先准备的替代文件。声明不能取代实际审阅。每个计划按可独立核验的范围编制，不以一个巨型计划替代小批次。
-
-`protected_sources` 是项目相对路径前缀，同时限制源、目标和替代源，工具在读取payload前检查；默认还保护明显封存、凭据、Git与环境文件名。必须声明项目中名字不可识别的保护范围，工具不能自行推断所有科研语义。新版恢复包封存计划/保护前缀，回滚拒绝仅编辑state放宽范围；旧版无此绑定的包不自动回滚，可在隔离位置审查恢复，不能宣称与新版具有同等保证。
-
-```powershell
-python scripts/organization_ops.py dry-run D:/temporary/plan.json
-python scripts/organization_ops.py apply D:/temporary/plan.json --state-dir D:/temporary/new-recovery-state
-python scripts/organization_ops.py rollback D:/temporary/new-recovery-state
-```
-
-状态目录必须是工作根外的新目录。恢复包须保留到验收完成；回滚会检查恢复包和当前文件，遇后续修改或无法判明的丢失状态会拒绝自动覆盖。需要从完整恢复包取回独立文件时，先恢复到隔离位置再审阅，不把自动拒绝当成恢复包已丢失。该工具不管理空目录、不保留旧路径接口，也不解除环境审批。
-
-关键证据关系可加入现有索引，最小结构如下；同一份 JSON 可保留其他业务字段：
-
-```json
-{
-  "schema_version": 1,
-  "objects": [
-    {"id": "experiment:01", "kind": "experiment", "status": "completed", "stage": "exploration", "sources": [{"path": "results/run.json"}]},
-    {"id": "claim:01", "kind": "claim", "status": "scoped", "sources": [{"path": "reports/findings.md"}]}
-  ],
-  "relations": [{"from": "experiment:01", "to": "claim:01", "type": "supports"}],
-  "excluded_sources": ["sealed"]
-}
-```
-
-来源 path 使用项目相对 POSIX 路径，可增加 sha256 约束或 `protected: true` 声明。supports/contradicts/supersedes 从 from 向 to 传播复核，depends_on 从 to 向 from 传播。stage 可选 exploration、validated_method、formal_result；这是已有研究状态的登记，不由工具自动晋升。
-
-```powershell
-# 需要快照时只调用snapshot并检查errors/verification_complete；不保存快照时才改用validate
-python scripts/evidence_index.py snapshot --index D:/Research/INDEX.json --root D:/Research --out D:/temporary/before.json
-# 只筛选候选，不读取来源payload；所有对象仍未验证
-python scripts/evidence_index.py scan --index D:/Research/INDEX.json --root D:/Research --previous D:/temporary/before.json --out D:/temporary/candidates.json
-# 在实际新增/修改发生后重新生成 after 快照
-python scripts/evidence_index.py snapshot --index D:/Research/INDEX.json --root D:/Research --out D:/temporary/after.json
-python scripts/evidence_index.py impact --before D:/temporary/before.json --after D:/temporary/after.json
-```
-
-`direct_changes` 是严格快照的实际变化；`invalid_objects` 包含当前仍缺失或哈希错误的对象，即使两次快照相同也进入 `review_required`。`reusable_objects` 只说明此索引中严格校验后的结构未变、无绑定错误且无未验证来源依赖；保护来源及其依赖保持 `unverified_objects`，不列入可复用。`impact` 拒绝metadata scan输入。
-
-`scan` 比较size、mtime/ctime和文件身份等元数据，返回candidate_sources/changed_sources/needs_strict_verification；旧快照缺元数据时作为需严格复核候选。即使元数据一致，内容仍可能变更，全部对象继续未验证，不能拿scan替代删除前哈希或冻结证据认证。validate/snapshot保留完整哈希及读取前后状态检查。metrics仅统计来源payload读取/哈希和显式stat，不包括索引JSON读取、路径检查、操作系统缓存和Agent阅读开销。
+日常参数及最小输入见[工具示例](tool-recipes.md)，普通整理无需加载本评价协议。
 
 使用 `python scripts/benchmark_organization.py --index D:/Research/INDEX.json --root D:/Research --repeats 3` 对同一选择范围输出两次strict和一次scan的耗时与I/O。固定顺序受缓存影响；零payload读取不证明内容未变，也不证明整个整理或LLM Token提速。规模操作比较可将7b54715的脚本导出为外部本地baseline，在相同输入/路径深度/磁盘比较预演；不得为提高成绩移除并发检查或恢复验证。时间报告观测值，不在回归中断言脆弱秒数。
 
@@ -105,17 +51,7 @@ PR #3的单次真实文本试用存在两版条件遗漏及不同重试，不能
 
 真实比较分别固定首次深度整理、无变化二次检查、局部增量三个任务。每类用同一初始快照、模型、工具/质量约束和预算，对比原版与新版，评价者单独持有事实答案；记录从接收任务到验收的墙钟、实际调用/Token、重复读取、事实覆盖、证据恢复与当前行为。局部增量应检查受影响对象没有漏查、无关主题没有重写；快速结束应检查未决问题和深度请求不会被跳过。未执行同条件Agent对照时，工具计时与人工策略描述不能填作端到端收益。
 
-先读入口与存储政策，明确 `--opaque` 后盘点一次；本轮无目录变化就复用结果。示例快照必须在项目外，包含文件元数据及必要排除范围，不能上传原始会话日志：
-
-```powershell
-python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --snapshot-out C:/temporary/before.json
-# 一次遍历同时保存after及全部变化；输出均在项目外且互不覆盖
-python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --previous C:/temporary/before.json --snapshot-out C:/temporary/after.json --changes-out C:/temporary/changes.json
-```
-
-第二次仍遍历未排除目录，变化报告只用于挑选候选。`entry_stat_calls` 是目录项stat接口调用次数，未等价于底层磁盘I/O；`source_payload_files_opened=0`仅针对盘点。默认保护不能识别项目所有语义，必须先显式排除数据/包/环境；快照大小写按平台规则处理，不能借父级链接写回项目内。
-
-默认stdout只保留`change_preview`及每类`change_preview_truncated`，截断不是变化范围。API调用`delta(..., include_changes=True)`取得完整`change_paths`，或读取`--changes-out`中的`changes`；仅含baseline/added/metadata_changed/missing，不把未变全量路径再次送入上下文。敏感文件、目录和链接均仅计数，不记录敏感相对名。
+盘点与完整变化清单的命令见[元数据盘点](tool-recipes.md#元数据盘点)。
 
 将实际流程分段记录在外部任务目录：盘点/快照，来源读取与哈希，Agent理解/综合，计划执行/恢复同步，质量检查及发布等待。记录工具调用、分析对象和重复读取；没有可靠的文件读取/模型计量时，相关指标写N/A，不用字符数推算Token。只重查变化对象及依赖；批量读必要引文并保留来源/行号，避免先输出整份报告、随后逐段重读。严格快照、事实门控可在同一短进程共享已固定身份的来源字节；活文件、删除前或无法证实稳定时仍重新核验。源读取器调用数、唯一源读取数及缓存命中分别记录，不能混为零读取。
 
