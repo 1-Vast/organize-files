@@ -27,7 +27,8 @@ HASH = re.compile(r"[0-9a-fA-F]{64}\Z")
 DEVICE = re.compile(r"(?:CON|PRN|AUX|NUL|COM[1-9¹²³]|LPT[1-9¹²³]|CONIN\$|CONOUT\$)(?:\..*)?\Z", re.I)
 PROTECTED = re.compile(r"sealed|blind|credential|secret|password|passwd|api[_-]?key|(?:^|[_-])token(?:[_.-]|$)", re.I)
 PRIVATE_SUFFIXES = {".pem", ".key", ".p12", ".pfx", ".kdbx"}
-SKIP_PARTS = {".git", ".ssh", ".venv", "venv", "gpu_venv", "node_modules", "__pycache__"}
+SKIP_PARTS = {".git", ".hg", ".svn", ".ssh", ".venv", "venv", "gpu_venv",
+              "node_modules", "__pycache__", ".pytest_cache", ".mypy_cache"}
 METRICS_SCOPE = "Ordinary file source reads/hashes and explicit source stat calls only; index JSON, path-safety checks and filesystem/OS caches are not measured. Historical resolver calls/returned bytes are reported separately."
 SOURCE_ID_METRICS_SCOPE = "Only calls, failures and bytes returned by the trusted resolver are observable here. Its internal disk/network reads, hashing and reads before an exception are not measured."
 
@@ -129,7 +130,7 @@ def exclusion_reason(name, excluded):
         return "explicitly_excluded"
     if any(p.lower() in SKIP_PARTS for p in parts):
         return "managed_state"
-    if any(p.lower().startswith(".env") or PROTECTED.search(p) for p in parts):
+    if any(p.lower().startswith(".env") or p.lower() in {".npmrc", ".pypirc"} or PROTECTED.search(p) for p in parts):
         return "protected_name"
     if PurePosixPath(name).suffix.lower() in PRIVATE_SUFFIXES or PurePosixPath(name).name.lower() in {"id_rsa", "id_ed25519", "authorized_keys"}:
         return "credential_name"

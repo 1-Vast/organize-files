@@ -61,7 +61,7 @@ python scripts/organization_ops.py rollback D:/temporary/new-recovery-state
 来源 path 使用项目相对 POSIX 路径，可增加 sha256 约束或 `protected: true` 声明。supports/contradicts/supersedes 从 from 向 to 传播复核，depends_on 从 to 向 from 传播。stage 可选 exploration、validated_method、formal_result；这是已有研究状态的登记，不由工具自动晋升。
 
 ```powershell
-python scripts/evidence_index.py validate --index D:/Research/INDEX.json --root D:/Research
+# 需要快照时只调用snapshot并检查errors/verification_complete；不保存快照时才改用validate
 python scripts/evidence_index.py snapshot --index D:/Research/INDEX.json --root D:/Research --out D:/temporary/before.json
 # 只筛选候选，不读取来源payload；所有对象仍未验证
 python scripts/evidence_index.py scan --index D:/Research/INDEX.json --root D:/Research --previous D:/temporary/before.json --out D:/temporary/candidates.json
@@ -91,68 +91,7 @@ python scripts/benchmark_organization.py --operations 100 --baseline-ops "$env:T
 
 先定义本轮任务和固定输入：深度重构、功能开发、只读维护、软件测试及远端发布分别计时。不能把一次包含开发/调试/等待CI的任务，与已整理项目的轻量检查比较并宣称提速。30%–50%端到端降时是待验证目标；同一模型、预算、输入及质量约束的对照未做时不报达标。
 
-### 动态阅读与快速收口
-
-从用户目标、完整变化清单、已有核验及未解决问题决定深度，不用固定文件数量阈值。下表是决策条件，无需另建永久任务规划数据库：
-
-| 深度 | 进入条件 | 必要工作与停止条件 |
-|---|---|---|
-| 深度重构 | 用户明确要求，或现有综合/依赖/覆盖不足以完成目标 | 理解拟替代资料，按科研问题综合并核对独有事实；完整覆盖、现行调用及恢复验收通过才收口 |
-| 局部增量 | 局部内容/依赖变化，出现矛盾，或仍有影响本轮目标的问题 | 深读变化及影响闭包；相关结论、引用和行为已核验，未解决差异有明确状态后收口 |
-| 快速结束 | 仅维护或检查；范围/保护策略/目标一致；相关已有结果仍有效；无新增影响且无本轮待处理问题 | 复用有效检查，简要交付范围与结果；不重新综合、改写稳定报告或为本轮增加永久文件 |
-
-元数据无变化只支持候选筛选，不能单独证明上述快速结束条件。排除范围外的来源、环境变化、未核验来源及未完成的既定整理不能被“零变化”隐藏；不确定时只补足该项证据。深度重构请求即使没有新增文件也照常完成，不以快速结束代替用户目标。无变化检查的结论也不自动证明项目已经全量科学整理。
-
-阅读采用入口→来源定位/检索→相关段落→必要全文。每次深入应对应一个会改变处置的疑问，例如条件是否不同、数值属于哪个端点、阴性结果是否其实为执行失败。优先重要结论及其反证，不因扩展名或篇幅机械全读。拟删除或语义替代资料仍须全文理解，主动尝试找出目标报告未正确保留的任一独有事实；找到反例就补齐或保留源件。任务内只复用绑定当前内容身份、事实及位置的记录（`scripts/task_context.py`），矛盾、来源变化、范围/依赖改变或破坏性动作触发相关复核；摘要缓存不能代替删除前哈希和语义覆盖。
-
-定位到数字后，仍需在该来源中找到这条结论的适用条件、失败/未完成身份及可重放边界；关键词只负责定位。实际试用曾出现解析值已改对，但同一来源中的历史checkpoint及不可重放规模未进入维护报告，或修复了重放限制却没明确共享潜变量条件。此时不能按“更快完成”验收；补齐相关事实闭包，不必重读无关研究。
-
-独立查询合批返回带来源身份的紧凑记录，让模型集中处理冲突和取舍。用户授权多代理时，只并行互不依赖主题的读取/分析，交付事实位置、反例及未决问题，由一个执行者修改共享报告、计划与索引。先判断启动开销和共享依赖是否抵消收益，不为凑代理数重复阅读相同全文。
-
-`task_context.py`是同一Python进程内的短期工作结果，不是后台服务或跨会话数据库。将`scripts`放入Python模块路径后使用：
-
-```python
-from task_context import TaskContext
-context = TaskContext(root, opaque=('data/raw', 'sealed'))
-batch = context.batch([
-    {'source_id': 'reports/result.md', 'start_line': 12, 'end_line': 26},
-    {'source_id': 'reports/protocol.md', 'start_line': 1, 'end_line': 20},
-])
-if batch['complete']:
-    context.record('finding', ['reports/result.md', 'reports/protocol.md'],
-                   facts={'interpretation': '已实际阅读摘录后填写的事实声明'},
-                   unresolved_questions=['尚未核对误差条口径'])
-    context.result('finding')              # 复用固定快照；未决项保持needs_review
-    context.result('finding', fresh=True)  # 重读所选来源及依赖，变化则stale
-```
-
-`excerpt`/`batch`返回source_id、字节哈希、行号及限长原文；`record`保留这些位置、事实声明、记录依赖与未决问题，不执行LLM自动抽取。`snapshot_status=snapshot_reusable`只指已读快照，不能声明磁盘当前无变化；`fresh=True`失败或字节改变不会回退到旧缓存。根及opaque策略固定，改变目标/范围另建context。可信`source_resolver(id)->bytes`仅显式传入，保护项在调用前拒绝；其内部I/O无法计量，大小限制也不能阻止任意外部回调先行读取大文件。缓存不跨进程自动保存；多个工具往返使用同一个已持有context的会话，或将读/抽取/复核合批在一次进程内，不能重新启动Python后声称缓存命中。拟删除仍单独完成当前哈希、全来源覆盖和恢复验收。
-
-#### 证据闭包与紧凑输出
-
-对本轮受影响的重要结论，在阅读前按实际问题确定必要维度；通常包括结果、条件、协议、证据等级、限制与执行状态，涉及历史重放再加入重放边界。不适用项在已有审阅中说明理由，不能为获得通过而缩减必要维度。优先核对缺项对应的原文及反例，未知保持待复核；不要重新读无关全文。拟替代/删除资料的全文覆盖规则不变。
-
-`record(required_context=..., context_reviews=...)`在现有任务记录内保存此声明，不建立另一套事实库。维度名称由调用者选择，每项审阅包含`status`（`reviewed`或`unknown`）、具体`note`及非空`citations`。引文使用`excerpt`返回值，工具核对来源归属、已返回的行范围、SHA256和原文；未读、篡改或失效的摘录不能作为新审阅依据。缺失和`unknown`均进入`context_gaps`，依赖中的缺口也使`closure_status`保持`needs_review`。`reviewed`引文不能是纯空白。
-
-```python
-context = TaskContext(root, opaque=('data/raw', 'sealed'))
-value = context.excerpt('reports/result.md', 12, 14)
-context.record('finding', ['reports/result.md'], facts={'result': '实际观察到的结果'},
-               required_context=['result', 'conditions', 'replay'],
-               context_reviews={'result': {
-                   'status': 'reviewed', 'note': '已核对结果身份及统计口径', 'citations': [value]}})
-brief = context.result('finding', compact=True)
-# brief['context_gaps'] == {'finding': ['conditions', 'replay']}
-# 只追查这两项；核对后重写该条record，保留全部仍必要的维度、事实与审阅。
-```
-
-`result(compact=True)`省去事实正文和审阅引文，保留签名、来源哈希/位置、所有未决问题、缺失维度和失效状态；仅在具体决策需要时请求完整结果。它是所选记录的紧凑状态，不是跨调用自动增量传输；调用者只输出本轮需要的记录。`record`返回完整记录便于调试，正常流程不必打印该返回值。完整变化清单仍保存在外部并处理全部影响，不能将stdout预览当作全量。
-
-`result`不再返回含混的通用`status`：`snapshot_status`仅回答缓存绑定是否可复用，`closure_status`回答整个依赖闭包的已声明维度是否完成。任一传递依赖未声明必要维度，会列入`unassessed_records`并阻止`declared_covered`；无其他缺口时返回`not_assessed`。`closure_status=declared_covered`仅表示声明绑定齐备，它不证明维度选择完整、引文支持解释、报告覆盖充分或审阅独立发生，也不是任务完成许可。重要报告由独立内容审阅者从原始资料重新检查条件与反例，不能只核对同一整理者声明的维度。审阅缺口须补齐或明确部分完成，不能由缓存状态放行。`fresh=True`只重读字节并撤销失效绑定，不自动更新事实或完成语义审阅。阅读侧缺口关闭后，报告仍按`claim_coverage.py`及独立内容审阅核验；这两种检查不能互代。
-
-结束一个修改步骤时，将已核验输入、命令/环境身份和修改后产物摘要记入外部任务状态一次，后续复用同一条记录；只有源文件摘要而缺少修改后报告绑定，不能直接继承报告验收。使用`TaskContext`时，先摘录修改后报告，将报告路径与来源一起列入验收记录的`source_ids`，需要当前身份时调用`result(..., fresh=True, compact=True)`；报告变更也会使记录stale。范围/环境改变则另行复核，不能只靠字节判定。这些状态用于本任务接续，不是项目内新增报告；无法匹配时补足必要核验，而非默认再次全文综合。
-
-收口按本轮授权义务判断：`COMPLETE`仅用于必要检查通过且无验收缺口；`PARTIAL`用于可独立交付的工作已完成但仍有明确缺口；`BLOCKED`用于必要条件不足、无法继续相关动作。工具快照状态不等于任务完成状态。未知项如实列出，不升级为已验证；证据不足时保留受影响资料。无变化维护无需制造结论审阅记录。
+普通整理的阅读深度、任务内复用、证据闭包和停止条件见[执行规则](task-execution.md)；无需为一次局部维护全文加载本评价协议。
 
 #### 质量约束下的配对性能评价
 
@@ -170,9 +109,8 @@ PR #3的单次真实文本试用存在两版条件遗漏及不同重试，不能
 
 ```powershell
 python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --snapshot-out C:/temporary/before.json
-python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --previous C:/temporary/before.json --snapshot-out C:/temporary/after.json
-# 超出stdout预览的全部变化写到项目外，不覆盖previous或snapshot
-python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --previous C:/temporary/before.json --changes-out C:/temporary/changes.json
+# 一次遍历同时保存after及全部变化；输出均在项目外且互不覆盖
+python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --previous C:/temporary/before.json --snapshot-out C:/temporary/after.json --changes-out C:/temporary/changes.json
 ```
 
 第二次仍遍历未排除目录，变化报告只用于挑选候选。`entry_stat_calls` 是目录项stat接口调用次数，未等价于底层磁盘I/O；`source_payload_files_opened=0`仅针对盘点。默认保护不能识别项目所有语义，必须先显式排除数据/包/环境；快照大小写按平台规则处理，不能借父级链接写回项目内。
@@ -223,7 +161,7 @@ python -c "import runpy; from pathlib import Path; runpy.run_path('tests/test_re
 | 指标 | 分子 / 分母或记录方式 | 验收边界 |
 |---|---|---|
 | 精确信息保留率 | 仍能按哈希读取的唯一原始对象 / 所有要求精确保留对象 | 冻结/唯一原始证据须 100%；保护项只检查范围边界，不能为计分打开 |
-| 语义信息覆盖率 | 独立审查确认在报告或可读证据中准确保留的事实项 / 预先列出的独有事实项 | 数值、条件、失败、更正和未知状态分别计；摘要存在不算覆盖 |
+| 语义信息覆盖率 | 独立审查确认在现行报告中准确表达的关键事实项 / 预先列出的关键事实项 | 决定解释或采用的数值、条件、协议、证据等级、限制、失败与未知须进入正文；仅源件保留而未综合者计为报告缺口。非决策性细节可定位至可读来源，不混入此分母 |
 | 证据追溯成功率 | 从现行结论找齐研究身份、数据、参数、代码版本、结果及更正的成功题数 / 适用题数 | 来源可达是必要条件；仅路径存在不等于结论被支持 |
 | 接续成功率 | 盲测接手者准确回答并给出证据的题数 / 适用问题数 | 未实施盲测则 N/A，不用自动图遍历代替 |
 | 有效检索成本 | 每道成功问题的耗时、工具步骤和实际可得 Token | 错答/找不到单列，不能用提前停止降低均值 |

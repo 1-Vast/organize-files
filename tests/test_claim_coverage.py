@@ -100,7 +100,9 @@ def test_report_binding_detects_missing_condition_without_invalidating_unrelated
 
 @pytest.mark.parametrize('sid', [r'records\.ENV', r'records\.git\config',
     'archive/passwd.txt', r'records\.ssh. \config', 'records/.env.production',
-    'records/authorized_keys', r'records\node_modules\index.js'])
+    'records/authorized_keys', r'records\node_modules\index.js',
+    '.npmrc', '.pypirc', 'records/.NPMRC', r'records\.PYPIRC. ',
+    'records/.hg/store', 'records/.svn/entries', 'records/.pytest_cache/state'])
 def test_protected_spelling_aliases_never_reach_resolver(sid):
     claim = copy.deepcopy(FIXTURE['after_claims'][0])
     claim['disposition'] = 'preserved'

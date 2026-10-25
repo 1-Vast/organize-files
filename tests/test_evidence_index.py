@@ -93,7 +93,8 @@ def test_path_escape_rejected(tmp_path, name):
 
 
 def test_protected_payloads_are_never_opened(tmp_path, monkeypatch):
-    names = ["sealed_source/outcomes.csv", ".env", "credentials.txt", "private.key", "api_key.json", ".git/config", "declared.csv", "excluded/data.csv"]
+    names = ["sealed_source/outcomes.csv", ".env", "credentials.txt", "private.key", "api_key.json", ".git/config", "declared.csv", "excluded/data.csv",
+             ".npmrc", ".pypirc", "nested/.NPMRC", "nested/.PYPIRC", "nested/.hg/store", "nested/.svn/entries"]
     data = {"schema_version": 1, "objects": [{"id": "x", "kind": "source", "status": "qualified_metadata_only", "sources": [
         {"path": name, **({"protected": True} if name == "declared.csv" else {})} for name in names]}], "excluded_sources": ["excluded"]}
     def forbidden(*args, **kwargs):
@@ -571,7 +572,8 @@ def test_reserved_historical_ids_never_reach_a_resolver(tmp_path):
     files(tmp_path)
     data = historical_index()
     names = ["archive/sealed_source/results.csv", "archive/BLIND/results.csv", "credentials.json",
-             "logs/.ENV", "records/.git./config", "records\\private.key", "RESERVED/outcome.md"]
+             "logs/.ENV", "records/.git./config", "records\\private.key", "RESERVED/outcome.md",
+             ".npmrc", ".pypirc", "records/.NPMRC", "records\\.PYPIRC. "]
     data["objects"][0]["source_ids"] = names
     data["excluded_sources"] = ["reserved"]
 
