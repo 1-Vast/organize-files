@@ -121,3 +121,50 @@ def test_truthy_text_is_not_a_measured_operational_gate():
     candidate['attempts'][0]['gates']['preserved'] = 'unknown'
     with pytest.raises(ValueError, match='boolean'):
         tool.summarize([trial(), candidate])
+
+
+def test_interrupted_duration_bound_is_retained_but_not_reported_as_exact_time():
+    candidate = trial('candidate', passed=False)
+    candidate['duration_complete'] = False
+    candidate['attempts'][0]['worker']['usage'] = None
+    result = tool.summarize([trial(), candidate])
+    row = result['runs'][1]
+    assert row['end_to_end_seconds'] is None
+    assert row['duration_lower_bounds']['end_to_end_seconds'] == 20
+    assert row['tokens']['input_tokens'] is None
+    assert result['groups'][1]['runs'] == 1
+    assert result['groups'][1]['end_to_end_seconds_all_runs']['missing'] == 1
+    assert result['pairs'][0]['seconds_difference'] is None
+
+
+def test_later_success_cannot_make_incomplete_cost_eligible_for_speed_comparison():
+    candidate = trial('candidate', repair=True)
+    candidate['duration_complete'] = False
+    result = tool.summarize([trial(), candidate])
+    assert result['runs'][1]['passed'] is True
+    assert result['pairs'][0]['reason'] == 'duration_incomplete'
+    assert result['pairs'][0]['seconds_difference'] is None
+
+
+def test_truthy_duration_measurement_is_rejected():
+    candidate = trial('candidate')
+    candidate['duration_complete'] = 'unknown'
+    with pytest.raises(ValueError, match='Duration completeness'):
+        tool.summarize([trial(), candidate])
+
+
+def test_no_evaluator_call_has_zero_known_cost_but_missing_worker_usage_stays_unknown():
+    candidate = trial('candidate', passed=False)
+    candidate['attempts'][0]['worker']['usage'] = None
+    review = candidate['attempts'][0]['evaluation']
+    review.update(not_called=True, usage=None, returncode=-1, seconds=0, tool_calls=0)
+    row = tool.summarize([trial(), candidate])['runs'][1]
+    assert row['tokens']['input_tokens'] is None
+    assert row['review_tokens']['input_tokens'] == 0
+
+
+def test_not_called_flag_cannot_erase_recorded_call_costs():
+    candidate = trial('candidate')
+    candidate['attempts'][0]['evaluation']['not_called'] = True
+    with pytest.raises(ValueError, match='cannot hide'):
+        tool.summarize([trial(), candidate])

@@ -16,6 +16,7 @@ TOKEN_FIELDS = ('input_tokens', 'cached_input_tokens', 'output_tokens')
 
 
 def total_usage(calls):
+    calls = [call for call in calls if call.get('not_called') is not True]
     return {field: (sum(call['usage'][field] for call in calls)
                     if all(isinstance(call.get('usage'), dict)
                            and type(call['usage'].get(field)) is int
@@ -44,6 +45,16 @@ def summarize(records):
         workers = [attempt['worker'] for attempt in attempts]
         reviewers = [attempt['evaluation'] for attempt in attempts]
         calls = workers + reviewers
+        for call in calls:
+            if type(call.get('not_called', False)) is not bool:
+                raise ValueError('Not-called measurements must be explicit booleans')
+            if call.get('not_called') and (call['seconds'] != 0 or call['tool_calls'] != 0
+                                          or call.get('usage') is not None or call.get('trace')
+                                          or call['returncode'] == 0):
+                raise ValueError('A not-called measurement cannot hide executed-call costs or success')
+        duration_complete = record.get('duration_complete', True)
+        if type(duration_complete) is not bool:
+            raise ValueError('Duration completeness must be an explicit boolean')
         for seconds in [record['end_to_end_seconds']] + [call['seconds'] for call in calls]:
             if type(seconds) not in (int, float) or not math.isfinite(seconds) or seconds < 0:
                 raise ValueError('Elapsed times must be finite nonnegative numbers')
@@ -77,6 +88,13 @@ def summarize(records):
                    repair_seconds=sum(a['worker']['seconds'] + a['evaluation']['seconds'] for a in attempts[1:]),
                    tokens=total_usage(calls), worker_tokens=total_usage(workers), review_tokens=total_usage(reviewers),
                    worker_tool_calls=sum(call['tool_calls'] for call in workers))
+        if not duration_complete:
+            # A last-event time bound is not an exact interrupted-call cost.
+            row['duration_complete'] = False
+            row['duration_lower_bounds'] = {field: row[field] for field in
+                ('end_to_end_seconds', 'worker_seconds', 'review_seconds', 'repair_seconds')}
+            for field in row['duration_lower_bounds']:
+                row[field] = None
         if row['arm'] not in ('baseline', 'candidate') or row['arm'] in pairs[row['pair_id']]:
             raise ValueError('Each pair needs distinct baseline and candidate arms')
         pairs[row['pair_id']][row['arm']] = row
@@ -93,9 +111,11 @@ def summarize(records):
         for field in ('input_sha256', 'case', 'stage', 'model', 'reasoning'):
             if before[field] != after[field]:
                 raise ValueError(f'Unmatched paired {field}: {pair_id}')
-        eligible = before['passed'] and after['passed']
+        quality_passed = before['passed'] and after['passed']
+        eligible = quality_passed and all(row.get('duration_complete', True) for row in (before, after))
         comparisons.append({'pair_id': pair_id, 'stage': before['stage'], 'eligible': eligible,
-                            'reason': None if eligible else 'quality_gate_failed',
+                            'reason': (None if eligible else 'duration_incomplete' if quality_passed
+                                       else 'quality_gate_failed'),
                             'seconds_difference': after['end_to_end_seconds'] - before['end_to_end_seconds'] if eligible else None,
                             'input_tokens_difference': (after['tokens']['input_tokens'] - before['tokens']['input_tokens']
                                 if eligible and all(r['tokens']['input_tokens'] is not None for r in (before, after)) else None)})
