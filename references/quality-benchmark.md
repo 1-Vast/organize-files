@@ -132,6 +132,24 @@ python scripts/benchmark_organization.py --trace C:/temporary/rollout.jsonl
 
 执行日志优化先实测 `_save`时间、次数/写入字节、恢复包和哈希成本；如果实际整理没有文件变更，改造执行日志不能降低这轮耗时。追加式日志尚不是当前执行路径。只有它在目标任务中占主导且恢复一致性回归覆盖中断、尾部损坏、并发修改、回滚重入后，才考虑替换全量state；保留fsync及严格恢复保障，不能用孤立JSON写入速度冒充完整apply/rollback提速。
 
+## 可执行的双版本Agent配对基准
+
+此入口只在明确评价Skill时运行，日常整理不调用。`scripts/create_agent_fixture.py`生成由独立评价者编写的两个合成科研项目、三阶段输入与隐藏答案；它们不是未见真实项目，也不是15个独立案例。初次整理、无变化、局部增量各5组配对，同一阶段从相同独立快照开始，维护阶段也是新上下文，不能代表延续聊天的暖缓存收益。
+
+```powershell
+python scripts/create_agent_fixture.py --out D:/temporary/agent-suite/oracle
+# 把两个已审阅的固定Git提交分别导出到项目外variants/baseline及variants/candidate
+# 在suite根写variants.json：{"baseline":["baseline","<commit>"],"candidate":["candidate","<commit>"]}
+python scripts/run_agent_benchmark.py --suite-root D:/temporary/agent-suite --model <固定模型名>
+python scripts/benchmark_agent_results.py --suite-root D:/temporary/agent-suite
+```
+
+运行器使用已安装并已认证的Codex CLI，固定high推理设置，种子20261025随机安排顺序。两个独立配对并发，每对内部两版本顺序执行；共享服务调度仍会影响耗时。每次整理/评价调用上限240秒，每项失败最多追加一轮修复；超时、失败、重试和评价成本全部保留。旧的工具读取预试验与正式完整快照评价分开，不混算。比较版本必须在启动前冻结，不把后来修改的规则套用到较早测量。
+
+评价者使用单独的新上下文，取得完整的前后文本快照、行号、哈希、文件清单和隐藏答案；按语义审阅，不以关键词或整理者自评替代。保护二进制不进入模型上下文，由运行器独立核对其路径和字节；同时核对无关主题、Skill字节及无变化阶段的改写。原草稿可按任务修订，不能以原草稿字节变化直接判为科学信息丢失；可恢复性及更正历史由内容审阅检查。无变化阶段的无必要改写即使后来撤销，也作为行为失败保留；仅mtime变化单列为操作扰动。执行轨迹仍需独立审查，才能判断是否违反实验/联网/读取范围限制。
+
+`result.json`保存各次worker和review的真实用量及时长，汇总器保留失败分母、全部纠错和评价成本，Token缺测为null；不接受缺臂、缺结果、空完成标记、遗漏质量字段或低于串行调用总成本的端到端时间。性能差值只取输入与设置匹配、双方最终质量门槛均通过的配对；同时报告全部运行的分布和正确完成率，避免挑选幸存样本。结果身份和检查有效性是声明绑定，自动评价仍需独立抽查。仅发布匿名统计、协议和复现资源，原始模型日志留在外部。
+
 ## 三组同输入对照
 
 在需要比较方法时另行执行；不要把上述测试结果当成比较结果。

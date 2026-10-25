@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "passed": {
+      "type": "boolean",
+      "description": "True only when every applicable mandatory semantic, citation, provenance and stage-behavior requirement has been verified."
+    },
+    "missing_facts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Material facts or required distinctions missing from the authoritative current report, each tied to an applicable criterion and output location when available."
+    },
+    "incorrect_claims": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Specific wrong, misleading or unsupported claims, broken/misleading citations, provenance loss or unjustified stage behavior, with actual output evidence."
+    },
+    "feedback": {
+      "type": "string",
+      "description": "Targeted, self-contained correction instructions suitable for a worker without hidden-rubric access; empty when no repair is needed."
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Unverifiable aspects, evaluator access/tool limits, unresolved ambiguity and checks delegated to the harness; not a substitute for rejecting an unverified mandatory requirement."
+    }
+  },
+  "required": [
+    "passed",
+    "missing_facts",
+    "incorrect_claims",
+    "feedback",
+    "limitations"
+  ]
+}

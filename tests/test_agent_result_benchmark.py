@@ -1,0 +1,89 @@
+import copy
+import importlib.util
+from pathlib import Path
+
+import pytest
+
+SPEC = importlib.util.spec_from_file_location('agent_results', Path(__file__).parents[1] / 'scripts/benchmark_agent_results.py')
+tool = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(tool)
+
+
+def trial(arm='baseline', repair=False, passed=True):
+    call = {'seconds': 10, 'returncode': 0, 'usage': {'input_tokens': 100, 'cached_input_tokens': 80, 'output_tokens': 5}, 'tool_calls': 2}
+    def attempt(ok):
+        return {'worker': copy.deepcopy(call), 'evaluation': copy.deepcopy(call),
+                'verdict': {'passed': ok, 'missing_facts': [] if ok else ['condition omitted'], 'incorrect_claims': []},
+                'gates': {'preserved': True}, 'passed': ok}
+    return {'run_id': arm, 'pair_id': 'first-1', 'stage': 'first', 'case': 'synthetic', 'arm': arm,
+            'skill_commit': arm, 'input_sha256': 'same', 'model': 'fixed', 'reasoning': 'fixed',
+            'finished_utc': 'recorded', 'end_to_end_seconds': 40 if repair else 20,
+            'attempts': [attempt(False), attempt(passed)] if repair else [attempt(passed)], 'passed': passed}
+
+
+def test_repairs_and_independent_reviews_are_included_in_cost():
+    result = tool.summarize([trial(), trial('candidate', repair=True)])
+    row = result['runs'][1]
+    assert row['tokens']['input_tokens'] == 400 and row['worker_tokens']['input_tokens'] == 200
+    assert row['repair_seconds'] == 20 and row['first_pass'] is False
+    assert result['pairs'][0]['seconds_difference'] == 20
+
+
+def test_failed_trials_stay_in_denominator_but_cannot_claim_speedup():
+    result = tool.summarize([trial(), trial('candidate', passed=False)])
+    assert result['groups'][1]['runs'] == 1 and result['groups'][1]['final_pass'] == 0
+    assert result['pairs'][0]['eligible'] is False
+    assert result['pairs'][0]['seconds_difference'] is None
+
+
+def test_partial_usage_is_unknown_not_zero():
+    record = trial(repair=True)
+    record['attempts'][0]['evaluation']['usage'] = None
+    row = tool.summarize([record, trial('candidate')])['runs'][0]
+    assert row['tokens']['input_tokens'] is None
+    assert row['worker_tokens']['input_tokens'] == 200
+
+
+@pytest.mark.parametrize('field', ['input_sha256', 'model', 'reasoning', 'case', 'stage'])
+def test_incomparable_pairs_are_rejected(field):
+    candidate = trial('candidate')
+    candidate[field] = 'different'
+    with pytest.raises(ValueError, match='Unmatched'):
+        tool.summarize([trial(), candidate])
+
+
+def test_stale_or_forged_pass_and_incomplete_trials_are_rejected():
+    record = trial()
+    record['attempts'][0]['gates']['preserved'] = False
+    with pytest.raises(ValueError, match='gate'):
+        tool.summarize([record])
+    record = trial()
+    del record['finished_utc']
+    with pytest.raises(ValueError, match='Incomplete'):
+        tool.summarize([record])
+
+
+def test_missing_arm_cannot_be_omitted_from_comparison():
+    with pytest.raises(ValueError, match='Incomplete pair'):
+        tool.summarize([trial()])
+
+
+def test_end_to_end_duration_cannot_omit_review_or_repair_costs():
+    candidate = trial('candidate', repair=True)
+    candidate['end_to_end_seconds'] = 0
+    with pytest.raises(ValueError, match='omits'):
+        tool.summarize([trial(), candidate])
+
+
+def test_missing_verdict_lists_are_not_evidence_of_zero_defects():
+    candidate = trial('candidate')
+    candidate['attempts'][0]['verdict'] = {'passed': True}
+    with pytest.raises(ValueError, match='quality measurements'):
+        tool.summarize([trial(), candidate])
+
+
+def test_empty_completion_marker_is_rejected():
+    candidate = trial('candidate')
+    candidate['finished_utc'] = None
+    with pytest.raises(ValueError, match='Incomplete'):
+        tool.summarize([trial(), candidate])
