@@ -23,6 +23,8 @@ import tempfile
 import zipfile
 
 PROTECTED_NAME = re.compile(r'sealed|blind|credential|secret|password|passwd|api[_-]?key|(?:^|[_-])token(?:[_.-]|$)', re.I)
+MANAGED = {'.git', '.hg', '.svn', '.ssh', '.venv', 'venv', 'gpu_venv',
+           'node_modules', '__pycache__', '.pytest_cache', '.mypy_cache'}
 
 
 def digest(path: Path) -> str:
@@ -72,7 +74,8 @@ def _parts(value: str) -> list[str]:
 
 
 def _default_protected(parts) -> bool:
-    return (any(p.casefold().startswith('.env') or p.casefold() in {'.git', '.ssh'} or PROTECTED_NAME.search(p) for p in parts)
+    return (any(p.casefold().startswith('.env') or p.casefold() in MANAGED
+                or p.casefold() in {'.npmrc', '.pypirc'} or PROTECTED_NAME.search(p) for p in parts)
             or Path(parts[-1]).suffix.casefold() in {'.pem', '.key', '.p12', '.pfx', '.kdbx'}
             or parts[-1].casefold() in {'id_rsa', 'id_ed25519', 'authorized_keys'})
 

@@ -1,0 +1,1962 @@
+{
+  "schema_version": 1,
+  "runs": [
+    {
+      "run_id": "run-001",
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "ff681dbda8da0e9eace3b03c7c91aec8717c0013c268c29f7a04daa30b5ec8cf",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": false,
+      "end_to_end_seconds": 182.97317190000103,
+      "worker_seconds": 137.63277539999763,
+      "review_seconds": 45.241462500001944,
+      "repair_seconds": 63.02674439999828,
+      "tokens": {
+        "input_tokens": 403786,
+        "cached_input_tokens": 303104,
+        "output_tokens": 5903
+      },
+      "worker_tokens": {
+        "input_tokens": 340780,
+        "cached_input_tokens": 284672,
+        "output_tokens": 5372
+      },
+      "review_tokens": {
+        "input_tokens": 63006,
+        "cached_input_tokens": 18432,
+        "output_tokens": 531
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-002",
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "ff681dbda8da0e9eace3b03c7c91aec8717c0013c268c29f7a04daa30b5ec8cf",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": false,
+      "end_to_end_seconds": 239.28481470000042,
+      "worker_seconds": 181.19244550000076,
+      "review_seconds": 58.00558529999762,
+      "repair_seconds": 101.49992059999931,
+      "tokens": {
+        "input_tokens": 487173,
+        "cached_input_tokens": 392576,
+        "output_tokens": 6348
+      },
+      "worker_tokens": {
+        "input_tokens": 424178,
+        "cached_input_tokens": 355712,
+        "output_tokens": 5589
+      },
+      "review_tokens": {
+        "input_tokens": 62995,
+        "cached_input_tokens": 36864,
+        "output_tokens": 759
+      },
+      "worker_tool_calls": 7
+    },
+    {
+      "run_id": "run-003",
+      "pair_id": "first-1",
+      "stage": "first",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "cfcc9d0066babbdfc0643a75a815742818a3bc8ebea03b77177370d2ec3dbb28",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 219.23558250000133,
+      "worker_seconds": 202.68471339999815,
+      "review_seconds": 16.512304899999435,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 226876,
+        "cached_input_tokens": 161024,
+        "output_tokens": 5646
+      },
+      "worker_tokens": {
+        "input_tokens": 194293,
+        "cached_input_tokens": 161024,
+        "output_tokens": 5466
+      },
+      "review_tokens": {
+        "input_tokens": 32583,
+        "cached_input_tokens": 0,
+        "output_tokens": 180
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-004",
+      "pair_id": "first-1",
+      "stage": "first",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "cfcc9d0066babbdfc0643a75a815742818a3bc8ebea03b77177370d2ec3dbb28",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 225.16632319999917,
+      "worker_seconds": 207.65101570000115,
+      "review_seconds": 17.46495860000141,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 302824,
+        "cached_input_tokens": 262528,
+        "output_tokens": 5859
+      },
+      "worker_tokens": {
+        "input_tokens": 269569,
+        "cached_input_tokens": 244096,
+        "output_tokens": 5663
+      },
+      "review_tokens": {
+        "input_tokens": 33255,
+        "cached_input_tokens": 18432,
+        "output_tokens": 196
+      },
+      "worker_tool_calls": 7
+    },
+    {
+      "run_id": "run-005",
+      "pair_id": "first-5",
+      "stage": "first",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "cfcc9d0066babbdfc0643a75a815742818a3bc8ebea03b77177370d2ec3dbb28",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 303.2681177000013,
+      "worker_seconds": 251.47998949999965,
+      "review_seconds": 51.67895110000245,
+      "repair_seconds": 38.86469340000258,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": 67116,
+        "cached_input_tokens": 36864,
+        "output_tokens": 435
+      },
+      "worker_tool_calls": 8
+    },
+    {
+      "run_id": "run-006",
+      "pair_id": "first-5",
+      "stage": "first",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "cfcc9d0066babbdfc0643a75a815742818a3bc8ebea03b77177370d2ec3dbb28",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 215.9831204000002,
+      "worker_seconds": 195.53848070000095,
+      "review_seconds": 20.37307509999664,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 271736,
+        "cached_input_tokens": 212992,
+        "output_tokens": 5653
+      },
+      "worker_tokens": {
+        "input_tokens": 239106,
+        "cached_input_tokens": 212992,
+        "output_tokens": 5444
+      },
+      "review_tokens": {
+        "input_tokens": 32630,
+        "cached_input_tokens": 0,
+        "output_tokens": 209
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-007",
+      "pair_id": "unchanged-4",
+      "stage": "unchanged",
+      "case": "guidegraph",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "f257f28b3d4f87144ac5fabb4caea5927cface9056365c2aa7ec9d9ea9ae801b",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": false,
+      "end_to_end_seconds": 176.11736960000053,
+      "worker_seconds": 130.42479749999984,
+      "review_seconds": 45.56780289999733,
+      "repair_seconds": 50.85076029999982,
+      "tokens": {
+        "input_tokens": 586204,
+        "cached_input_tokens": 510720,
+        "output_tokens": 4995
+      },
+      "worker_tokens": {
+        "input_tokens": 523178,
+        "cached_input_tokens": 473856,
+        "output_tokens": 4489
+      },
+      "review_tokens": {
+        "input_tokens": 63026,
+        "cached_input_tokens": 36864,
+        "output_tokens": 506
+      },
+      "worker_tool_calls": 7
+    },
+    {
+      "run_id": "run-008",
+      "pair_id": "unchanged-4",
+      "stage": "unchanged",
+      "case": "guidegraph",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "f257f28b3d4f87144ac5fabb4caea5927cface9056365c2aa7ec9d9ea9ae801b",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": false,
+      "end_to_end_seconds": 200.33346800000072,
+      "worker_seconds": 152.3089499000016,
+      "review_seconds": 47.89926579999883,
+      "repair_seconds": 66.10360390000278,
+      "tokens": {
+        "input_tokens": 563778,
+        "cached_input_tokens": 499456,
+        "output_tokens": 5701
+      },
+      "worker_tokens": {
+        "input_tokens": 500739,
+        "cached_input_tokens": 462592,
+        "output_tokens": 5156
+      },
+      "review_tokens": {
+        "input_tokens": 63039,
+        "cached_input_tokens": 36864,
+        "output_tokens": 545
+      },
+      "worker_tool_calls": 9
+    },
+    {
+      "run_id": "run-009",
+      "pair_id": "first-3",
+      "stage": "first",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "cfcc9d0066babbdfc0643a75a815742818a3bc8ebea03b77177370d2ec3dbb28",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 189.05741529999796,
+      "worker_seconds": 169.71196960000088,
+      "review_seconds": 19.27806409999903,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 225092,
+        "cached_input_tokens": 177920,
+        "output_tokens": 5189
+      },
+      "worker_tokens": {
+        "input_tokens": 192012,
+        "cached_input_tokens": 159488,
+        "output_tokens": 4991
+      },
+      "review_tokens": {
+        "input_tokens": 33080,
+        "cached_input_tokens": 18432,
+        "output_tokens": 198
+      },
+      "worker_tool_calls": 5
+    },
+    {
+      "run_id": "run-010",
+      "pair_id": "first-3",
+      "stage": "first",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "cfcc9d0066babbdfc0643a75a815742818a3bc8ebea03b77177370d2ec3dbb28",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 226.5027349999982,
+      "worker_seconds": 208.12670760000037,
+      "review_seconds": 18.304268899999443,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 225630,
+        "cached_input_tokens": 178304,
+        "output_tokens": 5682
+      },
+      "worker_tokens": {
+        "input_tokens": 192382,
+        "cached_input_tokens": 159872,
+        "output_tokens": 5451
+      },
+      "review_tokens": {
+        "input_tokens": 33248,
+        "cached_input_tokens": 18432,
+        "output_tokens": 231
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-011",
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "ecb1e285e7cb4204058f4f222d9c33d0c50764a2de546fdfc3b032f4125fec82",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 183.47781190000023,
+      "worker_seconds": 167.3258515000016,
+      "review_seconds": 16.088949600001797,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 285595,
+        "cached_input_tokens": 211840,
+        "output_tokens": 5304
+      },
+      "worker_tokens": {
+        "input_tokens": 251044,
+        "cached_input_tokens": 211840,
+        "output_tokens": 5127
+      },
+      "review_tokens": {
+        "input_tokens": 34551,
+        "cached_input_tokens": 0,
+        "output_tokens": 177
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-012",
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "ecb1e285e7cb4204058f4f222d9c33d0c50764a2de546fdfc3b032f4125fec82",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 191.2217982000002,
+      "worker_seconds": 170.5883591999991,
+      "review_seconds": 20.55892600000152,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 236222,
+        "cached_input_tokens": 184192,
+        "output_tokens": 5259
+      },
+      "worker_tokens": {
+        "input_tokens": 201276,
+        "cached_input_tokens": 165760,
+        "output_tokens": 5029
+      },
+      "review_tokens": {
+        "input_tokens": 34946,
+        "cached_input_tokens": 18432,
+        "output_tokens": 230
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-013",
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "case": "guidegraph",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "1c4066cea267abd542d85b31a6bf6847004c61dd2cf9b0ea3bbdbbf9de4eee0e",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 244.94869889999973,
+      "worker_seconds": 223.4425381000001,
+      "review_seconds": 21.43642120000004,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 225891,
+        "cached_input_tokens": 119040,
+        "output_tokens": 5099
+      },
+      "worker_tokens": {
+        "input_tokens": 191009,
+        "cached_input_tokens": 100608,
+        "output_tokens": 4867
+      },
+      "review_tokens": {
+        "input_tokens": 34882,
+        "cached_input_tokens": 18432,
+        "output_tokens": 232
+      },
+      "worker_tool_calls": 5
+    },
+    {
+      "run_id": "run-014",
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "case": "guidegraph",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "1c4066cea267abd542d85b31a6bf6847004c61dd2cf9b0ea3bbdbbf9de4eee0e",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 180.1279531,
+      "worker_seconds": 158.71148749999702,
+      "review_seconds": 21.348685799999657,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 226454,
+        "cached_input_tokens": 163968,
+        "output_tokens": 4726
+      },
+      "worker_tokens": {
+        "input_tokens": 191724,
+        "cached_input_tokens": 163968,
+        "output_tokens": 4457
+      },
+      "review_tokens": {
+        "input_tokens": 34730,
+        "cached_input_tokens": 0,
+        "output_tokens": 269
+      },
+      "worker_tool_calls": 5
+    },
+    {
+      "run_id": "run-015",
+      "pair_id": "first-2",
+      "stage": "first",
+      "case": "guidegraph",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "7ca86876ac7544609d4fa2e5391b0202de74aa31365022228c700cba911ace5d",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 208.5367632999987,
+      "worker_seconds": 189.40313160000005,
+      "review_seconds": 19.06428739999683,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 262032,
+        "cached_input_tokens": 224000,
+        "output_tokens": 5295
+      },
+      "worker_tokens": {
+        "input_tokens": 228953,
+        "cached_input_tokens": 205568,
+        "output_tokens": 5073
+      },
+      "review_tokens": {
+        "input_tokens": 33079,
+        "cached_input_tokens": 18432,
+        "output_tokens": 222
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-016",
+      "pair_id": "first-2",
+      "stage": "first",
+      "case": "guidegraph",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "7ca86876ac7544609d4fa2e5391b0202de74aa31365022228c700cba911ace5d",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 196.91090309999709,
+      "worker_seconds": 178.84047499999724,
+      "review_seconds": 18.00493700000152,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 262203,
+        "cached_input_tokens": 224640,
+        "output_tokens": 5131
+      },
+      "worker_tokens": {
+        "input_tokens": 229868,
+        "cached_input_tokens": 206208,
+        "output_tokens": 4914
+      },
+      "review_tokens": {
+        "input_tokens": 32335,
+        "cached_input_tokens": 18432,
+        "output_tokens": 217
+      },
+      "worker_tool_calls": 7
+    },
+    {
+      "run_id": "run-017",
+      "pair_id": "unchanged-3",
+      "stage": "unchanged",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "ff681dbda8da0e9eace3b03c7c91aec8717c0013c268c29f7a04daa30b5ec8cf",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 100.70615519999774,
+      "worker_seconds": 82.33942780000143,
+      "review_seconds": 18.29642800000147,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 166597,
+        "cached_input_tokens": 135808,
+        "output_tokens": 2111
+      },
+      "worker_tokens": {
+        "input_tokens": 135120,
+        "cached_input_tokens": 117376,
+        "output_tokens": 1920
+      },
+      "review_tokens": {
+        "input_tokens": 31477,
+        "cached_input_tokens": 18432,
+        "output_tokens": 191
+      },
+      "worker_tool_calls": 4
+    },
+    {
+      "run_id": "run-018",
+      "pair_id": "unchanged-3",
+      "stage": "unchanged",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "ff681dbda8da0e9eace3b03c7c91aec8717c0013c268c29f7a04daa30b5ec8cf",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": false,
+      "end_to_end_seconds": 190.12784719999763,
+      "worker_seconds": 144.19827910000458,
+      "review_seconds": 45.82163740000033,
+      "repair_seconds": 57.69895070000348,
+      "tokens": {
+        "input_tokens": 617004,
+        "cached_input_tokens": 520576,
+        "output_tokens": 5306
+      },
+      "worker_tokens": {
+        "input_tokens": 554007,
+        "cached_input_tokens": 483712,
+        "output_tokens": 4742
+      },
+      "review_tokens": {
+        "input_tokens": 62997,
+        "cached_input_tokens": 36864,
+        "output_tokens": 564
+      },
+      "worker_tool_calls": 9
+    },
+    {
+      "run_id": "run-019",
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "ff681dbda8da0e9eace3b03c7c91aec8717c0013c268c29f7a04daa30b5ec8cf",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": false,
+      "end_to_end_seconds": 170.17359390000274,
+      "worker_seconds": 130.32680039999832,
+      "review_seconds": 39.714195200001996,
+      "repair_seconds": 53.14915090000068,
+      "tokens": {
+        "input_tokens": 437609,
+        "cached_input_tokens": 355840,
+        "output_tokens": 5884
+      },
+      "worker_tokens": {
+        "input_tokens": 374624,
+        "cached_input_tokens": 337408,
+        "output_tokens": 5383
+      },
+      "review_tokens": {
+        "input_tokens": 62985,
+        "cached_input_tokens": 18432,
+        "output_tokens": 501
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-020",
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "ff681dbda8da0e9eace3b03c7c91aec8717c0013c268c29f7a04daa30b5ec8cf",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 107.66757200000211,
+      "worker_seconds": 89.66701130000001,
+      "review_seconds": 17.935104799998953,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 180174,
+        "cached_input_tokens": 144768,
+        "output_tokens": 1955
+      },
+      "worker_tokens": {
+        "input_tokens": 148697,
+        "cached_input_tokens": 126336,
+        "output_tokens": 1772
+      },
+      "review_tokens": {
+        "input_tokens": 31477,
+        "cached_input_tokens": 18432,
+        "output_tokens": 183
+      },
+      "worker_tool_calls": 5
+    },
+    {
+      "run_id": "run-021",
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "case": "guidegraph",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "1c4066cea267abd542d85b31a6bf6847004c61dd2cf9b0ea3bbdbbf9de4eee0e",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 191.8142420999975,
+      "worker_seconds": 168.20103409999865,
+      "review_seconds": 23.542279400000552,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 294518,
+        "cached_input_tokens": 254720,
+        "output_tokens": 5489
+      },
+      "worker_tokens": {
+        "input_tokens": 259752,
+        "cached_input_tokens": 236288,
+        "output_tokens": 5211
+      },
+      "review_tokens": {
+        "input_tokens": 34766,
+        "cached_input_tokens": 18432,
+        "output_tokens": 278
+      },
+      "worker_tool_calls": 7
+    },
+    {
+      "run_id": "run-022",
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "case": "guidegraph",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "1c4066cea267abd542d85b31a6bf6847004c61dd2cf9b0ea3bbdbbf9de4eee0e",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 195.75348719999965,
+      "worker_seconds": 172.97031250000146,
+      "review_seconds": 22.710225700000592,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 273050,
+        "cached_input_tokens": 212608,
+        "output_tokens": 5338
+      },
+      "worker_tokens": {
+        "input_tokens": 238684,
+        "cached_input_tokens": 212608,
+        "output_tokens": 5112
+      },
+      "review_tokens": {
+        "input_tokens": 34366,
+        "cached_input_tokens": 0,
+        "output_tokens": 226
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-023",
+      "pair_id": "first-4",
+      "stage": "first",
+      "case": "guidegraph",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "7ca86876ac7544609d4fa2e5391b0202de74aa31365022228c700cba911ace5d",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 203.8321692999998,
+      "worker_seconds": 182.14919689999806,
+      "review_seconds": 21.64014980000138,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 267554,
+        "cached_input_tokens": 222080,
+        "output_tokens": 5038
+      },
+      "worker_tokens": {
+        "input_tokens": 234934,
+        "cached_input_tokens": 203648,
+        "output_tokens": 4797
+      },
+      "review_tokens": {
+        "input_tokens": 32620,
+        "cached_input_tokens": 18432,
+        "output_tokens": 241
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-024",
+      "pair_id": "first-4",
+      "stage": "first",
+      "case": "guidegraph",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "7ca86876ac7544609d4fa2e5391b0202de74aa31365022228c700cba911ace5d",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 222.35721049999847,
+      "worker_seconds": 200.397292499998,
+      "review_seconds": 21.887872600000264,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 270456,
+        "cached_input_tokens": 227328,
+        "output_tokens": 5609
+      },
+      "worker_tokens": {
+        "input_tokens": 237023,
+        "cached_input_tokens": 208896,
+        "output_tokens": 5395
+      },
+      "review_tokens": {
+        "input_tokens": 33433,
+        "cached_input_tokens": 18432,
+        "output_tokens": 214
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-025",
+      "pair_id": "incremental-3",
+      "stage": "incremental",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "ecb1e285e7cb4204058f4f222d9c33d0c50764a2de546fdfc3b032f4125fec82",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 181.90535389999786,
+      "worker_seconds": 164.3884708000005,
+      "review_seconds": 17.447128499999963,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 233716,
+        "cached_input_tokens": 190976,
+        "output_tokens": 5376
+      },
+      "worker_tokens": {
+        "input_tokens": 199004,
+        "cached_input_tokens": 172544,
+        "output_tokens": 5206
+      },
+      "review_tokens": {
+        "input_tokens": 34712,
+        "cached_input_tokens": 18432,
+        "output_tokens": 170
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-026",
+      "pair_id": "incremental-3",
+      "stage": "incremental",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "ecb1e285e7cb4204058f4f222d9c33d0c50764a2de546fdfc3b032f4125fec82",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 220.05282219999935,
+      "worker_seconds": 198.90916410000136,
+      "review_seconds": 21.077397099998052,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 272607,
+        "cached_input_tokens": 230400,
+        "output_tokens": 5833
+      },
+      "worker_tokens": {
+        "input_tokens": 237745,
+        "cached_input_tokens": 211968,
+        "output_tokens": 5628
+      },
+      "review_tokens": {
+        "input_tokens": 34862,
+        "cached_input_tokens": 18432,
+        "output_tokens": 205
+      },
+      "worker_tool_calls": 6
+    },
+    {
+      "run_id": "run-027",
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "case": "anchorflow",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "ecb1e285e7cb4204058f4f222d9c33d0c50764a2de546fdfc3b032f4125fec82",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 193.3434739000004,
+      "worker_seconds": 177.44575279999844,
+      "review_seconds": 15.821234200000617,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 223040,
+        "cached_input_tokens": 184576,
+        "output_tokens": 5041
+      },
+      "worker_tokens": {
+        "input_tokens": 188119,
+        "cached_input_tokens": 166144,
+        "output_tokens": 4873
+      },
+      "review_tokens": {
+        "input_tokens": 34921,
+        "cached_input_tokens": 18432,
+        "output_tokens": 168
+      },
+      "worker_tool_calls": 5
+    },
+    {
+      "run_id": "run-028",
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "case": "anchorflow",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "ecb1e285e7cb4204058f4f222d9c33d0c50764a2de546fdfc3b032f4125fec82",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 180.01985330000025,
+      "worker_seconds": 163.77471969999897,
+      "review_seconds": 16.196776700002374,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 229212,
+        "cached_input_tokens": 185728,
+        "output_tokens": 4941
+      },
+      "worker_tokens": {
+        "input_tokens": 194391,
+        "cached_input_tokens": 167296,
+        "output_tokens": 4739
+      },
+      "review_tokens": {
+        "input_tokens": 34821,
+        "cached_input_tokens": 18432,
+        "output_tokens": 202
+      },
+      "worker_tool_calls": 5
+    },
+    {
+      "run_id": "run-029",
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "case": "guidegraph",
+      "arm": "baseline",
+      "skill_commit": "e2ff5dab799dacc675c27a2d1e80f232b5eb7f62",
+      "input_sha256": "f257f28b3d4f87144ac5fabb4caea5927cface9056365c2aa7ec9d9ea9ae801b",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": false,
+      "end_to_end_seconds": 175.18834609999976,
+      "worker_seconds": 136.18507500000123,
+      "review_seconds": 38.884231699998054,
+      "repair_seconds": 60.82397389999824,
+      "tokens": {
+        "input_tokens": 625176,
+        "cached_input_tokens": 548736,
+        "output_tokens": 4741
+      },
+      "worker_tokens": {
+        "input_tokens": 562118,
+        "cached_input_tokens": 511872,
+        "output_tokens": 4371
+      },
+      "review_tokens": {
+        "input_tokens": 63058,
+        "cached_input_tokens": 36864,
+        "output_tokens": 370
+      },
+      "worker_tool_calls": 8
+    },
+    {
+      "run_id": "run-030",
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "case": "guidegraph",
+      "arm": "candidate",
+      "skill_commit": "38f80db23aa108c1d4b15e404e6bb9f04b2e3233",
+      "input_sha256": "f257f28b3d4f87144ac5fabb4caea5927cface9056365c2aa7ec9d9ea9ae801b",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 96.88224789999731,
+      "worker_seconds": 81.96388669999942,
+      "review_seconds": 14.868783500001882,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 166844,
+        "cached_input_tokens": 135680,
+        "output_tokens": 1756
+      },
+      "worker_tokens": {
+        "input_tokens": 135345,
+        "cached_input_tokens": 117248,
+        "output_tokens": 1615
+      },
+      "review_tokens": {
+        "input_tokens": 31499,
+        "cached_input_tokens": 18432,
+        "output_tokens": 141
+      },
+      "worker_tool_calls": 5
+    }
+  ],
+  "groups": [
+    {
+      "stage": "first",
+      "arm": "baseline",
+      "runs": 5,
+      "first_pass": 4,
+      "final_pass": 5,
+      "content_review_pass": 5,
+      "operational_gates_pass": 5,
+      "end_to_end_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 222.35721049999847,
+        "min": 208.5367632999987,
+        "max": 303.2681177000013
+      },
+      "worker_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 202.68471339999815,
+        "min": 189.40313160000005,
+        "max": 251.47998949999965
+      },
+      "repair_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 0,
+        "min": 0,
+        "max": 38.86469340000258
+      },
+      "input_tokens_all_runs": {
+        "observed": 4,
+        "missing": 1,
+        "median": 244454.0,
+        "min": 225630,
+        "max": 270456
+      }
+    },
+    {
+      "stage": "first",
+      "arm": "candidate",
+      "runs": 5,
+      "first_pass": 5,
+      "final_pass": 5,
+      "content_review_pass": 5,
+      "operational_gates_pass": 5,
+      "end_to_end_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 203.8321692999998,
+        "min": 189.05741529999796,
+        "max": 225.16632319999917
+      },
+      "worker_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 182.14919689999806,
+        "min": 169.71196960000088,
+        "max": 207.65101570000115
+      },
+      "repair_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "input_tokens_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 267554,
+        "min": 225092,
+        "max": 302824
+      }
+    },
+    {
+      "stage": "incremental",
+      "arm": "baseline",
+      "runs": 5,
+      "first_pass": 5,
+      "final_pass": 5,
+      "content_review_pass": 5,
+      "operational_gates_pass": 5,
+      "end_to_end_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 183.47781190000023,
+        "min": 180.1279531,
+        "max": 195.75348719999965
+      },
+      "worker_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 167.3258515000016,
+        "min": 158.71148749999702,
+        "max": 177.44575279999844
+      },
+      "repair_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "input_tokens_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 233716,
+        "min": 223040,
+        "max": 285595
+      }
+    },
+    {
+      "stage": "incremental",
+      "arm": "candidate",
+      "runs": 5,
+      "first_pass": 5,
+      "final_pass": 5,
+      "content_review_pass": 5,
+      "operational_gates_pass": 5,
+      "end_to_end_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 191.8142420999975,
+        "min": 180.01985330000025,
+        "max": 244.94869889999973
+      },
+      "worker_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 170.5883591999991,
+        "min": 163.77471969999897,
+        "max": 223.4425381000001
+      },
+      "repair_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "input_tokens_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 236222,
+        "min": 225891,
+        "max": 294518
+      }
+    },
+    {
+      "stage": "unchanged",
+      "arm": "baseline",
+      "runs": 5,
+      "first_pass": 1,
+      "final_pass": 1,
+      "content_review_pass": 5,
+      "operational_gates_pass": 1,
+      "end_to_end_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 176.11736960000053,
+        "min": 107.66757200000211,
+        "max": 239.28481470000042
+      },
+      "worker_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 136.18507500000123,
+        "min": 89.66701130000001,
+        "max": 181.19244550000076
+      },
+      "repair_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 57.69895070000348,
+        "min": 0,
+        "max": 101.49992059999931
+      },
+      "input_tokens_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 586204,
+        "min": 180174,
+        "max": 625176
+      }
+    },
+    {
+      "stage": "unchanged",
+      "arm": "candidate",
+      "runs": 5,
+      "first_pass": 2,
+      "final_pass": 2,
+      "content_review_pass": 5,
+      "operational_gates_pass": 2,
+      "end_to_end_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 170.17359390000274,
+        "min": 96.88224789999731,
+        "max": 200.33346800000072
+      },
+      "worker_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 130.32680039999832,
+        "min": 81.96388669999942,
+        "max": 152.3089499000016
+      },
+      "repair_seconds_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 53.14915090000068,
+        "min": 0,
+        "max": 66.10360390000278
+      },
+      "input_tokens_all_runs": {
+        "observed": 5,
+        "missing": 0,
+        "median": 403786,
+        "min": 166597,
+        "max": 563778
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "pair_id": "first-1",
+      "stage": "first",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": 5.930740699997841,
+      "input_tokens_difference": 75948
+    },
+    {
+      "pair_id": "first-2",
+      "stage": "first",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": -11.625860200001625,
+      "input_tokens_difference": 171
+    },
+    {
+      "pair_id": "first-3",
+      "stage": "first",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": -37.445319700000255,
+      "input_tokens_difference": -538
+    },
+    {
+      "pair_id": "first-4",
+      "stage": "first",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": -18.525041199998668,
+      "input_tokens_difference": -2902
+    },
+    {
+      "pair_id": "first-5",
+      "stage": "first",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": -87.28499730000112,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": 7.7439862999999605,
+      "input_tokens_difference": -49373
+    },
+    {
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": -3.9392451000021538,
+      "input_tokens_difference": 21468
+    },
+    {
+      "pair_id": "incremental-3",
+      "stage": "incremental",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": 38.14746830000149,
+      "input_tokens_difference": 38891
+    },
+    {
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": 64.82074579999971,
+      "input_tokens_difference": -563
+    },
+    {
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": -13.32362060000014,
+      "input_tokens_difference": 6172
+    },
+    {
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "unchanged-3",
+      "stage": "unchanged",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "unchanged-4",
+      "stage": "unchanged",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    }
+  ],
+  "scope": "All completed trials and all attempts retained. Wall time includes organizer, independent review and repairs. Token totals include cached input and evaluator usage; missing usage stays null. Pair differences only for identical inputs/settings with both quality gates passed. Semantic verdicts require independent audit; no general speedup is inferred.",
+  "protocol": {
+    "started_local_date": "2026-10-25",
+    "completed_local_date": "2026-10-26",
+    "timezone": "Asia/Shanghai",
+    "model": "gpt-6-astra",
+    "reasoning": "high",
+    "codex_cli": "0.159.2",
+    "python": "3.14.4",
+    "cases": 2,
+    "pairs_per_stage": 5,
+    "seed": 20261025,
+    "parallel_pairs": 2,
+    "arms_within_pair": "randomized and sequential",
+    "maintenance_context": "fresh context from independent canonical snapshots",
+    "max_seconds_per_call": 240,
+    "max_attempts": 2,
+    "max_worker_tool_calls_prompted": 8,
+    "source_kind": "independently authored synthetic computational-biology projects",
+    "exclusions_from_trial_time": [
+      "fixture and oracle creation",
+      "input cloning",
+      "additional independent spot-audits",
+      "parent development work"
+    ],
+    "trace_hashes": [
+      {
+        "run_id": "run-001",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "4d935b0f8005355550ed7c33073fcdfd2796bbf8fb529ade3ec865064be99475"
+      },
+      {
+        "run_id": "run-001",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "f9ad2c6070882ec15f5b9de26e50fc775b58b5b67d63e9130d50665eea174cf9"
+      },
+      {
+        "run_id": "run-001",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "a50295e6fa9d69750c44da0c514c61d282706d9073549e03539c49fecf9052c5"
+      },
+      {
+        "run_id": "run-001",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "677eb87cebca8230fa902dda9ebab6c137d9eded0e3e89dcc4f21d1ca4735546"
+      },
+      {
+        "run_id": "run-002",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "ffe450945c75f0ebf92fe62580efa78c3a364e34f92b22affbc5512ab23e0f78"
+      },
+      {
+        "run_id": "run-002",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "0e29bc8039b7a72efe102d74ab9b6850307417d0977c49996c47767d82249934"
+      },
+      {
+        "run_id": "run-002",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "0482ab6732e626fb9138b54e4623d165ade854be899be297cf63ec73499f412b"
+      },
+      {
+        "run_id": "run-002",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "7c06852d97aaa8872c48fd3b67fff74148fe5e9eb0a16899c44de57b9acecfb2"
+      },
+      {
+        "run_id": "run-003",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "0ebacd90c4aa8c19875d24ae75a71db6e64161d2ffaa707ca260803de5cdf068"
+      },
+      {
+        "run_id": "run-003",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "6bf6bc9fd0af85a0d19686c14ef9a7e77027785d2192b8c3dfee03efbac8c181"
+      },
+      {
+        "run_id": "run-004",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "959d1b4778c43c0b877774866d64ea47c890475b18bb4b40f020640086233ba7"
+      },
+      {
+        "run_id": "run-004",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "d2b0cdfb6766d394b471c36cba0ead89835b4f7a9d6ffd97dc55ff6208860da3"
+      },
+      {
+        "run_id": "run-005",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "cac57c6773940abcef1869b4388dcb8a9e08179c57b23f172a429d83aea2fe04"
+      },
+      {
+        "run_id": "run-005",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "444ae9e1cedbef4b5dcc4afaa316627631823bc6643573b5681ad5df895c197e"
+      },
+      {
+        "run_id": "run-005",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "b13f918b70c89f2a51700402e8a0189a81080961cbbc642ca6f3e2728cfcf4f5"
+      },
+      {
+        "run_id": "run-005",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "9e261bf353ec70867825a54848a2c1c88e928977bf84a9d2479abd1e9f24e7d0"
+      },
+      {
+        "run_id": "run-006",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "b7c92a44457ad4321b9681622a9a3369cd4cba66afe65cab4c431f050c21a200"
+      },
+      {
+        "run_id": "run-006",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "5fdd2e69048d6750ed66661ad3158a226180b6090bced9ebe74c198703caa321"
+      },
+      {
+        "run_id": "run-007",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "831c325e3a9dfefe4fdc0a007f3bc8d08503bb02e7c01056d1ab445a6fa0d255"
+      },
+      {
+        "run_id": "run-007",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "7bafd4b912a9557ec31fce69fab8513632f08f2bf62bd466ef9992ad9ea1a893"
+      },
+      {
+        "run_id": "run-007",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "3564a1d9d458332635ada0aae515a598d44f4599c3e1f8c7f12022fa8c4b88d4"
+      },
+      {
+        "run_id": "run-007",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "1208e6c06d115e168f86e747c1ea1393b3edad1e9375699bd5b9999f05b14a17"
+      },
+      {
+        "run_id": "run-008",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "0c4d9e12644bd81d034ab7dd5ccbd9609a6e3d6c3040836b29ffbc4631178ffc"
+      },
+      {
+        "run_id": "run-008",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "5115af9e22b0df745d14ff44c79cf09b1fcb7d368ce0305bec96cc4d72449d5f"
+      },
+      {
+        "run_id": "run-008",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "ea2a3a946947fadd794e3ebfc1643a818b72605284911388168676aa37dbbc07"
+      },
+      {
+        "run_id": "run-008",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "ab25837349969233dfedfeb9b8af638d849b4ebdf3a103ee60d01c9ef207f03c"
+      },
+      {
+        "run_id": "run-009",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "51a3170ee6e4681894cc69b723d76a703d6d68a11e540a1b50d3e5a8dc0ba9f6"
+      },
+      {
+        "run_id": "run-009",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "9c243fc376380be2eb9d1733126502d17fd5b9b39dbf601453164bc039861c10"
+      },
+      {
+        "run_id": "run-010",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "cf21e3ba8577affe314e7ada817db6ae5c75052a0af3a172205f037796aba981"
+      },
+      {
+        "run_id": "run-010",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "64aa47fc19d0dce28dd91fb145289c70c168abc0b2d2a7b6fcaceae12355db39"
+      },
+      {
+        "run_id": "run-011",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "05fac158a6feb6b2e2776d8b8c9108caadbd33464bec04f1db8cd03297b2e9d3"
+      },
+      {
+        "run_id": "run-011",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "064f14225e715a1ed99c3d9cdf13c0e4b144c7799f15deae349603c7e203a0cc"
+      },
+      {
+        "run_id": "run-012",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "883745203538d5b07eface3e92200f534c5caa7ae94004755cefd6de10e47a94"
+      },
+      {
+        "run_id": "run-012",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "4397b40bbcb52e15b8681b8423c9934b16c74bd79b8dc1853cf8f17161fc6a37"
+      },
+      {
+        "run_id": "run-013",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "c53896d1d20fa113dace36bd5628f876f298b124ac8881baf18132bd6c4a6366"
+      },
+      {
+        "run_id": "run-013",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "58b1b75477dd836b791e96eaf2db05747cf4fb1c0624b24e1cdd3621194da5b0"
+      },
+      {
+        "run_id": "run-014",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "61b3469b46d683b599d2d40e35532f7e328a3e0f3c751e97d53e9e072b490d05"
+      },
+      {
+        "run_id": "run-014",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "0cdfeaf146c54a387c6e0b7c07de375e49beb84963f29a8b64ec531ff70289b4"
+      },
+      {
+        "run_id": "run-015",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "acbd18bea19cfd59830f1f3d6d366fc1255c91f587627bbccb03c9c60e7d9a4c"
+      },
+      {
+        "run_id": "run-015",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "234b2beb9022475df5ab86f1adfaf92f2577ba712ac7c8d47bd46ecc91126cd9"
+      },
+      {
+        "run_id": "run-016",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "cdb986e6e00e8557f0054473e9da78f74848a226ae1206442e6bb5849acafc66"
+      },
+      {
+        "run_id": "run-016",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "a3deeeb8b3fc45ba5c95404ffedcdfe2540b90123e38c73241bde5dcdc9acfda"
+      },
+      {
+        "run_id": "run-017",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "b2074d222482553449e5f693e0fbbef6ff8573da2b7d271f7a48ed30766dc411"
+      },
+      {
+        "run_id": "run-017",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "a2e795ed6864f82738af794b1f148214d51196c5a13ef2fffba3a960be43990c"
+      },
+      {
+        "run_id": "run-018",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "8917e1a66dd8d5b51257177664f02bb144fafede1c99915d873f5c8028a18ee4"
+      },
+      {
+        "run_id": "run-018",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "5627540a476a9312b5059b3460f31e7a2f3dc2c3422672d46f93624b3afe3aef"
+      },
+      {
+        "run_id": "run-018",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "f3f7be9f0d5db1e168531c95b409e727eaee40ce2b378341208301f4a4524c3c"
+      },
+      {
+        "run_id": "run-018",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "c1907aadc9bfc2e0629acf9ca38ebeba3ad4bac735d0207f6d2ac4d8882ddbb7"
+      },
+      {
+        "run_id": "run-019",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "c2ae8be80c226e1c69948b216e5defd3eb74247e60b99c1e96314cf5253cbdcf"
+      },
+      {
+        "run_id": "run-019",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "2d33a08d0897d744e16af0bdfc28f41dbbf7d0b78e6ae8d91491cb2c43883d28"
+      },
+      {
+        "run_id": "run-019",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "2c01ec607b3becdc2a73c4cea18a9b82384425330e76f13f013ca38db8c4adb4"
+      },
+      {
+        "run_id": "run-019",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "5edd9cce2bcb78c4fba5a8fa2d662d8a207b47e598a8bd780a815ff541897ebe"
+      },
+      {
+        "run_id": "run-020",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "a9c48bac632dc70bf01e29aff22c648ed5c3ffb0dddd3e6d5414921a7c6d59f0"
+      },
+      {
+        "run_id": "run-020",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "f545304e856d9e55ae200f8132b5c61b2b78ab0775d92454cadfbdb20793eca5"
+      },
+      {
+        "run_id": "run-021",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "f83f2f91c4f9b0057fbac5c714126f41bedf02866c68a87cd30110947fc488db"
+      },
+      {
+        "run_id": "run-021",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "95b37733624dab50d27a10e87655207ba08ab469e32fa0c5455a5480cb0b1922"
+      },
+      {
+        "run_id": "run-022",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "0b3c1168e422c854ece5d9f1b621f7cbf1e0f9246bebfdcd3c175c1929b94674"
+      },
+      {
+        "run_id": "run-022",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "6e6bc109b880753b7ee1b48433c634bca80a3f2ccb4e9f076b4d96a93da6d702"
+      },
+      {
+        "run_id": "run-023",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "f442006c92aa88b51a6d89a3773c3e251e8dcd0d5b62445146003c12032ce0a5"
+      },
+      {
+        "run_id": "run-023",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "4881351005b3d450fe4dcf1b5c20e50aaa577e4271585483ee603bada1972980"
+      },
+      {
+        "run_id": "run-024",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "9991135333e51a81aa0e3c424c0a5ce2a9b4d3d8a452f245731868e7537bf6e5"
+      },
+      {
+        "run_id": "run-024",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "50041e5f5ec1c221631f00d529a5ed8f1dae2f6651d723627510e0a37e646c60"
+      },
+      {
+        "run_id": "run-025",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "da14db3654a83d3d702804f3f136a8c141c78ca878b18c967aac361d2e56b819"
+      },
+      {
+        "run_id": "run-025",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "3c31b1a4095aa6295dcb4d681c9630772ead912e528d6dbafdfc3dff2c7b8994"
+      },
+      {
+        "run_id": "run-026",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "3f4d7e2fa07d14705e28118df37a1eb8462cb93c9418c1251b5633d6e453a7de"
+      },
+      {
+        "run_id": "run-026",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "7560159941d16b2ee3d2c5c8fd6e29bd653f28dd6ebff9b994aeb711cad0b913"
+      },
+      {
+        "run_id": "run-027",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "c035b01e4b3e7cbc8ea86544be883e02e446951a424ce372b8bcebd20b97c3c3"
+      },
+      {
+        "run_id": "run-027",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "2da7f0f7e5e4ba9097e3e74dfde314786e03303e1339863a5a7584dc2da0e0f5"
+      },
+      {
+        "run_id": "run-028",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "6466728c83b795961a74bfed02ceaa27ea934dbc38c5026124a0cb1d639e5773"
+      },
+      {
+        "run_id": "run-028",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "e37d128b2e5924a0ee4162543acec1ea0ac6227becf2524d4dfdb75cca2bbf93"
+      },
+      {
+        "run_id": "run-029",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "383f674a17fdb25cd9e0c327b4d1b67ca0cdab8813682179cd2b32f64e8c1899"
+      },
+      {
+        "run_id": "run-029",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "fd5c7ffc7466d6d858488120e04eb79d5a2578994c2852fb57bf1feb1279143f"
+      },
+      {
+        "run_id": "run-029",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "e947e69a2f29b01c3da776effffbcec933dfb961daff6d98e3acc6742e6a2168"
+      },
+      {
+        "run_id": "run-029",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "3efdd2c21a388ebc6a316957e0e750298a1e5969fa9240d10cda81f1aad6de1c"
+      },
+      {
+        "run_id": "run-030",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "54fabdb4a26c24718954f9f39f699faffece446bafec1580e268e93cfcf7db3e"
+      },
+      {
+        "run_id": "run-030",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "5a55f596275828b370fcf5c055ca41bcde64fce49f280672e38112926e0bb194"
+      }
+    ],
+    "command_mentions_not_io_metrics": {
+      "workspace_scout.py": 66,
+      "task-execution.md": 15,
+      "quality-benchmark.md": 17
+    },
+    "frozen_oracle_sha256": "79a86ccf41187af9063795951f23c708df14754ced91bb59b5ce1eb77a3abc1b",
+    "formal_runner_sha256": "cdb85bd766cef1a87f3bc35a0a0eb62c1cb4e1869fb9fb59b72212015418845c",
+    "limitations": [
+      "Only two reused synthetic cases; not unseen real-project generalization.",
+      "Two concurrent pairs share provider scheduling; this is not an isolated latency laboratory.",
+      "One interrupted worker lacks completed usage; total tokens for that trial are null.",
+      "No-change write gate is operational, not a scientific-omission verdict; some citation refinements are defensible.",
+      "The later write guard is outside the formal comparator; its two checks are post-hoc, not paired speed evidence.",
+      "Independent evaluators use separate prompts/directories, not a read-isolating OS security boundary."
+    ]
+  },
+  "post_guard_checks": [
+    {
+      "run_id": "check-001",
+      "case": "anchorflow",
+      "skill_commit": "dc3f5ab9e1a2c686926dd4e51c08f44b36b6a1d5",
+      "passed": true,
+      "attempts": 1,
+      "seconds": 134.24283540000033,
+      "content_review_passed": true,
+      "mtime_churn": [],
+      "gates": {
+        "protected_unrelated_unchanged": true,
+        "unchanged_stage_no_write": true,
+        "skill_unchanged": true
+      }
+    },
+    {
+      "run_id": "check-002",
+      "case": "guidegraph",
+      "skill_commit": "dc3f5ab9e1a2c686926dd4e51c08f44b36b6a1d5",
+      "passed": true,
+      "attempts": 1,
+      "seconds": 120.59950260000187,
+      "content_review_passed": true,
+      "mtime_churn": [],
+      "gates": {
+        "protected_unrelated_unchanged": true,
+        "unchanged_stage_no_write": true,
+        "skill_unchanged": true
+      }
+    }
+  ]
+}

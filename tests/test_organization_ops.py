@@ -105,6 +105,38 @@ def test_replacement_source_cannot_also_be_changed(tmp_path):
         ops.dry_run(plan)
 
 
+@pytest.mark.parametrize('name', ['.npmrc', 'nested/.PYPIRC', '.venv/pkg.py',
+                                 'node_modules/pkg/index.js', '.hg/store', '.svn/entries'])
+@pytest.mark.parametrize('role', ['source', 'target', 'replacement', 'root'])
+def test_credentials_and_managed_paths_rejected_before_payload_read(tmp_path, monkeypatch, name, role):
+    root = tmp_path / 'workspace'
+    root.mkdir()
+    ordinary = root / 'ordinary.txt'
+    ordinary.write_bytes(b'research note')
+    protected = root / name
+    protected.parent.mkdir(parents=True, exist_ok=True)
+    if role == 'root':
+        protected.mkdir()
+    else:
+        protected.write_bytes(b'synthetic protected data')
+    operation = {'op': 'move', 'source': name if role == 'source' else 'ordinary.txt',
+                 'target': name if role == 'target' else 'organized/result.txt',
+                 'sha256': '0' * 64, 'reason': 'Synthetic guard probe'}
+    if role == 'replacement':
+        operation = {'op': 'replace', 'source': 'ordinary.txt', 'replacement': name,
+                     'sha256': '0' * 64, 'replacement_sha256': '0' * 64,
+                     'reason': 'Synthetic guard probe', 'evidence': {'coverage': 'fixture', 'review': 'fixture'}}
+    plan = {'schema': 1, 'root': str(protected if role == 'root' else root), 'operations': [operation]}
+    with monkeypatch.context() as guard:
+        guard.setattr(Path, 'open', lambda *a, **k: pytest.fail('Opened payload before rejecting protected path'))
+        with pytest.raises(ValueError, match='Protected|Git internal'):
+            ops.apply_plan(plan, tmp_path / 'recovery')
+    assert not (tmp_path / 'recovery').exists()
+    assert ordinary.read_bytes() == b'research note'
+    if role != 'root':
+        assert protected.read_bytes() == b'synthetic protected data'
+
+
 def test_symlinked_target_parent_is_rejected_without_following_it(tmp_path):
     root, _, plan = make_plan(tmp_path)
     outside = tmp_path / 'outside'

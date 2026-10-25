@@ -14,7 +14,7 @@ import re
 
 DIMENSIONS = ('result', 'conditions', 'protocol', 'evidence_level', 'limitations', 'execution_status')
 HASH = re.compile(r'[0-9a-f]{64}\Z')
-PROTECTED = re.compile(r'sealed|blind|credential|secret|password|passwd|api[_-]?key|(?:^|[/_.-])token(?:[/_.-]|$)|(?:^|/)\.env|(?:^|/)(?:\.git|\.ssh|\.venv|venv|gpu_venv|node_modules|__pycache__)(?:/|$)|(?:id_rsa|id_ed25519|authorized_keys)|\.(?:pem|key|p12|pfx|kdbx)$', re.I)
+PROTECTED = re.compile(r'sealed|blind|credential|secret|password|passwd|api[_-]?key|(?:^|[/_.-])token(?:[/_.-]|$)|(?:^|/)\.env|(?:^|/)(?:\.git|\.hg|\.svn|\.ssh|\.venv|venv|gpu_venv|node_modules|__pycache__|\.pytest_cache|\.mypy_cache|\.npmrc|\.pypirc)(?:/|$)|(?:id_rsa|id_ed25519|authorized_keys)|\.(?:pem|key|p12|pfx|kdbx)$', re.I)
 
 
 def digest(data):
