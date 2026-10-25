@@ -72,3 +72,41 @@ def test_snapshot_only_outside_project(tmp_path):
     target = tmp_path / 'snapshot.json'
     scout.write_snapshot(target, root, snapshot)
     assert target.exists()
+
+
+@pytest.mark.parametrize('parent', ['.git', 'sealed_results', '.venv', 'credentials'])
+def test_protected_root_and_ancestor_rejected_before_enumeration(tmp_path, monkeypatch, parent):
+    root = tmp_path / parent / 'child'
+    root.mkdir(parents=True)
+    monkeypatch.setattr(scout.os, 'scandir', lambda *args: pytest.fail('Protected root enumerated'))
+    with pytest.raises(ValueError, match='Protected project root'):
+        scout.inventory(root)
+
+
+def test_opaque_uses_platform_case_rules(tmp_path):
+    root = tmp_path / 'project'
+    (root / 'Data' / 'Raw').mkdir(parents=True)
+    (root / 'Data' / 'Raw' / 'input.csv').write_text('synthetic')
+    result = scout.inventory(root, ('data/raw',))
+    assert ('Data/Raw/input.csv' not in result['entries']) == (scout.os.name == 'nt')
+
+
+def test_snapshot_parent_reparse_rejected_without_writing_inside_project(tmp_path, monkeypatch):
+    root = tmp_path / 'project'
+    root.mkdir()
+    outside = tmp_path / 'outside'
+    outside.mkdir()
+    snapshot = scout.inventory(root)
+    linked = scout._linked
+    # Models a directory reparse point without requiring symlink privileges.
+    monkeypatch.setattr(scout, '_linked', lambda path: path == outside or linked(path))
+    with pytest.raises(ValueError, match='Linked snapshot path'):
+        scout.write_snapshot(outside / 'snapshot.json', root, snapshot)
+    assert not (outside / 'snapshot.json').exists()
+
+
+def test_opaque_invalid_prefix_is_checked_without_symlink_support(tmp_path):
+    root = tmp_path / 'project'
+    root.mkdir()
+    with pytest.raises(ValueError, match='Unsafe'):
+        scout.inventory(root, ('../outside',))

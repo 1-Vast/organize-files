@@ -31,6 +31,8 @@ def _linked(path: Path) -> bool:
 def checked_root(value: Path) -> Path:
     path = value.absolute()
     for candidate in (path, *path.parents):
+        if candidate.name.casefold() in MANAGED or _sensitive(candidate.name):
+            raise ValueError(f'Protected project root or ancestor: {candidate}')
         if candidate.exists() and _linked(candidate):
             raise ValueError(f'Linked project root or ancestor: {candidate}')
     if not path.is_dir():
@@ -44,7 +46,8 @@ def _relative_prefix(value: str) -> str:
     parts = value.split('/')
     if any(p in ('', '.', '..') or p != p.rstrip(' .') or DEVICE.fullmatch(p) for p in parts):
         raise ValueError(f'Unsafe opaque prefix: {value}')
-    return '/'.join(parts)
+    result = '/'.join(parts)
+    return result.casefold() if os.name == 'nt' else result
 
 
 def _sensitive(name: str) -> bool:
@@ -52,6 +55,8 @@ def _sensitive(name: str) -> bool:
 
 
 def _opaque_match(path: str, opaque: tuple[str, ...]) -> bool:
+    if os.name == 'nt':
+        path = path.casefold()
     return any(path == item or path.startswith(item + '/') for item in opaque)
 
 
@@ -77,6 +82,7 @@ def inventory(root: Path, opaque: tuple[str, ...] = ()) -> dict:
     top = defaultdict(lambda: {'files': 0, 'bytes': 0})
     extensions = Counter()
     total_bytes = 0
+    entry_stat_calls = 0
     while stack:
         directory, prefix = stack.pop()
         with os.scandir(directory) as scan:
@@ -85,6 +91,7 @@ def inventory(root: Path, opaque: tuple[str, ...] = ()) -> dict:
         for item in children:
             relative = f'{prefix}/{item.name}' if prefix else item.name
             # Do not inspect payload or traverse linked/reparse-point subtrees.
+            entry_stat_calls += 1
             info = item.stat(follow_symlinks=False)
             linked = item.is_symlink() or bool(getattr(info, 'st_file_attributes', 0) & 0x400)
             if linked:
@@ -119,6 +126,7 @@ def inventory(root: Path, opaque: tuple[str, ...] = ()) -> dict:
                 exclusions.append({'path': relative, 'reason': 'special'})
     return {'schema': 1, 'root': str(root), 'opaque': list(opaque),
             'entries': entries, 'stats': {'files': len(entries), 'visited_directories': dirs,
+                'entry_stat_calls': entry_stat_calls, 'source_payload_files_opened': 0,
                 'logical_bytes': total_bytes, 'excluded_counts': dict(excluded),
                 'top_areas': dict(top), 'extension_counts': dict(extensions),
                 'excluded_paths': exclusions},
@@ -158,10 +166,13 @@ def delta(current: dict, previous: dict | None, max_preview: int = 20) -> dict:
 
 def write_snapshot(target: Path, root: Path, snapshot: dict) -> None:
     target = target.absolute()
+    root = checked_root(root)
+    for candidate in (target, *target.parents):
+        if candidate.exists() and _linked(candidate):
+            raise ValueError('Linked snapshot path or ancestor is outside the write boundary')
+    target = target.parent.resolve(strict=True) / target.name
     if target == root or root in target.parents:
         raise ValueError('Snapshot must stay outside the project root')
-    if target.exists() and _linked(target):
-        raise ValueError('Linked snapshot cannot be overwritten')
     if not target.parent.is_dir():
         raise ValueError('Snapshot parent must exist')
     staging = None

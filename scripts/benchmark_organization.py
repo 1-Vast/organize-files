@@ -1,4 +1,4 @@
-"""Measure strict hashing/metadata scans or synthetic dry-run plans.
+"""Measure strict scans, synthetic plans or aggregate explicit local Agent traces.
 
 Index mode reads only explicitly indexed sources. Operations mode creates an external
 temporary fixture and optionally imports an explicitly supplied local baseline.
@@ -8,6 +8,8 @@ I/O, not index loading. Metadata screening does not authorize cleanup.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
+from datetime import datetime
 import hashlib
 import importlib.util
 import json
@@ -17,6 +19,95 @@ import time
 
 import evidence_index
 import organization_ops
+
+
+def _union_seconds(intervals):
+    end, total = float('-inf'), 0.0
+    for start, stop in sorted(intervals):
+        total += max(0.0, stop - max(start, end))
+        end = max(end, stop)
+    return total
+
+
+def benchmark_trace(path, turn_id=None):
+    """Aggregate an explicitly supplied local Codex trace without exporting text.
+
+    Runtime item intervals may overlap. Their per-type unions are not additive.
+    Usage records are per-response, unlike repeated token_count cumulative events.
+    Subagent traces and semantic reading/synthesis attribution are not inferred.
+    """
+    turns, items, usage = {}, {}, {}
+    last_time, incomplete_lines = 0.0, 0
+    with Path(path).open(encoding='utf-8') as stream:
+        for line in stream:
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                # An active JSONL file may end with an incomplete write; do not
+                # silently accept corruption in an earlier complete line.
+                if line.endswith('\n'):
+                    raise ValueError('Malformed complete trace record') from None
+                incomplete_lines += 1
+                continue
+            timestamp = datetime.fromisoformat(row['timestamp'].replace('Z', '+00:00')).timestamp()
+            last_time = max(last_time, timestamp)
+            payload = row.get('payload', {})
+            kind = payload.get('type')
+            if row['type'] == 'event_msg' and kind == 'task_started':
+                turns[payload['turn_id']] = {'start': timestamp, 'end': None}
+            elif row['type'] == 'event_msg' and kind == 'task_complete':
+                if payload['turn_id'] in turns:
+                    turns[payload['turn_id']]['end'] = timestamp
+            elif row['type'] == 'event_msg' and kind == 'item_completed':
+                item = payload['item']
+                if isinstance(payload.get('started_at_ms'), (int, float)) and isinstance(payload.get('completed_at_ms'), (int, float)):
+                    items[item['id']] = {'type': item['type'],
+                        'start': payload['started_at_ms'] / 1000,
+                        'end': payload['completed_at_ms'] / 1000}
+            elif row['type'] == 'token_usage_record':
+                # Deduplicate replayed response records; never sum token_count.
+                usage[payload['response_id']] = (timestamp, payload.get('turn_id'), payload['usage'])
+    if turn_id is not None and turn_id not in turns:
+        raise ValueError('Requested turn is absent from trace')
+    results = []
+    ordered = list(turns.items())
+    token_fields = {'input_tokens', 'cached_input_tokens', 'cache_write_input_tokens',
+                    'output_tokens', 'reasoning_output_tokens', 'total_tokens'}
+    for number, (tid, turn) in enumerate(ordered, 1):
+        if turn_id is not None and tid != turn_id:
+            continue
+        next_start = ordered[number][1]['start'] if number < len(ordered) else last_time
+        start, end = turn['start'], turn['end'] or min(next_start, last_time)
+        selected = [item for item in items.values() if item['start'] < end and item['end'] >= start]
+        by_type = {}
+        for kind in sorted({item['type'] for item in selected}):
+            intervals = [(max(start, item['start']), min(end, item['end']))
+                         for item in selected if item['type'] == kind and item['end'] >= item['start']]
+            by_type[kind] = {'items': sum(item['type'] == kind for item in selected),
+                            'wall_union_seconds': _union_seconds(intervals)}
+        tokens, responses, missing_usage = Counter(), 0, 0
+        for stamp, record_tid, values in usage.values():
+            if record_tid == tid:
+                if (not isinstance(values, dict) or not {'input_tokens', 'output_tokens'} <= values.keys()
+                        or any(type(values[key]) is not int or values[key] < 0 for key in token_fields & values.keys())):
+                    missing_usage += 1
+                    continue
+                responses += 1
+                tokens.update({key: values[key] for key in token_fields & values.keys()})
+        measured = _union_seconds([(max(start, item['start']), min(end, item['end']))
+                                   for item in selected if item['end'] >= item['start']])
+        results.append({'turn_number': number, 'complete': turn['end'] is not None,
+            'elapsed_seconds': end - start, 'runtime_items': by_type,
+            'runtime_union_seconds': measured, 'unattributed_seconds': max(0.0, end - start - measured),
+            'responses_with_usage': responses, 'responses_missing_usage': missing_usage,
+            'token_usage': dict(tokens) if responses else None})
+    return {'schema_version': 1, 'mode': 'agent_trace', 'turns': results,
+        'incomplete_trailing_records': incomplete_lines,
+        'scope': 'Only this explicitly supplied local trace. No prompts, commands, reasoning text or file payloads exported. '
+                 'Runtime item intervals are observations, not CPU time or semantic reading/synthesis phases; per-type unions overlap. '
+                 'Token usage sums deduplicated per-response records, includes cached input, and excludes separate subagent traces. '
+                 'Reasoning tokens are a subset of output tokens. Missing usage is null, not zero. '
+                 'Unattributed wall time may include scheduling, waits and unlogged activity. No same-input speedup is established.'}
 
 
 def benchmark(index, root, repeats=1):
@@ -113,22 +204,30 @@ def main(argv=None):
     modes = parser.add_mutually_exclusive_group(required=True)
     modes.add_argument('--index', type=Path)
     modes.add_argument('--operations', type=int)
+    modes.add_argument('--trace', type=Path, help='Explicit local Codex JSONL; aggregate only, never publish raw logs')
+    parser.add_argument('--turn-id', help='Select one trace turn; default reports each observed turn')
     parser.add_argument('--root', type=Path)
     parser.add_argument('--baseline-ops', type=Path)
     parser.add_argument('--repeats', type=int, default=1)
     args = parser.parse_args(argv)
+    if args.trace is not None and (args.root is not None or args.baseline_ops is not None):
+        parser.error('--trace cannot use --root or --baseline-ops')
+    if args.turn_id is not None and args.trace is None:
+        parser.error('--turn-id requires --trace')
     if args.index is not None and (args.root is None or args.baseline_ops is not None):
         parser.error('--index requires --root and cannot use --baseline-ops')
     if args.operations is not None and args.root is not None:
         parser.error('--operations cannot use --root; it always creates an external synthetic workspace')
     try:
-        if args.operations is not None:
+        if args.trace is not None:
+            result = benchmark_trace(args.trace, args.turn_id)
+        elif args.operations is not None:
             result = benchmark_operations(args.operations, args.repeats, args.baseline_ops)
         else:
             index = json.loads(args.index.read_text(encoding='utf-8'))
             result = benchmark(index, args.root, args.repeats)
         print(json.dumps(result, ensure_ascii=False, indent=2))
-        return int(any(run.get('errors') for run in result['runs']))
+        return int(any(run.get('errors') for run in result.get('runs', [])))
     except (ValueError, OSError, KeyError) as error:
         parser.exit(2, f'benchmark_organization: {error}\n')
 

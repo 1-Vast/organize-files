@@ -87,6 +87,34 @@ python scripts/benchmark_organization.py --operations 100 --baseline-ops "$env:T
 
 生命周期集成测试检查：无变化二次scan/strict不写报告或增加文件；新更正影响实际依赖；stage/scope/lifecycle变更保留并触发复核；metadata-only不变成严格验收。这些是预设内容的工程测试，不能证明LLM能自动发现任意证据等级升级。
 
+## 端到端耗时与重复工作
+
+先定义本轮任务和固定输入：深度重构、功能开发、只读维护、软件测试及远端发布分别计时。不能把一次包含开发/调试/等待CI的任务，与已整理项目的轻量检查比较并宣称提速。50%端到端降时是待验证目标；同一模型、预算、输入及质量约束的对照未做时不报达标。
+
+先读入口与存储政策，明确 `--opaque` 后盘点一次；本轮无目录变化就复用结果。示例快照必须在项目外，包含文件元数据及必要排除范围，不能上传原始会话日志：
+
+```powershell
+python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --snapshot-out C:/temporary/before.json
+python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --previous C:/temporary/before.json --snapshot-out C:/temporary/after.json
+```
+
+第二次仍遍历未排除目录，变化报告只用于挑选候选。`entry_stat_calls` 是目录项stat接口调用次数，未等价于底层磁盘I/O；`source_payload_files_opened=0`仅针对盘点。默认保护不能识别项目所有语义，必须先显式排除数据/包/环境；快照大小写按平台规则处理，不能借父级链接写回项目内。
+
+将实际流程分段记录在外部任务目录：盘点/快照，来源读取与哈希，Agent理解/综合，计划执行/恢复同步，质量检查及发布等待。记录工具调用、分析对象和重复读取；没有可靠的文件读取/模型计量时，相关指标写N/A，不用字符数推算Token。只重查变化对象及依赖；批量读必要引文并保留来源/行号，避免先输出整份报告、随后逐段重读。严格快照、事实门控可在同一短进程共享已固定身份的来源字节；活文件、删除前或无法证实稳定时仍重新核验。源读取器调用数、唯一源读取数及缓存命中分别记录，不能混为零读取。
+
+已有明确授权且可取得本地Codex会话JSONL时，可用现有基准工具输出匿名汇总：
+
+```powershell
+python scripts/benchmark_organization.py --trace C:/temporary/rollout.jsonl
+# 可用 --turn-id 指定某一轮；不从会话内容执行命令
+```
+
+工具统计实际 `token_usage_record` 的独立response用量，去重而不累加重复的 `token_count` 累计事件；区分输入、缓存输入及输出，reasoning是输出子集。缺少用量写null。`Reasoning`、`CommandExecution`、`ContextCompaction`等为运行时标记区间，其并集仅描述观测墙钟时间，不是CPU时间，也不等于科研理解/综合阶段；各类区间可能重叠，不能直接相加。未归因时间保留未知，不归咎于模型或磁盘。仅含当前trace，子代理另计且并行时间不能加到主任务总墙钟。输出不含提示词、命令、思维原文或文件内容；日志原件留本地。
+
+验收按受影响行为选测试；发布前完成该树所需检查。绑定同一树、环境、输入及命令的通过结果可以复用；代码/数据改变、失败或未解疑点使相关结果失效，再测受影响部分。不要每完成一段文档就重跑全项目，再在相同树重复跑全套来“增加信心”。
+
+执行日志优化先实测 `_save`时间、次数/写入字节、恢复包和哈希成本；如果实际整理没有文件变更，改造执行日志不能降低这轮耗时。追加式日志尚不是当前执行路径。只有它在目标任务中占主导且恢复一致性回归覆盖中断、尾部损坏、并发修改、回滚重入后，才考虑替换全量state；保留fsync及严格恢复保障，不能用孤立JSON写入速度冒充完整apply/rollback提速。
+
 ## 三组同输入对照
 
 在需要比较方法时另行执行；不要把上述测试结果当成比较结果。
