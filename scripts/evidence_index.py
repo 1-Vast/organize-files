@@ -108,6 +108,10 @@ def schema(index):
                 raise ValueError(f"Invalid declared SHA256: {name}")
             if "protected" in source and not isinstance(source["protected"], bool):
                 raise ValueError(f"protected must be boolean: {name}")
+    for obj in objects:
+        source_ids = obj.get("source_ids", [])
+        if not isinstance(source_ids, list) or any(not isinstance(v, str) or not v.strip() for v in source_ids):
+            raise ValueError("source_ids must be nonempty string identifiers")
     for relation in relations:
         if not isinstance(relation, dict) or not isinstance(relation.get("type"), str) or relation["type"] not in RELATIONS:
             raise ValueError("Unknown evidence relation type")
@@ -180,6 +184,9 @@ def inspect_index(index, root, metadata_only=False, previous=None, metrics=None)
     objects, relations, excluded = schema(index)
     root = checked_root(root)
     sources, errors, unverified = {}, [], []
+    # Historical retained-source IDs are metadata references, not verified
+    # live paths. A separate retained-record resolver must verify their bytes.
+    retained_unverified = sorted({sid for obj in objects for sid in obj.get("source_ids", [])})
     candidates, changes, needs_strict = [], [], []
     same_root = previous is not None and previous.get("root") == str(root)
     # One protected declaration protects the file globally, even when reused.
@@ -227,7 +234,8 @@ def inspect_index(index, root, metadata_only=False, previous=None, metrics=None)
     result = {"schema_version": 1, "objects": copy.deepcopy(sorted(objects, key=lambda x: x["id"])),
             "relations": copy.deepcopy(sorted(relations, key=lambda x: (x["from"], x["type"], x["to"]))),
             "excluded_sources": list(excluded), "sources": sources, "errors": errors,
-            "unverified_sources": unverified, "root": str(root), "metrics": metrics,
+            "unverified_sources": unverified, "unverified_source_ids": retained_unverified,
+            "root": str(root), "metrics": metrics,
             "verification_mode": "metadata_only" if metadata_only else "strict_hash",
             "metrics_scope": METRICS_SCOPE,
             "scope": "Only explicitly indexed files were checked; no scientific claim was validated."}
@@ -295,7 +303,9 @@ def impact(before, after):
             start, end = end, start
         adjacency.setdefault(start, set()).add(end)
     unverified_paths = {name for name, item in after["sources"].items() if item["state"] == "unverified"}
-    unverified = {obj["id"] for obj in new_objects if any(s["path"] in unverified_paths for s in obj.get("sources", []))}
+    unverified = {obj["id"] for obj in new_objects if
+                  any(s["path"] in unverified_paths for s in obj.get("sources", []))
+                  or bool(obj.get("source_ids"))}
     pending = list(unverified)
     while pending:
         for dependent in adjacency.get(pending.pop(), set()) - unverified:
