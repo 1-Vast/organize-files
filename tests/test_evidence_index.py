@@ -429,3 +429,225 @@ def test_missing_source_is_still_reported_without_isjunction_api(tmp_path, monke
     result = tool.snapshot_index(data, tmp_path)
     assert result["errors"] == [{"path": "absent/result.json", "error": "missing"}]
     assert result["metrics"]["payload_files_opened"] == 0
+
+
+
+def test_retained_source_id_requires_review_without_reading_payload(tmp_path):
+    files(tmp_path)
+    data = index()
+    data["objects"][1]["source_ids"] = ["log/research_records/example/DECISION.md"]
+    before = tool.snapshot_index(data, tmp_path)
+    after = tool.snapshot_index(data, tmp_path)
+    assert before["unverified_source_ids"] == ["log/research_records/example/DECISION.md"]
+    result = tool.impact(before, after)
+    assert {"claim", "report"} <= set(result["unverified_objects"])
+    assert "claim" not in result["reusable_objects"]
+
+
+def test_source_id_validation_is_bounded(tmp_path):
+    files(tmp_path)
+    data = index()
+    data["objects"][1]["source_ids"] = ["", 3]
+    assert "source_ids" in tool.validate_index(data, tmp_path)["errors"][0]
+
+
+def historical_index():
+    data = index()
+    data["objects"][0]["sources"] = []
+    data["objects"][0]["source_ids"] = ["records/experiment/RESULT.md"]
+    return data
+
+
+def test_trusted_historical_bytes_are_hashed_and_changes_reach_dependent_claims(tmp_path):
+    files(tmp_path)
+    data = historical_index()
+    payloads = {"records/experiment/RESULT.md": b"gain=-0.02"}
+    before = tool.snapshot_index(data, tmp_path, source_resolver=payloads.__getitem__)
+    payloads["records/experiment/RESULT.md"] = b"gain=-0.03"
+    after = tool.snapshot_index(data, tmp_path, source_resolver=payloads.__getitem__)
+    binding = after["source_id_bindings"]["records/experiment/RESULT.md"]
+    assert binding["state"] == "present"
+    assert binding["bytes"] == len(b"gain=-0.03")
+    assert binding["sha256"] == hashlib.sha256(b"gain=-0.03").hexdigest()
+    assert binding["representation"] == "trusted_resolver_bytes"
+    assert after["unverified_source_ids"] == []
+    assert after["verification_complete"]
+    result = tool.impact(before, after)
+    assert result["source_id_changes"] == [{"source_id": "records/experiment/RESULT.md", "change": "changed"}]
+    assert result["direct_changes"] == ["experiment"]
+    assert result["affected_objects"] == ["claim", "report"]
+    assert result["reusable_objects"] == ["unrelated"]
+    assert next(obj for obj in after["objects"] if obj["id"] == "experiment")["status"] == "negative"
+    assert after["source_id_metrics"] == {"resolver_calls": 1, "resolver_failures": 0,
+                                          "bytes_returned": 10, "sha256_computations": 1}
+
+
+def test_unchanged_verified_historical_bytes_allow_only_structural_reuse(tmp_path):
+    files(tmp_path)
+    data = historical_index()
+    resolver = lambda source_id: b"scoped negative evidence"
+    before = tool.snapshot_index(data, tmp_path, source_resolver=resolver)
+    after = tool.snapshot_index(data, tmp_path, source_resolver=resolver)
+    result = tool.impact(before, after)
+    assert result["source_id_changes"] == []
+    assert result["unverified_objects"] == []
+    assert result["review_required"] == []
+    assert result["reusable_objects"] == ["claim", "experiment", "report", "unrelated"]
+    assert "does not establish scientific validity" in result["scope"]
+    validated = tool.validate_index(data, tmp_path, source_resolver=resolver)
+    assert validated["valid"] and validated["verification_complete"]
+    assert validated["verified_sources"] == 1
+    assert validated["verified_source_ids"] == 1
+
+
+def test_absent_resolver_does_not_import_repository_code_or_verify_source_ids(tmp_path):
+    files(tmp_path)
+    repo_tools = tmp_path / "tools"
+    repo_tools.mkdir()
+    (repo_tools / "retained_records.py").write_text("raise RuntimeError('must not import repository code')")
+    data = historical_index()
+    validated = tool.validate_index(data, tmp_path)
+    assert validated["valid"]  # Schema/file checks pass; completeness is separate.
+    assert not validated["verification_complete"]
+    assert validated["verified_source_ids"] == 0
+    assert validated["unverified_source_ids"] == ["records/experiment/RESULT.md"]
+    assert validated["source_id_bindings"]["records/experiment/RESULT.md"]["reason"] == "no_trusted_resolver"
+    assert validated["source_id_metrics"]["resolver_calls"] == 0
+    result = tool.impact(tool.snapshot_index(data, tmp_path), tool.snapshot_index(data, tmp_path))
+    assert result["unverified_objects"] == ["claim", "experiment", "report"]
+    assert result["reusable_objects"] == ["unrelated"]
+
+
+def test_historical_read_failure_preserves_prior_file_and_resolver_io(tmp_path):
+    files(tmp_path)
+    data = historical_index()
+    data["objects"][0]["source_ids"] = ["records/a.md", "records/b.md"]
+
+    def resolver(source_id):
+        if source_id == "records/b.md":
+            raise RuntimeError("storage reader failed after internal I/O")
+        return b"five!"
+
+    result = tool.validate_index(data, tmp_path, source_resolver=resolver)
+    assert not result["valid"] and not result["verification_complete"]
+    assert result["verified_source_ids"] == 1
+    assert result["source_id_bindings"]["records/b.md"]["state"] == "unreadable"
+    assert result["errors"] == [{"source_id": "records/b.md", "error": "source_id_unreadable", "error_type": "RuntimeError"}]
+    assert result["metrics"]["payload_bytes_read"] == len((tmp_path / "report.md").read_bytes())
+    assert result["metrics"]["sha256_computations"] == 1
+    assert result["source_id_metrics"] == {"resolver_calls": 2, "resolver_failures": 1,
+                                           "bytes_returned": 5, "sha256_computations": 1}
+    assert "reads before an exception are not measured" in result["source_id_metrics_scope"]
+
+
+@pytest.mark.parametrize("returned", ["text is not original bytes", {}, None])
+def test_historical_resolver_must_return_exact_bytes(tmp_path, returned):
+    files(tmp_path)
+    result = tool.validate_index(historical_index(), tmp_path, source_resolver=lambda source_id: returned)
+    assert not result["valid"]
+    assert result["errors"][0]["error_type"] == "TypeError"
+    assert result["verified_source_ids"] == 0
+    assert result["source_id_metrics"] == {"resolver_calls": 1, "resolver_failures": 1,
+                                           "bytes_returned": 0, "sha256_computations": 0}
+
+
+def test_historical_source_ids_are_deduplicated_across_objects(tmp_path):
+    files(tmp_path)
+    data = historical_index()
+    data["objects"][1]["source_ids"] = data["objects"][0]["source_ids"][:]
+    calls = []
+
+    def resolver(source_id):
+        calls.append(source_id)
+        return b"shared evidence"
+
+    snapshot = tool.snapshot_index(data, tmp_path, source_resolver=resolver)
+    assert calls == ["records/experiment/RESULT.md"]
+    assert snapshot["source_id_metrics"]["resolver_calls"] == 1
+    assert len(snapshot["source_id_bindings"]) == 1
+
+
+def test_reserved_historical_ids_never_reach_a_resolver(tmp_path):
+    files(tmp_path)
+    data = historical_index()
+    names = ["archive/sealed_source/results.csv", "archive/BLIND/results.csv", "credentials.json",
+             "logs/.ENV", "records/.git./config", "records\\private.key", "RESERVED/outcome.md"]
+    data["objects"][0]["source_ids"] = names
+    data["excluded_sources"] = ["reserved"]
+
+    def forbidden(source_id):
+        pytest.fail("Protected historical payload resolver was called")
+
+    snapshot = tool.snapshot_index(data, tmp_path, source_resolver=forbidden)
+    assert snapshot["errors"] == []
+    assert set(snapshot["unverified_source_ids"]) == set(names)
+    assert all(item["state"] == "unverified" for item in snapshot["source_id_bindings"].values())
+    assert snapshot["source_id_metrics"]["resolver_calls"] == 0
+
+
+def test_declared_file_protection_also_protects_matching_historical_id(tmp_path):
+    files(tmp_path)
+    data = historical_index()
+    data["objects"][0]["source_ids"] = ["RESERVED.md", "reserved.md.", "reserved.md "]
+    data["objects"][1]["sources"] = [{"path": "reserved.md", "protected": True}]
+    snapshot = tool.snapshot_index(data, tmp_path, source_resolver=lambda sid: pytest.fail("Declared protection bypassed"))
+    assert all(item["reason"] == "declared_protected" for item in snapshot["source_id_bindings"].values())
+    assert snapshot["source_id_metrics"]["resolver_calls"] == 0
+
+
+def test_scan_cannot_reuse_historical_bytes_or_resolve_previous_ids(tmp_path, monkeypatch):
+    files(tmp_path)
+    data = historical_index()
+    before = tool.snapshot_index(data, tmp_path, source_resolver=lambda sid: b"trusted once")
+    monkeypatch.setattr(Path, "open", lambda *args, **kwargs: pytest.fail("Scan opened a payload"))
+    scan = tool.scan_index(data, tmp_path, before)
+    assert scan["candidate_sources"] == ["report.md"]
+    assert scan["needs_strict_source_id_verification"] == ["records/experiment/RESULT.md"]
+    assert scan["source_id_bindings"]["records/experiment/RESULT.md"]["state"] == "unverified"
+    assert "sha256" not in scan["source_id_bindings"]["records/experiment/RESULT.md"]
+    assert scan["source_id_metrics"] == {"resolver_calls": 0, "resolver_failures": 0,
+                                         "bytes_returned": 0, "sha256_computations": 0}
+    assert scan["metrics"]["payload_bytes_read"] == 0
+    assert not scan["verification_complete"]
+    with pytest.raises(ValueError, match="strict_hash"):
+        tool.impact(before, scan)
+
+
+def test_lost_historical_access_still_requires_review_when_repeated(tmp_path):
+    files(tmp_path)
+    data = historical_index()
+    before = tool.snapshot_index(data, tmp_path, source_resolver=lambda sid: b"old evidence")
+
+    def missing(source_id):
+        raise FileNotFoundError(source_id)
+
+    after = tool.snapshot_index(data, tmp_path, source_resolver=missing)
+    result = tool.impact(before, after)
+    assert result["source_id_changes"] == [{"source_id": "records/experiment/RESULT.md", "change": "unreadable"}]
+    assert result["invalid_objects"] == ["experiment"]
+    assert result["review_required"] == ["claim", "experiment", "report"]
+    repeated = tool.impact(after, tool.snapshot_index(data, tmp_path, source_resolver=missing))
+    assert repeated["source_id_changes"] == []
+    assert repeated["review_required"] == ["claim", "experiment", "report"]
+    assert repeated["reusable_objects"] == ["unrelated"]
+
+
+def test_rebinding_a_historical_id_requires_review_even_with_identical_bytes(tmp_path):
+    files(tmp_path)
+    data = historical_index()
+    resolver = lambda sid: b"same bytes from a different evidence identity"
+    before = tool.snapshot_index(data, tmp_path, source_resolver=resolver)
+    data["objects"][0]["source_ids"] = ["records/replacement/RESULT.md"]
+    result = tool.impact(before, tool.snapshot_index(data, tmp_path, source_resolver=resolver))
+    assert result["direct_changes"] == ["experiment"]
+    assert result["review_required"] == ["claim", "experiment", "report"]
+    assert {row["change"] for row in result["source_id_changes"]} == {"removed", "added"}
+
+
+def test_resolver_module_strings_are_rejected_without_loading_code(tmp_path):
+    files(tmp_path)
+    result = tool.validate_index(historical_index(), tmp_path, source_resolver="tools.retained_records.read_bytes")
+    assert not result["valid"]
+    assert "trusted callable" in result["errors"][0]
+    assert result["metrics"]["payload_bytes_read"] == 0
+    assert result["source_id_metrics"]["resolver_calls"] == 0
