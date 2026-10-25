@@ -1,0 +1,810 @@
+{
+  "schema_version": 1,
+  "origin": {
+    "maestro_before_commit": "f1a71ff0eef7dd8db5360cc8206193045888887c",
+    "scope": "Six selected actual retained-source cases, plus original and corrected report excerpts. Expected/observed tuples are independently reviewed extraction declarations, not automatic semantic ground truth. This is not an Agent comparison or exhaustive fact coverage."
+  },
+  "source_payloads": {
+    "log/20261023/evidence_portfolio_optimization/RESULTS.json": "{\r\n  \"K\": 5390,\r\n  \"SIDM_clusters\": 78,\r\n  \"scout_count\": 2156,\r\n  \"missing_scout_reads\": 0,\r\n  \"summary\": {\r\n    \"fixed\": {\r\n      \"planned_reads\": 3234,\r\n      \"scout_reads\": 2156,\r\n      \"final_reads\": 1078,\r\n      \"missing_final_reads\": 0,\r\n      \"missing_paired_scout_reads\": 0,\r\n      \"missing_paid_scout_reads\": 0,\r\n      \"0.1\": {\r\n        \"repeat_positive\": 675,\r\n        \"per_1000_planned_wells\": 29.817121653856347,\r\n        \"repeat_positive_fraction\": 0.6261595547309833,\r\n        \"positive_final_reads_secondary\": 765\r\n      },\r\n      \"0.0\": {\r\n        \"repeat_positive\": 971,\r\n        \"per_1000_planned_wells\": 42.89248166799187,\r\n        \"repeat_positive_fraction\": 0.9007421150278293,\r\n        \"positive_final_reads_secondary\": 1002\r\n      }\r\n    },\r\n    \"feedback\": {\r\n      \"planned_reads\": 3234,\r\n      \"scout_reads\": 2156,\r\n      \"final_reads\": 1078,\r\n      \"missing_final_reads\": 0,\r\n      \"missing_paired_scout_reads\": 0,\r\n      \"missing_paid_scout_reads\": 0,\r\n      \"0.1\": {\r\n        \"repeat_positive\": 919,\r\n        \"per_1000_planned_wells\": 40.5954589628059,\r\n        \"repeat_positive_fraction\": 0.852504638218924,\r\n        \"positive_final_reads_secondary\": 919\r\n      },\r\n      \"0.0\": {\r\n        \"repeat_positive\": 1061,\r\n        \"per_1000_planned_wells\": 46.86809788850605,\r\n        \"repeat_positive_fraction\": 0.9842300556586271,\r\n        \"positive_final_reads_secondary\": 1061\r\n      }\r\n    },\r\n    \"mix\": {\r\n      \"planned_reads\": 3234,\r\n      \"scout_reads\": 2156,\r\n      \"final_reads\": 1078,\r\n      \"missing_final_reads\": 0,\r\n      \"missing_paired_scout_reads\": 0,\r\n      \"missing_paid_scout_reads\": 0,\r\n      \"0.1\": {\r\n        \"repeat_positive\": 830,\r\n        \"per_1000_planned_wells\": 36.66401625585299,\r\n        \"repeat_positive_fraction\": 0.7699443413729128,\r\n        \"positive_final_reads_secondary\": 875\r\n      },\r\n      \"0.0\": {\r\n        \"repeat_positive\": 1048,\r\n        \"per_1000_planned_wells\": 46.29384221220956,\r\n        \"repeat_positive_fraction\": 0.9721706864564007,\r\n        \"positive_final_reads_secondary\": 1051\r\n      }\r\n    },\r\n    \"random\": {\r\n      \"planned_reads\": 3234,\r\n      \"scout_reads\": 2156,\r\n      \"final_reads\": 1078,\r\n      \"missing_final_reads\": 0,\r\n      \"missing_paired_scout_reads\": 0,\r\n      \"missing_paid_scout_reads\": 0,\r\n      \"0.1\": {\r\n        \"repeat_positive\": 513,\r\n        \"per_1000_planned_wells\": 22.661012456930823,\r\n        \"repeat_positive_fraction\": 0.47588126159554733,\r\n        \"positive_final_reads_secondary\": 624\r\n      },\r\n      \"0.0\": {\r\n        \"repeat_positive\": 899,\r\n        \"per_1000_planned_wells\": 39.71198869158053,\r\n        \"repeat_positive_fraction\": 0.8339517625231911,\r\n        \"positive_final_reads_secondary\": 950\r\n      }\r\n    },\r\n    \"direct\": {\r\n      \"planned_reads\": 3234,\r\n      \"scout_reads\": 1617,\r\n      \"final_reads\": 1617,\r\n      \"missing_final_reads\": 0,\r\n      \"missing_paired_scout_reads\": 0,\r\n      \"missing_paid_scout_reads\": 0,\r\n      \"0.1\": {\r\n        \"repeat_positive\": 876,\r\n        \"per_1000_planned_wells\": 38.695997879671346,\r\n        \"repeat_positive_fraction\": 0.5417439703153989,\r\n        \"positive_final_reads_secondary\": 1037\r\n      },\r\n      \"0.0\": {\r\n        \"repeat_positive\": 1409,\r\n        \"per_1000_planned_wells\": 62.24048060782755,\r\n        \"repeat_positive_fraction\": 0.8713667285095856,\r\n        \"positive_final_reads_secondary\": 1473\r\n      }\r\n    }\r\n  },\r\n  \"feedback_over_fixed_primary_ratio\": 1.3614814814814815,\r\n  \"primary_paired_differences\": {\r\n    \"fixed\": {\r\n      \"positive_count_difference\": 244,\r\n      \"sidm_bootstrap_95pct\": [\r\n        185.0,\r\n        310.02499999999986\r\n      ]\r\n    },\r\n    \"direct\": {\r\n      \"positive_count_difference\": 43,\r\n      \"sidm_bootstrap_95pct\": [\r\n        9.0,\r\n        78.0\r\n      ]\r\n    },\r\n    \"mix\": {\r\n      \"positive_count_difference\": 89,\r\n      \"sidm_bootstrap_95pct\": [\r\n        59.0,\r\n        121.0\r\n      ]\r\n    }\r\n  },\r\n  \"scout_final_count_upper_bound\": 1078,\r\n  \"decision\": \"DEVELOPMENT_FEASIBILITY_PASS\",\r\n  \"no_certification_or_world_agent_inheritance_RSI_claim\": true,\r\n  \"artifact_hashes\": {\r\n    \"ELIGIBLE.json\": \"20c6e0375940d3f28ea8b096c8b295fcebc022de909eda5fa52caf153acbd8cb\",\r\n    \"CHOICES.json\": \"d1f24cdc00a4738a4129f3e722bdbbb0ce90d23ec19ea7f18d6b5fbf7f3b95ba\",\r\n    \"OBSERVED.npz\": \"b702bb8db93c19ed4f6b37ff2cc1f68bbbcecd89165d0edc644422766fcabd9e\"\r\n  }\r\n}\r\n",
+    "log/20261023/evidence_portfolio_optimization/PROTOCOL.md": "# Paid scout feedback: exposed Jaaks feasibility diagnostic\n\nQuestion: does adaptive allocation improve the number of pairs positive on both purchased validation plates at the same total well proxy cost?\nRule: scout-based ranking must improve by at least 20% over fixed ranking with the same scouts, with a positive paired SIDM-bootstrap difference, and outperform direct final acquisition at equal total cost.\nResult: pending execution; this file and code are frozen before this study converts response fields.\nDecision: developmental feasibility only; no protected asset opening.\nDoes not show: latent true hits, FDR control, clinical utility, world-model necessity, agent value, inheritance or RSI.\n\n## Data and isolation\n\nUse only the fully exposed Jaaks original and validation fitted CSVs. No AZ numeric data or reserve is read. Units are SIDM, anchor ID, float-normalized scalar anchor concentration and library ID. Exclude missing/invalid identity fields or multi-anchor pipe-delimited IDs/concentrations as metadata-only out-of-scope records. Metadata-only eligibility requires an original row and distinct validation plates in both roles. Assign each validation BARCODE globally to scout or final by SHA256(`portfolio-role-v1:` + BARCODE), modulo 2. Within each unit/role choose the minimum SHA256(`portfolio-read-v1:` + unit + `|` + BARCODE), without reading outcomes. Require no original/validation barcode overlap and one SIDM per validation plate.\n\nThe original score is the mean original SYNERGY_DELTA_EMAX, first averaging finite duplicate rows per unit/plate, then averaging plates. Nonfinite scores rank last. Only selected scout responses are converted before choices are persisted. Final response conversion occurs after immutable choices are saved. Duplicate rows at a selected unit/plate are finite-averaged; all-missing selected reads count as no observed positive, remain charged and are never replaced.\n\n## Fixed policies and cost\n\nLet K be the metadata-eligible pool, S = floor(0.4 K), F = floor(0.2 K). All scout policies pay for the same S units ranked by original score. They then purchase F final reads from those scouts, ranked by:\n\n- fixed: original score;\n- feedback: scout score;\n- mix (descriptive): equal average of ordinal original/scout ranks;\n- random (descriptive): a fixed hash order.\n\nThe strong cost comparator (direct) purchases both scout-role and final-role reads for the top D = floor((S + F)/2) units ranked by original score, without using scout feedback for its choices. An odd leftover read is charged as a scout-only read on the next original-ranked unit. Every policy pays exactly S + F reads at seven combination wells/read, including missing reads. This is a well proxy: shared controls, plate capacity and turnaround overhead are not modeled, so it does not demonstrate executable wet-lab campaign economics. In the archive, source processing may share monotherapy fits across screens; barcode separation does not prove independent cultures or normalization.\n\n## Endpoints and inference\n\nPrimary utility is repeat-positive count, requiring BOTH purchased scout and final SYNERGY_DELTA_EMAX > 0.10, per 1,000 planned proxy wells. The threshold is fixed before conversion in this study and is not an assertion of clinical significance. Also report repeat-positives at > 0, final-only positive count, repeat-positive fraction and missing reads descriptively. Missing either purchased read is no observed repeat-positive. Scout positives alone are not confirmed outcomes. No likelihood, e-value or fitted model is used.\n\nUse one fixed plate-role split, no outcome-dependent seed/threshold/budget search. Report paired 95% percentile-bootstrap differences over whole SIDM clusters (2,000 draws, seed 20261023), retaining all units and outcomes in each sampled cluster. This is uncertainty conditional on the exposed, validation-selected candidate pool and fixed choices; it is not prospective policy uncertainty or cross-drug external validation. SIDM clusters do not address all shared-drug dependence. No replays count as new biological tasks.\n\nPass only if feedback/fixed primary count >= 1.20, feedback-minus-fixed lower interval > 0, feedback primary count exceeds fixed pair acquisition and feedback-minus-direct lower interval > 0. Otherwise stop this scout budget/ranking configuration. This does not reject other allocations or the evidence-portfolio family. A structural upper bound is F repeat-positives for any scout policy; report it against the direct arm, without treating hindsight final labels as an allocation oracle. No reserve opening or production promotion follows automatically from a pass.\n\nThe initial final-only acquisition design was mathematically set-dominated and rejected before freeze or response conversion. This protocol defines a different, explicit two-read repeatability task; see [pre-freeze revisions](PRE_FREEZE_REVISIONS.md). It cannot support a claim that feedback beats direct acquisition on single-read positive counts.\n\n## Storage\n\nCode and tests: `research/evidence_portfolio_optimization_20261023/`. Metadata selections, detailed choices and outcomes: `data/processed/evidence_portfolio_optimization_20261023/`. Key reports, result summaries, hashes, reviews and decisions: this `log/` directory. See the independent statistical, evidence and primary-source reviews and cross-discussion records here.\n",
+    "log/research_records/seed_attribution_20261017/ERRATUM_20261018.md": "# Erratum (2026-10-18): the equal-lineage bootstrap interval dropped lineage multiplicity\n\nStatus: a separate record. `analyse.py`, `FREEZE.json`, `RESULTS.json` and `REPORT.md` of this frozen study are\nunchanged. The correction is computed by `erratum_equal_lineage_bootstrap.py` from the public per-lineage means in\n`RESULTS.json` only and saved in `ERRATUM_equal_lineage_bootstrap.json` (write-once).\n\n## The defect\n\n`analyse.cluster_boot` draws 21 lineage indices with replacement, concatenates the lines of the drawn lineages and\npasses them to `equal_cluster_mean`, which averages over `sorted(set(groups))`. A lineage drawn twice therefore\ncounts once and a lineage not drawn is dropped, so each replicate is the mean over the *distinct* drawn lineages\n(13.46 of 21 on average) instead of the mean over the 21 draws. A cluster bootstrap of the equal-lineage mean must\nlet a repeatedly drawn lineage weigh as often as it was drawn.\n\nIt affects one secondary statistic: `RESULTS.json` `standardised.<layer>.equal_lineage_weights.ci95`, quoted in\n`REPORT.md` (section 3) and `research/EVIDENCE.md`. It does not affect:\n\n* the primary tests P1-P3 and their Holm family (`common.paired` weights drawn clusters by `sums[picks]` and\n  `sizes[picks]`, so multiplicity is kept);\n* any point estimate, the pooled, stratum, leave-one-lineage-out and attribution contrasts;\n* the NOT_CONFIRMED verdicts or any stop decision.\n\n## Check that the diagnosis is right\n\nReplaying the flawed estimator on the public per-lineage means with the frozen seed (20261017) and 2,000 draws\nreproduces the three saved intervals to 1e-12. The same draws with the corrected statistic, and 100,000 draws for\nMonte Carlo stability, give:\n\n| Layer | Equal-lineage mean | Saved (flawed) 95% | Corrected 95% (2,000 draws) | Corrected 95% (100,000 draws) |\n|---|---|---|---|---|\n| policy | +0.057 | [-0.175, +0.267] | [-0.212, +0.344] | **[-0.206, +0.355]** |\n| I2 | +0.100 | [+0.023, +0.176] | [+0.006, +0.194] | **[+0.002, +0.202]** |\n| I1 | +0.076 | [-0.072, +0.213] | [-0.112, +0.282] | **[-0.105, +0.278]** |\n\nThe intervals widen by about a quarter; no bound changes sign. At I2 the lower bound is now +0.002, so \"the\nequal-lineage interval excludes zero\" survives only marginally. That statement was never a registered test: the\nregistered primary test at I2 (pooled, Holm-adjusted) is unchanged and stays NOT_CONFIRMED.\n\n## Consequence\n\nNone for any decision. The statement in `REPORT.md` and `EVIDENCE.md` that I2 is \"more evenly spread\n(equal-lineage mean +0.100 [+0.023, +0.176])\" should be read with the corrected interval above.\n",
+    "log/research_records/beataml_g1_20261017/REPORT.md": "# Report: gate G1 on Beat AML (`beataml_g1_20261017`)\n\n**Decision: G1 FAILED. Stop the low-rank state-model branch.** The frozen candidate beats the ridge by\n+0.098 hits per sample [+0.045, +0.153], but the registered gate needs the lower bound, net of 0.05 per\nextra round, to exceed 0.05. It is -0.005 net (+0.045 gross). A strong static model given the same probe\nround gets nearly the same gain.\n\n**Status: DEVELOPMENT.** Beat AML 2.0 is exposed: it shaped the confirmation, its repair and this design.\nNothing here confirms a method.\n\n**Run.**\n\n* `PROTOCOL.md`, the arms, the run and analysis code, the tests and the parity reference were frozen at\n  2026-10-17T15:55:50Z. The run started 56 s later and wrote `records/records.json` once.\n* `RESULTS.json` was written once by `g1_analyse.py`; `verify.py` recomputes it from the records and prints\n  VERIFIED. 17 synthetic tests pass.\n* Parity (stop condition) held on all 520 samples: the low-rank arms reproduce the attribution study's\n  `t_vc0_coh`, `t_x4_coh`, `t_x8_coh` and the confirmed engine's total, and the ridge probabilities equal\n  `strong_state` in all five folds.\n* One documentation clarification after the freeze (`DEVIATIONS.json`); it touches no registered number.\n* Cost: 0 wells, $0, no download, no sealed tier. The run took 43 s.\n\n**Units.** A query is one archived 7-dose AUC profile; 16 queries stand for about 112 treatment wells.\nThe outcome is **total** known frozen events among the 16 queried inhibitors (probes included). A second\nround needs banked cells and about 72 h; the declared value of a round is 0.05 hits per sample.\nn = 520 samples, 479 patients (clusters).\n\n## 1. The gate\n\n| Arm | Rounds | Total hits | Reading |\n|---|---|---|---|\n| `A_item` empirical item ranking | 1 | 0.785 | |\n| `S_ridge` drug-specific ridge on 30 basal PCs | 1 | 0.835 | strongest one-round arm |\n| `C0` low-rank RNA prior, coherent score | 1 | 0.808 | |\n| `E` confirmed two-round engine (promoted score, k = 4) | 2 | 0.854 | |\n| `RF` ridge plus feedback (k chosen on source patients) | 2 | 0.917 | |\n| `CAND` frozen candidate (coherent score, exploit-first, k chosen on source patients) | 2 | 0.933 | |\n\n**Gate: `CAND - S_ridge` = +0.098 [+0.045, +0.153]** (positive in 57 samples, negative in 29, one-sided\nsign-flip p 0.0005).\n\n| Reading | Rule | Result |\n|---|---|---|\n| Strict (decides) | lo - 0.05 x 1 > 0.05 | lo - 0.05 = **-0.005**: FAIL |\n| Gross | lo > 0.05 | 0.045: fail |\n| Net positive | lo - 0.05 > 0 | -0.005: fail |\n\nThe net mean after the round charge is +0.048. The strict rule needs a lower bound above 0.10 hits per\nsample; with intervals about 0.05 either side of the mean, it needs a point estimate of about 0.15.\n\n## 2. Model benefit against the benefit of extra observations\n\nUnadjusted, descriptive. \"Net lower\" is the lower bound minus 0.05 per extra round.\n\n| Contrast | Mean [95% CI] | Extra rounds | Net lower | What it separates |\n|---|---|---|---|---|\n| `C0 - S_ridge` | -0.027 [-0.065, +0.011] | 0 | -0.065 | The low-rank model's own value with no observation: **none** (nominally worse than the ridge). |\n| `CAND - C0` | +0.125 [+0.074, +0.180] | 1 | +0.024 | The probe round, for the low-rank model. |\n| `RF - S_ridge` | +0.083 [+0.042, +0.127] | 1 | -0.008 | The same probe round, for a ridge prior. |\n| `CAND - RF` | +0.015 [-0.036, +0.066] | 0 | -0.036 | The low-rank model's value when both get the same two-round protocol: **not distinguishable**, and the upper bound is below 0.10. |\n| `CAND - E` | +0.079 [+0.032, +0.127] | 0 | +0.032 | The coherent score and k selection against the confirmed engine. |\n| `E - S_ridge` | +0.019 [-0.033, +0.073] | 1 | -0.083 | The confirmed engine is not shown better than the one-round ridge. |\n| `S_ridge - A_item` | +0.050 [-0.002, +0.109] | 0 | -0.002 | The ridge prior against the item ranking. |\n| `C0 - A_item` | +0.023 [-0.025, +0.076] | 0 | -0.025 | The low-rank prior against the item ranking. |\n| `CAND - A_item` | +0.148 [+0.088, +0.211] | 1 | +0.038 | |\n| `RF - A_item` | +0.133 [+0.075, +0.197] | 1 | +0.025 | |\n\nThe identity `CAND - S_ridge = (C0 - S_ridge) + (CAND - C0)` holds exactly (0.098 = -0.027 + 0.125). Almost\nall of the gain is the probe round: it adds +0.125 to the low-rank model and +0.083 to the ridge, and the\ntwo models differ by only +0.015 once both have it.\n\n**Registered classification.** The strongest one-round prior is `S_ridge`. The registered classifier reads\nthe feedback gain on it as \"no net feedback gain at the lower bound\" (`RF - S_ridge`: net lower -0.008).\nIts mean is positive and its gross interval excludes zero, so the pattern is real but small: a round must be\nworth less than about 0.08 hits per sample (point estimate; 0.04 at the lower bound) for it to pay.\n\n## 3. Sensitivity (none of it decides)\n\n* **Fixed probe counts.**\n\n  | k | `C_k - S_ridge` | `RF_k - S_ridge` | `C_k - RF_k` |\n  |---|---|---|---|\n  | 4 | +0.065 [+0.012, +0.125] | +0.062 [+0.013, +0.114] | +0.004 [-0.035, +0.044] |\n  | 8 | +0.131 [+0.076, +0.189] | +0.106 [+0.058, +0.162] | +0.025 [-0.023, +0.075] |\n  | 12 | +0.073 [+0.028, +0.118] | +0.063 [+0.028, +0.104] | +0.010 [-0.038, +0.060] |\n\n  k = 8 is the best fixed count for both models (0.965 and 0.940). The inner choice of k was noisy: the\n  candidate's choices were 8, 12, 8, 8, 4 across folds and cost it 0.032 against always taking 8 (0.933\n  against 0.965). Post hoc, `C_8 - S_ridge` would not pass the strict gate either (lower bound 0.076 gross,\n  net 0.026), because k = 8 was not what the registered procedure selected and 0.076 is below 0.10.\n* **More shrinkage in the ridge feedback** (`RF_s`, lambda = 0.5): 0.904; `RF_s - S_ridge` +0.069\n  [+0.035, +0.108]; `CAND - RF_s` +0.029 [-0.021, +0.081]. The conclusion does not depend on the\n  shrinkage.\n* **Per fold** (`CAND - S_ridge`): +0.187, +0.078, +0.082, +0.073, +0.068. The gain is positive in every fold\n  and largest in fold 0.\n* **Probe returns.** 80-87% of probe readouts return a value (some pairs were never measured); wasted\n  queries per sample are 2.6 (`E`) to 3.4 (`C0`).\n* Within a fold the inner means for the three k differ by 0.00-0.06 hits, so the choice of k carries weak\n  information; the outer table shows k = 8 best for both models.\n\n## 4. Interpretation\n\n1. **The feedback pattern, not the model, produced the gain.** Measuring the top few items and re-ranking\n   adds +0.08 to +0.13 hits per sample to a ridge or a low-rank prior alike. That agrees with\n   `feedback_attribution_20261017` (the update carries item-specific information) and sharpens it: the\n   low-rank state model is not needed to get it.\n2. **The low-rank prior is not better than a ridge on the same basal profile**, with or without\n   observations (`C0 - S_ridge` -0.027; `CAND - RF` +0.015 [-0.036, +0.066]). The registered consequence\n   follows: stop developing the bridged-transfer state model on this domain.\n3. **The confirmed engine is weaker than the candidate** (`CAND - E` +0.079) but is not shown better than\n   the one-round ridge (`E - S_ridge` +0.019). The coherent score is the part of the candidate that\n   mattered; it is development-grade and not calibrated.\n4. **Rounds decide.** After a 0.05 charge per round the strongest net result is `CAND - A_item` (+0.038\n   lower bound) and `C_8 - S_ridge` post hoc (+0.026). No arm clears the 0.05 net usefulness line against\n   the strongest one-round model.\n\n## 5. What this does not show\n\n* Any confirmation: Beat AML is exposed, and the folds are those of the confirmation.\n* That a low-rank model cannot help elsewhere: only that it does not beat a ridge here at the declared\n  margin. The upper bound of `CAND - RF` (+0.066) leaves a small benefit possible.\n* That the declared 0.05 per round is the right price. If a round is cheaper, the ridge-plus-feedback\n  pattern pays (`RF - S_ridge` +0.083); if it is dearer, nothing here does.\n* Transfer of knowledge from PRISM or other screens, clinical benefit, absolute efficacy or causal\n  mechanism. Every model is refitted within Beat AML.\n* Anything about the LLM: no provider call was made.\n\n## 6. Consequences\n\n* **Stopped:** further variants of `BridgedTransferModel` on Beat AML (rank, prior, scorer, probe rule) and\n  any claim that the low-rank state model adds to the feedback gain.\n* **Retained:** the feedback design pattern (a few exploit-first probes, one update, the rest), on the\n  strongest prior, with a ridge as the mandatory comparator. Keep `k = 8` as the working default from the\n  fixed-k table; it is a post hoc choice.\n* **Retained as infrastructure:** `agent.bridge_design`, the coherent scorer as a development scorer, and the\n  promoted `virtual_cell.bridged_transfer`, within their documented scope. The confirmed label stays\n  narrower than its protocol name.\n* **Gate G2** (confirmation) is not opened: it needs a candidate that passes G1 and a new, independent,\n  powered domain, and neither exists locally.\n",
+    "log/research_records/innovation_validation_repair1_20261020/REPORT.md": "# Innovation validation repair: engineering defects fixed, unique benefit still unestablished\n\nThe failure had three causes: an incorrect acquisition calculation, incomplete\nimplementation of the claimed inheritance mechanism, and a task family largely\nserved by conventional latent models. Repairing the first cause does not establish\nthe proposed scientific innovation. The bounded repaired diagnostic now runs and\nreplays correctly; an ordinary latent model using the corrected acquisition rule\nmatches or exceeds the inherited model in its development results.\n\nThree independent reviewers examined implementation, statistics and mechanism.\nTheir claims were cross-checked against source code, stored outputs and analytical\nfixtures. This package is an audit and an isolated repair, not an overwrite of the\noriginal study. All 411 preserved non-cache files across the three predecessors\nremain byte-identical. No old sealed outcomes, real evaluation backgrounds, API,\nexternal messages or wet experiments were used. Nothing was staged or committed.\n\n## What failed, and what has been resolved\n\n| Cause | Evidence | Resolution and limit |\n|---|---|---|\n| KG used inconsistent simulated worlds | Continuous-factor outcomes were drawn independently per pair, while posterior updates used correlated Kalman gains. A valuable probe could appear worthless. | Replaced the estimator with expected maximum posterior shortlist utility minus current maximum. Probe outcomes use the correct marginal; target predictions use the matching conditional model. Recorded values stay fixed. |\n| Useful continuous probes were screened out | Candidate screening used between-component mean disagreement, which can be zero when latent information is substantial. | A-optimal evaluates every legal action. KG screens across disagreement, continuous information and exploitation, with an actual cap of 40. |\n| Gate identity discarded executable content | Same-scope/sign gates with different numerical profiles shared IDs and could be deduplicated. | Full numerical-definition fingerprints; lineage is separate. Program keys can include current definitions and canonical undirected conjunction edges. History versions hash observations and fitted prior parameters, not only cell names. |\n| Deployment refitted already-adapted gates | A validated fit was discarded; a second fit could fail, silently leaving a base model behind a deployed-program record. | Cache and reuse the actual gate fit for the same history/definition, including copied program objects. At release boundaries fit once and explicitly record rollback on failure. Stale/missing deployment snapshots raise an error. |\n| The verifier waived a failed invariant | `compose_8/rst_kg/checkpoint4` declared a gate but eight anchor rows used no gate. The original replay sample covered only first-generation inherited tasks. | New strict legacy audit does not waive exceptions and covers every archived decisive task model. It correctly returns failure for the old checkpoint; old unarchived anchor fits cannot be reconstructed as historical evidence. |\n| Archive and diagnostic-plan claims exceeded implementation | No candidate was added to or retrieved from the archive; probe-order metadata and applicability declarations were not executed. | Corrected archive counts and explicitly label reuse NOT_IMPLEMENTED. Removed the misleading unused applicability/plan interface from the repair. Branching procedure inheritance is a new mechanism still to be tested, not silently added to make the old study pass. |\n| H2 did not match resources | Restart had `12 * generation` candidate slots versus 12 for inheritance. | Old H2 is retained only against the expanded-budget restart. Equal-resource H2 stays NOT_TESTED. The new diagnostic matches candidate ceilings and records actual costs, without pretending equal ceilings imply equal CPU. |\n| Mechanism controls and scientific labels were too strong | Decoupling altered late-gate marginals and retained other probe-to-target paths; H3 was a conditional gain, not an interaction. | Corrected interpretation in `STATISTICAL_REVIEW.md`. The flawed control is not reused as causal evidence. The post hoc four-arm interaction is separately labelled and does not replace H3. |\n\nThe old synthetic mechanisms also have limited rank: alias uses three loading\nouter products; compose uses four plus one conjunction outer product, giving\nmechanism-only rank at most three and five. A continuous latent comparator can\ntherefore explain much of the same information. This is a reason the current\nrepresentation may be redundant, not a claim that biological responses in general\nhave low rank or that all future virtual-cell research is futile.\n\n## Verified engineering outcomes\n\nThe analytical fixture has one shared Gaussian latent state, a diagnostic probe,\nand two competing shortlist targets. It needs no learned model or outcome dataset.\nWith measurement noise 0.01 its exact KG is `sqrt(2/pi)/sqrt(1+0.01^2)/5`.\n\n| Estimator | Value with seed 0 and 20,000 samples |\n|---|---:|\n| Analytical value | 0.159568934 |\n| Original implementation | -0.001015198 |\n| Repaired implementation | 0.160570499 |\n\nThe original implementation would stop; the repair would continue. Independent\nuninformative probes have zero transfer value, and an analytical truncated-normal\ncase verifies that recorded shortlist values remain fixed. These are software\nregressions, not biological evidence (`ANALYTICAL_REGRESSION.json`).\n\nStrict original-output audit (`LEGACY_STRICT_AUDIT.json`):\n\n- 144 streams; all 27,648 archived decisive task nominations reproduced, including\n  10,104 gate-program rows. All 6,912 stream/arm/generation/contract strata covered.\n- One failed checkpoint, affecting eight anchor rows. Status:\n  `INVALID_LEGACY_CHECKPOINT`. The old task estimates are not invalidated by this\n  last-checkpoint anchor inconsistency.\n- 46,080 old anchor rows have no archived fitted model and are `NOT_REPLAYABLE`.\n  Re-fitting now would not recover proof of which model actually ran then.\n\nRepaired development run (`VERIFICATION.json`): eight streams, all 1,152 task and\nanchor rows replay exactly, including 68 gate-program rows. Every actual fitted\nartifact has a stored SHA256 and every checkpoint matches the model used. Four\nmutation checks reject absent generation records, duplicated task cells, wrong\ndeployment IDs and an empty source freeze. Restoring the copied records passes.\nThe 27 new focused tests pass; the original 21-test study suite also passes.\nThe full default suite has one failure, the pre-existing repository-shape check\nfor `D:/MAESTRO/.build-1024-dgm-revision`; all other collected tests pass. That\nconcurrent work directory was not deleted or moved. `git diff --check` passes.\n\n## What the repaired diagnostic says\n\nThe protocol fixed two new development seeds for each unchanged generator family,\n12 drugs/66 pair units, four generations, four queries and shortlist size five.\nThese are small engineering worlds with a different pool size from the original\nstudy. They are not new independent pharmacological evidence and cannot overturn\nthe old 378-pair results. All eight runs completed once in 210.77 elapsed seconds.\n\nMean utility over batches 2-4, pooling the four alias/compose development streams:\n\n| Method | E: queried pairs may be nominated | T: probes and nominated targets are disjoint |\n|---|---:|---:|\n| Inherited gates + corrected KG | 0.836834 | 0.796345 |\n| Restarted gates + corrected KG | 0.836585 | 0.795060 |\n| Ordinary rank-3 latent + A-optimal | 0.826630 | 0.795622 |\n| Ordinary rank-3 latent + corrected KG | 0.836844 | 0.798870 |\n\nRelative to latent + A-optimal, the inherited pipeline has a development E gain\nof about 0.010205. However, its E difference from ordinary latent + corrected KG\nis -0.000010, and its T difference is -0.002525. Thus an available conventional\nconfiguration explains the apparent advantage in this diagnostic. It would be\nincorrect to report the A-optimal comparison alone as successful inheritance.\nThere are too few streams for an efficacy claim; no new CI, significance test or\nSUPPORT label is produced. The two null worlds deploy no gates. Inheritance\ndeploys at six of 32 checkpoints, restart at four.\n\n| Cost across all eight diagnostic streams | Inherited KG | Restarted KG | Latent A-optimal | Latent KG |\n|---|---:|---:|---:|---:|\n| Actual candidate evaluations | 165 | 372 | n/a | n/a |\n| Candidate validation task replays | 660 | 1,488 | n/a | n/a |\n| Measured process CPU seconds | 70.484 | 113.688 | 0.281 | 15.813 |\n| Measured elapsed arm seconds | 74.043 | 119.429 | 0.793 | 16.195 |\n\nBoth library arms had a ceiling of 12 candidates per generation; unused slots\nwere not padded. Consequently actual search effort differs and a fully equal-CPU\ninheritance comparison remains untested. Shared history fitting adds 0.047 process\nCPU seconds separately. Arm totals include their own fitting, search, validation,\ncampaigns and artifact storage; library arms additionally run engineering anchors,\nso these totals are not a matched task-only efficiency benchmark. Costs are\ninstrumented diagnostic costs, not inferred assay costs or production estimates.\n\n## Scientific decisions that remain\n\nThe original H1 negative result is numerically robust for the original\nimplementation: a family-stratified 98.333% interval is [-0.001951, +0.005671],\nbelow the registered 0.01 useful-gain threshold at its upper end. That does not\nevaluate the repaired algorithm. H2 only tested the expanded-budget restart;\nH3 tested policy adaptation conditional on structural adaptation. The descriptive\nfactorial interaction is -0.000758, 95% interval [-0.002646, +0.000789]. Neither\nthese computations nor repaired software establish a useful unique innovation.\n\nThe original resource columns measured elapsed time, not process CPU, and mixed\n96 normal streams with 144 total streams. Correct counts and intervals are in\n`STATISTICAL_AUDIT.json`. The old recommendation to procure a 350-pair pool on\n12 backgrounds is withdrawn: eight historical backgrounds would leave only four\nevaluation units, the synthetic world SD is not a real-background SD, and the\nformula used was a precision calculation rather than a powered useful-gain test.\nMeasured pharmacological utility remains NOT_TESTED.\n\nThe current finite binary-factor family is not a demonstrated open-ended\nevolution system. The immediate research object should be an actually executable\nexperimental procedure learned from feedback, with branching measurements,\napplicability/unknown exits, and inherited evidence. Test its later-task\nmeasurement or planning-cost benefit against the same response model with fresh\nplanning, corrected KG/lookahead, and ordinary amortized policy distillation.\nFactor inheritance, plan inheritance and their combination must be separated.\nIf ordinary planning/distillation explains the benefit, stop this novelty claim.\nAdding more agents, gate counts or specially favorable generators does not answer\nthat question. The bounded next-step instructions are in\n`log/20261020/NEXT_PROCEDURE_INHERITANCE_PROMPT.md` at the repository root.\n\n## Reproduction\n\n```powershell\n.\\.venv\\Scripts\\python.exe -m pytest -q tests/test_innovation_validation_repair.py tests/test_innovation_validation_repair_artifacts.py tests/test_innovation_validation_repair_audit.py\n.\\.venv\\Scripts\\python.exe -B research/innovation_validation_repair1_20261020/r1_verify.py\n.\\.venv\\Scripts\\python.exe -B research/innovation_validation_repair1_20261020/r1_audit.py --out tmp/repair1_legacy_audit_rebuilt.json\n.\\.venv\\Scripts\\python.exe -B research/innovation_validation_repair1_20261020/r1_statistics.py --out tmp/repair1_statistics_rebuilt.json\n```\n\nThe repair verifier should return engineering OK; the strict original audit\nshould return exit 1 for the preserved checkpoint discrepancy. Do not suppress\nthat exit to obtain a green scientific claim. The development runner refuses to\noverwrite its completed output directory; verification does not rerun it.\n",
+    "log/research_records/eg_rpt_20261019/PROTOCOL.md": "# EG-RPT first-stage protocol (DRAFT for review; not frozen; nothing executed)\n\nStudy `research/eg_rpt_20261019`. Development study on exposed data; **never independent confirmation**. No sealed tier, download, paid LLM call or assay\npurchase. Thresholds marked **[T]** are set from Phase-0 data before any evaluation read. Hypothetical costs unless stated.\n\n## 1. Scope: one narrow task first (Task A only)\n\nTask A, drug response / sensitivity discovery on PRISM 19Q4 replay (the only task family with enough local structure to generate many tasks). Task B (mechanism\ndiscrimination) lacks measured mechanism truth (`mechanism_falsification_20261014` ASSET_BLOCKED); Task C needs plate/dose data and independent synergy validation\n(NCI-ALMANAC is used elsewhere and exposed); Task D is a later external test. They are not averaged with A.\n\n## 2. Question and hypotheses\n\nCan evidence about past research procedures plus a Virtual Cell reliability report choose, per **new task**, a procedure that raises terminal utility over the best fixed\npolicy, at equal total cost, on chemical families and lineages not used to build the memory?\n\n* **H0 (identifiable headroom).** Between candidate procedures, the per-task utility difference is reproducible across two independent probe-noise draws: split-noise\n  rank agreement and an oracle-minus-best-fixed gap computed by choosing on draw 1 and evaluating on draw 2 exceed **[T]** (proposed: lower bound > 0.1875 events/64,\n  the carried practical floor). The existing 131-vs-100 figure is **not** evidence (`NOISE_HEADROOM.json`). If H0 fails, stop: no meta-learner is built (route: expand the\n  action space or change the task).\n* **H1 (transfer).** On tasks of held-out families and lineages, EG-RPT's chosen policy beats the best fixed policy and the non-LLM meta-selector (below) by the\n  practical floor, with a positive cluster lower bound.\n* **H2 (reliability value).** The Virtual Cell reliability report improves H1 selections (ablation without it) and lowers false progression.\n* **H3 (agent).** Only if H1 holds with non-LLM selectors: an agent reading the same memory adds utility over the non-LLM selector (agent null in 5 prior studies).\n\n## 3. Task, policy and utility definitions\n\nTask `tau = (c, d, A, O, B, U)` as `policy_memory.ResearchTask`. A task = a 64-compound purged chemical batch x a lineage group (search/held-out lineage split from\n`observable_state_20261018/STAGE0.json`), observations = published PRISM values (no synthetic noise in the primary grader; synthetic probe noise only for the H0\nsplit-noise test), A = pool reads (23 pools, 3 reads per compound), U = qualified nominations among unmeasured pairs per 64 compounds (registered event rule; 32\nnominations, <= 3 per compound). Candidate procedures (finite, non-LLM): prior only; ridge+feedback; mixture mean; kNN-K10; R1; random forest; fixed A-optimal vs\nposterior-sampling read order (`observable_state_20261018/policies.py`). Every procedure is run on every task, so per-task utilities are **observed, not\ncounterfactual** (replay). Utility is never pooled across units.\n\n## 4. Policy memory and reliability\n\n* `PolicyExperience` records (`policy_memory.py`): task, policy, baseline, delta_u, ci95, unit, tier, outcome, dependence group, failure mode, applicability. Negative\n  and withdrawn results are stored as records. Independence = number of dependence groups (families/lineages), never records or noise draws.\n* The 13 study-level records are context only. Training data for the meta-selector = per-task observed utilities from the generated task panel; the memory for a\n  held-out task excludes its family and lineage (`leave_group_out`).\n* Task descriptors (legal at decision time): chemical-family size/novelty, max Tanimoto to training set, seed-pool response statistics, lineage group, available\n  DepMap state counts. No hidden outcomes.\n* Virtual Cell reliability (`ReliabilityReport`): disagreement across the model classes above, calibration residual on training tasks, domain distance, in-scope flag;\n  refusal and fallback to the strongest simple baseline. `choose_under_uncertainty` compares proceed / acquire / test-assumption / baseline in one unit.\n\n## 5. Arms (feasible in the first study marked *)\n\nFixed best-on-training policy*; random policy*; expert rule (ridge+feedback)*; non-LLM meta-selectors on the same descriptors* (nearest-task retrieval; regularised\nregression on descriptors; reliability-gated rule); Virtual Cell + fixed policy*; **EG-RPT non-LLM** (retrieval over evidence-qualified memory + reliability gate)*; oracle\n(hindsight, unavailable)*. Agent-only, agent+VC without memory and full agent EG-RPT: **not run unless H1 holds** (declared infeasible/unpowered otherwise). Ablations*:\nno failure memory, no reliability report, no cross-task transfer (within-family memory only).\n\n## 6. Splits and data roles\n\n`D_search`: folds 0-1 x search lineages (build the panel, derive thresholds). `D_select`: fold 2, bounded pass/fail through `observable_state_20261018/masked_interface.py`.\n`D_transfer`: folds 3-4 x held-out lineages, evaluated once after a hashed freeze. Everything is exposed PRISM 19Q4 => internal development assessment.\nExternal confirmation requires an independent screen (sealed PRISM 24Q2, GDSC/CTRP-style, or new experiments): **blocked**, not authorised.\n\n## 7. Statistics and power\n\nCluster = MoA family (chemical axis) and lineage group (context axis); bootstrap 4,000 draws seed 20261018, one-sided family sign-flip, Holm over H1 comparisons. Power is\nderived in Phase 0 from the split-noise reliability, not from the unreliable campaign-level SDs; the carried scale (acquisition-like SE 0.07-0.08 at ~2,300 compounds,\npredictor-changing SE ~0.2) means a selector that changes the predictor needs thousands of compounds and is declared descriptive in advance unless the pilot SE is small.\n\n## 8. Costs and reporting\n\nCosts itemised (assay_wells, compute, curation, rounds, logical queries), hypothetical, with sensitivity at x0.5/x2 per-read price; no double counting between Delta U and\ncost. Report prediction metrics, perturbation- and context-specific metrics, terminal utility, regret vs oracle, selected-candidate error, false progression/rejection,\ncalibration and domain applicability for every arm.\n\n## 9. Stop, continue, reroute, promotion\n\nStop at H0 failure. Reroute by headroom/identifiability/transport (`observable_state_20261018/research_edit.route`). Continue to the agent arm only if the non-LLM\nEG-RPT beats the fixed policy and non-LLM selector. Promote nothing without independent confirmation; a failed hypothesis rejects that hypothesis, not MAESTRO.\n\n## 10. Minimum repository changes\n\nNew files only (`policy_memory.py`, `experiences.py`, audit, tests, verify); reuse `observable_state_20261018` (masked interface, policies, STAGE0 splits) and\n`feedback_propagation_20261018.bench`. Not built: the task-panel generator, meta-selectors, reliability estimators, any run.\n",
+    "log/research_records/seed_attribution_20261017/REPORT.md": "# Report: contract repair, access trace and what explains the fixed-seed benefit (`seed_attribution_20261017`)\n\n**Status: DEVELOPMENT on exposed data.** The PRISM 19Q4 target strata were opened by\n`program_revision_20261017`; a same-screen stratum is not an independent confirmation, and the 247 lines\nare 21 lineage clusters, not 247 independent domains. Nothing in the three predecessor studies was edited\n(`verify.py` re-checks their freeze digests). No sealed tier was opened, nothing was pushed, no LLM was called.\n\n**Run.**\n\n* `PROTOCOL.md`, the corrected predictor, the replay contract, the 20 null libraries, the runner, the\n  analysis and the tests were frozen before the run (`FREEZE.json`). Smoke runs on 12 lines checked code\n  only.\n* In frozen mode the runner reproduces the previous implementation's strong and seed hits and unknown\n  nominations at I1, I2 and the exploit-first campaign to 1e-9 (parity record in `RESULTS.json`).\n* `RESULTS.json` was written once by `analyse.py` from `records/units.json`; `verify.py` recomputes it and\n  prints VERIFIED. 19 synthetic tests pass (`test_science.py`).\n* Cost: 0 wells, $0, local compute 147 s for the run (about 18 min for the access audit).\n\n## 1. Is the evaluation contract one contract?\n\nNo. `AUDIT_CONTRACT.json` finds the following in `program_revision_20261017`:\n\n| Defect | Size |\n|---|---|\n| The score reference was `(X2+X3)/2`, NaN when a pair has one replicate; labels use the mean of the available replicates. | 23.2% of source pairs have one replicate, 15.2% none; 27.3% of known source pairs rest on one replicate. 5,942 of 18,679 future hits (31.8%) rest on one replicate. |\n| Frozen thresholds were undefined for 100 source drugs. The contract defines all but 24 (no known source pair: refused by name, never nominated). | 76 drugs restored; they carry 4.8% of future hits. |\n| Thresholds of drugs defined in both versions differ. | 527 of 866 drugs (absolute shift up to 0.46); 1,777 future labels would flip under the old threshold. |\n| The predictive variance of a library arm used its in-sample fit. | Out-of-sample variance changes the in-scope variance by about 1% (standardised squared error 1.058 frozen, 1.042 cross-fitted, 1.034 base); it does not change a decision. |\n| The Gaussian crossing score was read as a probability. | It ranks well (AUROC 0.834 on known pairs) and is close to the observed rate in the top deciles (0.381 against 0.382) but under-predicts the lowest deciles about tenfold (0.0002 against 0.0021). The sign condition fails for 0.17% of crossing pairs. It is **not** shown to be a calibrated probability of the complete qualified-hit event, and this report never uses it as one. |\n| The strong-model fit cache was keyed by lines, settings and shape, not by the data. | A relabelled domain reused the stale fit (`AUDIT_ACCESS.json`, stale-cache demo). Repaired: the key now includes the data. |\n\n**Consequence for the reported decisions** (seed library minus strong model, 247 future lines, single-shot):\n\n| Layer | Frozen contract | Repaired contract | Repaired, availability-weighted nomination |\n|---|---|---|---|\n| I2 (8 probe wells) | +0.211 [+0.097, +0.340] | +0.117 [-0.026, +0.248] | +0.166 [+0.039, +0.282] |\n| I1 (DNA panel) | +0.445 [+0.084, +0.921] | +0.283 [-0.065, +0.699] | +0.385 [+0.038, +0.809] |\n| Exploit-first campaign (28 wells) | +0.437 [+0.041, +0.889] | +0.356 [-0.088, +0.856] | — |\n\nAt I2 the median/threshold change and the restoration of the 76 drugs each account for about 0.05 of the\nshrinkage (0.166 and 0.162 when applied alone). The restored drugs are mostly unknown pairs (62.7% unknown,\nhit rate 0.21 among their known pairs against 0.54 otherwise). Point estimates stay positive; the lower bounds cross zero. The frozen \"CONFIRMED (unadjusted)\"\nlabels do not survive the repair at any layer without an availability weight, and the weight is a\nsensitivity choice, not a registered primary.\n\n## 2. Which development-query outcomes entered the development bench?\n\n`AUDIT_ACCESS.json` (structural trace plus perturbation of three projects, bone, lung and uterus, on the\nfrozen and on a masked bench, at I1 and I2):\n\n* **Every fold of the frozen bench trains on the reserved query lines**: each fold's training set holds\n  74-101 of the 103 query lines. The masked bench trains on the 128 historical lines only and its folds\n  contain no query line.\n* **Perturbing query outcomes changes the frozen bench** in the quantities that decide proposals and\n  selection: the fold base means (up to 3.1 units), the cross-fitted residuals (up to 12.2), the\n  out-of-sample variance (up to 4.8), the probe design (none of the 8 probes is shared at I2), the committed\n  digests, the proposals and the diagnosis. Scrambling 2-29 query lines changes 57-100% of the nominations of\n  a project's folds, and 60-88% (I1) or 65-70% (I2) of a project's own nominations through the thresholds and\n  replicate variance alone. The masked bench is **exactly invariant** (every quantity, proposal and distinguishing pair identical) in\n  all six project-by-condition perturbations.\n* **Consequence for quoted numbers.** On the 103 development query lines the seed library obtains 4.41 hits\n  per line on the frozen bench and 3.87 on the masked bench at I2 (2.84 against 2.94 at I1). The empty\n  library moves the same way (4.35 against 3.80), so the inflation is common to the arms; the\n  library-minus-empty contrast is 0.058 against 0.078 hits per line at I2 and 0.049 against 0.146 at I1.\n  The absolute development numbers, and the development arena that the revision loop optimised on, were\n  not prospective. The frozen and masked diagnoses share only 20-60% of their top-10 clusters at I1 and\n  0-40% at I2.\n* **Legitimate offline model selection** (fitting a corrector or library on source lines and comparing\n  held-out source folds) is kept and is not what the frozen bench did wrong. **Prospective-style\n  acquisition** is only `replay.MaskedBench`: the reserved pool is masked before every upstream fit and\n  `reveal` is the only costed access. A measurement edit on the masked bench refuses with\n  `MEASURE_EDIT_NEEDS_PURCHASE`.\n\n### Cost units (`COST_UNITS.json`)\n\nSix accounts are no longer one number: shared historical data (966 source drugs x 231 source lines,\ninherited by every arm), incremental research (the frozen convention is 2 wells per newly revealed pair\nand is a logical charge), deployment (28 wells and one assay unit per line), bundles and rounds\n(turnaround), compute/API/curation, and logical replay queries (one pair, not one plate well). A PRISM\nwell measures every line of a pool (6-21 source lines), so the development \"wells\" of the earlier report\nare an upper bound on physical effort; the retained trajectories keep counts, not pairs, so only bounds\nare reported. Deployment wells and rounds are identical across all arms of this study.\n\n## 3. What explains the fixed-seed benefit?\n\nCorrected contract, 247 future lines, 21 lineage clusters, hits per line (unknown is never a hit).\n\n| Layer | Strong (A) | Seed (B) | Shared-only (D) | 20 null libraries (mean; range) | Global ridge on seed features (C1) | Per-drug ridge (C2) | Pooled GBM (C3) |\n|---|---|---|---|---|---|---|---|\n| Policy (exploit-first, 28 wells) | 4.514 | 4.870 | 4.838 | 4.523 (4.466-4.603) | 4.874 | 4.781 | 4.583 |\n| I2 | 4.202 | 4.320 | 4.296 | 4.179 (4.154-4.198) | 4.312 | 4.243 | 4.190 |\n| I1 | 2.923 | 3.206 | 3.069 | 2.896 (2.850-2.923) | 3.040 | 3.117 | 2.947 |\n\n**Registered primary family (Holm over three).** The seed signal does **not** survive.\n\n| Test | Mean [95% CI] | Holm p | Result |\n|---|---|---|---|\n| P1 policy, B - A | +0.356 [-0.088, +0.856] | 0.31 | NOT_CONFIRMED |\n| P2 I2, B - A | +0.117 [-0.026, +0.248] | 0.29 | NOT_CONFIRMED |\n| P3 I1, B - A | +0.283 [-0.065, +0.699] | 0.31 | NOT_CONFIRMED |\n\nThe registered consequence applies: the seed signal is not confirmed under the corrected contract at the\ncomplete-policy layer, and no revision study follows.\n\n**Attribution (policy layer unless stated; unadjusted unless a Holm value is given).**\n\n| Question | Contrast | Mean [95% CI] | Reading |\n|---|---|---|---|\n| Biological correspondence | B - mean(20 nulls) | policy +0.348 [-0.063, +0.826]; I2 +0.140 [+0.001, +0.273]; I1 +0.311 [-0.025, +0.730] | The seed exceeds **every** null at every layer (exact permutation p 1/21 = 0.048, the smallest possible). Registered reading: supported at I2 only (lower bound +0.001, Holm p 0.22), not established at policy or I1. |\n| Capacity alone | mean(nulls) - A | +0.009 / -0.023 / -0.027 | None. Equal capacity and 4-20% **more** observed cell support than the seed give no gain. |\n| Per-drug loadings | B - D | +0.032 [-0.194, +0.231] (policy); +0.024 [-0.039, +0.088] (I2) | Not distinguishable; equivalent within margin at I2. |\n| Shared structure | D - A | +0.324 [+0.059, +0.638] (policy); +0.093 [0.000, +0.179] (I2) | Shared loadings carry most of the policy-layer effect (Holm p 0.069). |\n| Uncertainty estimation | B with the seed variance only, minus A | I2 +0.012 [-0.006, +0.034]; I1 +0.004 [-0.012, +0.019] | None. The mean carries the gain (mean-only +0.113 at I2 against full +0.117). |\n| Conventional counterpart | B - C1 (global ridge on the same ten scope-by-gate products) | -0.004 [-0.198, +0.166] (policy); +0.008 [-0.051, +0.075] (I2) | The hierarchical library does no better than a ridge on the same ten interaction features. C1 - A is +0.360 [+0.068, +0.714] (policy), +0.109 [+0.009, +0.210] (I2). |\n| Learn the pairing from data | B - C1x (all 72 scope-by-gate products) | +0.263 [-0.099, +0.668] | A ridge given all 72 products gains +0.093 [-0.018, +0.191]: it did not find the seed's pairings. |\n| Other conventional | B - C3 pooled GBM | I2 +0.130 [+0.004, +0.266] | The GBM on the same flags gains nothing. |\n\n**Reading.** The benefit, to the extent it exists, is carried by *which* ten scope-by-gate interactions\nare present (the textbook pairings), entered as a mean correction, and is matched by a plain ridge that\nreceives the same ten features. It is not explained by extra capacity, by per-drug calibration, or by\nuncertainty estimation, and no conventional model reproduces it without being given the pairings. That\nsupports \"the information is in the pairings\"; it does not support \"the library architecture adds\nsomething\", and it does not by itself show the pairings are biologically right (a permuted pairing can be\naccidentally informative, which would understate the correspondence effect).\n\n**Support and transport.**\n\n* **Gate-positive and gate-negative lines.** 225 of 247 lines are positive for at least one seed gate.\n  Policy-layer gain: +0.422 [-0.051, +0.935] on gate-positive lines (108% of the total gain) and -0.318\n  [-0.500, -0.048] on the 22 gate-negative lines (8 lineages), where the seed library costs hits. By gene:\n  BRAF-positive lines (39) +1.59, NRAS-positive (13) +1.08, KRAS-positive (62) -0.13, TP53-positive (167)\n  +0.27; EGFR-positive lines (4) cannot be scored.\n* **Nominations that differ.** 3.02 of 10 policy nominations per line differ between A and B (206 of 247 lines).\n  B-only nominations yield 0.365 hits each against 0.247 for A-only, with equal unknown rates (0.21 and\n  0.22). The 272 B-only hits fall in 87 distinct structure groups (largest 7.4%), so the gain is not a\n  single scaffold.\n* **Lineage support.** The policy gain is concentrated: skin (39 lines) contributes 82% of it\n  (+1.85 hits per line) and urinary tract another +0.96; only 5 of 21 lineages are positive and 9 negative.\n  Leaving out one lineage moves the pooled mean between +0.08 and +0.44. With equal lineage weights the\n  contrast is +0.057 [-0.175, +0.267]; by stratum it is +0.015 on the 67 future-line cases and +0.483 on the\n  180 future-lineage cases (7 clusters). At I2 it is more evenly spread (10 positive, 5 negative lineages;\n  skin 59%; equal-lineage mean +0.100 [+0.023, +0.176]).\n* **Target-mixture standardisation** to equal lineage weights is shown above; equal stratum weights give\n  +0.249 (policy), +0.095 (I2), +0.213 (I1). Source-gate-mixture standardisation gives +0.358\n  [-0.087, +0.838] (policy).\n* **Unknown outcomes.** Treating unknown as a miss is the registered reading. Unknown per line is\n  unchanged (-0.020 [-0.228, +0.172]); the hit rate among known pairs rises by 0.032 [+0.001, +0.062].\n  Filling unknown pairs at the pooled hit rate (an optimistic upper bound) gives +0.455 [+0.082, +0.855]\n  and availability-weighted nomination +0.267 [-0.075, +0.613].\n* **Cost and rounds** are identical (28 wells, 3 rounds per line); arms differ in compute (A 1 s,\n  B 2 s, C3 34 s) and in curation (ten authored programs for B and D, none for E, a tuning grid for C).\n\n**Precision.** With 21 clusters the policy-layer interval is about +-0.47, so a gain of +0.36 is neither\nconfirmed nor excluded, and the smaller attribution contrasts are mostly inconclusive. Absence of\ndistinction is reported as \"not established\", never as a null.\n\n## 4. Remaining learnable opportunity (Part 4)\n\n**Not run.** The registered trigger was a primary test with a mean of at least 0.10 and a positive lower\nbound. None has one (lower bounds -0.088, -0.026, -0.065). A frozen small-menu hindsight diagnostic, a\nnested conventional prediction of useful choices and the four-way classification (insufficient headroom,\ninsufficient information, unsupported target conditions, algorithm failure) would only restate noise\nhere, and are not produced. No automatic revision rerun was started.\n\n## 5. What this does not show\n\n* Any independent confirmation: the screen, the lines and the lineages are the ones the earlier study\n  opened.\n* That revision, stepwise search or an LLM adds anything: none was rerun; the earlier null (editable\n  minus fixed library 0.000) stands, with its numbers now on a corrected contract only for the fixed\n  library.\n* That the seed pairings are biologically correct: a ridge on the same features does equally well, and\n  the effect is concentrated in BRAF/NRAS-positive skin lines.\n* That programs learned from an empty start fail: the seed-arm ablations do not cover every empty-start\n  program.\n* Anything about the lower-scoring part of the ranking: the Gaussian score is a ranking score here.\n\n## 6. Decision\n\n* Retain the fixed ten-program seed library as an **optional, scoped component with a labelled\n  exploratory effect**: positive point estimates (+0.12 to +0.36), no confirmed lower bound, concentrated\n  in BRAF/NRAS-mutant skin lines, harmful on gate-negative lines.\n* The strongest simple comparator for any later library claim is a **ridge on the same ten scope-by-gate\n  features**, not the strong model alone.\n* No further revision, LLM proposal or grammar search on this arena. The development arena's absolute\n  numbers are not prospective (section 2); any later study must use `replay.MaskedBench`.\n"
+  },
+  "before_claims": [
+    {
+      "id": "JAAKS-SENSITIVITY-THRESHOLD",
+      "expected": {
+        "result": {
+          "direct_repeat_positive": 1409,
+          "feedback_repeat_positive": 1061
+        },
+        "conditions": {
+          "threshold": ">0",
+          "endpoint": "both purchased observations"
+        },
+        "protocol": "sensitivity repeat-positive count; primary threshold remains >0.10",
+        "evidence_level": "exposed_development",
+        "limitations": [
+          "not a new experiment",
+          "not prospective evidence"
+        ],
+        "execution_status": "completed_readout_correction"
+      },
+      "observed": {
+        "result": {
+          "direct_repeat_positive": 1409,
+          "feedback_repeat_positive": 1061
+        },
+        "conditions": {
+          "threshold": ">0",
+          "endpoint": "both purchased observations"
+        },
+        "protocol": "sensitivity repeat-positive count; primary threshold remains >0.10",
+        "evidence_level": "exposed_development",
+        "limitations": [
+          "not a new experiment",
+          "not prospective evidence"
+        ],
+        "execution_status": "completed_readout_correction"
+      },
+      "sources": [
+        {
+          "id": "log/20261023/evidence_portfolio_optimization/RESULTS.json",
+          "sha256": "2ee8da940d2e6b8fa0fa21c39423a85ed7d231073063481c614218b3ee739283",
+          "quote": "        \"repeat_positive\": 1409,",
+          "representation": "git_blob",
+          "json_values": {
+            "/summary/direct/0.0/repeat_positive": 1409,
+            "/summary/feedback/0.0/repeat_positive": 1061
+          }
+        },
+        {
+          "id": "log/20261023/evidence_portfolio_optimization/PROTOCOL.md",
+          "sha256": "5fd4d952bc3b7d71605eea36356d2ac4279f7bdc69a96bbfa1b26052e558937e",
+          "quote": "Primary utility is repeat-positive count, requiring BOTH purchased scout and final SYNERGY_DELTA_EMAX > 0.10, per 1,000 planned proxy wells. The threshold is fixed before conversion in this study and is not an assertion of clinical significance. Also report repeat-positives at > 0, final-only positive count, repeat-positive fraction and missing reads descriptively. Missing either purchased read is no observed repeat-positive. Scout positives alone are not confirmed outcomes. No likelihood, e-value or fitted model is used.",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "## Current paid-repeatability result\n\nThe Jaaks development replay used 5,390 single-anchor units in 78 SIDM clusters. Every strategy paid for 3,234 reads, represented by 22,638 combination wells. The primary endpoint required both purchased measurements to exceed the fixed 0.10 threshold.\n\n| Strategy | Repeated positives | Comparison status |\n|---|---:|---|\n| Original rank after the same initial screen | 675 | Frozen baseline |\n| Ranking by initial-screen numerical feedback | 919 | Frozen tested strategy |\n| Equal-weight original/screen rank mixture | 830 | Frozen descriptive comparison |\n| Equal-cost fixed paired acquisition | 876 | Frozen strong comparator |\n| Binary initial-screen gate, then original rank | 898 | Post-result simple control |\n| Binary gate, then fixed hash rank | 869 | Post-result simple control |\n\nThe numerical-feedback result retains a positive development comparison with frozen baselines; the difference from the simple binary-gate control has an interval including zero. Initial screening participates in the endpoint, so removing initial-screen failures can explain substantial improvement without a learned cell-update mechanism. At the lower sensitivity threshold of >0, fixed paired acquisition yielded 1,409 against numerical feedback's 1,061; at the primary threshold but counting only the last positive measurement, the comparison was 1,037 against 919. These are different endpoints, not interchangeable rankings.\n\nCorrection (2026-10-25): this synthesis previously attributed 1,409 versus 1,061 to a stricter 0.20 threshold. The retained `log/20261023/evidence_portfolio_optimization/RESULTS.json` records those counts under `summary.direct[\"0.0\"]` and `summary.feedback[\"0.0\"]`. Recounting both purchased observations from the hash-bound `CHOICES.json` and `OBSERVED.npz` reproduced all ten arm/threshold repeat counts. This corrects the summary's threshold attribution; it is not a new experiment or source-table reconstruction.\n\nThe data were exposed and the candidate pool was selected by the original study. The cost proxy omits shared controls, plate layout and turnaround. Conditional development intervals are not prospective guarantees. Thresholds, budgets and splits must not be retuned from these observations. Independent source-table recomputation checked selection, charging, counts and 2,000 bootstrap draws; it is not biological replication. A complete comparison with Scientific CI/CD remains limited by inaccessible original text.\n\nEvidence IDs: `log/20261023/evidence_portfolio_optimization/DECISION.md`, `log/20261023/research_progress/README.md`, and the former `log/20261023/report_consolidation/RESEARCH_SUMMARY.md`. Exact source text and its original numerical intervals remain available through the retained-record reader.",
+      "disposition": "corrected",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      },
+      "amendment_source": "log/20261023/evidence_portfolio_optimization/RESULTS.json"
+    },
+    {
+      "id": "SEED-SECONDARY-INTERVAL",
+      "expected": {
+        "result": {
+          "I2_mean": 0.1,
+          "I2_interval": [
+            0.002,
+            0.202
+          ]
+        },
+        "conditions": {
+          "draws": 100000,
+          "draw_multiplicities": "preserved"
+        },
+        "protocol": "equal-lineage secondary bootstrap; primary Holm tests unchanged",
+        "evidence_level": "secondary_posthoc_development",
+        "limitations": [
+          "not primary confirmation",
+          "stop decisions unchanged"
+        ],
+        "execution_status": "readout_correction"
+      },
+      "observed": {
+        "result": {
+          "I2_mean": 0.1,
+          "I2_interval": [
+            0.002,
+            0.202
+          ]
+        },
+        "conditions": {
+          "draws": 100000,
+          "draw_multiplicities": "preserved"
+        },
+        "protocol": "equal-lineage secondary bootstrap; primary Holm tests unchanged",
+        "evidence_level": "secondary_posthoc; exposure status not stated in the study paragraph",
+        "limitations": [
+          "not primary confirmation",
+          "stop decisions unchanged"
+        ],
+        "execution_status": "readout_correction"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/seed_attribution_20261017/ERRATUM_20261018.md",
+          "sha256": "656d1691f82b079103e996028f5f76f061c71ef2381a6ac56d1e961651dedb20",
+          "quote": "| I2 | +0.100 | [+0.023, +0.176] | [+0.006, +0.194] | **[+0.002, +0.202]** |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/seed_attribution_20261017/ERRATUM_20261018.md",
+          "sha256": "656d1691f82b079103e996028f5f76f061c71ef2381a6ac56d1e961651dedb20",
+          "quote": "registered primary test at I2 (pooled, Holm-adjusted) is unchanged and stays NOT_CONFIRMED.",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/seed_attribution_20261017/REPORT.md",
+          "sha256": "8173a2efd1a6ccd0e1b62d51758fe0e983ce772bac5a2a8173393a244eaff6e6",
+          "quote": "**Status: DEVELOPMENT on exposed data.**",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**16. `seed_attribution_20261017` — repaired primary contrasts do not confirm seed gain.** (`REPORT.md`, `ERRATUM_20261018.md`.) Primary pooled I2 was +0.117 [−0.026, +0.248], I1 +0.283 [−0.065, +0.699], and policy +0.356 [−0.088, +0.856]. None was confirmed. A separate equal-lineage secondary bootstrap had incorrectly dropped draw multiplicities. Corrected 100,000-draw intervals were policy +0.057 [−0.206, +0.355], I2 +0.100 [+0.002, +0.202], and I1 +0.076 [−0.105, +0.278]. This secondary repair changes neither primary Holm tests nor stop decisions. Same-feature ridge matched the library; much gain concentrated in skin/BRAF/NRAS, with gate-negative harm −0.318 [−0.500, −0.048]. Scoped feature information remains optional; renewed program search is unsupported.",
+      "disposition": "corrected",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      },
+      "amendment_source": "log/research_records/seed_attribution_20261017/ERRATUM_20261018.md"
+    },
+    {
+      "id": "G1-COST-ADJUSTED-STOP",
+      "expected": {
+        "result": {
+          "difference": 0.098,
+          "interval": [
+            0.045,
+            0.153
+          ],
+          "net_lower": -0.005,
+          "decision": "stop_low_rank_branch"
+        },
+        "conditions": {
+          "strict_gate": "lo - 0.05 x 1 > 0.05",
+          "round_cost": 0.05,
+          "required_net_margin": 0.05
+        },
+        "protocol": {
+          "unit": "hits/sample",
+          "samples": 520,
+          "patient_clusters": 479,
+          "endpoint": "total known frozen events among 16 queried inhibitors, probes included"
+        },
+        "evidence_level": "exposed_development",
+        "limitations": [
+          "configuration-specific stop",
+          "same-feedback ridge nearly matches candidate"
+        ],
+        "execution_status": "executed_negative"
+      },
+      "observed": {
+        "result": {
+          "difference": 0.098,
+          "interval": [
+            0.045,
+            0.153
+          ],
+          "net_lower": -0.005,
+          "decision": "stop_low_rank_branch"
+        },
+        "conditions": {
+          "round_cost": 0.05,
+          "strict_gate": "not stated",
+          "required_net_margin": "not stated"
+        },
+        "protocol": {
+          "unit": "not stated",
+          "samples": "not stated",
+          "patient_clusters": "not stated"
+        },
+        "evidence_level": "exposed_development",
+        "limitations": [
+          "configuration-specific stop",
+          "same-feedback ridge nearly matches candidate"
+        ],
+        "execution_status": "executed_negative"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/beataml_g1_20261017/REPORT.md",
+          "sha256": "343e83a604963de377b732dd053c21e33723fef24080b51e319b933c49a2a600",
+          "quote": "| Strict (decides) | lo - 0.05 x 1 > 0.05 | lo - 0.05 = **-0.005**: FAIL |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/beataml_g1_20261017/REPORT.md",
+          "sha256": "343e83a604963de377b732dd053c21e33723fef24080b51e319b933c49a2a600",
+          "quote": "n = 520 samples, 479 patients (clusters).",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/beataml_g1_20261017/REPORT.md",
+          "sha256": "343e83a604963de377b732dd053c21e33723fef24080b51e319b933c49a2a600",
+          "quote": "The outcome is **total** known frozen events among the 16 queried inhibitors (probes included). A second",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**17. `beataml_g1_20261017` — low-rank benefit fails the cost-adjusted gate.** (`REPORT.md`.) Candidate versus ridge was +0.098 [0.045, 0.153]. Charging the extra round at 0.05 moves the lower bound to −0.005, and the same-feedback ridge nearly matched the candidate. G1 failed and the low-rank branch stopped. The important inherited constraint is fair feedback and round-cost accounting, not simply whether an uncharged contrast is positive.",
+      "disposition": "preserved",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      }
+    },
+    {
+      "id": "KG-ANALYTICAL-VERSUS-ESTIMATE",
+      "expected": {
+        "result": {
+          "analytical": "0.159568934",
+          "original_estimate": "-0.001015198",
+          "repaired_estimate": "0.160570499"
+        },
+        "conditions": {
+          "noise": 0.01,
+          "seed": 0,
+          "samples": 20000
+        },
+        "protocol": "shared Gaussian analytical fixture; not a rerun of the original 378-pair experiment",
+        "evidence_level": "software_regression",
+        "limitations": [
+          "not biological validation",
+          "equal-resource capability not established"
+        ],
+        "execution_status": "implementation_repair"
+      },
+      "observed": {
+        "result": {
+          "analytic_approximation": "0.1606",
+          "original_estimate_approximation": "-0.0010"
+        },
+        "conditions": "fixture details not stated",
+        "protocol": "fixture; shared latent state not stated",
+        "evidence_level": "software_regression",
+        "limitations": [
+          "not biological validation",
+          "equal-resource capability not established"
+        ],
+        "execution_status": "implementation_repair"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "| Analytical value | 0.159568934 |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "| Original implementation | -0.001015198 |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "| Repaired implementation | 0.160570499 |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "| Estimator | Value with seed 0 and 20,000 samples |",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**34. `innovation_validation_repair1_20261020` — engineering repair does not rerun the original claim.** (`REPORT.md`.) KG estimation was corrected from −0.0010 toward the analytic value approximately 0.1606, and inheritance implementation was repaired. A small 12-drug/66-pair diagnostic gave E inherited 0.836834 versus ordinary latent+corrected KG 0.836844, and T 0.796345 versus 0.798870. It was not a rerun of the old 378-pair experiment. The strict legacy-checkpoint exception remains a failure; real utility, equal-resource capability, and implemented archive reuse were not established.",
+      "disposition": "corrected",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      },
+      "amendment_source": "log/research_records/innovation_validation_repair1_20261020/REPORT.md"
+    },
+    {
+      "id": "LEGACY-ANCHOR-REPLAY-LIMIT",
+      "expected": {
+        "result": {
+          "invalid_checkpoints": 1,
+          "affected_anchor_rows": 8,
+          "not_replayable_anchor_rows": 46080,
+          "replayed_task_nominations": 27648,
+          "streams": 144
+        },
+        "conditions": "old anchor fitted models were not archived",
+        "protocol": "strict original-output audit",
+        "evidence_level": "engineering_audit",
+        "limitations": [
+          "task estimates not invalidated by this anchor inconsistency",
+          "refitting cannot establish which historical anchor model ran"
+        ],
+        "execution_status": "engineering_failure"
+      },
+      "observed": {
+        "result": {
+          "strict_checkpoint_failure": "retained",
+          "not_replayable_anchor_rows": "not stated"
+        },
+        "conditions": "old anchor fitted models were not archived",
+        "protocol": "strict original-output audit",
+        "evidence_level": "engineering_audit",
+        "limitations": [
+          "real utility and equal-resource capability not established"
+        ],
+        "execution_status": "engineering_failure"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "- One failed checkpoint, affecting eight anchor rows. Status:",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "- 46,080 old anchor rows have no archived fitted model and are `NOT_REPLAYABLE`.",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "- 144 streams; all 27,648 archived decisive task nominations reproduced, including",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**34. `innovation_validation_repair1_20261020` — engineering repair does not rerun the original claim.** (`REPORT.md`.) KG estimation was corrected from −0.0010 toward the analytic value approximately 0.1606, and inheritance implementation was repaired. A small 12-drug/66-pair diagnostic gave E inherited 0.836834 versus ordinary latent+corrected KG 0.836844, and T 0.796345 versus 0.798870. It was not a rerun of the old 378-pair experiment. The strict legacy-checkpoint exception remains a failure; real utility, equal-resource capability, and implemented archive reuse were not established.",
+      "disposition": "preserved",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      }
+    },
+    {
+      "id": "EG-UNEXECUTED-PROPOSAL",
+      "expected": {
+        "result": "no effect estimate",
+        "conditions": "H0 repeatability and decision headroom are prerequisites",
+        "protocol": "unfrozen draft protocol",
+        "evidence_level": "unexecuted_proposal",
+        "limitations": [
+          "not a positive or negative experiment",
+          "generalization not executed"
+        ],
+        "execution_status": "not_executed"
+      },
+      "observed": {
+        "result": "no effect estimate",
+        "conditions": "H0 repeatability and decision headroom are prerequisites",
+        "protocol": "draft; freeze status not stated",
+        "evidence_level": "unexecuted_proposal",
+        "limitations": [
+          "not a positive or negative experiment",
+          "generalization not executed"
+        ],
+        "execution_status": "not_executed"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/eg_rpt_20261019/PROTOCOL.md",
+          "sha256": "ad1859b1280096e486a2b06e4237f9d5ec7ce95dfd7386134860d9a862163aea",
+          "quote": "# EG-RPT first-stage protocol (DRAFT for review; not frozen; nothing executed)",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/eg_rpt_20261019/PROTOCOL.md",
+          "sha256": "ad1859b1280096e486a2b06e4237f9d5ec7ce95dfd7386134860d9a862163aea",
+          "quote": "`feedback_propagation_20261018.bench`. Not built: the task-panel generator, meta-selectors, reliability estimators, any run.",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**21. `eg_rpt_20261019` — a proposal, not an experiment.** (`PROTOCOL.md`.) The protocol was a draft and nothing was executed. H0 repeatability and decision headroom were prerequisites, while the retrospective “131 versus 100” comparison was a best-case illustration rather than experimental evidence. Missing mechanism truth and missing combination-validation assets remain separate barriers. This record should guide prerequisite acquisition and protocol design without contributing a positive or negative effect estimate to the results ledger.",
+      "disposition": "preserved",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      }
+    }
+  ],
+  "after_claims": [
+    {
+      "id": "JAAKS-SENSITIVITY-THRESHOLD",
+      "expected": {
+        "result": {
+          "direct_repeat_positive": 1409,
+          "feedback_repeat_positive": 1061
+        },
+        "conditions": {
+          "threshold": ">0",
+          "endpoint": "both purchased observations"
+        },
+        "protocol": "sensitivity repeat-positive count; primary threshold remains >0.10",
+        "evidence_level": "exposed_development",
+        "limitations": [
+          "not a new experiment",
+          "not prospective evidence"
+        ],
+        "execution_status": "completed_readout_correction"
+      },
+      "observed": {
+        "result": {
+          "direct_repeat_positive": 1409,
+          "feedback_repeat_positive": 1061
+        },
+        "conditions": {
+          "threshold": ">0",
+          "endpoint": "both purchased observations"
+        },
+        "protocol": "sensitivity repeat-positive count; primary threshold remains >0.10",
+        "evidence_level": "exposed_development",
+        "limitations": [
+          "not a new experiment",
+          "not prospective evidence"
+        ],
+        "execution_status": "completed_readout_correction"
+      },
+      "sources": [
+        {
+          "id": "log/20261023/evidence_portfolio_optimization/RESULTS.json",
+          "sha256": "2ee8da940d2e6b8fa0fa21c39423a85ed7d231073063481c614218b3ee739283",
+          "quote": "        \"repeat_positive\": 1409,",
+          "representation": "git_blob",
+          "json_values": {
+            "/summary/direct/0.0/repeat_positive": 1409,
+            "/summary/feedback/0.0/repeat_positive": 1061
+          }
+        },
+        {
+          "id": "log/20261023/evidence_portfolio_optimization/PROTOCOL.md",
+          "sha256": "5fd4d952bc3b7d71605eea36356d2ac4279f7bdc69a96bbfa1b26052e558937e",
+          "quote": "Primary utility is repeat-positive count, requiring BOTH purchased scout and final SYNERGY_DELTA_EMAX > 0.10, per 1,000 planned proxy wells. The threshold is fixed before conversion in this study and is not an assertion of clinical significance. Also report repeat-positives at > 0, final-only positive count, repeat-positive fraction and missing reads descriptively. Missing either purchased read is no observed repeat-positive. Scout positives alone are not confirmed outcomes. No likelihood, e-value or fitted model is used.",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "## Current paid-repeatability result\n\nThe Jaaks development replay used 5,390 single-anchor units in 78 SIDM clusters. Every strategy paid for 3,234 reads, represented by 22,638 combination wells. The primary endpoint required both purchased measurements to exceed the fixed 0.10 threshold.\n\n| Strategy | Repeated positives | Comparison status |\n|---|---:|---|\n| Original rank after the same initial screen | 675 | Frozen baseline |\n| Ranking by initial-screen numerical feedback | 919 | Frozen tested strategy |\n| Equal-weight original/screen rank mixture | 830 | Frozen descriptive comparison |\n| Equal-cost fixed paired acquisition | 876 | Frozen strong comparator |\n| Binary initial-screen gate, then original rank | 898 | Post-result simple control |\n| Binary gate, then fixed hash rank | 869 | Post-result simple control |\n\nThe numerical-feedback result retains a positive development comparison with frozen baselines; the difference from the simple binary-gate control has an interval including zero. Initial screening participates in the endpoint, so removing initial-screen failures can explain substantial improvement without a learned cell-update mechanism. At the lower sensitivity threshold of >0, fixed paired acquisition yielded 1,409 against numerical feedback's 1,061; at the primary threshold but counting only the last positive measurement, the comparison was 1,037 against 919. These are different endpoints, not interchangeable rankings.\n\nCorrection (2026-10-25): this synthesis previously attributed 1,409 versus 1,061 to a stricter 0.20 threshold. The retained `log/20261023/evidence_portfolio_optimization/RESULTS.json` records those counts under `summary.direct[\"0.0\"]` and `summary.feedback[\"0.0\"]`. Recounting both purchased observations from the hash-bound `CHOICES.json` and `OBSERVED.npz` reproduced all ten arm/threshold repeat counts. This corrects the summary's threshold attribution; it is not a new experiment or source-table reconstruction.\n\nThe data were exposed and the candidate pool was selected by the original study. The cost proxy omits shared controls, plate layout and turnaround. Conditional development intervals are not prospective guarantees. Thresholds, budgets and splits must not be retuned from these observations. Independent source-table recomputation checked selection, charging, counts and 2,000 bootstrap draws; it is not biological replication. A complete comparison with Scientific CI/CD remains limited by inaccessible original text.\n\nEvidence IDs: `log/20261023/evidence_portfolio_optimization/DECISION.md`, `log/20261023/research_progress/README.md`, and the former `log/20261023/report_consolidation/RESEARCH_SUMMARY.md`. Exact source text and its original numerical intervals remain available through the retained-record reader.",
+      "disposition": "corrected",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      },
+      "amendment_source": "log/20261023/evidence_portfolio_optimization/RESULTS.json"
+    },
+    {
+      "id": "SEED-SECONDARY-INTERVAL",
+      "expected": {
+        "result": {
+          "I2_mean": 0.1,
+          "I2_interval": [
+            0.002,
+            0.202
+          ]
+        },
+        "conditions": {
+          "draws": 100000,
+          "draw_multiplicities": "preserved"
+        },
+        "protocol": "equal-lineage secondary bootstrap; primary Holm tests unchanged",
+        "evidence_level": "secondary_posthoc_development",
+        "limitations": [
+          "not primary confirmation",
+          "stop decisions unchanged"
+        ],
+        "execution_status": "readout_correction"
+      },
+      "observed": {
+        "result": {
+          "I2_mean": 0.1,
+          "I2_interval": [
+            0.002,
+            0.202
+          ]
+        },
+        "conditions": {
+          "draws": 100000,
+          "draw_multiplicities": "preserved"
+        },
+        "protocol": "equal-lineage secondary bootstrap; primary Holm tests unchanged",
+        "evidence_level": "secondary_posthoc_development",
+        "limitations": [
+          "not primary confirmation",
+          "stop decisions unchanged"
+        ],
+        "execution_status": "readout_correction"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/seed_attribution_20261017/ERRATUM_20261018.md",
+          "sha256": "656d1691f82b079103e996028f5f76f061c71ef2381a6ac56d1e961651dedb20",
+          "quote": "| I2 | +0.100 | [+0.023, +0.176] | [+0.006, +0.194] | **[+0.002, +0.202]** |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/seed_attribution_20261017/ERRATUM_20261018.md",
+          "sha256": "656d1691f82b079103e996028f5f76f061c71ef2381a6ac56d1e961651dedb20",
+          "quote": "registered primary test at I2 (pooled, Holm-adjusted) is unchanged and stays NOT_CONFIRMED.",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/seed_attribution_20261017/REPORT.md",
+          "sha256": "8173a2efd1a6ccd0e1b62d51758fe0e983ce772bac5a2a8173393a244eaff6e6",
+          "quote": "**Status: DEVELOPMENT on exposed data.**",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**16. `seed_attribution_20261017` — repaired primary contrasts do not confirm seed gain.** (`REPORT.md`, `ERRATUM_20261018.md`.) Primary pooled I2 was +0.117 [−0.026, +0.248], I1 +0.283 [−0.065, +0.699], and policy +0.356 [−0.088, +0.856]. None was confirmed. A separate equal-lineage secondary bootstrap had incorrectly dropped draw multiplicities. Corrected 100,000-draw intervals were policy +0.057 [−0.206, +0.355], I2 +0.100 [+0.002, +0.202], and I1 +0.076 [−0.105, +0.278]. This exposed-development, post-hoc secondary repair changes neither primary Holm tests nor stop decisions. Same-feature ridge matched the library; much gain concentrated in skin/BRAF/NRAS, with gate-negative harm −0.318 [−0.500, −0.048]. Scoped feature information remains optional; renewed program search is unsupported.",
+      "disposition": "corrected",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      },
+      "amendment_source": "log/research_records/seed_attribution_20261017/ERRATUM_20261018.md"
+    },
+    {
+      "id": "G1-COST-ADJUSTED-STOP",
+      "expected": {
+        "result": {
+          "difference": 0.098,
+          "interval": [
+            0.045,
+            0.153
+          ],
+          "net_lower": -0.005,
+          "decision": "stop_low_rank_branch"
+        },
+        "conditions": {
+          "strict_gate": "lo - 0.05 x 1 > 0.05",
+          "round_cost": 0.05,
+          "required_net_margin": 0.05
+        },
+        "protocol": {
+          "unit": "hits/sample",
+          "samples": 520,
+          "patient_clusters": 479,
+          "endpoint": "total known frozen events among 16 queried inhibitors, probes included"
+        },
+        "evidence_level": "exposed_development",
+        "limitations": [
+          "configuration-specific stop",
+          "same-feedback ridge nearly matches candidate"
+        ],
+        "execution_status": "executed_negative"
+      },
+      "observed": {
+        "result": {
+          "difference": 0.098,
+          "interval": [
+            0.045,
+            0.153
+          ],
+          "net_lower": -0.005,
+          "decision": "stop_low_rank_branch"
+        },
+        "conditions": {
+          "strict_gate": "lo - 0.05 x 1 > 0.05",
+          "round_cost": 0.05,
+          "required_net_margin": 0.05
+        },
+        "protocol": {
+          "unit": "hits/sample",
+          "samples": 520,
+          "patient_clusters": 479,
+          "endpoint": "total known frozen events among 16 queried inhibitors, probes included"
+        },
+        "evidence_level": "exposed_development",
+        "limitations": [
+          "configuration-specific stop",
+          "same-feedback ridge nearly matches candidate"
+        ],
+        "execution_status": "executed_negative"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/beataml_g1_20261017/REPORT.md",
+          "sha256": "343e83a604963de377b732dd053c21e33723fef24080b51e319b933c49a2a600",
+          "quote": "| Strict (decides) | lo - 0.05 x 1 > 0.05 | lo - 0.05 = **-0.005**: FAIL |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/beataml_g1_20261017/REPORT.md",
+          "sha256": "343e83a604963de377b732dd053c21e33723fef24080b51e319b933c49a2a600",
+          "quote": "n = 520 samples, 479 patients (clusters).",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/beataml_g1_20261017/REPORT.md",
+          "sha256": "343e83a604963de377b732dd053c21e33723fef24080b51e319b933c49a2a600",
+          "quote": "The outcome is **total** known frozen events among the 16 queried inhibitors (probes included). A second",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**17. `beataml_g1_20261017` — low-rank benefit fails the cost-adjusted gate.** (`REPORT.md`.) On 520 exposed development samples from 479 patient clusters, candidate versus ridge was +0.098 [0.045, 0.153] hits per sample. The outcome counts total known frozen events among the 16 queried inhibitors, including probes. The strict rule was `lo - 0.05 x 1 > 0.05`: charging the extra round moves the lower bound to −0.005, which fails the required net margin of 0.05. The same-feedback ridge nearly matched the candidate. G1 failed and the low-rank branch stopped. The important inherited constraint is fair feedback and round-cost accounting, not simply whether an uncharged contrast is positive.",
+      "disposition": "preserved",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      }
+    },
+    {
+      "id": "KG-ANALYTICAL-VERSUS-ESTIMATE",
+      "expected": {
+        "result": {
+          "analytical": "0.159568934",
+          "original_estimate": "-0.001015198",
+          "repaired_estimate": "0.160570499"
+        },
+        "conditions": {
+          "noise": 0.01,
+          "seed": 0,
+          "samples": 20000
+        },
+        "protocol": "shared Gaussian analytical fixture; not a rerun of the original 378-pair experiment",
+        "evidence_level": "software_regression",
+        "limitations": [
+          "not biological validation",
+          "equal-resource capability not established"
+        ],
+        "execution_status": "implementation_repair"
+      },
+      "observed": {
+        "result": {
+          "analytical": "0.159568934",
+          "original_estimate": "-0.001015198",
+          "repaired_estimate": "0.160570499"
+        },
+        "conditions": {
+          "noise": 0.01,
+          "seed": 0,
+          "samples": 20000
+        },
+        "protocol": "shared Gaussian analytical fixture; not a rerun of the original 378-pair experiment",
+        "evidence_level": "software_regression",
+        "limitations": [
+          "not biological validation",
+          "equal-resource capability not established"
+        ],
+        "execution_status": "implementation_repair"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "| Analytical value | 0.159568934 |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "| Original implementation | -0.001015198 |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "| Repaired implementation | 0.160570499 |",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "| Estimator | Value with seed 0 and 20,000 samples |",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**34. `innovation_validation_repair1_20261020` — engineering repair does not rerun the original claim.** (`REPORT.md`.) At noise 0.01, the analytical fixture with one shared Gaussian latent state has value 0.159568934; the seed-0, 20,000-sample estimate changed from −0.001015198 to 0.160570499, and inheritance implementation was repaired. The previous synthesis incorrectly called the repaired estimate approximately 0.1606 the analytic value; this corrects numerical identity without changing frozen outputs. This is a software regression, not biological validation. A small 12-drug/66-pair diagnostic gave E inherited 0.836834 versus ordinary latent+corrected KG 0.836844, and T 0.796345 versus 0.798870. It was not a rerun of the old 378-pair experiment. The strict original-output audit retained one `INVALID_LEGACY_CHECKPOINT` affecting eight anchor rows; 46,080 old anchor rows lack archived fitted models and are `NOT_REPLAYABLE`. This last-checkpoint anchor inconsistency does not invalidate the old task estimates: all 27,648 archived decisive task nominations were reproduced across 144 streams. Re-fitting now cannot establish which historical anchor model ran. Real utility, equal-resource capability, and implemented archive reuse were not established.",
+      "disposition": "corrected",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      },
+      "amendment_source": "log/research_records/innovation_validation_repair1_20261020/REPORT.md"
+    },
+    {
+      "id": "LEGACY-ANCHOR-REPLAY-LIMIT",
+      "expected": {
+        "result": {
+          "invalid_checkpoints": 1,
+          "affected_anchor_rows": 8,
+          "not_replayable_anchor_rows": 46080,
+          "replayed_task_nominations": 27648,
+          "streams": 144
+        },
+        "conditions": "old anchor fitted models were not archived",
+        "protocol": "strict original-output audit",
+        "evidence_level": "engineering_audit",
+        "limitations": [
+          "task estimates not invalidated by this anchor inconsistency",
+          "refitting cannot establish which historical anchor model ran"
+        ],
+        "execution_status": "engineering_failure"
+      },
+      "observed": {
+        "result": {
+          "invalid_checkpoints": 1,
+          "affected_anchor_rows": 8,
+          "not_replayable_anchor_rows": 46080,
+          "replayed_task_nominations": 27648,
+          "streams": 144
+        },
+        "conditions": "old anchor fitted models were not archived",
+        "protocol": "strict original-output audit",
+        "evidence_level": "engineering_audit",
+        "limitations": [
+          "task estimates not invalidated by this anchor inconsistency",
+          "refitting cannot establish which historical anchor model ran"
+        ],
+        "execution_status": "engineering_failure"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "- One failed checkpoint, affecting eight anchor rows. Status:",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "- 46,080 old anchor rows have no archived fitted model and are `NOT_REPLAYABLE`.",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/innovation_validation_repair1_20261020/REPORT.md",
+          "sha256": "cfed230349ccee3430caa96b6517e06e7862a42ee3d27cf19b7bf891da59f6ab",
+          "quote": "- 144 streams; all 27,648 archived decisive task nominations reproduced, including",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**34. `innovation_validation_repair1_20261020` — engineering repair does not rerun the original claim.** (`REPORT.md`.) At noise 0.01, the analytical fixture with one shared Gaussian latent state has value 0.159568934; the seed-0, 20,000-sample estimate changed from −0.001015198 to 0.160570499, and inheritance implementation was repaired. The previous synthesis incorrectly called the repaired estimate approximately 0.1606 the analytic value; this corrects numerical identity without changing frozen outputs. This is a software regression, not biological validation. A small 12-drug/66-pair diagnostic gave E inherited 0.836834 versus ordinary latent+corrected KG 0.836844, and T 0.796345 versus 0.798870. It was not a rerun of the old 378-pair experiment. The strict original-output audit retained one `INVALID_LEGACY_CHECKPOINT` affecting eight anchor rows; 46,080 old anchor rows lack archived fitted models and are `NOT_REPLAYABLE`. This last-checkpoint anchor inconsistency does not invalidate the old task estimates: all 27,648 archived decisive task nominations were reproduced across 144 streams. Re-fitting now cannot establish which historical anchor model ran. Real utility, equal-resource capability, and implemented archive reuse were not established.",
+      "disposition": "preserved",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      }
+    },
+    {
+      "id": "EG-UNEXECUTED-PROPOSAL",
+      "expected": {
+        "result": "no effect estimate",
+        "conditions": "H0 repeatability and decision headroom are prerequisites",
+        "protocol": "unfrozen draft protocol",
+        "evidence_level": "unexecuted_proposal",
+        "limitations": [
+          "not a positive or negative experiment",
+          "generalization not executed"
+        ],
+        "execution_status": "not_executed"
+      },
+      "observed": {
+        "result": "no effect estimate",
+        "conditions": "H0 repeatability and decision headroom are prerequisites",
+        "protocol": "unfrozen draft protocol",
+        "evidence_level": "unexecuted_proposal",
+        "limitations": [
+          "not a positive or negative experiment",
+          "generalization not executed"
+        ],
+        "execution_status": "not_executed"
+      },
+      "sources": [
+        {
+          "id": "log/research_records/eg_rpt_20261019/PROTOCOL.md",
+          "sha256": "ad1859b1280096e486a2b06e4237f9d5ec7ce95dfd7386134860d9a862163aea",
+          "quote": "# EG-RPT first-stage protocol (DRAFT for review; not frozen; nothing executed)",
+          "representation": "git_blob"
+        },
+        {
+          "id": "log/research_records/eg_rpt_20261019/PROTOCOL.md",
+          "sha256": "ad1859b1280096e486a2b06e4237f9d5ec7ce95dfd7386134860d9a862163aea",
+          "quote": "`feedback_propagation_20261018.bench`. Not built: the task-panel generator, meta-selectors, reliability estimators, any run.",
+          "representation": "git_blob"
+        }
+      ],
+      "report_quote": "**21. `eg_rpt_20261019` — a proposal, not an experiment.** (`PROTOCOL.md`.) The protocol was an unfrozen draft and nothing was executed. H0 repeatability and decision headroom were prerequisites, while the retrospective “131 versus 100” comparison was a best-case illustration rather than experimental evidence. Missing mechanism truth and missing combination-validation assets remain separate barriers. This record should guide prerequisite acquisition and protocol design without contributing a positive or negative effect estimate to the results ledger.",
+      "disposition": "preserved",
+      "review": {
+        "status": "pending",
+        "reviewer": ""
+      }
+    }
+  ],
+  "before_report": "## Current paid-repeatability result\n\nThe Jaaks development replay used 5,390 single-anchor units in 78 SIDM clusters. Every strategy paid for 3,234 reads, represented by 22,638 combination wells. The primary endpoint required both purchased measurements to exceed the fixed 0.10 threshold.\n\n| Strategy | Repeated positives | Comparison status |\n|---|---:|---|\n| Original rank after the same initial screen | 675 | Frozen baseline |\n| Ranking by initial-screen numerical feedback | 919 | Frozen tested strategy |\n| Equal-weight original/screen rank mixture | 830 | Frozen descriptive comparison |\n| Equal-cost fixed paired acquisition | 876 | Frozen strong comparator |\n| Binary initial-screen gate, then original rank | 898 | Post-result simple control |\n| Binary gate, then fixed hash rank | 869 | Post-result simple control |\n\nThe numerical-feedback result retains a positive development comparison with frozen baselines; the difference from the simple binary-gate control has an interval including zero. Initial screening participates in the endpoint, so removing initial-screen failures can explain substantial improvement without a learned cell-update mechanism. At the lower sensitivity threshold of >0, fixed paired acquisition yielded 1,409 against numerical feedback's 1,061; at the primary threshold but counting only the last positive measurement, the comparison was 1,037 against 919. These are different endpoints, not interchangeable rankings.\n\nCorrection (2026-10-25): this synthesis previously attributed 1,409 versus 1,061 to a stricter 0.20 threshold. The retained `log/20261023/evidence_portfolio_optimization/RESULTS.json` records those counts under `summary.direct[\"0.0\"]` and `summary.feedback[\"0.0\"]`. Recounting both purchased observations from the hash-bound `CHOICES.json` and `OBSERVED.npz` reproduced all ten arm/threshold repeat counts. This corrects the summary's threshold attribution; it is not a new experiment or source-table reconstruction.\n\nThe data were exposed and the candidate pool was selected by the original study. The cost proxy omits shared controls, plate layout and turnaround. Conditional development intervals are not prospective guarantees. Thresholds, budgets and splits must not be retuned from these observations. Independent source-table recomputation checked selection, charging, counts and 2,000 bootstrap draws; it is not biological replication. A complete comparison with Scientific CI/CD remains limited by inaccessible original text.\n\nEvidence IDs: `log/20261023/evidence_portfolio_optimization/DECISION.md`, `log/20261023/research_progress/README.md`, and the former `log/20261023/report_consolidation/RESEARCH_SUMMARY.md`. Exact source text and its original numerical intervals remain available through the retained-record reader.\n\n**16. `seed_attribution_20261017` — repaired primary contrasts do not confirm seed gain.** (`REPORT.md`, `ERRATUM_20261018.md`.) Primary pooled I2 was +0.117 [−0.026, +0.248], I1 +0.283 [−0.065, +0.699], and policy +0.356 [−0.088, +0.856]. None was confirmed. A separate equal-lineage secondary bootstrap had incorrectly dropped draw multiplicities. Corrected 100,000-draw intervals were policy +0.057 [−0.206, +0.355], I2 +0.100 [+0.002, +0.202], and I1 +0.076 [−0.105, +0.278]. This secondary repair changes neither primary Holm tests nor stop decisions. Same-feature ridge matched the library; much gain concentrated in skin/BRAF/NRAS, with gate-negative harm −0.318 [−0.500, −0.048]. Scoped feature information remains optional; renewed program search is unsupported.\n\n**17. `beataml_g1_20261017` — low-rank benefit fails the cost-adjusted gate.** (`REPORT.md`.) Candidate versus ridge was +0.098 [0.045, 0.153]. Charging the extra round at 0.05 moves the lower bound to −0.005, and the same-feedback ridge nearly matched the candidate. G1 failed and the low-rank branch stopped. The important inherited constraint is fair feedback and round-cost accounting, not simply whether an uncharged contrast is positive.\n\n**34. `innovation_validation_repair1_20261020` — engineering repair does not rerun the original claim.** (`REPORT.md`.) KG estimation was corrected from −0.0010 toward the analytic value approximately 0.1606, and inheritance implementation was repaired. A small 12-drug/66-pair diagnostic gave E inherited 0.836834 versus ordinary latent+corrected KG 0.836844, and T 0.796345 versus 0.798870. It was not a rerun of the old 378-pair experiment. The strict legacy-checkpoint exception remains a failure; real utility, equal-resource capability, and implemented archive reuse were not established.\n\n**21. `eg_rpt_20261019` — a proposal, not an experiment.** (`PROTOCOL.md`.) The protocol was a draft and nothing was executed. H0 repeatability and decision headroom were prerequisites, while the retrospective “131 versus 100” comparison was a best-case illustration rather than experimental evidence. Missing mechanism truth and missing combination-validation assets remain separate barriers. This record should guide prerequisite acquisition and protocol design without contributing a positive or negative effect estimate to the results ledger.\n",
+  "after_report": "## Current paid-repeatability result\n\nThe Jaaks development replay used 5,390 single-anchor units in 78 SIDM clusters. Every strategy paid for 3,234 reads, represented by 22,638 combination wells. The primary endpoint required both purchased measurements to exceed the fixed 0.10 threshold.\n\n| Strategy | Repeated positives | Comparison status |\n|---|---:|---|\n| Original rank after the same initial screen | 675 | Frozen baseline |\n| Ranking by initial-screen numerical feedback | 919 | Frozen tested strategy |\n| Equal-weight original/screen rank mixture | 830 | Frozen descriptive comparison |\n| Equal-cost fixed paired acquisition | 876 | Frozen strong comparator |\n| Binary initial-screen gate, then original rank | 898 | Post-result simple control |\n| Binary gate, then fixed hash rank | 869 | Post-result simple control |\n\nThe numerical-feedback result retains a positive development comparison with frozen baselines; the difference from the simple binary-gate control has an interval including zero. Initial screening participates in the endpoint, so removing initial-screen failures can explain substantial improvement without a learned cell-update mechanism. At the lower sensitivity threshold of >0, fixed paired acquisition yielded 1,409 against numerical feedback's 1,061; at the primary threshold but counting only the last positive measurement, the comparison was 1,037 against 919. These are different endpoints, not interchangeable rankings.\n\nCorrection (2026-10-25): this synthesis previously attributed 1,409 versus 1,061 to a stricter 0.20 threshold. The retained `log/20261023/evidence_portfolio_optimization/RESULTS.json` records those counts under `summary.direct[\"0.0\"]` and `summary.feedback[\"0.0\"]`. Recounting both purchased observations from the hash-bound `CHOICES.json` and `OBSERVED.npz` reproduced all ten arm/threshold repeat counts. This corrects the summary's threshold attribution; it is not a new experiment or source-table reconstruction.\n\nThe data were exposed and the candidate pool was selected by the original study. The cost proxy omits shared controls, plate layout and turnaround. Conditional development intervals are not prospective guarantees. Thresholds, budgets and splits must not be retuned from these observations. Independent source-table recomputation checked selection, charging, counts and 2,000 bootstrap draws; it is not biological replication. A complete comparison with Scientific CI/CD remains limited by inaccessible original text.\n\nEvidence IDs: `log/20261023/evidence_portfolio_optimization/DECISION.md`, `log/20261023/research_progress/README.md`, and the former `log/20261023/report_consolidation/RESEARCH_SUMMARY.md`. Exact source text and its original numerical intervals remain available through the retained-record reader.\n\n**16. `seed_attribution_20261017` — repaired primary contrasts do not confirm seed gain.** (`REPORT.md`, `ERRATUM_20261018.md`.) Primary pooled I2 was +0.117 [−0.026, +0.248], I1 +0.283 [−0.065, +0.699], and policy +0.356 [−0.088, +0.856]. None was confirmed. A separate equal-lineage secondary bootstrap had incorrectly dropped draw multiplicities. Corrected 100,000-draw intervals were policy +0.057 [−0.206, +0.355], I2 +0.100 [+0.002, +0.202], and I1 +0.076 [−0.105, +0.278]. This exposed-development, post-hoc secondary repair changes neither primary Holm tests nor stop decisions. Same-feature ridge matched the library; much gain concentrated in skin/BRAF/NRAS, with gate-negative harm −0.318 [−0.500, −0.048]. Scoped feature information remains optional; renewed program search is unsupported.\n\n**17. `beataml_g1_20261017` — low-rank benefit fails the cost-adjusted gate.** (`REPORT.md`.) On 520 exposed development samples from 479 patient clusters, candidate versus ridge was +0.098 [0.045, 0.153] hits per sample. The outcome counts total known frozen events among the 16 queried inhibitors, including probes. The strict rule was `lo - 0.05 x 1 > 0.05`: charging the extra round moves the lower bound to −0.005, which fails the required net margin of 0.05. The same-feedback ridge nearly matched the candidate. G1 failed and the low-rank branch stopped. The important inherited constraint is fair feedback and round-cost accounting, not simply whether an uncharged contrast is positive.\n\n**34. `innovation_validation_repair1_20261020` — engineering repair does not rerun the original claim.** (`REPORT.md`.) At noise 0.01, the analytical fixture with one shared Gaussian latent state has value 0.159568934; the seed-0, 20,000-sample estimate changed from −0.001015198 to 0.160570499, and inheritance implementation was repaired. The previous synthesis incorrectly called the repaired estimate approximately 0.1606 the analytic value; this corrects numerical identity without changing frozen outputs. This is a software regression, not biological validation. A small 12-drug/66-pair diagnostic gave E inherited 0.836834 versus ordinary latent+corrected KG 0.836844, and T 0.796345 versus 0.798870. It was not a rerun of the old 378-pair experiment. The strict original-output audit retained one `INVALID_LEGACY_CHECKPOINT` affecting eight anchor rows; 46,080 old anchor rows lack archived fitted models and are `NOT_REPLAYABLE`. This last-checkpoint anchor inconsistency does not invalidate the old task estimates: all 27,648 archived decisive task nominations were reproduced across 144 streams. Re-fitting now cannot establish which historical anchor model ran. Real utility, equal-resource capability, and implemented archive reuse were not established.\n\n**21. `eg_rpt_20261019` — a proposal, not an experiment.** (`PROTOCOL.md`.) The protocol was an unfrozen draft and nothing was executed. H0 repeatability and decision headroom were prerequisites, while the retrospective “131 versus 100” comparison was a best-case illustration rather than experimental evidence. Missing mechanism truth and missing combination-validation assets remain separate barriers. This record should guide prerequisite acquisition and protocol design without contributing a positive or negative effect estimate to the results ledger.\n"
+}

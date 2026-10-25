@@ -2,6 +2,8 @@
 
 Index schema (version 1): objects have stable id, kind, status, optional stage
 (exploration/validated_method/formal_result), and sources [{path, sha256?, protected?}].
+Optional source_ids are historical identifiers, resolved only by an explicitly
+trusted Python callable returning bytes. No repository code is imported for them.
 Relations {from, to, type} use supports/contradicts/supersedes or depends_on.
 The first three propagate from -> to; depends_on propagates to -> from.
 Project-relative excluded_sources prefixes and protected sources are declarations:
@@ -26,7 +28,8 @@ DEVICE = re.compile(r"(?:CON|PRN|AUX|NUL|COM[1-9¹²³]|LPT[1-9¹²³]|CONIN\$|C
 PROTECTED = re.compile(r"sealed|blind|credential|secret|password|passwd|api[_-]?key|(?:^|[_-])token(?:[_.-]|$)", re.I)
 PRIVATE_SUFFIXES = {".pem", ".key", ".p12", ".pfx", ".kdbx"}
 SKIP_PARTS = {".git", ".ssh", ".venv", "venv", "gpu_venv", "node_modules", "__pycache__"}
-METRICS_SCOPE = "Source payload reads/hashes and explicit source stat calls only; index JSON, path-safety checks and filesystem/OS caches are not measured."
+METRICS_SCOPE = "Ordinary file source reads/hashes and explicit source stat calls only; index JSON, path-safety checks and filesystem/OS caches are not measured. Historical resolver calls/returned bytes are reported separately."
+SOURCE_ID_METRICS_SCOPE = "Only calls, failures and bytes returned by the trusted resolver are observable here. Its internal disk/network reads, hashing and reads before an exception are not measured."
 
 
 def relative_path(value):
@@ -166,8 +169,14 @@ def fingerprint(path, metrics):
             "bytes": after["size"], "metadata": after}
 
 
-def snapshot_index(index, root):
-    return inspect_index(index, root)
+def snapshot_index(index, root, *, source_resolver=None):
+    """Hash files and optionally bytes from a caller-authorized historical resolver.
+
+    source_resolver(source_id) must return bytes and enforce the source identity,
+    alias permissions and storage binding itself. Passing a callable explicitly
+    authorizes that code; no resolver is discovered or imported from the project.
+    """
+    return inspect_index(index, root, source_resolver=source_resolver)
 
 
 def scan_index(index, root, previous=None):
@@ -179,14 +188,55 @@ def scan_index(index, root, previous=None):
     return inspect_index(index, root, metadata_only=True, previous=previous)
 
 
-def inspect_index(index, root, metadata_only=False, previous=None, metrics=None):
+def source_id_metrics():
+    return {"resolver_calls": 0, "resolver_failures": 0,
+            "bytes_returned": 0, "sha256_computations": 0}
+
+
+def inspect_source_ids(objects, excluded, protected, resolver, metrics, metadata_only):
+    bindings, errors = {}, []
+    for name in sorted({sid for obj in objects for sid in obj.get("source_ids", [])}):
+        # IDs are opaque, not filesystem paths. Normalize only for protection
+        # checks so Windows spelling aliases cannot bypass managed/protected names.
+        guarded_name = "/".join(part.rstrip(" .") for part in name.replace("\\", "/").split("/"))
+        reason = "declared_protected" if guarded_name.casefold() in protected else exclusion_reason(guarded_name, excluded)
+        if not reason:
+            reason = "metadata_only" if metadata_only else "no_trusted_resolver" if resolver is None else None
+        if reason:
+            bindings[name] = {"state": "unverified", "reason": reason,
+                              "scope": "Historical source payload was not read or verified."}
+            continue
+        metrics["resolver_calls"] += 1
+        try:
+            data = resolver(name)
+            if not isinstance(data, bytes):
+                raise TypeError("Trusted source resolver must return bytes")
+            metrics["bytes_returned"] += len(data)
+            digest = hashlib.sha256(data).hexdigest()
+            metrics["sha256_computations"] += 1
+        except Exception as error:
+            metrics["resolver_failures"] += 1
+            bindings[name] = {"state": "unreadable", "reason": "resolver_error",
+                              "error_type": type(error).__name__,
+                              "scope": "Resolver failed; payload identity remains unverified."}
+            errors.append({"source_id": name, "error": "source_id_unreadable",
+                           "error_type": type(error).__name__})
+            continue
+        bindings[name] = {"state": "present", "bytes": len(data), "sha256": digest,
+                          "representation": "trusted_resolver_bytes",
+                          "scope": "Fingerprint of returned bytes; storage/alias binding is delegated to the explicit trusted resolver. No scientific claim was validated."}
+    return bindings, errors
+
+
+def inspect_index(index, root, metadata_only=False, previous=None, metrics=None,
+                  source_resolver=None, retained_metrics=None):
     metrics = io_metrics() if metrics is None else metrics
+    retained_metrics = source_id_metrics() if retained_metrics is None else retained_metrics
+    if source_resolver is not None and not callable(source_resolver):
+        raise ValueError("source_resolver must be an explicitly trusted callable")
     objects, relations, excluded = schema(index)
     root = checked_root(root)
     sources, errors, unverified = {}, [], []
-    # Historical retained-source IDs are metadata references, not verified
-    # live paths. A separate retained-record resolver must verify their bytes.
-    retained_unverified = sorted({sid for obj in objects for sid in obj.get("source_ids", [])})
     candidates, changes, needs_strict = [], [], []
     same_root = previous is not None and previous.get("root") == str(root)
     # One protected declaration protects the file globally, even when reused.
@@ -231,37 +281,54 @@ def inspect_index(index, root, metadata_only=False, previous=None, metrics=None)
             expected = source.get("sha256")
             if expected and sources[name]["state"] == "present" and sources[name]["sha256"] != expected.lower():
                 errors.append({"path": name, "object": obj["id"], "error": "sha256_mismatch"})
+    bindings, retained_errors = inspect_source_ids(objects, excluded, protected,
+                                                 source_resolver, retained_metrics, metadata_only)
+    errors.extend(retained_errors)
+    retained_unverified = sorted(name for name, item in bindings.items() if item["state"] != "present")
     result = {"schema_version": 1, "objects": copy.deepcopy(sorted(objects, key=lambda x: x["id"])),
             "relations": copy.deepcopy(sorted(relations, key=lambda x: (x["from"], x["type"], x["to"]))),
             "excluded_sources": list(excluded), "sources": sources, "errors": errors,
             "unverified_sources": unverified, "unverified_source_ids": retained_unverified,
+            "source_id_bindings": bindings, "source_id_metrics": retained_metrics,
+            "source_id_metrics_scope": SOURCE_ID_METRICS_SCOPE,
+            "verification_complete": not metadata_only and not errors and not unverified and not retained_unverified,
             "root": str(root), "metrics": metrics,
             "verification_mode": "metadata_only" if metadata_only else "strict_hash",
             "metrics_scope": METRICS_SCOPE,
-            "scope": "Only explicitly indexed files were checked; no scientific claim was validated."}
+            "scope": "Only explicitly indexed sources were checked; historical source identity/storage binding depends on the explicit trusted resolver. Unverified entries remain unverified; no scientific claim was validated."}
     if metadata_only:
         if same_root:
             changes.extend({"path": name, "change": "removed_from_index"}
                            for name in sorted(set(previous["sources"]) - set(sources)))
         result.update(candidate_sources=sorted(candidates), changed_sources=changes,
                       needs_strict_verification=sorted(needs_strict), verified_sources=0,
+                      needs_strict_source_id_verification=retained_unverified,
                       unverified_objects=sorted(obj["id"] for obj in objects),
                       scope="Metadata agreement is only a screening candidate, not content equality. All objects remain unverified. Run a fresh strict snapshot/validation before content reuse, consolidation or deletion; no scientific claim was validated.")
     return result
 
 
-def validate_index(index, root):
+def validate_index(index, root, *, source_resolver=None):
     metrics = io_metrics()
+    retained_metrics = source_id_metrics()
     try:
-        snapshot = inspect_index(index, root, metrics=metrics)
+        snapshot = inspect_index(index, root, metrics=metrics,
+                                 source_resolver=source_resolver, retained_metrics=retained_metrics)
     except (ValueError, OSError) as error:
         return {"valid": False, "errors": [str(error)], "verified_sources": 0, "unverified_sources": [],
+                "verified_source_ids": 0, "verification_complete": False,
+                "source_id_metrics": retained_metrics, "source_id_metrics_scope": SOURCE_ID_METRICS_SCOPE,
                 "verification_mode": "strict_hash", "metrics": metrics, "metrics_scope": METRICS_SCOPE}
-    invalid_paths = {error["path"] for error in snapshot["errors"]}
+    invalid_paths = {error["path"] for error in snapshot["errors"] if "path" in error}
     return {"valid": not snapshot["errors"], "errors": snapshot["errors"],
             "verified_sources": sum(x["state"] == "present" and name not in invalid_paths
                                     for name, x in snapshot["sources"].items()),
             "unverified_sources": snapshot["unverified_sources"], "scope": snapshot["scope"],
+            "source_id_bindings": snapshot["source_id_bindings"],
+            "verified_source_ids": sum(item["state"] == "present" for item in snapshot["source_id_bindings"].values()),
+            "unverified_source_ids": snapshot["unverified_source_ids"],
+            "verification_complete": snapshot["verification_complete"],
+            "source_id_metrics": retained_metrics, "source_id_metrics_scope": SOURCE_ID_METRICS_SCOPE,
             "verification_mode": snapshot["verification_mode"], "metrics": snapshot["metrics"],
             "metrics_scope": snapshot["metrics_scope"]}
 
@@ -283,9 +350,18 @@ def impact(before, after):
             change = "removed" if b is None or b.get("state") == "missing" else "added" if a is None or a.get("state") == "missing" else "changed"
             source_changes.append({"path": name, "change": change})
             changed_sources.add(name)
+    old_bindings, new_bindings = before.get("source_id_bindings", {}), after.get("source_id_bindings", {})
+    source_id_changes = []
+    changed_ids = set()
+    for name in sorted(set(old_bindings) | set(new_bindings)):
+        a, b = old_bindings.get(name), new_bindings.get(name)
+        if a != b:
+            change = "removed" if b is None else "unreadable" if b.get("state") == "unreadable" else "added" if a is None else "changed"
+            source_id_changes.append({"source_id": name, "change": change})
+            changed_ids.add(name)
     direct = {key for key in set(old) | set(new) if old.get(key) != new.get(key)}
     for obj in old_objects + new_objects:
-        if any(s["path"] in changed_sources for s in obj.get("sources", [])):
+        if any(s["path"] in changed_sources for s in obj.get("sources", [])) or changed_ids.intersection(obj.get("source_ids", [])):
             direct.add(obj["id"])
     relation_sets = [{(r["from"], r["type"], r["to"]) for r in rows} for rows in (old_relations, new_relations)]
     for start, _, end in relation_sets[0] ^ relation_sets[1]:
@@ -294,7 +370,8 @@ def impact(before, after):
     for error in after.get("errors", []):
         for obj in new_objects:
             if error.get("object") == obj["id"] or (
-                    "object" not in error and any(s["path"] == error.get("path") for s in obj.get("sources", []))):
+                    "object" not in error and (any(s["path"] == error.get("path") for s in obj.get("sources", []))
+                                               or error.get("source_id") in obj.get("source_ids", []))):
                 invalid.add(obj["id"])
     adjacency = {}
     for relation in old_relations + new_relations:
@@ -305,7 +382,7 @@ def impact(before, after):
     unverified_paths = {name for name, item in after["sources"].items() if item["state"] == "unverified"}
     unverified = {obj["id"] for obj in new_objects if
                   any(s["path"] in unverified_paths for s in obj.get("sources", []))
-                  or bool(obj.get("source_ids"))}
+                  or any(new_bindings.get(sid, {}).get("state") != "present" for sid in obj.get("source_ids", []))}
     pending = list(unverified)
     while pending:
         for dependent in adjacency.get(pending.pop(), set()) - unverified:
@@ -321,6 +398,7 @@ def impact(before, after):
             "review_required": sorted(affected), "reusable_objects": sorted(set(new) - affected),
             "unverified_objects": sorted(unverified & set(new)),
             "source_changes": source_changes, "unverified_sources": after.get("unverified_sources", []),
+            "source_id_changes": source_id_changes, "unverified_source_ids": after.get("unverified_source_ids", []),
             "scope": "Affected means review required, not scientifically disproved; reusable means structurally unchanged after strict hashing, without current binding errors or unverified source dependencies within this selected index. It does not establish scientific validity."}
 
 

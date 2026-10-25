@@ -13,7 +13,8 @@ from pathlib import Path
 import re
 from urllib.parse import unquote, urldefrag
 
-HEADING = re.compile(r"^(#{1,6})[ \t]+(.+?)\s*#*\s*$")
+HEADING = re.compile(r"^ {0,3}(#{1,6})[ \t]+(.+?)\s*#*\s*$")
+FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
 
 
 def slugify(title: str) -> str:
@@ -23,13 +24,36 @@ def slugify(title: str) -> str:
     return re.sub(r"\s+", "-", title)
 
 
-def headings(markdown: str) -> list[dict]:
+def prose_lines(markdown: str) -> list[str]:
+    """Mask fenced code without changing line positions used by the audit."""
     lines = markdown.splitlines()
+    fence = None
+    for i, line in enumerate(lines):
+        match = FENCE.match(line)
+        if fence is not None:
+            if match and match[1][0] == fence[0] and len(match[1]) >= len(fence) and not match[2].strip():
+                fence = None
+            lines[i] = ""
+        elif match and (match[1][0] != "`" or "`" not in match[2]):
+            fence = match[1]
+            lines[i] = ""
+    return lines
+
+
+def headings(markdown: str) -> list[dict]:
+    lines = prose_lines(markdown)
     result = []
+    used_slugs = set()
     for line_number, line in enumerate(lines):
         match = HEADING.match(line)
         if match:
-            result.append({"title": match[2].strip(), "slug": slugify(match[2]),
+            base = slugify(match[2])
+            slug, suffix = base, 0
+            while slug in used_slugs:
+                suffix += 1
+                slug = f"{base}-{suffix}"
+            used_slugs.add(slug)
+            result.append({"title": match[2].strip(), "slug": slug,
                            "level": len(match[1]), "start": line_number, "end": len(lines)})
     for i, item in enumerate(result):
         for following in result[i + 1:]:
@@ -43,8 +67,9 @@ def audit(index_path: Path, report_path: Path, registry_path: Path | None = None
     """Return candidates for human review; no automatic link rewrites."""
     index_path = index_path.resolve(strict=True)
     report_path = report_path.resolve(strict=True)
-    lines = report_path.read_text(encoding="utf-8-sig").splitlines()
-    sections = headings("\n".join(lines))
+    markdown = report_path.read_text(encoding="utf-8-sig")
+    lines = prose_lines(markdown)
+    sections = headings(markdown)
     by_slug: dict[str, list[dict]] = {}
     for section in sections:
         by_slug.setdefault(section["slug"], []).append(section)
@@ -84,10 +109,10 @@ def audit(index_path: Path, report_path: Path, registry_path: Path | None = None
         if not targets:
             missing_anchors.append({"study": study, "line": row_number, "anchor": anchor})
             continue
-        # Exact identifiers are a high-precision signal. Prose-only references
-        # remain unassessable, not incorrect.
-        token = chr(96) + study + chr(96)
-        mentions = [i for i, line in enumerate(lines) if token in line]
+        # Exact identifiers can appear in prose or inline code. Longer IDs and
+        # source-path components do not establish a section's subject.
+        token = re.compile(r"(?<![\w/-])" + re.escape(study) + r"(?![\w/-])")
+        mentions = [i for i, line in enumerate(lines) if token.search(line)]
         if not mentions:
             unassessable.append({"study": study, "line": row_number,
                                  "reason": "study_id_not_explicit_in_report"})
@@ -112,7 +137,7 @@ def audit(index_path: Path, report_path: Path, registry_path: Path | None = None
             "checked_exact_id_rows": checked,
             "needs_review": needs_review, "missing_anchors": missing_anchors,
             "missing_registered_rows": absent, "unassessable": unassessable,
-            "scope": "Checks Markdown anchors and literal study IDs only. Review candidates against scientific content; no claim correctness or source coverage is established."}
+            "scope": "Checks ATX Markdown anchors and bounded literal study IDs outside fenced code. Heading slugs approximate GitHub behavior; prose without the ID remains unassessable. Review candidates against scientific content; no claim correctness or source coverage is established."}
 
 
 def main(argv: list[str] | None = None) -> int:
