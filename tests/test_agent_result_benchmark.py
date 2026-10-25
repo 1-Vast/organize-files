@@ -87,3 +87,37 @@ def test_empty_completion_marker_is_rejected():
     candidate['finished_utc'] = None
     with pytest.raises(ValueError, match='Incomplete'):
         tool.summarize([trial(), candidate])
+
+
+def test_correct_report_with_unnecessary_write_is_not_a_scientific_omission():
+    candidate = trial('candidate')
+    candidate['attempts'][0]['gates']['no_write'] = False
+    candidate['attempts'][0]['passed'] = candidate['passed'] = False
+    row = tool.summarize([trial(), candidate])['runs'][1]
+    assert row['content_review_passed'] is True
+    assert row['operational_gates_passed'] is False and row['passed'] is False
+
+
+def test_mixing_revisions_within_an_arm_is_rejected():
+    other = trial()
+    other.update(run_id='other', pair_id='first-2', skill_commit='changed')
+    with pytest.raises(ValueError, match='frozen'):
+        tool.summarize([trial(), trial('candidate'), other])
+
+
+@pytest.mark.parametrize('fault', ['defect', 'review_failure'])
+def test_contradictory_verdict_is_not_counted_as_content_success(fault):
+    candidate = trial('candidate', passed=False)
+    candidate['attempts'][0]['verdict']['passed'] = True
+    if fault == 'review_failure':
+        candidate['attempts'][0]['verdict']['missing_facts'] = []
+        candidate['attempts'][0]['evaluation']['returncode'] = 1
+    row = tool.summarize([trial(), candidate])['runs'][1]
+    assert row['content_review_passed'] is False
+
+
+def test_truthy_text_is_not_a_measured_operational_gate():
+    candidate = trial('candidate', passed=False)
+    candidate['attempts'][0]['gates']['preserved'] = 'unknown'
+    with pytest.raises(ValueError, match='boolean'):
+        tool.summarize([trial(), candidate])

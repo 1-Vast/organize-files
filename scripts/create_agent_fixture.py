@@ -211,4 +211,3 @@ for case in facts:
     assert len(entries)==10 and 6*1024<=total<=12*1024,(case,len(entries),total)
     print(case,len(entries),total)
 print('Created fixtures, neutral prompts, manifests and isolated private rubric.')
-

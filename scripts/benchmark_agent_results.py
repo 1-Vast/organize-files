@@ -53,6 +53,8 @@ def summarize(records):
             verdict = attempt['verdict']
             if any(not isinstance(verdict.get(field), list) for field in ('missing_facts', 'incorrect_claims')):
                 raise ValueError('Missing quality measurements are not empty defect lists')
+            if not attempt['gates'] or any(type(value) is not bool for value in attempt['gates'].values()):
+                raise ValueError('Operational gates must be explicit boolean measurements')
             valid_pass = (attempt['worker']['returncode'] == 0 and attempt['evaluation']['returncode'] == 0
                           and verdict.get('passed') is True and not verdict.get('missing_facts')
                           and not verdict.get('incorrect_claims') and bool(attempt['gates'])
@@ -64,6 +66,11 @@ def summarize(records):
         row = {key: record[key] for key in ('run_id', 'pair_id', 'stage', 'case', 'arm',
                                             'skill_commit', 'input_sha256', 'model', 'reasoning', 'passed')}
         row.update(attempts=len(attempts), first_pass=attempts[0]['passed'],
+                   content_review_passed=(attempts[-1]['evaluation']['returncode'] == 0
+                       and attempts[-1]['verdict']['passed'] is True
+                       and not attempts[-1]['verdict']['missing_facts']
+                       and not attempts[-1]['verdict']['incorrect_claims']),
+                   operational_gates_passed=all(attempts[-1]['gates'].values()),
                    end_to_end_seconds=record['end_to_end_seconds'],
                    worker_seconds=sum(call['seconds'] for call in workers),
                    review_seconds=sum(call['seconds'] for call in reviewers),
@@ -75,6 +82,9 @@ def summarize(records):
         pairs[row['pair_id']][row['arm']] = row
         groups[(row['stage'], row['arm'])].append(row)
         runs.append(row)
+    for arm in ('baseline', 'candidate'):
+        if len({row['skill_commit'] for row in runs if row['arm'] == arm}) > 1:
+            raise ValueError('A comparator arm must use one frozen skill revision')
     comparisons = []
     for pair_id, arms in sorted(pairs.items()):
         if set(arms) != {'baseline', 'candidate'}:
@@ -94,6 +104,8 @@ def summarize(records):
         summaries.append({'stage': stage, 'arm': arm, 'runs': len(rows),
                           'first_pass': sum(row['first_pass'] for row in rows),
                           'final_pass': sum(row['passed'] for row in rows),
+                          'content_review_pass': sum(row['content_review_passed'] for row in rows),
+                          'operational_gates_pass': sum(row['operational_gates_passed'] for row in rows),
                           'end_to_end_seconds_all_runs': distribution([row['end_to_end_seconds'] for row in rows]),
                           'worker_seconds_all_runs': distribution([row['worker_seconds'] for row in rows]),
                           'repair_seconds_all_runs': distribution([row['repair_seconds'] for row in rows]),

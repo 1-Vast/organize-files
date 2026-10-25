@@ -19,4 +19,3 @@ One report means one identifiable authoritative current account. Clearly labeled
 Unchanged maintenance: a correct report should remain materially stable. Prefer a byte-stable current report and no gratuitous source churn. A documented factual or navigational repair is acceptable; stylistic rewrites alone count as unnecessary maintenance, separately from semantic correctness. Existing canonical reports are correct but no exact wording or folder scheme is a scoring requirement.
 
 Capture wall time, tool calls, tokens when available, touched paths, content hashes and report churn. Efficiency is secondary to semantics and preservation. Timeouts and worker failures remain in the denominator. Evaluate blind to comparator labels if practical. Do not inspect or edit organizer implementation while acting as evaluator.
-
