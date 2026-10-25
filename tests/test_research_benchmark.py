@@ -446,6 +446,9 @@ def test_operations_benchmark_compares_explicit_local_implementation_on_unchange
     ['--index', 'never-open.json'],
     ['--operations', '0'],
     ['--operations', '8', '--repeats', '0'],
+    ['--trace', 'never-read.jsonl', '--root', 'never-read-project'],
+    ['--trace', 'never-read.jsonl', '--baseline-ops', 'never-import.py'],
+    ['--operations', '8', '--turn-id', 'absent'],
 ])
 def test_benchmark_rejects_invalid_mode_combinations_before_reading_projects(arguments):
     result = subprocess.run([sys.executable, str(SKILL / 'scripts/benchmark_organization.py'), *arguments],
