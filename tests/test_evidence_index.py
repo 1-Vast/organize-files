@@ -429,3 +429,23 @@ def test_missing_source_is_still_reported_without_isjunction_api(tmp_path, monke
     result = tool.snapshot_index(data, tmp_path)
     assert result["errors"] == [{"path": "absent/result.json", "error": "missing"}]
     assert result["metrics"]["payload_files_opened"] == 0
+
+
+
+def test_retained_source_id_requires_review_without_reading_payload(tmp_path):
+    files(tmp_path)
+    data = index()
+    data["objects"][1]["source_ids"] = ["log/research_records/example/DECISION.md"]
+    before = tool.snapshot_index(data, tmp_path)
+    after = tool.snapshot_index(data, tmp_path)
+    assert before["unverified_source_ids"] == ["log/research_records/example/DECISION.md"]
+    result = tool.impact(before, after)
+    assert {"claim", "report"} <= set(result["unverified_objects"])
+    assert "claim" not in result["reusable_objects"]
+
+
+def test_source_id_validation_is_bounded(tmp_path):
+    files(tmp_path)
+    data = index()
+    data["objects"][1]["source_ids"] = ["", 3]
+    assert "source_ids" in tool.validate_index(data, tmp_path)["errors"][0]
