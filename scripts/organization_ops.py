@@ -6,6 +6,8 @@ add replacement and replacement_sha256. Remove/replace also record evidence with
 coverage and review. Evidence is a declared review record, not proof of equivalence.
 Only explicit files are read. Quiesce other writers: this is a recoverable journal,
 not an atomic transaction across files or a complete NTFS metadata backup.
+protected_sources declares project-relative prefixes. Default sensitive names are
+also excluded; omitted declarations cannot reveal all project-specific semantics.
 """
 from __future__ import annotations
 
@@ -14,10 +16,13 @@ import hashlib
 import json
 import os
 from pathlib import Path, PureWindowsPath
+import re
 import shutil
 import stat
 import tempfile
 import zipfile
+
+PROTECTED_NAME = re.compile(r'sealed|blind|credential|secret|password|passwd|api[_-]?key|(?:^|[_-])token(?:[_.-]|$)', re.I)
 
 
 def digest(path: Path) -> str:
@@ -43,6 +48,8 @@ def _root(value: str) -> Path:
         raise ValueError('Windows ambiguous/reserved root path')
     if any(part.casefold() == '.git' for part in path.parts):
         raise ValueError('Git internal directories are not organization roots')
+    if _default_protected(path.parts):
+        raise ValueError('Protected directories are not organization roots')
     _no_links(path)
     if not path.is_dir():
         raise ValueError('root must exist')
@@ -55,14 +62,34 @@ def _windows_alias(part: str) -> bool:
     return part.endswith((' ', '.')) or part.split('.')[0].upper() in devices
 
 
-def _path(root: Path, value: str) -> Path:
+def _parts(value: str) -> list[str]:
     if not isinstance(value, str) or not value or '\x00' in value:
         raise ValueError('A nonempty relative file path is required')
     parts = value.replace('\\', '/').split('/')
     if Path(value).is_absolute() or PureWindowsPath(value).drive or any(p in {'', '.', '..'} or ':' in p or _windows_alias(p) for p in parts):
         raise ValueError(f'Unsafe relative path: {value}')
-    if any(p.casefold() == '.git' for p in parts):
-        raise ValueError('Git internal files are not organization targets')
+    return parts
+
+
+def _default_protected(parts) -> bool:
+    return (any(p.casefold().startswith('.env') or p.casefold() in {'.git', '.ssh'} or PROTECTED_NAME.search(p) for p in parts)
+            or Path(parts[-1]).suffix.casefold() in {'.pem', '.key', '.p12', '.pfx', '.kdbx'}
+            or parts[-1].casefold() in {'id_rsa', 'id_ed25519', 'authorized_keys'})
+
+
+def _protected_sources(plan: dict) -> list[str]:
+    prefixes = plan.get('protected_sources', [])
+    if not isinstance(prefixes, list):
+        raise ValueError('protected_sources must be a list of relative path prefixes')
+    return ['/'.join(_parts(value)) for value in prefixes]
+
+
+def _path(root: Path, value: str, protected: list[str] = ()) -> Path:
+    parts = _parts(value)
+    name = '/'.join(parts).casefold()
+    if (_default_protected(parts)
+            or any(name == prefix.casefold() or name.startswith(prefix.casefold() + '/') for prefix in protected)):
+        raise ValueError(f'Protected path is outside the operation boundary: {value}')
     path = root.joinpath(*parts)
     _no_links(path)
     if not path.resolve().is_relative_to(root):
@@ -78,10 +105,38 @@ def _hash(value: str) -> str:
 
 def _assert_file(path: Path, expected: str) -> None:
     _no_links(path)
-    if not path.is_file() or digest(path) != expected:
+    if not path.is_file():
         raise ValueError(f'Source changed, missing, or not a regular file: {path}')
     if path.stat().st_nlink != 1:
         raise ValueError(f'Hard-linked files require a separate preservation decision: {path}')
+    if digest(path) != expected:
+        raise ValueError(f'Source changed, missing, or not a regular file: {path}')
+    if path.stat().st_nlink != 1:
+        raise ValueError(f'Hard-linked files require a separate preservation decision: {path}')
+
+
+def _check_overlap(writes: list[Path], reads: list[Path]) -> None:
+    """Index path segments; read/read ancestry is harmless, writes must not overlap."""
+    write_keys = {tuple(part.casefold() for part in path.parts) for path in writes}
+    read_keys = {tuple(part.casefold() for part in path.parts) for path in reads}
+    if len(write_keys) != len(writes):
+        raise ValueError('Overlapping source/destination operations')
+    if write_keys & read_keys:
+        raise ValueError('A replacement source is also being changed')
+    all_keys = write_keys | read_keys
+    for key in all_keys:
+        ancestors = write_keys if key not in write_keys else all_keys
+        if any(key[:depth] in ancestors for depth in range(1, len(key))):
+            raise ValueError('Ancestor/descendant operation paths overlap')
+
+
+def _operation_paths(root: Path, item: dict, protected: list[str]) -> dict[str, Path]:
+    fields = ['source']
+    if item['op'] == 'move':
+        fields.append('target')
+    elif item['op'] == 'replace':
+        fields.append('replacement')
+    return {field: _path(root, item[field], protected) for field in fields}
 
 
 def dry_run(plan: dict) -> list[dict]:
@@ -89,17 +144,19 @@ def dry_run(plan: dict) -> list[dict]:
     if plan.get('schema') != 1 or not isinstance(plan.get('operations'), list) or not plan['operations']:
         raise ValueError('Expected schema 1 and nonempty operations')
     root = _root(plan['root'])
+    protected = _protected_sources(plan)
     changes, writes, reads = [], [], []
     for operation in plan['operations']:
         item = dict(operation)
         kind = item.get('op')
         if kind not in {'move', 'remove', 'replace'} or not isinstance(item.get('reason'), str) or not item['reason'].strip():
             raise ValueError('Each operation requires op and a nonempty reason')
-        source = _path(root, item['source'])
+        paths = _operation_paths(root, item, protected)
+        source = paths['source']
         _assert_file(source, _hash(item['sha256']))
         writes.append(source)
         if kind == 'move':
-            target = _path(root, item['target'])
+            target = paths['target']
             if target.exists():
                 raise ValueError(f'Destination already exists: {target}')
             writes.append(target)
@@ -111,19 +168,11 @@ def dry_run(plan: dict) -> list[dict]:
             if not isinstance(coverage, list) or not coverage or not all(isinstance(x, str) and x.strip() for x in coverage) or not isinstance(evidence.get('review'), str) or not evidence['review'].strip():
                 raise ValueError('Remove/replace requires declared evidence.coverage and evidence.review')
             if kind == 'replace':
-                prepared = _path(root, item['replacement'])
+                prepared = paths['replacement']
                 _assert_file(prepared, _hash(item['replacement_sha256']))
                 reads.append(prepared)
         changes.append(item)
-    keys = [str(p).casefold() for p in writes]
-    if len(keys) != len(set(keys)):
-        raise ValueError('Overlapping source/destination operations')
-    for a in writes:
-        for b in writes + reads:
-            if a != b and (a in b.parents or b in a.parents):
-                raise ValueError('Ancestor/descendant operation paths overlap')
-    if set(keys) & {str(p).casefold() for p in reads}:
-        raise ValueError('A replacement source is also being changed')
+    _check_overlap(writes, reads)
     return changes
 
 
@@ -158,12 +207,27 @@ def _verify_recovery(state_dir: Path, state: dict) -> None:
     if digest(recovery) != state['recovery_sha256']:
         raise ValueError('Recovery archive checksum mismatch')
     with zipfile.ZipFile(recovery) as archive:
-        if archive.namelist() != [str(i) for i in range(len(state['operations']))]:
+        if 'plan.json' not in archive.namelist():
+            raise ValueError('Legacy recovery has no bound protection policy; separate reviewed recovery is required')
+        bound = json.loads(archive.read('plan.json'))
+        current = _bound_plan(state)
+        if bound != current:
+            raise ValueError('Recovery plan/protection policy differs from journal state')
+        protected = _protected_sources(state)
+        for item in state['operations']:
+            _operation_paths(Path(state['root']), item, protected)
+        if archive.namelist() != ['plan.json'] + [str(i) for i in range(len(state['operations']))]:
             raise ValueError('Unexpected recovery archive members')
         for i, item in enumerate(state['operations']):
             with archive.open(str(i)) as stream:
                 if hashlib.file_digest(stream, 'sha256').hexdigest() != item['sha256']:
                     raise ValueError('Recovery member checksum mismatch')
+
+
+def _bound_plan(state: dict) -> dict:
+    mutable = {'status', 'mode', 'mtime_ns', 'atime_ns'}
+    return {'root': state['root'], 'protected_sources': state.get('protected_sources', []),
+            'operations': [{k: v for k, v in item.items() if k not in mutable} for item in state['operations']]}
 
 
 def _copy_exclusive(source: Path, target: Path) -> None:
@@ -216,8 +280,11 @@ def apply_plan(plan: dict, state_dir: Path) -> dict:
     root = _root(plan['root'])
     state_dir = _state_dir(Path(state_dir), root, new=True)
     state_dir.mkdir(parents=True)
-    state = {'schema': 1, 'root': str(root), 'status': 'preparing', 'operations': []}
+    state = {'schema': 1, 'root': str(root), 'status': 'preparing',
+             'protected_sources': _protected_sources(plan), 'operations': []}
     with zipfile.ZipFile(state_dir / 'recovery.zip', 'x', compression=zipfile.ZIP_STORED, allowZip64=True) as archive:
+        archive.writestr('plan.json', json.dumps({'root': str(root), 'protected_sources': state['protected_sources'],
+                                               'operations': operations}, ensure_ascii=False))
         for i, operation in enumerate(operations):
             source = _path(root, operation['source'])
             info = source.stat()
@@ -234,6 +301,7 @@ def apply_plan(plan: dict, state_dir: Path) -> dict:
     _save(state_dir, state)
     try:
         for item in state['operations']:
+            _operation_paths(root, item, state['protected_sources'])
             item['status'] = 'started'
             _save(state_dir, state)
             _apply_one(root, item)

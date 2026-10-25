@@ -224,3 +224,121 @@ def test_cli_dry_run_and_help(tmp_path):
     result = subprocess.run([sys.executable, str(SCRIPT), 'dry-run', str(plan_path)], capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     assert len(json.loads(result.stdout)) == 3
+
+
+@pytest.mark.parametrize('field,name', [('source', 'sealed/source.bin'), ('target', 'blind/result.bin'),
+                                      ('source', '.env'), ('target', 'credentials/result.bin'),
+                                      ('replacement', 'private.key')])
+def test_default_protected_paths_rejected_before_payload_read(tmp_path, monkeypatch, field, name):
+    _, _, plan = make_plan(tmp_path)
+    item = plan['operations'][2 if field == 'replacement' else 0]
+    item[field] = name
+    plan['operations'] = [item]
+    monkeypatch.setattr(ops, 'digest', lambda *args: pytest.fail('Protected operation read a payload'))
+    with pytest.raises(ValueError, match='Protected'):
+        ops.dry_run(plan)
+
+
+@pytest.mark.parametrize('field', ['source', 'target', 'replacement'])
+def test_declared_protection_is_case_insensitive_prefix_and_checked_before_reads(tmp_path, monkeypatch, field):
+    _, _, plan = make_plan(tmp_path)
+    item = plan['operations'][2 if field == 'replacement' else 0]
+    item[field] = 'Study/Reserve/input.bin'
+    plan['operations'] = [item]
+    plan['protected_sources'] = ['study/reserve']
+    monkeypatch.setattr(ops, 'digest', lambda *args: pytest.fail('Declared protected payload read'))
+    with pytest.raises(ValueError, match='Protected'):
+        ops.dry_run(plan)
+
+
+def test_protection_prefix_does_not_match_sibling_name(tmp_path):
+    _, _, plan = make_plan(tmp_path)
+    plan['protected_sources'] = ['raw']
+    assert ops.dry_run(plan) == plan['operations']
+
+
+@pytest.mark.parametrize('protection', ['outside', ['../outside'], ['C:/outside']])
+def test_invalid_protection_prefix_rejected(tmp_path, protection):
+    _, _, plan = make_plan(tmp_path)
+    plan['protected_sources'] = protection
+    with pytest.raises(ValueError):
+        ops.dry_run(plan)
+
+
+def test_recovery_policy_and_operation_paths_cannot_be_changed_in_journal(tmp_path):
+    root, _, plan = make_plan(tmp_path)
+    plan['protected_sources'] = ['reserve']
+    state_dir = tmp_path / 'transaction'
+    state = ops.apply_plan(plan, state_dir)
+    for mutate in ('policy', 'source', 'target', 'replacement'):
+        altered = json.loads(json.dumps(state))
+        if mutate == 'policy':
+            altered['protected_sources'] = []
+        else:
+            altered['operations'][2 if mutate == 'replacement' else 0][mutate] = 'reserve/asset.bin'
+        (state_dir / 'state.json').write_text(json.dumps(altered), encoding='utf-8')
+        with pytest.raises(ValueError, match='policy differs'):
+            ops.rollback(state_dir)
+        assert not (root / 'raw.bin').exists()
+    (state_dir / 'state.json').write_text(json.dumps(state), encoding='utf-8')
+    assert ops.rollback(state_dir)['status'] == 'rolled_back'
+
+
+def test_legacy_recovery_requires_separately_reviewed_restore(tmp_path):
+    root, _, plan = make_plan(tmp_path)
+    state_dir = tmp_path / 'transaction'
+    state = ops.apply_plan(plan, state_dir)
+    archive_path = state_dir / 'recovery.zip'
+    with zipfile.ZipFile(archive_path) as archive:
+        members = [(name, archive.read(name)) for name in archive.namelist() if name != 'plan.json']
+    with zipfile.ZipFile(archive_path, 'w') as archive:
+        for name, data in members:
+            archive.writestr(name, data)
+    state['recovery_sha256'] = hashlib.sha256(archive_path.read_bytes()).hexdigest()
+    (state_dir / 'state.json').write_text(json.dumps(state), encoding='utf-8')
+    with pytest.raises(ValueError, match='Legacy recovery'):
+        ops.rollback(state_dir)
+    assert not (root / 'raw.bin').exists()
+
+
+def test_large_overlap_index_matches_pairwise_reference():
+    writes = [Path('/workspace') / f'group{i % 71}' / f'file{i}.bin' for i in range(6000)]
+    reads = [Path('/workspace') / 'prepared' / f'file{i}.bin' for i in range(1000)]
+    ops._check_overlap(writes, reads)
+    for left, right in [(Path('/root/A'), Path('/root/a/child')), (Path('/root/a/child'), Path('/root/A'))]:
+        with pytest.raises(ValueError, match='overlap'):
+            ops._check_overlap([left], [right])
+    # Read/read ancestry remains legal; only changes must be disjoint.
+    ops._check_overlap([Path('/root/output')], [Path('/root/read'), Path('/root/read/child')])
+
+
+def test_fixed_random_overlap_cases_match_original_rule():
+    import random
+    rng = random.Random(71023)
+    pool = [Path('/workspace') / '/'.join(rng.choices(['a', 'b', 'c', 'd'], k=rng.randint(1, 5))) for _ in range(100)]
+    for _ in range(300):
+        writes, reads = rng.sample(pool, 5), rng.sample(pool, 5)
+        expected = (len(set(writes)) != len(writes) or bool(set(writes) & set(reads))
+                    or any(a != b and (a in b.parents or b in a.parents) for a in writes for b in writes + reads))
+        try:
+            ops._check_overlap(writes, reads)
+        except ValueError:
+            assert expected
+        else:
+            assert not expected
+
+
+def test_hardlinked_sensitive_payload_is_rejected_before_hashing(tmp_path, monkeypatch):
+    root, _, plan = make_plan(tmp_path)
+    os.link(root / 'raw.bin', root / '.env')
+    monkeypatch.setattr(ops, 'digest', lambda *args: pytest.fail('Hard-linked source payload read'))
+    with pytest.raises(ValueError, match='Hard-linked'):
+        ops.dry_run(plan)
+
+
+def test_protected_root_cannot_be_used_to_hide_sensitive_prefix(tmp_path, monkeypatch):
+    root = tmp_path / 'sealed_source'
+    root.mkdir()
+    monkeypatch.setattr(ops, 'digest', lambda *args: pytest.fail('Protected root payload read'))
+    with pytest.raises(ValueError, match='Protected'):
+        ops.dry_run({'schema': 1, 'root': str(root), 'operations': [{'op':'move','source':'a','target':'b','sha256':'0'*64,'reason':'test'}]})

@@ -24,6 +24,7 @@ python -m pytest tests/test_research_benchmark.py tests/test_organization_ops.py
 {
   "schema": 1,
   "root": "D:/Research",
+  "protected_sources": ["data/raw", "frozen", "reserved"],
   "operations": [{
     "op": "move", "source": "notes/result.md", "target": "reports/result.md",
     "sha256": "<64位小写SHA256>", "reason": "归入现行报告位置"
@@ -32,6 +33,8 @@ python -m pytest tests/test_research_benchmark.py tests/test_organization_ops.py
 ```
 
 `remove` 不需 target，但必须增加 `evidence: {"coverage": "保留位置与逐项覆盖依据", "review": "审查记录"}`；`replace` 还需 `replacement` 和 `replacement_sha256`，指向工作根内预先准备的替代文件。声明不能取代实际审阅。每个计划按可独立核验的范围编制，不以一个巨型计划替代小批次。
+
+`protected_sources` 是项目相对路径前缀，同时限制源、目标和替代源，工具在读取payload前检查；默认还保护明显封存、凭据、Git与环境文件名。必须声明项目中名字不可识别的保护范围，工具不能自行推断所有科研语义。新版恢复包封存计划/保护前缀，回滚拒绝仅编辑state放宽范围；旧版无此绑定的包不自动回滚，可在隔离位置审查恢复，不能宣称与新版具有同等保证。
 
 ```powershell
 python scripts/organization_ops.py dry-run D:/temporary/plan.json
@@ -60,12 +63,29 @@ python scripts/organization_ops.py rollback D:/temporary/new-recovery-state
 ```powershell
 python scripts/evidence_index.py validate --index D:/Research/INDEX.json --root D:/Research
 python scripts/evidence_index.py snapshot --index D:/Research/INDEX.json --root D:/Research --out D:/temporary/before.json
+# 只筛选候选，不读取来源payload；所有对象仍未验证
+python scripts/evidence_index.py scan --index D:/Research/INDEX.json --root D:/Research --previous D:/temporary/before.json --out D:/temporary/candidates.json
 # 在实际新增/修改发生后重新生成 after 快照
 python scripts/evidence_index.py snapshot --index D:/Research/INDEX.json --root D:/Research --out D:/temporary/after.json
 python scripts/evidence_index.py impact --before D:/temporary/before.json --after D:/temporary/after.json
 ```
 
-`direct_changes` 是实际变化；`invalid_objects` 包含当前仍缺失或哈希错误的对象，即使两次快照相同也进入 `review_required`。`reusable_objects` 只说明此索引中结构未变且无当前绑定错误；保护来源仍在 `unverified_sources`，不能宣称已核验其内容。
+`direct_changes` 是严格快照的实际变化；`invalid_objects` 包含当前仍缺失或哈希错误的对象，即使两次快照相同也进入 `review_required`。`reusable_objects` 只说明此索引中严格校验后的结构未变、无绑定错误且无未验证来源依赖；保护来源及其依赖保持 `unverified_objects`，不列入可复用。`impact` 拒绝metadata scan输入。
+
+`scan` 比较size、mtime/ctime和文件身份等元数据，返回candidate_sources/changed_sources/needs_strict_verification；旧快照缺元数据时作为需严格复核候选。即使元数据一致，内容仍可能变更，全部对象继续未验证，不能拿scan替代删除前哈希或冻结证据认证。validate/snapshot保留完整哈希及读取前后状态检查。metrics仅统计来源payload读取/哈希和显式stat，不包括索引JSON读取、路径检查、操作系统缓存和Agent阅读开销。
+
+使用 `python scripts/benchmark_organization.py --index D:/Research/INDEX.json --root D:/Research --repeats 3` 对同一选择范围输出两次strict和一次scan的耗时与I/O。固定顺序受缓存影响；零payload读取不证明内容未变，也不证明整个整理或LLM Token提速。规模操作比较可将7b54715的脚本导出为外部本地baseline，在相同输入/路径深度/磁盘比较预演；不得为提高成绩移除并发检查或恢复验证。时间报告观测值，不在回归中断言脆弱秒数。
+
+在Git仓库副本中可重跑规模预演（目标文件位于外部临时目录；只导入你已审阅的本地baseline，不下载或执行未知脚本）：
+
+```powershell
+git show 7b54715:scripts/organization_ops.py | Set-Content -LiteralPath "$env:TEMP/organize-old-ops.py" -Encoding utf8
+python scripts/benchmark_organization.py --operations 100 --baseline-ops "$env:TEMP/organize-old-ops.py" --repeats 2
+```
+
+可用`--operations 600`或`6000`扩大规模；旧版600项可能需数分钟。无baseline参数时仅测当前实现。计时只含dry-run；计时外核对计划、文件字节/时间/mode和目录不变，记录实现源哈希。它不执行apply、不测回滚或科研语义；恢复能力另由回归覆盖。
+
+生命周期集成测试检查：无变化二次scan/strict不写报告或增加文件；新更正影响实际依赖；stage/scope/lifecycle变更保留并触发复核；metadata-only不变成严格验收。这些是预设内容的工程测试，不能证明LLM能自动发现任意证据等级升级。
 
 ## 三组同输入对照
 

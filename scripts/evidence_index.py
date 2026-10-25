@@ -5,7 +5,9 @@ Index schema (version 1): objects have stable id, kind, status, optional stage
 Relations {from, to, type} use supports/contradicts/supersedes or depends_on.
 The first three propagate from -> to; depends_on propagates to -> from.
 Project-relative excluded_sources prefixes and protected sources are declarations:
-their payloads are never read. This tool checks bindings, not scientific truth.
+their payloads are never read. Strict snapshots hash every accessible indexed source.
+Metadata scans only screen candidates and never verify content or authorize deletion.
+This tool checks bindings, not scientific truth.
 """
 from __future__ import annotations
 
@@ -13,7 +15,6 @@ import argparse
 import copy
 import hashlib
 import json
-import os
 from pathlib import Path, PurePosixPath, PureWindowsPath
 import re
 import stat
@@ -25,6 +26,7 @@ DEVICE = re.compile(r"(?:CON|PRN|AUX|NUL|COM[1-9¹²³]|LPT[1-9¹²³]|CONIN\$|C
 PROTECTED = re.compile(r"sealed|blind|credential|secret|password|passwd|api[_-]?key|(?:^|[_-])token(?:[_.-]|$)", re.I)
 PRIVATE_SUFFIXES = {".pem", ".key", ".p12", ".pfx", ".kdbx"}
 SKIP_PARTS = {".git", ".ssh", ".venv", "venv", "gpu_venv", "node_modules", "__pycache__"}
+METRICS_SCOPE = "Source payload reads/hashes and explicit source stat calls only; index JSON, path-safety checks and filesystem/OS caches are not measured."
 
 
 def relative_path(value):
@@ -38,11 +40,19 @@ def relative_path(value):
     return value
 
 
+def linked_path(path):
+    try:
+        info = path.lstat()
+    except FileNotFoundError:
+        return False
+    return stat.S_ISLNK(info.st_mode) or bool(getattr(info, "st_file_attributes", 0) & 0x400)
+
+
 def checked_path(root, value):
     target = root
     for part in PurePosixPath(relative_path(value)).parts:
         target = target / part
-        if target.is_symlink() or getattr(os.path, "isjunction", lambda _: False)(target):
+        if linked_path(target):
             raise ValueError(f"Linked source paths are not followed: {value}")
     if not target.resolve().is_relative_to(root):
         raise ValueError(f"Source leaves the project root: {value}")
@@ -54,8 +64,10 @@ def checked_root(value):
     if not root.is_absolute():
         root = Path.cwd() / root
     for part in reversed((root, *root.parents)):
-        if part.is_symlink() or getattr(os.path, "isjunction", lambda _: False)(part):
+        if linked_path(part):
             raise ValueError("Project root and its ancestors must not be linked paths")
+        if part.name and exclusion_reason(part.name, []):
+            raise ValueError("Project root and its ancestors must not be protected or managed paths")
     root = root.resolve(strict=True)
     if not root.is_dir():
         raise ValueError("Project root must be a directory")
@@ -117,26 +129,59 @@ def exclusion_reason(name, excluded):
     return None
 
 
-def fingerprint(path):
-    before = path.stat()
-    if not stat.S_ISREG(before.st_mode):
+def io_metrics():
+    return {"payload_bytes_read": 0, "payload_files_opened": 0,
+            "sha256_computations": 0, "source_stat_calls": 0}
+
+
+def file_metadata(path, metrics):
+    metrics["source_stat_calls"] += 1
+    info = path.stat()
+    if not stat.S_ISREG(info.st_mode):
         raise ValueError(f"Indexed source is not a regular file: {path.name}")
-    if before.st_nlink != 1:
+    if info.st_nlink != 1:
         raise ValueError(f"Hard-linked sources are not read: {path.name}")
+    return {"size": info.st_size, "mtime_ns": info.st_mtime_ns,
+            "ctime_ns": info.st_ctime_ns, "device": info.st_dev,
+            "inode": info.st_ino, "mode": info.st_mode, "nlink": info.st_nlink}
+
+
+def fingerprint(path, metrics):
+    before = file_metadata(path, metrics)
     digest = hashlib.sha256()
     with path.open("rb") as stream:
+        metrics["payload_files_opened"] += 1
         for block in iter(lambda: stream.read(1024 * 1024), b""):
+            metrics["payload_bytes_read"] += len(block)
             digest.update(block)
-    after = path.stat()
-    if (before.st_size, before.st_mtime_ns, before.st_ino, before.st_nlink) != (after.st_size, after.st_mtime_ns, after.st_ino, after.st_nlink):
+    metrics["sha256_computations"] += 1
+    after = file_metadata(path, metrics)
+    if before != after:
         raise ValueError(f"Source changed while hashing: {path.name}")
-    return {"state": "present", "sha256": digest.hexdigest(), "bytes": after.st_size}
+    return {"state": "present", "sha256": digest.hexdigest(),
+            "bytes": after["size"], "metadata": after}
 
 
 def snapshot_index(index, root):
+    return inspect_index(index, root)
+
+
+def scan_index(index, root, previous=None):
+    """Screen metadata only; even candidates need strict hashing before reuse/deletion."""
+    if previous is not None:
+        schema(previous)
+        if not isinstance(previous.get("sources"), dict):
+            raise ValueError("Previous scan/snapshot must include sources")
+    return inspect_index(index, root, metadata_only=True, previous=previous)
+
+
+def inspect_index(index, root, metadata_only=False, previous=None, metrics=None):
+    metrics = io_metrics() if metrics is None else metrics
     objects, relations, excluded = schema(index)
     root = checked_root(root)
     sources, errors, unverified = {}, [], []
+    candidates, changes, needs_strict = [], [], []
+    same_root = previous is not None and previous.get("root") == str(root)
     # One protected declaration protects the file globally, even when reused.
     protected = {s["path"].casefold() for obj in objects for s in obj.get("sources", []) if s.get("protected")}
     for obj in objects:
@@ -149,32 +194,73 @@ def snapshot_index(index, root):
                     unverified.append({"path": name, "reason": reason})
                 else:
                     target = checked_path(root, name)
+                    if metadata_only:
+                        needs_strict.append(name)
                     try:
-                        sources[name] = fingerprint(target)
+                        if metadata_only:
+                            metadata = file_metadata(target, metrics)
+                            old = previous.get("sources", {}).get(name) if same_root else None
+                            if isinstance(old, dict) and old.get("metadata") == metadata:
+                                classification = "candidate"
+                                candidates.append(name)
+                            else:
+                                if same_root and old is None:
+                                    classification = "new"
+                                elif isinstance(old, dict) and "metadata" in old:
+                                    classification = "metadata_changed"
+                                else:
+                                    classification = "baseline_unavailable"
+                                changes.append({"path": name, "change": classification})
+                            sources[name] = {"state": "unverified", "reason": "metadata_only",
+                                             "classification": classification, "metadata": metadata}
+                            unverified.append({"path": name, "reason": "metadata_only"})
+                        else:
+                            sources[name] = fingerprint(target, metrics)
                     except FileNotFoundError:
                         sources[name] = {"state": "missing"}
                         errors.append({"path": name, "error": "missing"})
+                        if metadata_only:
+                            changes.append({"path": name, "change": "missing"})
             expected = source.get("sha256")
             if expected and sources[name]["state"] == "present" and sources[name]["sha256"] != expected.lower():
                 errors.append({"path": name, "object": obj["id"], "error": "sha256_mismatch"})
-    return {"schema_version": 1, "objects": copy.deepcopy(sorted(objects, key=lambda x: x["id"])),
+    result = {"schema_version": 1, "objects": copy.deepcopy(sorted(objects, key=lambda x: x["id"])),
             "relations": copy.deepcopy(sorted(relations, key=lambda x: (x["from"], x["type"], x["to"]))),
             "excluded_sources": list(excluded), "sources": sources, "errors": errors,
-            "unverified_sources": unverified,
+            "unverified_sources": unverified, "root": str(root), "metrics": metrics,
+            "verification_mode": "metadata_only" if metadata_only else "strict_hash",
+            "metrics_scope": METRICS_SCOPE,
             "scope": "Only explicitly indexed files were checked; no scientific claim was validated."}
+    if metadata_only:
+        if same_root:
+            changes.extend({"path": name, "change": "removed_from_index"}
+                           for name in sorted(set(previous["sources"]) - set(sources)))
+        result.update(candidate_sources=sorted(candidates), changed_sources=changes,
+                      needs_strict_verification=sorted(needs_strict), verified_sources=0,
+                      unverified_objects=sorted(obj["id"] for obj in objects),
+                      scope="Metadata agreement is only a screening candidate, not content equality. All objects remain unverified. Run a fresh strict snapshot/validation before content reuse, consolidation or deletion; no scientific claim was validated.")
+    return result
 
 
 def validate_index(index, root):
+    metrics = io_metrics()
     try:
-        snapshot = snapshot_index(index, root)
+        snapshot = inspect_index(index, root, metrics=metrics)
     except (ValueError, OSError) as error:
-        return {"valid": False, "errors": [str(error)], "verified_sources": 0, "unverified_sources": []}
+        return {"valid": False, "errors": [str(error)], "verified_sources": 0, "unverified_sources": [],
+                "verification_mode": "strict_hash", "metrics": metrics, "metrics_scope": METRICS_SCOPE}
+    invalid_paths = {error["path"] for error in snapshot["errors"]}
     return {"valid": not snapshot["errors"], "errors": snapshot["errors"],
-            "verified_sources": sum(x["state"] == "present" for x in snapshot["sources"].values()),
-            "unverified_sources": snapshot["unverified_sources"], "scope": snapshot["scope"]}
+            "verified_sources": sum(x["state"] == "present" and name not in invalid_paths
+                                    for name, x in snapshot["sources"].items()),
+            "unverified_sources": snapshot["unverified_sources"], "scope": snapshot["scope"],
+            "verification_mode": snapshot["verification_mode"], "metrics": snapshot["metrics"],
+            "metrics_scope": snapshot["metrics_scope"]}
 
 
 def impact(before, after):
+    if any(item.get("verification_mode") != "strict_hash" for item in (before, after)):
+        raise ValueError("Impact requires strict_hash snapshots; metadata scans cannot establish reusable objects")
     old_objects, old_relations, _ = schema(before)
     new_objects, new_relations, _ = schema(after)
     old, new = ({obj["id"]: obj for obj in items} for items in (old_objects, new_objects))
@@ -182,6 +268,9 @@ def impact(before, after):
     changed_sources = set()
     for name in sorted(set(before["sources"]) | set(after["sources"])):
         a, b = before["sources"].get(name), after["sources"].get(name)
+        # Metadata changes alone are not content changes after full strict hashing.
+        a = {k: v for k, v in a.items() if k != "metadata"} if a else a
+        b = {k: v for k, v in b.items() if k != "metadata"} if b else b
         if a != b:
             change = "removed" if b is None or b.get("state") == "missing" else "added" if a is None or a.get("state") == "missing" else "changed"
             source_changes.append({"path": name, "change": change})
@@ -205,7 +294,14 @@ def impact(before, after):
         if relation["type"] == "depends_on":
             start, end = end, start
         adjacency.setdefault(start, set()).add(end)
-    affected, pending = direct | invalid, list(direct | invalid)
+    unverified_paths = {name for name, item in after["sources"].items() if item["state"] == "unverified"}
+    unverified = {obj["id"] for obj in new_objects if any(s["path"] in unverified_paths for s in obj.get("sources", []))}
+    pending = list(unverified)
+    while pending:
+        for dependent in adjacency.get(pending.pop(), set()) - unverified:
+            unverified.add(dependent)
+            pending.append(dependent)
+    affected, pending = direct | invalid | unverified, list(direct | invalid | unverified)
     while pending:
         for dependent in adjacency.get(pending.pop(), set()) - affected:
             affected.add(dependent)
@@ -213,19 +309,22 @@ def impact(before, after):
     return {"direct_changes": sorted(direct), "invalid_objects": sorted(invalid),
             "affected_objects": sorted(affected - direct - invalid),
             "review_required": sorted(affected), "reusable_objects": sorted(set(new) - affected),
+            "unverified_objects": sorted(unverified & set(new)),
             "source_changes": source_changes, "unverified_sources": after.get("unverified_sources", []),
-            "scope": "Affected means review required, not scientifically disproved; reusable means structurally unchanged without current binding errors within this selected index."}
+            "scope": "Affected means review required, not scientifically disproved; reusable means structurally unchanged after strict hashing, without current binding errors or unverified source dependencies within this selected index. It does not establish scientific validity."}
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    for command in ("validate", "snapshot"):
+    for command in ("validate", "snapshot", "scan"):
         child = commands.add_parser(command)
         child.add_argument("--index", type=Path, required=True)
         child.add_argument("--root", type=Path, required=True)
-        if command == "snapshot":
+        if command in {"snapshot", "scan"}:
             child.add_argument("--out", type=Path)
+        if command == "scan":
+            child.add_argument("--previous", type=Path)
     child = commands.add_parser("impact")
     child.add_argument("--before", type=Path, required=True)
     child.add_argument("--after", type=Path, required=True)
@@ -236,7 +335,11 @@ def main(argv=None):
             result = impact(json.loads(args.before.read_text(encoding="utf-8")), json.loads(args.after.read_text(encoding="utf-8")))
         else:
             index = json.loads(args.index.read_text(encoding="utf-8"))
-            result = validate_index(index, args.root) if args.command == "validate" else snapshot_index(index, args.root)
+            if args.command == "scan":
+                previous = json.loads(args.previous.read_text(encoding="utf-8")) if args.previous else None
+                result = scan_index(index, args.root, previous)
+            else:
+                result = validate_index(index, args.root) if args.command == "validate" else snapshot_index(index, args.root)
         output = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
         if getattr(args, "out", None):
             args.out.write_text(output, encoding="utf-8")

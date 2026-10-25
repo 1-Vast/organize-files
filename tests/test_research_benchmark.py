@@ -9,6 +9,8 @@ import os
 from pathlib import Path
 import re
 import statistics
+import subprocess
+import sys
 import zipfile
 
 import pytest
@@ -177,11 +179,12 @@ def test_incremental_review_reaches_dependents_without_rewriting_them(tmp_path):
     after = evidence.snapshot_index(index, root)
     result = evidence.impact(before, after)
     assert set(result['direct_changes']) == {'exp:positive'}
-    assert set(result['affected_objects']) == {'claim:mean', 'decision:continue', 'report:current'}
+    assert set(result['affected_objects']) == {'claim:mean', 'decision:continue', 'report:current', 'asset:sealed'}
     assert {'exp:negative', 'exp:interrupted', 'note:unrelated'} <= set(result['reusable_objects'])
     assert (root / 'REPORT.md').read_bytes() == report_before
     # The tool identifies a review boundary. It does not compute a new scientific decision.
-    assert set(result['review_required']) == {'exp:positive', 'claim:mean', 'decision:continue', 'report:current'}
+    assert set(result['review_required']) == {'exp:positive', 'claim:mean', 'decision:continue', 'report:current', 'asset:sealed'}
+    assert result['unverified_objects'] == ['asset:sealed']
 
 
 def test_incremental_review_does_not_call_incomplete_execution_a_negative_result(tmp_path):
@@ -195,7 +198,7 @@ def test_incremental_review_does_not_call_incomplete_execution_a_negative_result
     after = evidence.snapshot_index(index, root)
     result = evidence.impact(before, after)
     assert set(result['direct_changes']) == {'exp:interrupted'}
-    assert set(result['affected_objects']) == {'report:current'}
+    assert set(result['affected_objects']) == {'report:current', 'asset:sealed'}
     assert 'claim:mean' in result['reusable_objects']
     assert next(obj for obj in index['objects'] if obj['id'] == 'exp:interrupted')['status'] == 'incomplete'
 
@@ -271,3 +274,182 @@ def test_recovery_refuses_a_later_hardlink_without_touching_external_metadata(tm
     with pytest.raises(ValueError):
         ops.rollback(state)
     assert outside.stat().st_mtime_ns == metadata
+
+
+def test_second_validation_pass_preserves_report_lifecycle_without_parallel_summaries(tmp_path, monkeypatch):
+    """Exercise tool reuse of a supplied synthesis; this does not evaluate LLM editing decisions."""
+    evidence, ops = load_tool('evidence_index'), load_tool('organization_ops')
+    root = tmp_path / 'project'
+    baseline = build_fixture(root)
+    write_reviewed_report(root)
+    plan = {'schema': 1, 'root': str(root), 'operations': [
+        {'op': 'remove', 'source': name, 'sha256': baseline[name], 'reason': 'Supplied synthesis supersedes draft',
+         'evidence': {'coverage': 'REPORT.md retains hypothesis, correction, all seeds and limits',
+                      'review': 'Preset reference report; no automated semantic guarantee'}}
+        for name in ('legacy/hypothesis.md', 'legacy/result.md', 'legacy/erratum.md')]}
+    ops.apply_plan(plan, tmp_path / 'recovery')
+    index = fixture_index()
+    for obj in index['objects']:
+        if obj['id'] in {'claim:mean', 'decision:continue'}:
+            obj['sources'] = [{'path': 'REPORT.md'}]
+        if obj['id'] == 'report:current':
+            obj['lifecycle'] = 'maintained_synthesis'
+    original_files = {p.relative_to(root).as_posix(): (p.stat().st_size, p.stat().st_mtime_ns)
+                      for p in root.rglob('*') if p.is_file()}
+    report = (root / 'REPORT.md').read_bytes()
+    before = evidence.snapshot_index(index, root)
+    original_open = Path.open
+
+    def no_payload_writes(path, mode='r', *args, **kwargs):
+        assert not any(flag in mode for flag in 'wax+'), f'Validation unexpectedly wrote {path}'
+        return original_open(path, mode, *args, **kwargs)
+
+    monkeypatch.setattr(Path, 'open', no_payload_writes)
+    first_scan = evidence.scan_index(index, root, before)
+    second_scan = evidence.scan_index(index, root, first_scan)
+    after = evidence.snapshot_index(index, root)
+    result = evidence.impact(before, after)
+    assert first_scan['candidate_sources'] == second_scan['candidate_sources']
+    assert not first_scan['changed_sources'] and not second_scan['changed_sources']
+    assert result['direct_changes'] == []
+    assert result['review_required'] == ['asset:sealed']
+    assert 'report:current' in result['reusable_objects']
+    assert (root / 'REPORT.md').read_bytes() == report
+    assert original_files == {p.relative_to(root).as_posix(): (p.stat().st_size, p.stat().st_mtime_ns)
+                              for p in root.rglob('*') if p.is_file()}
+    assert not any((root / name).exists() for name in ('legacy/result.md', 'REPORT_2.md', 'REPORT_backup.md'))
+
+
+@pytest.mark.parametrize('field,value', [
+    ('evidence_scope', {'population': 'exposed_development', 'unit': 'source_compound_group',
+                        'independent_confirmation': False, 'limitation': 'not independent donor tasks'}),
+    ('lifecycle', 'historical_source'),
+    ('stage', 'validated_method'),
+])
+def test_evidence_scope_and_lifecycle_changes_require_review_without_certifying_promotion(tmp_path, field, value):
+    """Declared evidence fields survive checks; accepted schema is not scientific approval."""
+    evidence = load_tool('evidence_index')
+    root = tmp_path / 'project'
+    build_fixture(root)
+    write_reviewed_report(root)
+    index = fixture_index()
+    experiment = next(obj for obj in index['objects'] if obj['id'] == 'exp:positive')
+    experiment.update(lifecycle='current_experiment', evidence_scope={
+        'population': 'exposed_development', 'unit': 'seed', 'independent_confirmation': False})
+    before = evidence.snapshot_index(index, root)
+    original = json.loads(json.dumps(before['objects']))
+    report_before = (root / 'REPORT.md').read_bytes()
+    experiment[field] = value
+    after = evidence.snapshot_index(index, root)
+    result = evidence.impact(before, after)
+    assert result['direct_changes'] == ['exp:positive']
+    assert {'claim:mean', 'decision:continue', 'report:current'} <= set(result['review_required'])
+    assert before['objects'] == original
+    assert next(obj for obj in after['objects'] if obj['id'] == 'exp:positive')[field] == value
+    assert next(obj for obj in after['objects'] if obj['id'] == 'exp:negative')['status'] == 'completed_negative'
+    assert next(obj for obj in after['objects'] if obj['id'] == 'exp:interrupted')['status'] == 'incomplete'
+    assert (root / 'REPORT.md').read_bytes() == report_before
+
+
+def test_metadata_screen_is_never_a_scientific_or_cleanup_acceptance_gate(tmp_path, monkeypatch):
+    evidence = load_tool('evidence_index')
+    root = tmp_path / 'project'
+    build_fixture(root)
+    write_reviewed_report(root)
+    index = fixture_index()
+    before = evidence.snapshot_index(index, root)
+    with monkeypatch.context() as guards:
+        guards.setattr(Path, 'open', lambda *args, **kwargs: pytest.fail('Metadata screen opened payload'))
+        scan = evidence.scan_index(index, root, before)
+    assert scan['verified_sources'] == 0
+    assert scan['metrics']['payload_bytes_read'] == scan['metrics']['payload_files_opened'] == 0
+    assert scan['metrics']['sha256_computations'] == 0
+    assert set(scan['unverified_objects']) == {obj['id'] for obj in index['objects']}
+    assert set(scan['needs_strict_verification']) == {name for name in before['sources'] if name != 'sealed/outcome.bin'}
+    with pytest.raises(ValueError, match='strict_hash'):
+        evidence.impact(before, scan)
+    with pytest.raises(ValueError, match='strict_hash'):
+        evidence.impact(scan, before)
+
+
+def test_added_amendment_reaches_only_its_scientific_dependents(tmp_path):
+    evidence = load_tool('evidence_index')
+    root = tmp_path / 'project'
+    build_fixture(root)
+    write_reviewed_report(root)
+    index = fixture_index()
+    before = evidence.snapshot_index(index, root)
+    report_before = (root / 'REPORT.md').read_bytes()
+    amendment = root / 'AMENDMENT.md'
+    amendment.write_text('Correction: unchanged scores belong to exposed development, not donor confirmation.\n', encoding='utf-8')
+    index['objects'].append({'id': 'correction:scope', 'kind': 'correction', 'status': 'confirmed_scope_amendment',
+                             'stage': 'exploration', 'sources': [{'path': 'AMENDMENT.md'}]})
+    index['relations'].append({'from': 'correction:scope', 'to': 'claim:mean', 'type': 'supersedes'})
+    after = evidence.snapshot_index(index, root)
+    result = evidence.impact(before, after)
+    assert set(result['direct_changes']) == {'claim:mean', 'correction:scope'}
+    assert {'decision:continue', 'report:current'} <= set(result['review_required'])
+    assert {'note:unrelated', 'exp:negative', 'exp:interrupted'} <= set(result['reusable_objects'])
+    assert (root / 'REPORT.md').read_bytes() == report_before
+    # Impact requests review; it does not apply the amendment or change the scientific status.
+    assert next(obj for obj in after['objects'] if obj['id'] == 'claim:mean')['status'] == 'corrected_development_only'
+
+
+def test_repeatable_io_benchmark_reports_measured_work_without_touching_sources(tmp_path):
+    root = tmp_path / 'project'
+    build_fixture(root)
+    write_reviewed_report(root)
+    index_path = tmp_path / 'index.json'
+    index_path.write_text(json.dumps(fixture_index()), encoding='utf-8')
+    before = {p.relative_to(root).as_posix(): (p.stat().st_size, p.stat().st_mtime_ns)
+              for p in root.rglob('*') if p.is_file()}
+    result = subprocess.run([sys.executable, str(SKILL / 'scripts/benchmark_organization.py'),
+                             '--index', str(index_path), '--root', str(root)],
+                            capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    runs = json.loads(result.stdout)['runs']
+    assert [run['mode'] for run in runs] == ['strict_initial', 'strict_repeat', 'metadata_scan']
+    for run in runs[:2]:
+        assert run['metrics']['payload_bytes_read'] > 0
+        assert run['metrics']['sha256_computations'] > 0
+        assert run['seconds'] >= 0
+    assert runs[0]['metrics']['payload_bytes_read'] == runs[1]['metrics']['payload_bytes_read']
+    assert runs[2]['metrics']['payload_bytes_read'] == runs[2]['metrics']['sha256_computations'] == 0
+    assert runs[2]['candidate_sources']
+    assert before == {p.relative_to(root).as_posix(): (p.stat().st_size, p.stat().st_mtime_ns)
+                      for p in root.rglob('*') if p.is_file()}
+
+
+@pytest.mark.parametrize('with_baseline', [False, True])
+def test_operations_benchmark_compares_explicit_local_implementation_on_unchanged_plan(with_baseline):
+    command = [sys.executable, str(SKILL / 'scripts/benchmark_organization.py'),
+               '--operations', '8', '--repeats', '2']
+    if with_baseline:
+        command.extend(['--baseline-ops', str(SKILL / 'scripts/organization_ops.py')])
+    result = subprocess.run(command, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    report = json.loads(result.stdout)
+    assert report['mode'] == 'operations_dry_run'
+    assert len(report['runs']) == (4 if with_baseline else 2)
+    if with_baseline:
+        assert report['implementations']['current']['sha256'] == report['implementations']['baseline']['sha256']
+    for run in report['runs']:
+        assert run['operations'] == 8
+        assert run['plan_equal'] and run['workspace_unchanged']
+        assert run['seconds'] >= 0
+
+
+@pytest.mark.parametrize('arguments', [
+    ['--operations', '8', '--index', 'never-open.json'],
+    ['--operations', '8', '--root', 'never-read-project'],
+    ['--index', 'never-open.json', '--root', 'never-read-project', '--baseline-ops', 'never-import.py'],
+    ['--index', 'never-open.json'],
+    ['--operations', '0'],
+    ['--operations', '8', '--repeats', '0'],
+])
+def test_benchmark_rejects_invalid_mode_combinations_before_reading_projects(arguments):
+    result = subprocess.run([sys.executable, str(SKILL / 'scripts/benchmark_organization.py'), *arguments],
+                            capture_output=True, text=True)
+    assert result.returncode == 2
+    assert 'Traceback' not in result.stderr
+    assert result.stdout == ''
