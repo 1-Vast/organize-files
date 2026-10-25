@@ -1,0 +1,4595 @@
+{
+  "schema_version": 1,
+  "runs": [
+    {
+      "run_id": "run-001",
+      "pair_id": "complex-2",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 322.89988820000144,
+      "worker_seconds": 298.81806589999906,
+      "review_seconds": 23.97175540000171,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 257702,
+        "cached_input_tokens": 190208,
+        "output_tokens": 9676
+      },
+      "worker_tokens": {
+        "input_tokens": 206723,
+        "cached_input_tokens": 171904,
+        "output_tokens": 9361
+      },
+      "review_tokens": {
+        "input_tokens": 50979,
+        "cached_input_tokens": 18304,
+        "output_tokens": 315
+      },
+      "worker_tool_calls": 5,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-002",
+      "pair_id": "complex-2",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 310.6806222000014,
+      "worker_seconds": 284.64716329999646,
+      "review_seconds": 25.95795189999626,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 246232,
+        "cached_input_tokens": 174208,
+        "output_tokens": 9271
+      },
+      "worker_tokens": {
+        "input_tokens": 195877,
+        "cached_input_tokens": 174208,
+        "output_tokens": 8925
+      },
+      "review_tokens": {
+        "input_tokens": 50355,
+        "cached_input_tokens": 0,
+        "output_tokens": 346
+      },
+      "worker_tool_calls": 6,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-003",
+      "pair_id": "complex-5",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 338.4628445000053,
+      "worker_seconds": 316.3850250999967,
+      "review_seconds": 22.03240050000022,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 331495,
+        "cached_input_tokens": 251776,
+        "output_tokens": 10431
+      },
+      "worker_tokens": {
+        "input_tokens": 280266,
+        "cached_input_tokens": 251776,
+        "output_tokens": 10106
+      },
+      "review_tokens": {
+        "input_tokens": 51229,
+        "cached_input_tokens": 0,
+        "output_tokens": 325
+      },
+      "worker_tool_calls": 8,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-004",
+      "pair_id": "complex-5",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 329.4931990999976,
+      "worker_seconds": 306.7174792000005,
+      "review_seconds": 22.701216500005103,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 270569,
+        "cached_input_tokens": 198528,
+        "output_tokens": 9807
+      },
+      "worker_tokens": {
+        "input_tokens": 219446,
+        "cached_input_tokens": 180224,
+        "output_tokens": 9475
+      },
+      "review_tokens": {
+        "input_tokens": 51123,
+        "cached_input_tokens": 18304,
+        "output_tokens": 332
+      },
+      "worker_tool_calls": 5,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-005",
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 195.1775359000021,
+      "worker_seconds": 177.9536810999998,
+      "review_seconds": 17.160296399997605,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 249136,
+        "cached_input_tokens": 173568,
+        "output_tokens": 6592
+      },
+      "worker_tokens": {
+        "input_tokens": 200594,
+        "cached_input_tokens": 173568,
+        "output_tokens": 6325
+      },
+      "review_tokens": {
+        "input_tokens": 48542,
+        "cached_input_tokens": 0,
+        "output_tokens": 267
+      },
+      "worker_tool_calls": 6,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-006",
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 1,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": null,
+      "worker_seconds": null,
+      "review_seconds": null,
+      "repair_seconds": null,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0
+      },
+      "worker_tool_calls": 5,
+      "duration_complete": false,
+      "duration_lower_bounds": {
+        "end_to_end_seconds": 55.79427242279053,
+        "worker_seconds": 55.79427242279053,
+        "review_seconds": 0,
+        "repair_seconds": 0
+      },
+      "execution_status": "externally_interrupted"
+    },
+    {
+      "run_id": "run-007",
+      "pair_id": "first-3",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 138.2053678999946,
+      "worker_seconds": 118.65144149999833,
+      "review_seconds": 19.451457199997094,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 191573,
+        "cached_input_tokens": 151168,
+        "output_tokens": 4288
+      },
+      "worker_tokens": {
+        "input_tokens": 149467,
+        "cached_input_tokens": 132864,
+        "output_tokens": 4021
+      },
+      "review_tokens": {
+        "input_tokens": 42106,
+        "cached_input_tokens": 18304,
+        "output_tokens": 267
+      },
+      "worker_tool_calls": 4,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-008",
+      "pair_id": "first-3",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 140.1353358999986,
+      "worker_seconds": 121.96722769999906,
+      "review_seconds": 18.102581899998768,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 192543,
+        "cached_input_tokens": 151168,
+        "output_tokens": 4468
+      },
+      "worker_tokens": {
+        "input_tokens": 150039,
+        "cached_input_tokens": 132864,
+        "output_tokens": 4199
+      },
+      "review_tokens": {
+        "input_tokens": 42504,
+        "cached_input_tokens": 18304,
+        "output_tokens": 269
+      },
+      "worker_tool_calls": 4,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-009",
+      "pair_id": "complex-3",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 1,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": null,
+      "worker_seconds": null,
+      "review_seconds": null,
+      "repair_seconds": null,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0
+      },
+      "worker_tool_calls": 1,
+      "duration_complete": false,
+      "duration_lower_bounds": {
+        "end_to_end_seconds": 11.272021532058716,
+        "worker_seconds": 11.272021532058716,
+        "review_seconds": 0,
+        "repair_seconds": 0
+      },
+      "execution_status": "externally_interrupted"
+    },
+    {
+      "run_id": "run-010",
+      "pair_id": "complex-3",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 619.6563878000015,
+      "worker_seconds": 529.5218693999996,
+      "review_seconds": 90.00908259999414,
+      "repair_seconds": 205.03961439999694,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": 93513,
+        "cached_input_tokens": 0,
+        "output_tokens": 1746
+      },
+      "worker_tool_calls": 7,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-011",
+      "pair_id": "complex-4",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 466.76224419999926,
+      "worker_seconds": 414.59867429999576,
+      "review_seconds": 52.048773900001834,
+      "repair_seconds": 79.6427349000005,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": 101829,
+        "cached_input_tokens": 0,
+        "output_tokens": 688
+      },
+      "worker_tool_calls": 8,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-012",
+      "pair_id": "complex-4",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 367.32800300000235,
+      "worker_seconds": 352.9333841999978,
+      "review_seconds": 14.298531500004174,
+      "repair_seconds": 14.677951700003177,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 6,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-013",
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": true,
+      "attempts": 1,
+      "first_pass": true,
+      "content_review_passed": true,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 189.0715624000004,
+      "worker_seconds": 167.95316229999298,
+      "review_seconds": 21.072548000003735,
+      "repair_seconds": 0,
+      "tokens": {
+        "input_tokens": 302592,
+        "cached_input_tokens": 211328,
+        "output_tokens": 7256
+      },
+      "worker_tokens": {
+        "input_tokens": 254805,
+        "cached_input_tokens": 211328,
+        "output_tokens": 6983
+      },
+      "review_tokens": {
+        "input_tokens": 47787,
+        "cached_input_tokens": 0,
+        "output_tokens": 273
+      },
+      "worker_tool_calls": 6,
+      "execution_status": "passed"
+    },
+    {
+      "run_id": "run-014",
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 29.50506260000111,
+      "worker_seconds": 15.183050900006492,
+      "review_seconds": 14.232074700004887,
+      "repair_seconds": 13.431669500008866,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-015",
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 27.033743500003766,
+      "worker_seconds": 13.267997900002229,
+      "review_seconds": 13.682773100001214,
+      "repair_seconds": 13.431856200004404,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-016",
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 26.37722410000424,
+      "worker_seconds": 13.246107000006305,
+      "review_seconds": 13.051874299999326,
+      "repair_seconds": 13.181707900002948,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-017",
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 26.366102200001478,
+      "worker_seconds": 12.894242099995608,
+      "review_seconds": 13.389752800001588,
+      "repair_seconds": 13.153862199993455,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-018",
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 26.3732588999992,
+      "worker_seconds": 12.925089399999706,
+      "review_seconds": 13.380082499999844,
+      "repair_seconds": 13.373348900000565,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-019",
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 29.110551500001748,
+      "worker_seconds": 14.505407399999967,
+      "review_seconds": 14.536147899998468,
+      "repair_seconds": 14.084765899999184,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-020",
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 27.92844409999816,
+      "worker_seconds": 13.876612400003069,
+      "review_seconds": 13.987491300002148,
+      "repair_seconds": 13.80383360000269,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-021",
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 29.010054599995783,
+      "worker_seconds": 14.066404199998942,
+      "review_seconds": 14.884433999992325,
+      "repair_seconds": 13.96247929999663,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-022",
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 28.724377200000163,
+      "worker_seconds": 14.323960199995781,
+      "review_seconds": 14.327729799995723,
+      "repair_seconds": 14.955326700001024,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-023",
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 28.313350399999763,
+      "worker_seconds": 13.090923100004147,
+      "review_seconds": 15.14078470000095,
+      "repair_seconds": 13.92221440000867,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-024",
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 34.45373010000185,
+      "worker_seconds": 19.43421240000316,
+      "review_seconds": 14.95796889999474,
+      "repair_seconds": 19.075358099995356,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-025",
+      "pair_id": "first-1",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 28.73517240000365,
+      "worker_seconds": 14.123853099998087,
+      "review_seconds": 14.547152500002994,
+      "repair_seconds": 14.462451400002465,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    },
+    {
+      "run_id": "run-026",
+      "pair_id": "first-1",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+      "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "attempts": 2,
+      "first_pass": false,
+      "content_review_passed": false,
+      "operational_gates_passed": true,
+      "end_to_end_seconds": 33.86960619999445,
+      "worker_seconds": 17.076875899998413,
+      "review_seconds": 16.729787499993108,
+      "repair_seconds": 14.358776999994006,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "review_tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0,
+      "execution_status": "resource_limited"
+    }
+  ],
+  "groups": [
+    {
+      "stage": "complex",
+      "arm": "baseline",
+      "runs": 4,
+      "first_pass": 2,
+      "final_pass": 2,
+      "content_review_pass": 2,
+      "operational_gates_pass": 4,
+      "end_to_end_seconds_all_runs": {
+        "observed": 3,
+        "missing": 1,
+        "median": 329.4931990999976,
+        "min": 322.89988820000144,
+        "max": 367.32800300000235
+      },
+      "worker_seconds_all_runs": {
+        "observed": 3,
+        "missing": 1,
+        "median": 306.7174792000005,
+        "min": 298.81806589999906,
+        "max": 352.9333841999978
+      },
+      "repair_seconds_all_runs": {
+        "observed": 3,
+        "missing": 1,
+        "median": 0,
+        "min": 0,
+        "max": 14.677951700003177
+      },
+      "input_tokens_all_runs": {
+        "observed": 2,
+        "missing": 2,
+        "median": 264135.5,
+        "min": 257702,
+        "max": 270569
+      }
+    },
+    {
+      "stage": "complex",
+      "arm": "candidate",
+      "runs": 4,
+      "first_pass": 2,
+      "final_pass": 4,
+      "content_review_pass": 4,
+      "operational_gates_pass": 4,
+      "end_to_end_seconds_all_runs": {
+        "observed": 4,
+        "missing": 0,
+        "median": 402.6125443500023,
+        "min": 310.6806222000014,
+        "max": 619.6563878000015
+      },
+      "worker_seconds_all_runs": {
+        "observed": 4,
+        "missing": 0,
+        "median": 365.49184969999624,
+        "min": 284.64716329999646,
+        "max": 529.5218693999996
+      },
+      "repair_seconds_all_runs": {
+        "observed": 4,
+        "missing": 0,
+        "median": 39.82136745000025,
+        "min": 0,
+        "max": 205.03961439999694
+      },
+      "input_tokens_all_runs": {
+        "observed": 2,
+        "missing": 2,
+        "median": 288863.5,
+        "min": 246232,
+        "max": 331495
+      }
+    },
+    {
+      "stage": "first",
+      "arm": "baseline",
+      "runs": 2,
+      "first_pass": 1,
+      "final_pass": 1,
+      "content_review_pass": 1,
+      "operational_gates_pass": 2,
+      "end_to_end_seconds_all_runs": {
+        "observed": 2,
+        "missing": 0,
+        "median": 83.47027014999912,
+        "min": 28.73517240000365,
+        "max": 138.2053678999946
+      },
+      "worker_seconds_all_runs": {
+        "observed": 2,
+        "missing": 0,
+        "median": 66.3876472999982,
+        "min": 14.123853099998087,
+        "max": 118.65144149999833
+      },
+      "repair_seconds_all_runs": {
+        "observed": 2,
+        "missing": 0,
+        "median": 7.231225700001232,
+        "min": 0,
+        "max": 14.462451400002465
+      },
+      "input_tokens_all_runs": {
+        "observed": 1,
+        "missing": 1,
+        "median": 191573,
+        "min": 191573,
+        "max": 191573
+      }
+    },
+    {
+      "stage": "first",
+      "arm": "candidate",
+      "runs": 2,
+      "first_pass": 1,
+      "final_pass": 1,
+      "content_review_pass": 1,
+      "operational_gates_pass": 2,
+      "end_to_end_seconds_all_runs": {
+        "observed": 2,
+        "missing": 0,
+        "median": 87.00247104999653,
+        "min": 33.86960619999445,
+        "max": 140.1353358999986
+      },
+      "worker_seconds_all_runs": {
+        "observed": 2,
+        "missing": 0,
+        "median": 69.52205179999874,
+        "min": 17.076875899998413,
+        "max": 121.96722769999906
+      },
+      "repair_seconds_all_runs": {
+        "observed": 2,
+        "missing": 0,
+        "median": 7.179388499997003,
+        "min": 0,
+        "max": 14.358776999994006
+      },
+      "input_tokens_all_runs": {
+        "observed": 1,
+        "missing": 1,
+        "median": 192543,
+        "min": 192543,
+        "max": 192543
+      }
+    },
+    {
+      "stage": "incremental",
+      "arm": "baseline",
+      "runs": 4,
+      "first_pass": 1,
+      "final_pass": 1,
+      "content_review_pass": 1,
+      "operational_gates_pass": 4,
+      "end_to_end_seconds_all_runs": {
+        "observed": 3,
+        "missing": 1,
+        "median": 26.37722410000424,
+        "min": 26.366102200001478,
+        "max": 189.0715624000004
+      },
+      "worker_seconds_all_runs": {
+        "observed": 3,
+        "missing": 1,
+        "median": 13.246107000006305,
+        "min": 12.894242099995608,
+        "max": 167.95316229999298
+      },
+      "repair_seconds_all_runs": {
+        "observed": 3,
+        "missing": 1,
+        "median": 13.153862199993455,
+        "min": 0,
+        "max": 13.181707900002948
+      },
+      "input_tokens_all_runs": {
+        "observed": 1,
+        "missing": 3,
+        "median": 302592,
+        "min": 302592,
+        "max": 302592
+      }
+    },
+    {
+      "stage": "incremental",
+      "arm": "candidate",
+      "runs": 4,
+      "first_pass": 1,
+      "final_pass": 1,
+      "content_review_pass": 1,
+      "operational_gates_pass": 4,
+      "end_to_end_seconds_all_runs": {
+        "observed": 4,
+        "missing": 0,
+        "median": 28.26940305000244,
+        "min": 26.3732588999992,
+        "max": 195.1775359000021
+      },
+      "worker_seconds_all_runs": {
+        "observed": 4,
+        "missing": 0,
+        "median": 14.22552440000436,
+        "min": 12.925089399999706,
+        "max": 177.9536810999998
+      },
+      "repair_seconds_all_runs": {
+        "observed": 4,
+        "missing": 0,
+        "median": 13.402509200004715,
+        "min": 0,
+        "max": 13.431856200004404
+      },
+      "input_tokens_all_runs": {
+        "observed": 1,
+        "missing": 3,
+        "median": 249136,
+        "min": 249136,
+        "max": 249136
+      }
+    },
+    {
+      "stage": "unchanged",
+      "arm": "baseline",
+      "runs": 3,
+      "first_pass": 0,
+      "final_pass": 0,
+      "content_review_pass": 0,
+      "operational_gates_pass": 3,
+      "end_to_end_seconds_all_runs": {
+        "observed": 3,
+        "missing": 0,
+        "median": 29.110551500001748,
+        "min": 29.010054599995783,
+        "max": 34.45373010000185
+      },
+      "worker_seconds_all_runs": {
+        "observed": 3,
+        "missing": 0,
+        "median": 14.505407399999967,
+        "min": 14.066404199998942,
+        "max": 19.43421240000316
+      },
+      "repair_seconds_all_runs": {
+        "observed": 3,
+        "missing": 0,
+        "median": 14.084765899999184,
+        "min": 13.96247929999663,
+        "max": 19.075358099995356
+      },
+      "input_tokens_all_runs": {
+        "observed": 0,
+        "missing": 3,
+        "median": null,
+        "min": null,
+        "max": null
+      }
+    },
+    {
+      "stage": "unchanged",
+      "arm": "candidate",
+      "runs": 3,
+      "first_pass": 0,
+      "final_pass": 0,
+      "content_review_pass": 0,
+      "operational_gates_pass": 3,
+      "end_to_end_seconds_all_runs": {
+        "observed": 3,
+        "missing": 0,
+        "median": 28.313350399999763,
+        "min": 27.92844409999816,
+        "max": 28.724377200000163
+      },
+      "worker_seconds_all_runs": {
+        "observed": 3,
+        "missing": 0,
+        "median": 13.876612400003069,
+        "min": 13.090923100004147,
+        "max": 14.323960199995781
+      },
+      "repair_seconds_all_runs": {
+        "observed": 3,
+        "missing": 0,
+        "median": 13.92221440000867,
+        "min": 13.80383360000269,
+        "max": 14.955326700001024
+      },
+      "input_tokens_all_runs": {
+        "observed": 0,
+        "missing": 3,
+        "median": null,
+        "min": null,
+        "max": null
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "pair_id": "complex-2",
+      "stage": "complex",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": -12.219266000000061,
+      "input_tokens_difference": -11470
+    },
+    {
+      "pair_id": "complex-3",
+      "stage": "complex",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "complex-4",
+      "stage": "complex",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "complex-5",
+      "stage": "complex",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": 8.969645400007721,
+      "input_tokens_difference": 60926
+    },
+    {
+      "pair_id": "first-1",
+      "stage": "first",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "first-3",
+      "stage": "first",
+      "eligible": true,
+      "reason": null,
+      "seconds_difference": 1.9299680000040098,
+      "input_tokens_difference": 970
+    },
+    {
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    },
+    {
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "eligible": false,
+      "reason": "quality_gate_failed",
+      "seconds_difference": null,
+      "input_tokens_difference": null
+    }
+  ],
+  "scope": "Incomplete resource-limited study. Core runs/groups cover attempted pairs with both arms. Unpaired attempted arms and unstarted scheduled arms remain explicit below. All incurred calls, failures, repair costs and missing measurements retained; quota-rejection durations are failure costs, not times to complete research organization. No four-stage performance conclusion.",
+  "schedule_ledger": [
+    {
+      "run_id": "run-001",
+      "pair_id": "complex-2",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-002",
+      "pair_id": "complex-2",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-003",
+      "pair_id": "complex-5",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-004",
+      "pair_id": "complex-5",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-005",
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-006",
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "externally_interrupted",
+      "passed": false
+    },
+    {
+      "run_id": "run-007",
+      "pair_id": "first-3",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-008",
+      "pair_id": "first-3",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-009",
+      "pair_id": "complex-3",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "externally_interrupted",
+      "passed": false
+    },
+    {
+      "run_id": "run-010",
+      "pair_id": "complex-3",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-011",
+      "pair_id": "complex-4",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-012",
+      "pair_id": "complex-4",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-013",
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "run_id": "run-014",
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-015",
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-016",
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-017",
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-018",
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-019",
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-020",
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-021",
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-022",
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-023",
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-024",
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-025",
+      "pair_id": "first-1",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-026",
+      "pair_id": "first-1",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-027",
+      "pair_id": "first-2",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-028",
+      "pair_id": "first-2",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-029",
+      "pair_id": "unchanged-4",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "resource_limited",
+      "passed": false
+    },
+    {
+      "run_id": "run-030",
+      "pair_id": "unchanged-4",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-031",
+      "pair_id": "incremental-3",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-032",
+      "pair_id": "incremental-3",
+      "stage": "incremental",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-033",
+      "pair_id": "complex-1",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-034",
+      "pair_id": "complex-1",
+      "stage": "complex",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-035",
+      "pair_id": "first-5",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-036",
+      "pair_id": "first-5",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-037",
+      "pair_id": "unchanged-3",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-038",
+      "pair_id": "unchanged-3",
+      "stage": "unchanged",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-039",
+      "pair_id": "first-4",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "candidate",
+      "status": "not_started_resources_unavailable"
+    },
+    {
+      "run_id": "run-040",
+      "pair_id": "first-4",
+      "stage": "first",
+      "case": "real-literature-subset-01",
+      "arm": "baseline",
+      "status": "not_started_resources_unavailable"
+    }
+  ],
+  "schedule_status_counts": {
+    "passed": 10,
+    "externally_interrupted": 2,
+    "resource_limited": 16,
+    "not_started_resources_unavailable": 12
+  },
+  "planned_tasks": 40,
+  "attempted_tasks": 28,
+  "unpaired_attempted": [
+    {
+      "run_id": "run-027",
+      "pair_id": "first-2",
+      "stage": "first",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "execution_status": "resource_limited",
+      "duration_complete": false,
+      "end_to_end_seconds": null,
+      "seconds_lower_bound": 52.85166846725042,
+      "attempts": 2,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0
+    },
+    {
+      "run_id": "run-029",
+      "pair_id": "unchanged-4",
+      "stage": "unchanged",
+      "arm": "baseline",
+      "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+      "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "passed": false,
+      "execution_status": "resource_limited",
+      "duration_complete": false,
+      "end_to_end_seconds": null,
+      "seconds_lower_bound": 47.73831671578955,
+      "attempts": 2,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls": 0
+    }
+  ],
+  "protocol": {
+    "schema_version": 1,
+    "seed": 20261026,
+    "cases": 1,
+    "paired_repeats_per_stage": 5,
+    "stages": [
+      "first",
+      "unchanged",
+      "incremental",
+      "complex"
+    ],
+    "trials": 40,
+    "model": "gpt-6-astra",
+    "reasoning": "high",
+    "cli_version": "0.159.2",
+    "call_timeout_seconds": 360,
+    "max_repair_attempts": 1,
+    "concurrent_pairs": 2,
+    "runner_sha256": "8f3950f87826f6d9d57b75760923e8986aa4881f2ddee3b884c8253d7d47ded7",
+    "runner_adjustments": [
+      "Real held-out document subset and four-stage schedule",
+      "Explicit nonreport source path/byte retention gate, matching public instructions",
+      "External runner retains the original skill checkout guard as an absolute location",
+      "Symmetric parent-session worker permissions on initial/repair calls avoid Windows scratch ACL incompatibility.",
+      "Absolute-path/workdir guidance removes observed shell-startup cwd ambiguity.",
+      "Remove generic movement permission that contradicted stage-specific source path preservation.",
+      "Calibrated 360-second call budget before formal trials; pilot used 240 seconds."
+    ],
+    "raw_material_policy": "External only; no source text, original paths or hidden answers published",
+    "attribution_limit": "Bundled document change; no component ablation or general speedup inference",
+    "repeated_read_measurement": null,
+    "repeated_read_limit": "No OS-level read instrumentation; command audit is separate, not exact file I/O.",
+    "worker_permissions": "Same as parent session, danger-full-access in both arms and initial/repair calls. Scope is prompt-limited to copied project, skill and scratch, with separate command/path audit; not OS-isolated from private answers or original project.",
+    "evaluator_permissions": "read-only; all evidence transported in prompt, no tool use permitted",
+    "source_preservation": "Every nonreport source path and byte hash must remain unchanged.",
+    "calibration_policy": "Earlier cancelled pilot remains separate with all known and missing costs, not silently dropped or mixed into this formal cohort.",
+    "independent_projects": 1,
+    "input_scope": "Evaluator-assembled subset of authentic literature work: native copies, traceable excerpts and explicitly derived reports.",
+    "completion_status": "Incomplete: quota exhausted; not a completed40trial study.",
+    "generalization_limit": "One subset, not many independentprojects or a full original experimentalproject.",
+    "oracle_manifest_sha256": "6903ead188c43cd62e3ad89d6c576d12936908ce60d2c954def21c012954a8d5"
+  },
+  "calibration": {
+    "pilot_reason": "Separate cancelled calibration: shell cwd interference, scratch ACL failures and generic movement permission conflicting with stage instructions. Both arms affected. Formal protocol repaired before measurement.",
+    "pilot_runs": [
+      {
+        "run_id": "run-001",
+        "stage": "complex",
+        "finished": true,
+        "passed": false,
+        "end_to_end_seconds": 565.7986819999933,
+        "calls": [
+          {
+            "role": "worker",
+            "call": "worker-1",
+            "seconds": 240.58231620000151,
+            "observed_seconds_lower_bound": null,
+            "returncode": 1,
+            "usage": null,
+            "tool_calls": 4,
+            "trace_sha256": "6310dc29efebfc231fbb94d72e9c3ecb75fdf350f7749eb61fce366afda6020b"
+          },
+          {
+            "role": "worker",
+            "call": "worker-2",
+            "seconds": 240.55015899999853,
+            "observed_seconds_lower_bound": null,
+            "returncode": 1,
+            "usage": null,
+            "tool_calls": 3,
+            "trace_sha256": "a0c9c141315d8ccf45d4b7d99183783681402ba2068e81b7193516d9213c9bd3"
+          },
+          {
+            "role": "evaluation",
+            "call": "review-1",
+            "seconds": 60.957313999999315,
+            "observed_seconds_lower_bound": null,
+            "returncode": 0,
+            "usage": {
+              "input_tokens": 45472,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1378,
+              "reasoning_output_tokens": 469
+            },
+            "tool_calls": 0,
+            "trace_sha256": "08e366be567d349c2aeac8baa969f58dead0853e9419e2488b7183863360caa8"
+          },
+          {
+            "role": "evaluation",
+            "call": "review-2",
+            "seconds": 23.594465899994248,
+            "observed_seconds_lower_bound": null,
+            "returncode": 0,
+            "usage": {
+              "input_tokens": 50895,
+              "cached_input_tokens": 13440,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 323,
+              "reasoning_output_tokens": 171
+            },
+            "tool_calls": 0,
+            "trace_sha256": "4ca73eea435b34e9ba1a8881427dd60b3b079aa7e7a9674e86369919bb16b6ea"
+          }
+        ]
+      },
+      {
+        "run_id": "run-002",
+        "stage": "complex",
+        "finished": false,
+        "passed": false,
+        "end_to_end_seconds": null,
+        "calls": [
+          {
+            "role": "worker",
+            "call": "worker-1",
+            "seconds": 240.57532480000373,
+            "observed_seconds_lower_bound": null,
+            "returncode": 1,
+            "usage": null,
+            "tool_calls": 7,
+            "trace_sha256": "969c6e90e9f80c264fecb0ccc69c971818ef8779a382e3dfd6f2bd9777b775b0"
+          },
+          {
+            "role": "worker",
+            "call": "worker-2",
+            "seconds": null,
+            "observed_seconds_lower_bound": 0.6533434391021729,
+            "returncode": null,
+            "usage": null,
+            "tool_calls": 0,
+            "trace_sha256": "fff2cfb2dfe97b06d9eab7f97ff651e03a673561276c182f08ac1f93ff35e40e"
+          },
+          {
+            "role": "evaluation",
+            "call": "review-1",
+            "seconds": 49.92782939999597,
+            "observed_seconds_lower_bound": null,
+            "returncode": 0,
+            "usage": {
+              "input_tokens": 45598,
+              "cached_input_tokens": 18304,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1191,
+              "reasoning_output_tokens": 288
+            },
+            "tool_calls": 0,
+            "trace_sha256": "9eac5ba5e7cb2df2017d4cab830a2e94a59b197cc50712ff0310271f1ecf4378"
+          }
+        ]
+      },
+      {
+        "run_id": "run-003",
+        "stage": "complex",
+        "finished": true,
+        "passed": true,
+        "end_to_end_seconds": 533.950497400001,
+        "calls": [
+          {
+            "role": "worker",
+            "call": "worker-1",
+            "seconds": 240.55717939999886,
+            "observed_seconds_lower_bound": null,
+            "returncode": 1,
+            "usage": null,
+            "tool_calls": 5,
+            "trace_sha256": "1aab660387f230377d872051ad656d5c5bcae21b65be55181ea9f84b371d31d3"
+          },
+          {
+            "role": "worker",
+            "call": "worker-2",
+            "seconds": 206.20535359999485,
+            "observed_seconds_lower_bound": null,
+            "returncode": 0,
+            "usage": {
+              "input_tokens": 283066,
+              "cached_input_tokens": 262528,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 7493,
+              "reasoning_output_tokens": 594
+            },
+            "tool_calls": 3,
+            "trace_sha256": "6676d0f3aad494465a4854a3c018a36b40eeaf3e0c5797017beda1c7bfbf561c"
+          },
+          {
+            "role": "evaluation",
+            "call": "review-1",
+            "seconds": 58.96604379999917,
+            "observed_seconds_lower_bound": null,
+            "returncode": 0,
+            "usage": {
+              "input_tokens": 45472,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1283,
+              "reasoning_output_tokens": 354
+            },
+            "tool_calls": 0,
+            "trace_sha256": "b17632eee6270c6af17d2a73e54853bb5b01bc8f3a8d51aa8a4c1f4a7079c537"
+          },
+          {
+            "role": "evaluation",
+            "call": "review-2",
+            "seconds": 28.11845230000472,
+            "observed_seconds_lower_bound": null,
+            "returncode": 0,
+            "usage": {
+              "input_tokens": 49574,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 465,
+              "reasoning_output_tokens": 294
+            },
+            "tool_calls": 0,
+            "trace_sha256": "3eb99aca85fc1f3e73d23fd06f76cc9dcafd841e5f6f6c6babb39eca53e85817"
+          }
+        ]
+      },
+      {
+        "run_id": "run-004",
+        "stage": "complex",
+        "finished": false,
+        "passed": false,
+        "end_to_end_seconds": null,
+        "calls": [
+          {
+            "role": "worker",
+            "call": "worker-1",
+            "seconds": 240.62203800000134,
+            "observed_seconds_lower_bound": null,
+            "returncode": 1,
+            "usage": null,
+            "tool_calls": 6,
+            "trace_sha256": "c7f1b3a7c4f02e319c5523c3b82927469e35ea601dc0cfa5cd080eae156c4319"
+          },
+          {
+            "role": "worker",
+            "call": "worker-2",
+            "seconds": null,
+            "observed_seconds_lower_bound": 0.617436408996582,
+            "returncode": null,
+            "usage": null,
+            "tool_calls": 0,
+            "trace_sha256": "bc18ef9d83ad58199dbd5ccf0403442aac18574222756439bb6698c0110c2ffc"
+          },
+          {
+            "role": "evaluation",
+            "call": "review-1",
+            "seconds": 47.133400200000324,
+            "observed_seconds_lower_bound": null,
+            "returncode": 0,
+            "usage": {
+              "input_tokens": 45598,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 1038,
+              "reasoning_output_tokens": 258
+            },
+            "tool_calls": 0,
+            "trace_sha256": "3a39b138885cd2942d5e3969b83d65dc79bc66c3e63cf580e67eac8c11442e02"
+          }
+        ]
+      }
+    ],
+    "pilot_total_known_call_seconds": 1677.7898765999926,
+    "pilot_missing_call_durations": 2,
+    "pilot_usage_complete": false,
+    "runtime_smoke": [
+      {
+        "seconds": 17.12167220000265,
+        "returncode": 0,
+        "usage": {
+          "input_tokens": 39691,
+          "cached_input_tokens": 33152,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 122,
+          "reasoning_output_tokens": 0
+        },
+        "tool_calls": 1
+      },
+      {
+        "seconds": 14.476828799997747,
+        "returncode": 0,
+        "usage": {
+          "input_tokens": 79901,
+          "cached_input_tokens": 72832,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 275,
+          "reasoning_output_tokens": 22
+        },
+        "tool_calls": 1
+      }
+    ],
+    "limits": "Calibration and smoke costs are disclosed separately, not silently dropped and not mixed into formal paired efficacy statistics."
+  },
+  "trace_hashes": [
+    {
+      "run_id": "run-001",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "b3e642cb97783fcd33eb2caf1d926d5a83bd4b1e0eaf86ac235c848c0222302a"
+    },
+    {
+      "run_id": "run-001",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "a39a089b36a8328908b497f049226245a609113d53e71990ae994c0e8fe08580"
+    },
+    {
+      "run_id": "run-002",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "3f980645700502477c86c2636d7b5cc63a70eebd2ce03d970cb306b3bdd4ad2a"
+    },
+    {
+      "run_id": "run-002",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "29aca1a0eb91338e6d6d78b1b217da8f2d9e9beda17096e5fb5fb3210a241ad1"
+    },
+    {
+      "run_id": "run-003",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "a68fc747c70e9c116081d77bcac00a2a503af59b7003efba527dfebe366aea16"
+    },
+    {
+      "run_id": "run-003",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "6089777af861fc74f0f03b370a4a337b1d59013df6027f7b4fc738028ddffd87"
+    },
+    {
+      "run_id": "run-004",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "4e224148daf7aed40dd50a07ba2029ffae0be3f0be014eb0f63218c61d8d1d5f"
+    },
+    {
+      "run_id": "run-004",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "3058d31e3d007bb7347aa66fcba7c284f270bce65cadcbb202e8010b6f4cae82"
+    },
+    {
+      "run_id": "run-005",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "807b66880c0267b13ec5a6f6d427c39812b851c496b62c85f80abadde069ab6f"
+    },
+    {
+      "run_id": "run-005",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "6cc729a9a275a0aee43f168fc2672ffe29e0c63ea616b37f07fa2ce4c6fc309d"
+    },
+    {
+      "run_id": "run-006",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "17cf4d9ec3e9645d40aa2398d6fc33e414a4ad37ceaa0cccd11c85e8c37b8b9d"
+    },
+    {
+      "run_id": "run-006",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": true
+    },
+    {
+      "run_id": "run-007",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "82cb9854a0e9c8629ed185cb08f5997d963873bae8b2e645860a03a6d07a498e"
+    },
+    {
+      "run_id": "run-007",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "01b48d0e49541ae6d15d8ddfcdf0c1c294619000c758a2375c7d2bd7b1f4098b"
+    },
+    {
+      "run_id": "run-008",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "79adf45eada9f3a1ae6d182575db72e5a0e5fa3e1cfd95ede67ae2976997baf3"
+    },
+    {
+      "run_id": "run-008",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "e1f9da5074180a32cf5b3ca768da58b88f2cd65adfa0faedcfeb5a6dc2cb5782"
+    },
+    {
+      "run_id": "run-009",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "a12788d3486638377fa148479ffff6a80ce89e453355a24e58caf4fb8915ece9"
+    },
+    {
+      "run_id": "run-009",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": true
+    },
+    {
+      "run_id": "run-010",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "ef4db3a4f247e2dc2124ea739ea6d7e6dd700d0de24ff9201db7748ba33ac3e6"
+    },
+    {
+      "run_id": "run-010",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "c32fc03db52fd28e664b44eac89abeee0c60d55aee6ea4c9eb8fcf9ddc80bb67"
+    },
+    {
+      "run_id": "run-010",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "6d699bad59a1aa8de8244b7a6de328ca0760c67f008b040e636aea87c712f763"
+    },
+    {
+      "run_id": "run-010",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "0b479db48c3b8b965849c8bc708077f2a6d0f0dd6ba913ce947c8d05a6900850"
+    },
+    {
+      "run_id": "run-011",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "5f9fa53814639ac30f35ea5794f430fa57b0dadebfda3761c5848c9cdccfcdca"
+    },
+    {
+      "run_id": "run-011",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "ac7d3b70364bc56fe20bf96db12b935c245eaad8eb94ace12c0a5086bb72bb69"
+    },
+    {
+      "run_id": "run-011",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "fc87a826ee313b131da6196afbe6aafb42db4947e121e7d4030454c18f8cdfa9"
+    },
+    {
+      "run_id": "run-011",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "201d5da63f21308d7cfe9d8a9351d3fa4a150bb1aa255309a43e4168c77e81d7"
+    },
+    {
+      "run_id": "run-012",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "3b2cc8e30219ad56793cfaaa87f0f47daacb58116be8897f47b3941e8a3dd35a"
+    },
+    {
+      "run_id": "run-012",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "053dcc7e6d91b15bfb88f21ed1b03c57095092451391918d7f019616dbdd89d9"
+    },
+    {
+      "run_id": "run-012",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "9861329c986c2c751860eeaae4cfb1fc220959d3ea46546974ef49830cd0e8e6"
+    },
+    {
+      "run_id": "run-012",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "1869560d898af70662b5028681679e695cc3ea641fc126a8c7147ecada825b6d"
+    },
+    {
+      "run_id": "run-013",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "4fbaff87ed385f0d00732a9f4c5244e2ac39669ab143b91386e4301cac8b0204"
+    },
+    {
+      "run_id": "run-013",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "5c35dce774aa8c9aa24e06ce68296e326c74be91308c489ea580015202681b7e"
+    },
+    {
+      "run_id": "run-014",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "5d9ae0b5e82a7a1d3cdbb55a26d1076b40efc4bdf6c6fdb54bd62f9e8266e43f"
+    },
+    {
+      "run_id": "run-014",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "124fbd3eba9d2b4cfa7dea9ffeae2112d89a88908e1d814b9607e28b6dbe772e"
+    },
+    {
+      "run_id": "run-014",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "5d9ae0b5e82a7a1d3cdbb55a26d1076b40efc4bdf6c6fdb54bd62f9e8266e43f"
+    },
+    {
+      "run_id": "run-014",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "d68b4ab05b511817b4f0c070274bd5b4e98f1c21363f45b84e1d0328562f0a48"
+    },
+    {
+      "run_id": "run-015",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "57ddc8125c5e27cf189af83cf6d0fea404e0cfebab8b531599861b886a46335c"
+    },
+    {
+      "run_id": "run-015",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "8539d4e33ae8447703e045cbcaa1db19ef538cbd78a1c1bf64542ec5e022c718"
+    },
+    {
+      "run_id": "run-015",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "57ddc8125c5e27cf189af83cf6d0fea404e0cfebab8b531599861b886a46335c"
+    },
+    {
+      "run_id": "run-015",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "9cc1d08dc280f3f30dc652769a4b8abb6bf53433d7d75f09983619d73c7a2ef5"
+    },
+    {
+      "run_id": "run-016",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "2055b892fc864c57803dc6360d1369be7547fe89a40cdb1421937a0a3218107a"
+    },
+    {
+      "run_id": "run-016",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "6c76c0da2e67c4afb15d998e48b0bc2037cfa03314c8bd0a837f51acdf2e77c4"
+    },
+    {
+      "run_id": "run-016",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "2055b892fc864c57803dc6360d1369be7547fe89a40cdb1421937a0a3218107a"
+    },
+    {
+      "run_id": "run-016",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "b91ea2d73eb31183c83c8f3f79fe6bbaad7f79f3bfb23622feeecd9d40f6aaa1"
+    },
+    {
+      "run_id": "run-017",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "08fd61e106440323d313fc9a28c6fbca1dd534734ec9eccc9a64329620c700f1"
+    },
+    {
+      "run_id": "run-017",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "ff65c29cab224b1fccb209ffad65602b9aaf9d31577d3e9a5e7461c55db37ee1"
+    },
+    {
+      "run_id": "run-017",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "08fd61e106440323d313fc9a28c6fbca1dd534734ec9eccc9a64329620c700f1"
+    },
+    {
+      "run_id": "run-017",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "89be431c259d32a6cbb3fbc78d7cb4e1b8a6e2b65a4ffe2b9498fafe0ec55033"
+    },
+    {
+      "run_id": "run-018",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "da5fd0744325b99ed91cb89d7d86f0be57342f332a2fd59720aba15f4d61a01d"
+    },
+    {
+      "run_id": "run-018",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "dbe03c16bb403f3d4d5ea3f5cab2d80c84dc7671b62d8f2ecedf642a59ddd08f"
+    },
+    {
+      "run_id": "run-018",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "da5fd0744325b99ed91cb89d7d86f0be57342f332a2fd59720aba15f4d61a01d"
+    },
+    {
+      "run_id": "run-018",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "fb1ac653772b60b5015ac964121c75638743ac78041aa26aeb4b3af170da8462"
+    },
+    {
+      "run_id": "run-019",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "bea9819bef0246c34fc7e51cba992b7e9c514ace2058321646c5a82940a8df77"
+    },
+    {
+      "run_id": "run-019",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "9d4a0c43fb43f3ed715a32d359c44f65f791954c01bd00955333fe335e6e8efd"
+    },
+    {
+      "run_id": "run-019",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "bea9819bef0246c34fc7e51cba992b7e9c514ace2058321646c5a82940a8df77"
+    },
+    {
+      "run_id": "run-019",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "48fdd2f79a5b5387f45b6aaf6795537738e177728d87b38ff66280d3bffade1c"
+    },
+    {
+      "run_id": "run-020",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "d382fd46871ed5d567ea52ecd2ad937c574953b1cc2401a68e5da561443d31cd"
+    },
+    {
+      "run_id": "run-020",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "c376b44c2e8f1cc623a40d90fb6ef61312226ab78a4ebf68007f1c6b19408954"
+    },
+    {
+      "run_id": "run-020",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "d382fd46871ed5d567ea52ecd2ad937c574953b1cc2401a68e5da561443d31cd"
+    },
+    {
+      "run_id": "run-020",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "680e7f32ee644e837c987e94da11adabdb2d983c2f103b89ddc2bc53120129a4"
+    },
+    {
+      "run_id": "run-021",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "2504b2482c581351738771298750401730434a159f96dcc9fbd044c911a94f08"
+    },
+    {
+      "run_id": "run-021",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "9544caa56a4304979517aa771b207e2b3e53ea9404509768eebcd29b97b9bca5"
+    },
+    {
+      "run_id": "run-021",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "2504b2482c581351738771298750401730434a159f96dcc9fbd044c911a94f08"
+    },
+    {
+      "run_id": "run-021",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "f49840d9482e6ff69b8103ff3953678c5fe451ec53598aabcf0e5c5a345fcf38"
+    },
+    {
+      "run_id": "run-022",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "f280c947d205c51fed62f2a993509624924e2cbf9fbfe9dc4843d0a19b807a2b"
+    },
+    {
+      "run_id": "run-022",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "610511f41359e859207653baf75a56dda0e93da235722ff5f6e7635fa2a1d1e1"
+    },
+    {
+      "run_id": "run-022",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "f280c947d205c51fed62f2a993509624924e2cbf9fbfe9dc4843d0a19b807a2b"
+    },
+    {
+      "run_id": "run-022",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "fad1ef8a6ee2f22cb1bb458a3ce676cb76df33b0a7496919bc3649ec11161846"
+    },
+    {
+      "run_id": "run-023",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "206065a149fc650f13f7ad135d5de3360c82bc83a264dce3f7338d0d4138fee1"
+    },
+    {
+      "run_id": "run-023",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "cdfc1cb95279682c76920c1fdca34d64af1066e6a1b0c75773a5c102583b57ba"
+    },
+    {
+      "run_id": "run-023",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "206065a149fc650f13f7ad135d5de3360c82bc83a264dce3f7338d0d4138fee1"
+    },
+    {
+      "run_id": "run-023",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "8a23babfd66c896aeef81233db95cecf869b68f1f0699d21f83fad0382ebe257"
+    },
+    {
+      "run_id": "run-024",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "9983227fdf424eeaf51c41727b41a5612fcfec28025d6036eacac89a0f7d4bed"
+    },
+    {
+      "run_id": "run-024",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "3f73a905879aae2658eeb8c0a652a08f9b6be937dc28846224e7c63ca8bc66ec"
+    },
+    {
+      "run_id": "run-024",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "9983227fdf424eeaf51c41727b41a5612fcfec28025d6036eacac89a0f7d4bed"
+    },
+    {
+      "run_id": "run-024",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "651592e46505ccdb2f4cb3796a5eed5bd9c8620d5e852f6c92ccf02c830468e8"
+    },
+    {
+      "run_id": "run-025",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "d0f60430e616443d91eb101f820ef101fa3503ec78553f833c92a0c02aaf25d3"
+    },
+    {
+      "run_id": "run-025",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "3ca252aa5ee597407d2132fb629a0d506fae3dee7e37b779690ebd4461a36e35"
+    },
+    {
+      "run_id": "run-025",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "d0f60430e616443d91eb101f820ef101fa3503ec78553f833c92a0c02aaf25d3"
+    },
+    {
+      "run_id": "run-025",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "b480c9463c32e3b741f8eace744e6051e956d9354b02f12f3b9e5d3f840208ec"
+    },
+    {
+      "run_id": "run-026",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "c06e5e5aae58405d013357d1d2142d53621967fb75d1023946c417ea5053effc"
+    },
+    {
+      "run_id": "run-026",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "66ae70e096cafb5b41775521431a548771112e5e0517931bf468d87f23ce58a8"
+    },
+    {
+      "run_id": "run-026",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "c06e5e5aae58405d013357d1d2142d53621967fb75d1023946c417ea5053effc"
+    },
+    {
+      "run_id": "run-026",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "84f4959a18dbdb2c0ca57942e9b5414bd7753330798398e9c5a0f471d746af2f"
+    },
+    {
+      "run_id": "run-027",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "dc0cfe90d112d730e251b271ba517d6d5d3b12c7945d8c59a761bb3250504781"
+    },
+    {
+      "run_id": "run-027",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "e51d3402001b34ea69973b523add8655ad79df25d6252c34efda27a3d620a3bb"
+    },
+    {
+      "run_id": "run-027",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "dc0cfe90d112d730e251b271ba517d6d5d3b12c7945d8c59a761bb3250504781"
+    },
+    {
+      "run_id": "run-027",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "71358b3a68ec17f473ddfe9d6d80d096b2c9c49531892c5d27c8e84574aef312"
+    },
+    {
+      "run_id": "run-029",
+      "attempt": 1,
+      "role": "worker",
+      "sha256": "0d33f73e3a0b46ae835aaca08ca2d8bcbe44b9b2664eaebae16c5c955b836d26"
+    },
+    {
+      "run_id": "run-029",
+      "attempt": 1,
+      "role": "evaluation",
+      "sha256": "c4618c3da80b1fc94f5cb701062aff6bd067597e10bdd709b6cb27eee25a3aa1"
+    },
+    {
+      "run_id": "run-029",
+      "attempt": 2,
+      "role": "worker",
+      "sha256": "0d33f73e3a0b46ae835aaca08ca2d8bcbe44b9b2664eaebae16c5c955b836d26"
+    },
+    {
+      "run_id": "run-029",
+      "attempt": 2,
+      "role": "evaluation",
+      "sha256": "d38c766b82fab4201e1ce60f8eb8f8b2a65a90a607ad1c889199a7ce18a9b0bc"
+    }
+  ],
+  "cost_dimensions_all_attempted": [
+    {
+      "stage": "first",
+      "arm": "baseline",
+      "planned": 5,
+      "attempted": 3,
+      "passed": 1,
+      "tokens": {
+        "input_tokens": {
+          "observed": 1,
+          "missing": 2,
+          "median": 191573,
+          "min": 191573,
+          "max": 191573
+        },
+        "cached_input_tokens": {
+          "observed": 1,
+          "missing": 2,
+          "median": 151168,
+          "min": 151168,
+          "max": 151168
+        },
+        "output_tokens": {
+          "observed": 1,
+          "missing": 2,
+          "median": 4288,
+          "min": 4288,
+          "max": 4288
+        }
+      },
+      "worker_tool_calls": {
+        "observed": 3,
+        "missing": 0,
+        "median": 0,
+        "min": 0,
+        "max": 4
+      },
+      "all_attempted_termination_seconds": {
+        "observed": 2,
+        "missing": 1,
+        "median": 83.47027014999912,
+        "min": 28.73517240000365,
+        "max": 138.2053678999946
+      },
+      "nonresource_completed_task_seconds": {
+        "observed": 1,
+        "missing": 0,
+        "median": 138.2053678999946,
+        "min": 138.2053678999946,
+        "max": 138.2053678999946
+      },
+      "repair_seconds": {
+        "observed": 2,
+        "missing": 1,
+        "median": 7.231225700001232,
+        "min": 0,
+        "max": 14.462451400002465
+      }
+    },
+    {
+      "stage": "first",
+      "arm": "candidate",
+      "planned": 5,
+      "attempted": 2,
+      "passed": 1,
+      "tokens": {
+        "input_tokens": {
+          "observed": 1,
+          "missing": 1,
+          "median": 192543,
+          "min": 192543,
+          "max": 192543
+        },
+        "cached_input_tokens": {
+          "observed": 1,
+          "missing": 1,
+          "median": 151168,
+          "min": 151168,
+          "max": 151168
+        },
+        "output_tokens": {
+          "observed": 1,
+          "missing": 1,
+          "median": 4468,
+          "min": 4468,
+          "max": 4468
+        }
+      },
+      "worker_tool_calls": {
+        "observed": 2,
+        "missing": 0,
+        "median": 2.0,
+        "min": 0,
+        "max": 4
+      },
+      "all_attempted_termination_seconds": {
+        "observed": 2,
+        "missing": 0,
+        "median": 87.00247104999653,
+        "min": 33.86960619999445,
+        "max": 140.1353358999986
+      },
+      "nonresource_completed_task_seconds": {
+        "observed": 1,
+        "missing": 0,
+        "median": 140.1353358999986,
+        "min": 140.1353358999986,
+        "max": 140.1353358999986
+      },
+      "repair_seconds": {
+        "observed": 2,
+        "missing": 0,
+        "median": 7.179388499997003,
+        "min": 0,
+        "max": 14.358776999994006
+      }
+    },
+    {
+      "stage": "unchanged",
+      "arm": "baseline",
+      "planned": 5,
+      "attempted": 4,
+      "passed": 0,
+      "tokens": {
+        "input_tokens": {
+          "observed": 0,
+          "missing": 4,
+          "median": null,
+          "min": null,
+          "max": null
+        },
+        "cached_input_tokens": {
+          "observed": 0,
+          "missing": 4,
+          "median": null,
+          "min": null,
+          "max": null
+        },
+        "output_tokens": {
+          "observed": 0,
+          "missing": 4,
+          "median": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "worker_tool_calls": {
+        "observed": 4,
+        "missing": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "all_attempted_termination_seconds": {
+        "observed": 3,
+        "missing": 1,
+        "median": 29.110551500001748,
+        "min": 29.010054599995783,
+        "max": 34.45373010000185
+      },
+      "nonresource_completed_task_seconds": {
+        "observed": 0,
+        "missing": 0,
+        "median": null,
+        "min": null,
+        "max": null
+      },
+      "repair_seconds": {
+        "observed": 3,
+        "missing": 1,
+        "median": 14.084765899999184,
+        "min": 13.96247929999663,
+        "max": 19.075358099995356
+      }
+    },
+    {
+      "stage": "unchanged",
+      "arm": "candidate",
+      "planned": 5,
+      "attempted": 3,
+      "passed": 0,
+      "tokens": {
+        "input_tokens": {
+          "observed": 0,
+          "missing": 3,
+          "median": null,
+          "min": null,
+          "max": null
+        },
+        "cached_input_tokens": {
+          "observed": 0,
+          "missing": 3,
+          "median": null,
+          "min": null,
+          "max": null
+        },
+        "output_tokens": {
+          "observed": 0,
+          "missing": 3,
+          "median": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "worker_tool_calls": {
+        "observed": 3,
+        "missing": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "all_attempted_termination_seconds": {
+        "observed": 3,
+        "missing": 0,
+        "median": 28.313350399999763,
+        "min": 27.92844409999816,
+        "max": 28.724377200000163
+      },
+      "nonresource_completed_task_seconds": {
+        "observed": 0,
+        "missing": 0,
+        "median": null,
+        "min": null,
+        "max": null
+      },
+      "repair_seconds": {
+        "observed": 3,
+        "missing": 0,
+        "median": 13.92221440000867,
+        "min": 13.80383360000269,
+        "max": 14.955326700001024
+      }
+    },
+    {
+      "stage": "incremental",
+      "arm": "baseline",
+      "planned": 5,
+      "attempted": 4,
+      "passed": 1,
+      "tokens": {
+        "input_tokens": {
+          "observed": 1,
+          "missing": 3,
+          "median": 302592,
+          "min": 302592,
+          "max": 302592
+        },
+        "cached_input_tokens": {
+          "observed": 1,
+          "missing": 3,
+          "median": 211328,
+          "min": 211328,
+          "max": 211328
+        },
+        "output_tokens": {
+          "observed": 1,
+          "missing": 3,
+          "median": 7256,
+          "min": 7256,
+          "max": 7256
+        }
+      },
+      "worker_tool_calls": {
+        "observed": 4,
+        "missing": 0,
+        "median": 2.5,
+        "min": 0,
+        "max": 6
+      },
+      "all_attempted_termination_seconds": {
+        "observed": 3,
+        "missing": 1,
+        "median": 26.37722410000424,
+        "min": 26.366102200001478,
+        "max": 189.0715624000004
+      },
+      "nonresource_completed_task_seconds": {
+        "observed": 1,
+        "missing": 0,
+        "median": 189.0715624000004,
+        "min": 189.0715624000004,
+        "max": 189.0715624000004
+      },
+      "repair_seconds": {
+        "observed": 3,
+        "missing": 1,
+        "median": 13.153862199993455,
+        "min": 0,
+        "max": 13.181707900002948
+      }
+    },
+    {
+      "stage": "incremental",
+      "arm": "candidate",
+      "planned": 5,
+      "attempted": 4,
+      "passed": 1,
+      "tokens": {
+        "input_tokens": {
+          "observed": 1,
+          "missing": 3,
+          "median": 249136,
+          "min": 249136,
+          "max": 249136
+        },
+        "cached_input_tokens": {
+          "observed": 1,
+          "missing": 3,
+          "median": 173568,
+          "min": 173568,
+          "max": 173568
+        },
+        "output_tokens": {
+          "observed": 1,
+          "missing": 3,
+          "median": 6592,
+          "min": 6592,
+          "max": 6592
+        }
+      },
+      "worker_tool_calls": {
+        "observed": 4,
+        "missing": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 6
+      },
+      "all_attempted_termination_seconds": {
+        "observed": 4,
+        "missing": 0,
+        "median": 28.26940305000244,
+        "min": 26.3732588999992,
+        "max": 195.1775359000021
+      },
+      "nonresource_completed_task_seconds": {
+        "observed": 1,
+        "missing": 0,
+        "median": 195.1775359000021,
+        "min": 195.1775359000021,
+        "max": 195.1775359000021
+      },
+      "repair_seconds": {
+        "observed": 4,
+        "missing": 0,
+        "median": 13.402509200004715,
+        "min": 0,
+        "max": 13.431856200004404
+      }
+    },
+    {
+      "stage": "complex",
+      "arm": "baseline",
+      "planned": 5,
+      "attempted": 4,
+      "passed": 2,
+      "tokens": {
+        "input_tokens": {
+          "observed": 2,
+          "missing": 2,
+          "median": 264135.5,
+          "min": 257702,
+          "max": 270569
+        },
+        "cached_input_tokens": {
+          "observed": 2,
+          "missing": 2,
+          "median": 194368.0,
+          "min": 190208,
+          "max": 198528
+        },
+        "output_tokens": {
+          "observed": 2,
+          "missing": 2,
+          "median": 9741.5,
+          "min": 9676,
+          "max": 9807
+        }
+      },
+      "worker_tool_calls": {
+        "observed": 4,
+        "missing": 0,
+        "median": 5.0,
+        "min": 1,
+        "max": 6
+      },
+      "all_attempted_termination_seconds": {
+        "observed": 3,
+        "missing": 1,
+        "median": 329.4931990999976,
+        "min": 322.89988820000144,
+        "max": 367.32800300000235
+      },
+      "nonresource_completed_task_seconds": {
+        "observed": 2,
+        "missing": 0,
+        "median": 326.1965436499995,
+        "min": 322.89988820000144,
+        "max": 329.4931990999976
+      },
+      "repair_seconds": {
+        "observed": 3,
+        "missing": 1,
+        "median": 0,
+        "min": 0,
+        "max": 14.677951700003177
+      }
+    },
+    {
+      "stage": "complex",
+      "arm": "candidate",
+      "planned": 5,
+      "attempted": 4,
+      "passed": 4,
+      "tokens": {
+        "input_tokens": {
+          "observed": 2,
+          "missing": 2,
+          "median": 288863.5,
+          "min": 246232,
+          "max": 331495
+        },
+        "cached_input_tokens": {
+          "observed": 2,
+          "missing": 2,
+          "median": 212992.0,
+          "min": 174208,
+          "max": 251776
+        },
+        "output_tokens": {
+          "observed": 2,
+          "missing": 2,
+          "median": 9851.0,
+          "min": 9271,
+          "max": 10431
+        }
+      },
+      "worker_tool_calls": {
+        "observed": 4,
+        "missing": 0,
+        "median": 7.5,
+        "min": 6,
+        "max": 8
+      },
+      "all_attempted_termination_seconds": {
+        "observed": 4,
+        "missing": 0,
+        "median": 402.6125443500023,
+        "min": 310.6806222000014,
+        "max": 619.6563878000015
+      },
+      "nonresource_completed_task_seconds": {
+        "observed": 4,
+        "missing": 0,
+        "median": 402.6125443500023,
+        "min": 310.6806222000014,
+        "max": 619.6563878000015
+      },
+      "repair_seconds": {
+        "observed": 4,
+        "missing": 0,
+        "median": 39.82136745000025,
+        "min": 0,
+        "max": 205.03961439999694
+      }
+    }
+  ],
+  "incurred_costs": {
+    "worker_calls": 46,
+    "evaluator_calls": 44,
+    "complete_duration_tasks": 24,
+    "duration_incomplete_tasks": 4,
+    "known_terminal_task_seconds": 3793.67366890001,
+    "incomplete_duration_lower_bounds": {
+      "run-006": 55.79427242279053,
+      "run-009": 11.272021532058716,
+      "run-027": 52.85166846725042,
+      "run-029": 47.73831671578955
+    },
+    "whole_study_tokens": {
+      "input_tokens": null,
+      "cached_input_tokens": null,
+      "output_tokens": null
+    },
+    "observed_token_subtotals": {
+      "input_tokens": {
+        "known_call_subtotal": 3510338,
+        "observed_calls": 23,
+        "missing_calls": 67
+      },
+      "cached_input_tokens": {
+        "known_call_subtotal": 2630784,
+        "observed_calls": 23,
+        "missing_calls": 67
+      },
+      "output_tokens": {
+        "known_call_subtotal": 105686,
+        "observed_calls": 23,
+        "missing_calls": 67
+      }
+    }
+  },
+  "call_measurements": [
+    {
+      "run_id": "run-001",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 298.81806589999906,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 5,
+      "usage": {
+        "input_tokens": 206723,
+        "cached_input_tokens": 171904,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9361,
+        "reasoning_output_tokens": 836
+      }
+    },
+    {
+      "run_id": "run-001",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 23.97175540000171,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 50979,
+        "cached_input_tokens": 18304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 315,
+        "reasoning_output_tokens": 162
+      }
+    },
+    {
+      "run_id": "run-002",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 284.64716329999646,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 6,
+      "usage": {
+        "input_tokens": 195877,
+        "cached_input_tokens": 174208,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8925,
+        "reasoning_output_tokens": 828
+      }
+    },
+    {
+      "run_id": "run-002",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 25.95795189999626,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 50355,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 346,
+        "reasoning_output_tokens": 198
+      }
+    },
+    {
+      "run_id": "run-003",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 316.3850250999967,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 8,
+      "usage": {
+        "input_tokens": 280266,
+        "cached_input_tokens": 251776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 10106,
+        "reasoning_output_tokens": 841
+      }
+    },
+    {
+      "run_id": "run-003",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 22.03240050000022,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 51229,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 325,
+        "reasoning_output_tokens": 166
+      }
+    },
+    {
+      "run_id": "run-004",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 306.7174792000005,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 5,
+      "usage": {
+        "input_tokens": 219446,
+        "cached_input_tokens": 180224,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 9475,
+        "reasoning_output_tokens": 898
+      }
+    },
+    {
+      "run_id": "run-004",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 22.701216500005103,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 51123,
+        "cached_input_tokens": 18304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 332,
+        "reasoning_output_tokens": 183
+      }
+    },
+    {
+      "run_id": "run-005",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 177.9536810999998,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 6,
+      "usage": {
+        "input_tokens": 200594,
+        "cached_input_tokens": 173568,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6325,
+        "reasoning_output_tokens": 450
+      }
+    },
+    {
+      "run_id": "run-005",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 17.160296399997605,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 48542,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 267,
+        "reasoning_output_tokens": 126
+      }
+    },
+    {
+      "run_id": "run-006",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": null,
+      "observed_seconds_lower_bound": 55.79427242279053,
+      "returncode": null,
+      "timed_out": false,
+      "tool_calls": 5,
+      "usage": null
+    },
+    {
+      "run_id": "run-006",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": true,
+      "seconds": 0,
+      "observed_seconds_lower_bound": null,
+      "returncode": null,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0
+      }
+    },
+    {
+      "run_id": "run-007",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 118.65144149999833,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 4,
+      "usage": {
+        "input_tokens": 149467,
+        "cached_input_tokens": 132864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4021,
+        "reasoning_output_tokens": 209
+      }
+    },
+    {
+      "run_id": "run-007",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 19.451457199997094,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 42106,
+        "cached_input_tokens": 18304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 267,
+        "reasoning_output_tokens": 118
+      }
+    },
+    {
+      "run_id": "run-008",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 121.96722769999906,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 4,
+      "usage": {
+        "input_tokens": 150039,
+        "cached_input_tokens": 132864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4199,
+        "reasoning_output_tokens": 181
+      }
+    },
+    {
+      "run_id": "run-008",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 18.102581899998768,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 42504,
+        "cached_input_tokens": 18304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 269,
+        "reasoning_output_tokens": 110
+      }
+    },
+    {
+      "run_id": "run-009",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": null,
+      "observed_seconds_lower_bound": 11.272021532058716,
+      "returncode": null,
+      "timed_out": false,
+      "tool_calls": 1,
+      "usage": null
+    },
+    {
+      "run_id": "run-009",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": true,
+      "seconds": 0,
+      "observed_seconds_lower_bound": null,
+      "returncode": null,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 0,
+        "cached_input_tokens": 0,
+        "output_tokens": 0
+      }
+    },
+    {
+      "run_id": "run-010",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 360.569754199998,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": true,
+      "tool_calls": 3,
+      "usage": null
+    },
+    {
+      "run_id": "run-010",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 53.92158339999878,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 44583,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1146,
+        "reasoning_output_tokens": 345
+      }
+    },
+    {
+      "run_id": "run-010",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 168.95211520000157,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 4,
+      "usage": {
+        "input_tokens": 620894,
+        "cached_input_tokens": 569344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 16874,
+        "reasoning_output_tokens": 1972
+      }
+    },
+    {
+      "run_id": "run-010",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 36.087499199995364,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 48930,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 600,
+        "reasoning_output_tokens": 451
+      }
+    },
+    {
+      "run_id": "run-011",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 360.50301979999495,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": true,
+      "tool_calls": 7,
+      "usage": null
+    },
+    {
+      "run_id": "run-011",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 26.501693500002148,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 50852,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 352,
+        "reasoning_output_tokens": 200
+      }
+    },
+    {
+      "run_id": "run-011",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 54.09565450000082,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 1,
+      "usage": {
+        "input_tokens": 366049,
+        "cached_input_tokens": 320640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 13032,
+        "reasoning_output_tokens": 1996
+      }
+    },
+    {
+      "run_id": "run-011",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 25.547080399999686,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 50977,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 336,
+        "reasoning_output_tokens": 191
+      }
+    },
+    {
+      "run_id": "run-012",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 345.251872199995,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 6,
+      "usage": {
+        "input_tokens": 286211,
+        "cached_input_tokens": 238848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 11557,
+        "reasoning_output_tokens": 1368
+      }
+    },
+    {
+      "run_id": "run-012",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.302091800003836,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-012",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.68151200000284,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-012",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.996439700000337,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-013",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 167.95316229999298,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 6,
+      "usage": {
+        "input_tokens": 254805,
+        "cached_input_tokens": 211328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6983,
+        "reasoning_output_tokens": 439
+      }
+    },
+    {
+      "run_id": "run-013",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 21.072548000003735,
+      "observed_seconds_lower_bound": null,
+      "returncode": 0,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": {
+        "input_tokens": 47787,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 273,
+        "reasoning_output_tokens": 108
+      }
+    },
+    {
+      "run_id": "run-014",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 8.456253900003503,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-014",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.52720219999901,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-014",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.726797000002989,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-014",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.704872500005877,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-015",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.728277800000797,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-015",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.790636999998242,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-015",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.539720100001432,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-015",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.892136100002972,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-016",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.707243200005905,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-016",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.409030199996778,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-016",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.538863800000399,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-016",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.642844100002549,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-017",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.4990935000023455,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-017",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.631039200001396,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-017",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.395148599993263,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-017",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.758713600000192,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-018",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.468805099997553,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-018",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.463017900001432,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-018",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.456284300002153,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-018",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.917064599998412,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-019",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.846967199999199,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-019",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.109822200000053,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-019",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.6584402000007685,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-019",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.426325699998415,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-020",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.158684200003336,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-020",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.901585899999191,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-020",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.717928199999733,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-020",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.085905400002957,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-021",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.041828800000076,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-021",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.946530099994561,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-021",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.0245753999988665,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-021",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.937903899997764,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-022",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.796568399993703,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-022",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.8997948999967775,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-022",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.5273918000020785,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-022",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.427934899998945,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-023",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.646865399998205,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-023",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.662627999998222,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-023",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.444057700005942,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-023",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.478156700002728,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-024",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.1199725000042235,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-024",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 8.196850699998322,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-024",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 12.314239899998938,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-024",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.761118199996417,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-025",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.447455599998648,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-025",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 6.761098599999968,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-025",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.676397499999439,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-025",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.786053900003026,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-026",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 10.215780200000154,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-026",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 9.23210619999736,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-026",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 6.861095699998259,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-026",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 7.497681299995747,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-027",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.926367500003835,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-027",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 35.7038504000011,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-027",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": null,
+      "observed_seconds_lower_bound": 8.061945676803589,
+      "returncode": null,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-027",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": null,
+      "observed_seconds_lower_bound": 1.1595048904418945,
+      "returncode": null,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-029",
+      "attempt": 1,
+      "role": "worker",
+      "not_called": false,
+      "seconds": 7.057226500000979,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-029",
+      "attempt": 1,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": 32.12183699999878,
+      "observed_seconds_lower_bound": null,
+      "returncode": 1,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-029",
+      "attempt": 2,
+      "role": "worker",
+      "not_called": false,
+      "seconds": null,
+      "observed_seconds_lower_bound": 7.3662049770355225,
+      "returncode": null,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    },
+    {
+      "run_id": "run-029",
+      "attempt": 2,
+      "role": "evaluation",
+      "not_called": false,
+      "seconds": null,
+      "observed_seconds_lower_bound": 1.1930482387542725,
+      "returncode": null,
+      "timed_out": false,
+      "tool_calls": 0,
+      "usage": null
+    }
+  ],
+  "paired_cost_dimensions": [
+    {
+      "pair_id": "complex-2",
+      "stage": "complex",
+      "eligible": true,
+      "tokens": {
+        "input_tokens": -11470,
+        "cached_input_tokens": -16000,
+        "output_tokens": -405
+      },
+      "worker_tool_calls_difference": 1,
+      "repair_seconds_difference": 0
+    },
+    {
+      "pair_id": "complex-3",
+      "stage": "complex",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "complex-4",
+      "stage": "complex",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "complex-5",
+      "stage": "complex",
+      "eligible": true,
+      "tokens": {
+        "input_tokens": 60926,
+        "cached_input_tokens": 53248,
+        "output_tokens": 624
+      },
+      "worker_tool_calls_difference": 3,
+      "repair_seconds_difference": 0
+    },
+    {
+      "pair_id": "first-1",
+      "stage": "first",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "first-3",
+      "stage": "first",
+      "eligible": true,
+      "tokens": {
+        "input_tokens": 970,
+        "cached_input_tokens": 0,
+        "output_tokens": 180
+      },
+      "worker_tool_calls_difference": 0,
+      "repair_seconds_difference": 0
+    },
+    {
+      "pair_id": "incremental-1",
+      "stage": "incremental",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "incremental-2",
+      "stage": "incremental",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "incremental-4",
+      "stage": "incremental",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "incremental-5",
+      "stage": "incremental",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "unchanged-1",
+      "stage": "unchanged",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "unchanged-2",
+      "stage": "unchanged",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    },
+    {
+      "pair_id": "unchanged-5",
+      "stage": "unchanged",
+      "eligible": false,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "worker_tool_calls_difference": null,
+      "repair_seconds_difference": null
+    }
+  ],
+  "limits": [
+    "No completed unchanged-stage semantic evaluation; quota failures are not scientific content failures.",
+    "Only eligible, quality-passing complete-cost pairs support within-sample cost differences.",
+    "No component ablation, exact OS-level repeatedI/O, or freshAgent handoff efficiency measurement.",
+    "No stable20percent time/token improvement established. Rawsource text, answers, sourcepaths and logs excluded."
+  ],
+  "payload_verification": {
+    "selected_original_sources": 8,
+    "sha256_size_mtime_unchanged": true,
+    "frozen_oracle_files": 57,
+    "frozen_oracle_unchanged": true,
+    "attempted_trial_source_bindings": 228,
+    "source_paths_and_bytes_unchanged": true,
+    "attempted_trial_skill_payload_bindings": 1090,
+    "skill_payloads_unchanged": true,
+    "scope": "Selected source files and observed copied payloads only, not a filesystem-wide no-write proof."
+  },
+  "command_screening": {
+    "worker_command_events": 70,
+    "evaluator_command_events": 0,
+    "file_change_events": 1,
+    "mcp_tool_events": 0,
+    "failed_command_events": 1,
+    "pattern_flags": [],
+    "review_status": "Programmatic screening; inspect flagged or unexpected command code before broad behavioral claims.",
+    "limit": "Command/path evidence only, not OS-level read tracing; shell writes are not all file_change events."
+  },
+  "additional_checks": {
+    "blinded_complex_content_spot_checks": {
+      "runs": [
+        "run-001",
+        "run-003"
+      ],
+      "passed": true,
+      "scope": "Two outputs only, independent of method labels; does not audit full execution."
+    },
+    "fresh_agent_handoff": {
+      "status": "not_completed_resources_unavailable",
+      "result": null
+    },
+    "quota_stop_live_retest": {
+      "status": "not_done_resources_unavailable",
+      "offline_regression": "passed"
+    }
+  }
+}

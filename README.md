@@ -60,3 +60,5 @@ gh repo clone 1-Vast/organize-files $skillPath
 从仓库根运行 `python -m pytest tests -q`（Python 3.11+，pytest）。测试覆盖保护边界、恢复、冻结绑定、增量影响和报告生命周期，不能证明 Agent 在任意真实项目中都不遗漏事实。
 
 2026-10-26 的首轮 30 次合成 Agent 任务中，首次整理耗时中位数下降约 8.3%，局部增量增加约 4.5%，实际 Token 未稳定下降。后加写入约束的两次检查通过，但不能与此前对照混算。完整协议、数据与局限见[首轮实测](references/agent-evaluation-2026-10-26.md)。
+
+后续任务分流与文档精简的真实材料评价因额度不足未完成，仍属待验证；完整调度、失败成本、计量修复和续跑问题见[部分评价记录](references/lean-evaluation-2026-10-26.md)，不据此宣称稳定提速。

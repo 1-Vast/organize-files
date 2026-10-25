@@ -15,10 +15,12 @@ from pathlib import Path
 import random
 import shutil
 import subprocess
+from threading import Event
 import time
 
 ROOT = ORACLE = VARIANT_ROOT = MODEL = VARIANTS = None
 CODEX = shutil.which('codex.cmd' if os.name == 'nt' else 'codex')
+RESOURCE_STOP = Event()
 
 INPUTS = {'first': 'initial', 'unchanged': 'maintenance_snapshot', 'incremental': 'incremental_input'}
 
@@ -32,7 +34,20 @@ def hashes(root):
             for p in root.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
 
 
+def resource_limited(events):
+    for row in events:
+        if row.get('type') not in ('error', 'turn.failed'):
+            continue
+        message = str(row.get('message', '') or row.get('error', {}).get('message', '')).lower()
+        if 'usage limit' in message or 'usage_limit_exceeded' in message or 'insufficient_quota' in message:
+            return True
+    return False
+
+
 def call_agent(cwd, prompt, prefix, *, schema=None, resume=None, readonly=False):
+    if RESOURCE_STOP.is_set():
+        return {'seconds': 0, 'returncode': -1, 'timed_out': False, 'usage': None,
+                'thread_id': resume, 'tool_calls': 0, 'not_called': True, 'resource_limited': True}
     command = [CODEX, 'exec', '-m', MODEL, '-c', 'model_reasoning_effort="high"',
                '-c', 'approval_policy="never"']
     if resume:
@@ -68,7 +83,11 @@ def call_agent(cwd, prompt, prefix, *, schema=None, resume=None, readonly=False)
     totals = Counter()
     for item in usage:
         totals.update(item)
+    limited = resource_limited(events)
+    if limited:
+        RESOURCE_STOP.set()
     return {'seconds': time.perf_counter() - started, 'returncode': process.returncode,
+            'resource_limited': limited,
             'timed_out': timed_out, 'usage': dict(totals) if usage else None,
             'thread_id': next((row['thread_id'] for row in events if row.get('type') == 'thread.started'), resume),
             'tool_calls': sum(row.get('type') == 'item.completed' and row.get('item', {}).get('type') in
@@ -77,6 +96,8 @@ def call_agent(cwd, prompt, prefix, *, schema=None, resume=None, readonly=False)
 
 
 def run_trial(entry):
+    if RESOURCE_STOP.is_set():
+        return
     run_id = entry['run_id']
     trial = ROOT / 'trials' / run_id
     trial.mkdir(parents=True, exist_ok=False)
@@ -161,13 +182,15 @@ def run_trial(entry):
                                                    if (project / name).stat().st_mtime_ns != before_mtimes[name]]})
         save(trial / f'output-{attempt}-manifest.json', after)
         save(trial / 'result.json', result)
-        if passed or not session:
+        if passed or not session or RESOURCE_STOP.is_set():
             break
         feedback = verdict.get('feedback', '')
         if not all(gates.values()):
             feedback += '\nHarness failures: ' + ', '.join(key for key, value in gates.items() if not value)
     result.update(passed=passed, end_to_end_seconds=time.perf_counter() - start,
                   finished_utc=datetime.now(timezone.utc).isoformat())
+    if any(a[role].get('resource_limited') for a in result['attempts'] for role in ('worker', 'evaluation')):
+        result['execution_status'] = 'resource_limited'
     save(trial / 'result.json', result)
     print(json.dumps({'run_id': run_id, 'stage': entry['stage'], 'passed': passed,
                       'attempts': len(result['attempts']), 'seconds': round(result['end_to_end_seconds'], 2)}), flush=True)
@@ -207,6 +230,8 @@ def main():
     schedule = json.loads(schedule_path.read_text(encoding='utf-8'))
     def block(entries):
         for entry in entries:
+            if RESOURCE_STOP.is_set():
+                break
             result = ROOT / 'trials' / entry['run_id'] / 'result.json'
             if result.exists() and 'finished_utc' in json.loads(result.read_text(encoding='utf-8')):
                 continue
@@ -216,6 +241,8 @@ def main():
         futures = [pool.submit(block, schedule[i:i + 2]) for i in range(0, len(schedule), 2)]
         for future in futures:
             future.result()
+    if RESOURCE_STOP.is_set():
+        raise SystemExit('Evaluation stopped at an explicit usage/quota limit. Retain failed calls and the unstarted schedule; restore resources before resuming.')
 
 
 if __name__ == '__main__':
