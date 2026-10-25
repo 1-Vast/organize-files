@@ -1,5 +1,6 @@
 """Task-local snapshots reduce reading without asserting live or semantic truth."""
 import importlib.util
+import json
 import os
 from pathlib import Path
 import sys
@@ -189,3 +190,123 @@ def test_record_iterators_cannot_silently_drop_sources_or_questions(tmp_path):
     assert result['status'] == 'needs_review'
     with pytest.raises(ValueError, match='selected sources'):
         context.record('empty', iter([]), facts={})
+
+
+def test_required_context_gaps_survive_compaction_and_dependencies(tmp_path):
+    (tmp_path / 'report.md').write_text('Result: 0.70\nShared latents only\nReplay not completed\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    result = context.excerpt('report.md', 1, 1)
+    recorded = context.record('claim', ['report.md'], facts={'result': 0.70},
+                              required_context=iter(['result', 'conditions', 'replay']),
+                              context_reviews={'result': {'status': 'reviewed', 'note': 'Observed value', 'citations': [result]}})
+    assert recorded['status'] == 'needs_review'
+    assert recorded['context_gaps'] == {'claim': ['conditions', 'replay']}
+    context.record('report', ['report.md'], facts={'text': 'x' * 10000}, dependencies=['claim'])
+    brief = context.result('report', compact=True)
+    full = context.result('report')
+    for field in ('status', 'closure_status', 'context_gaps', 'signature', 'source_bindings', 'source_locations'):
+        assert brief[field] == full[field]
+    assert brief['closure_status'] == 'needs_review'
+    assert 'facts' not in brief and 'context_reviews' not in brief
+    assert len(json.dumps(brief)) < len(json.dumps(full))
+    assert context.metrics['payload_files_opened'] == 1
+
+
+def test_reviewed_context_is_snapshot_declaration_and_output_edits_invalidate_it(tmp_path):
+    (tmp_path / 'source.md').write_text('Development result\nReplay unavailable\n', encoding='utf-8')
+    output = tmp_path / 'REPORT.md'
+    output.write_text('Development result; replay unavailable\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    source = context.excerpt('source.md')
+    report = context.excerpt('REPORT.md')
+    context.record('output', ['source.md', 'REPORT.md'], facts={'scope': 'development'},
+                   required_context=['limitations'], context_reviews={
+                       'limitations': {'status': 'reviewed', 'note': 'Report preserves replay boundary', 'citations': [source, report]}})
+    assert context.result('output', compact=True)['closure_status'] == 'declared_covered'
+    output.write_text('Confirmed result; replay available\n', encoding='utf-8')
+    assert context.result('output', fresh=True, compact=True)['closure_status'] == 'stale'
+    assert context.result('output')['invalid_records'] == ['output']
+
+
+@pytest.mark.parametrize('change', [
+    {'sha256': '0' * 64}, {'excerpt': 'fabricated condition'}, {'start_line': True},
+    {'end_line': 2}, {'source_id': 'other.md'},
+])
+def test_review_rejects_forged_or_unread_citations_without_replacing_record(tmp_path, change):
+    (tmp_path / 'report.md').write_text('Result\nCondition\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    citation = context.excerpt('report.md', 1, 1)
+    before = context.record('claim', ['report.md'], facts={'result': 'pending'}, required_context=['conditions'])
+    with pytest.raises(ValueError, match='citations'):
+        context.record('claim', ['report.md'], facts={}, required_context=['conditions'], context_reviews={
+            'conditions': {'status': 'reviewed', 'note': 'Condition review', 'citations': [{**citation, **change}]}})
+    assert context.result('claim')['signature'] == before['signature']
+
+
+@pytest.mark.parametrize('required,reviews', [
+    ('conditions', {}), (['conditions', 'conditions'], {}), ([''], {}),
+    (['conditions'], {'replay': {}}), (['conditions'], {'conditions': {}}),
+    (['conditions'], {'conditions': {'status': 'reviewed', 'note': 'not recorded', 'citations': []}}),
+])
+def test_empty_or_malformed_reviews_cannot_close_a_gap(tmp_path, required, reviews):
+    (tmp_path / 'report.md').write_text('Result\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    context.excerpt('report.md')
+    with pytest.raises(ValueError):
+        context.record('claim', ['report.md'], facts={}, required_context=required, context_reviews=reviews)
+
+
+def test_new_review_invalidates_dependent_record_until_rebound(tmp_path):
+    (tmp_path / 'report.md').write_text('Shared latents only\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    citation = context.excerpt('report.md')
+    context.record('claim', ['report.md'], facts={}, required_context=['conditions'])
+    context.record('summary', ['report.md'], facts={}, dependencies=['claim'])
+    context.record('claim', ['report.md'], facts={}, required_context=['conditions'], context_reviews={
+        'conditions': {'status': 'reviewed', 'note': 'Limited to shared latents', 'citations': [citation]}})
+    assert context.result('summary', compact=True)['status'] == 'stale'
+    context.record('summary', ['report.md'], facts={}, dependencies=['claim'])
+    assert context.result('summary')['status'] == 'snapshot_reusable'
+    assert context.result('summary')['closure_status'] == 'not_assessed'
+
+
+def test_questions_and_failed_refresh_remain_visible_in_compact_output(tmp_path):
+    path = tmp_path / 'report.md'
+    path.write_text('Unknown protocol\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    citation = context.excerpt('report.md')
+    context.record('claim', ['report.md'], facts={}, required_context=['protocol'], context_reviews={
+        'protocol': {'status': 'unknown', 'note': 'Source does not record protocol', 'citations': [citation]}},
+        unresolved_questions=['Which protocol produced this result?'])
+    assert context.result('claim', compact=True)['closure_status'] == 'needs_review'
+    path.unlink()
+    result = context.result('claim', fresh=True, compact=True)
+    assert result['status'] == 'stale' and result['errors']
+    assert result['unresolved_questions_in_scope'] == ['Which protocol produced this result?']
+
+
+def test_unknown_context_cannot_pass_even_without_an_extra_question(tmp_path):
+    (tmp_path / 'report.md').write_text('Protocol was not recorded\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    citation = context.excerpt('report.md')
+    context.record('claim', ['report.md'], facts={}, required_context=['protocol'], context_reviews={
+        'protocol': {'status': 'unknown', 'note': 'No protocol in retained record', 'citations': [citation]}})
+    result = context.result('claim', fresh=True, compact=True)
+    assert result['status'] == result['closure_status'] == 'needs_review'
+    assert result['context_gaps'] == {'claim': ['protocol']}
+
+
+def test_unchanged_refresh_preserves_citations_but_changed_bytes_reject_them(tmp_path):
+    path = tmp_path / 'report.md'
+    path.write_text('Shared latents only\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    citation = context.excerpt('report.md')
+    review = {'conditions': {'status': 'reviewed', 'note': 'Shared latents', 'citations': [citation]}}
+    context.record('claim', ['report.md'], facts={}, required_context=['conditions'], context_reviews=review)
+    context.result('claim', fresh=True)
+    result = context.record('claim', ['report.md'], facts={}, required_context=['conditions'], context_reviews=review)
+    assert result['closure_status'] == 'declared_covered'
+    path.write_text('Independent latents\n', encoding='utf-8')
+    context.result('claim', fresh=True)
+    with pytest.raises(ValueError, match='citations'):
+        context.record('claim', ['report.md'], facts={}, required_context=['conditions'], context_reviews=review)
