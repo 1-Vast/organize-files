@@ -55,7 +55,7 @@ class TaskContext:
             self._metrics['cache_hits'] += 1
             return self._sources[source_id]
         # A failed fresh read must not fall back to stale cached bytes.
-        self._sources.pop(source_id, None)
+        previous = self._sources.pop(source_id, None)
         if self._resolver is None:
             path = evidence.checked_path(self.root, source_id)
             before = evidence.file_metadata(path, self._metrics)
@@ -81,6 +81,8 @@ class TaskContext:
         self._metrics['sha256_computations'] += 1
         item = {'source_id': source_id, 'sha256': hashlib.sha256(payload).hexdigest(),
                 'bytes': len(payload), 'lines': lines, 'locations': []}
+        if previous and previous['sha256'] == item['sha256']:
+            item['locations'] = previous['locations']
         self._sources[source_id] = item
         return item
 
@@ -121,7 +123,8 @@ class TaskContext:
         return {'complete': bool(results) and all(r['status'] == 'available' for r in results),
                 'results': results, 'metrics': self.metrics}
 
-    def record(self, key, source_ids, *, facts, dependencies=(), unresolved_questions=()):
+    def record(self, key, source_ids, *, facts, dependencies=(), unresolved_questions=(),
+               required_context=(), context_reviews=None):
         source_ids = tuple(source_ids)
         dependencies = tuple(dependencies)
         unresolved_questions = tuple(unresolved_questions)
@@ -141,15 +144,51 @@ class TaskContext:
             raise ValueError('Unresolved questions must be explicit nonempty strings')
         if any(sid not in self._sources for sid in source_ids):
             raise ValueError('Read every selected source before recording facts')
+        if isinstance(required_context, str):
+            raise ValueError('Required context must be a sequence of dimension names')
+        required_context = tuple(required_context)
+        if (any(not isinstance(name, str) or not name.strip() for name in required_context)
+                or len(set(required_context)) != len(required_context)):
+            raise ValueError('Required context must contain unique nonempty dimension names')
+        reviews = {} if context_reviews is None else copy.deepcopy(context_reviews)
+        if not isinstance(reviews, dict) or any(name not in required_context for name in reviews):
+            raise ValueError('Reviews must name declared context dimensions')
+        for review in reviews.values():
+            if (not isinstance(review, dict) or not isinstance(review.get('note'), str)
+                    or not review['note'].strip() or not isinstance(review.get('citations'), list)
+                    or not review['citations'] or review.get('status') not in ('reviewed', 'unknown')):
+                raise ValueError('Each context review needs a status, note and nonempty citations')
+            citations = []
+            for citation in review['citations']:
+                if not isinstance(citation, dict) or citation.get('source_id') not in source_ids:
+                    raise ValueError('Context citations must belong to selected sources')
+                source = self._sources[citation['source_id']]
+                start, end = citation.get('start_line'), citation.get('end_line')
+                if (type(start) is not int or type(end) is not int
+                        or {'start_line': start, 'end_line': end} not in source['locations']
+                        or citation.get('sha256') != source['sha256']
+                        or citation.get('excerpt') != '\n'.join(source['lines'][start - 1:end])):
+                    raise ValueError('Context citations must match an emitted snapshot excerpt')
+                if review['status'] == 'reviewed' and not citation['excerpt'].strip():
+                    raise ValueError('Reviewed context requires nonblank citations')
+                citations.append({field: citation[field] for field in
+                                  ('source_id', 'sha256', 'start_line', 'end_line', 'excerpt')})
+            review['citations'] = citations
         body = {'source_bindings': {sid: self._sources[sid]['sha256'] for sid in source_ids},
                 'source_locations': {sid: copy.deepcopy(self._sources[sid]['locations']) for sid in source_ids},
                 'facts': copy.deepcopy(facts),
                 'dependencies': {dep: self._records[dep]['signature'] for dep in dependencies},
-                'unresolved_questions': list(unresolved_questions)}
+                'unresolved_questions': list(unresolved_questions),
+                'required_context': list(required_context), 'context_reviews': reviews}
         self._records[key] = {**body, 'signature': _signature(body)}
         return self.result(key)
 
-    def result(self, key, *, fresh=False):
+    def result(self, key, *, fresh=False, compact=False):
+        """Return declared coverage, never a semantic verdict.
+
+        compact omits facts and review quotes, while retaining bindings and every
+        pending dimension/question in the selected dependency closure.
+        """
         if key not in self._records:
             raise KeyError(key)
         visited, sources, errors = set(), set(), []
@@ -168,7 +207,7 @@ class TaskContext:
                     self._load(source_id, True)
                 except Exception as error:
                     errors.append({'error_type': type(error).__name__})
-        invalid, unresolved = [], []
+        invalid, unresolved, gaps, unassessed = [], [], {}, []
         for name in sorted(visited):
             item = self._records[name]
             if (any(self._sources.get(sid, {}).get('sha256') != digest
@@ -177,8 +216,20 @@ class TaskContext:
                            for dep, digest in item['dependencies'].items())):
                 invalid.append(name)
             unresolved.extend(item['unresolved_questions'])
-        return {'key': key, **copy.deepcopy(self._records[key]),
-                'status': 'stale' if invalid or errors else 'needs_review' if unresolved else 'snapshot_reusable',
+            if not item['required_context']:
+                unassessed.append(name)
+            missing = [dimension for dimension in item['required_context']
+                       if item['context_reviews'].get(dimension, {}).get('status') != 'reviewed']
+            if missing:
+                gaps[name] = missing
+        snapshot_status = 'stale' if invalid or errors else 'snapshot_reusable'
+        closure_status = ('stale' if invalid or errors else 'needs_review' if unresolved or gaps else
+                          'not_assessed' if unassessed else 'declared_covered')
+        record = self._records[key]
+        fields = ('signature', 'source_bindings', 'source_locations') if compact else record.keys()
+        return {'key': key, **{field: copy.deepcopy(record[field]) for field in fields},
+                'snapshot_status': snapshot_status, 'context_gaps': gaps,
+                'closure_status': closure_status, 'unassessed_records': unassessed,
                 'invalid_records': invalid, 'errors': errors, 'unresolved_questions_in_scope': unresolved,
                 'scope': 'Declared facts bound to task snapshots only; not semantic proof or cleanup authorization',
                 'metrics': self.metrics}

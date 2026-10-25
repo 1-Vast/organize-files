@@ -85,13 +85,16 @@ def test_existing_target_is_not_overwritten(tmp_path):
 
 
 def test_overlapping_operations_are_rejected(tmp_path):
-    _, _, plan = make_plan(tmp_path)
+    root, sources, plan = make_plan(tmp_path)
     plan['operations'][0]['target'] = 'notes.txt'
     with pytest.raises(ValueError):
         ops.dry_run(plan)
     plan['operations'][0]['target'] = 'notes.txt/child'
-    with pytest.raises(ValueError, match='overlap'):
+    # POSIX rejects a file used as a parent before the overlap check; Windows
+    # can reach the overlap guard. Both must reject without changing sources.
+    with pytest.raises((ValueError, NotADirectoryError)):
         ops.dry_run(plan)
+    assert {name: (root / name).read_bytes() for name in sources} == sources
 
 
 def test_replacement_source_cannot_also_be_changed(tmp_path):
