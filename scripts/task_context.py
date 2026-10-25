@@ -169,6 +169,8 @@ class TaskContext:
                         or citation.get('sha256') != source['sha256']
                         or citation.get('excerpt') != '\n'.join(source['lines'][start - 1:end])):
                     raise ValueError('Context citations must match an emitted snapshot excerpt')
+                if review['status'] == 'reviewed' and not citation['excerpt'].strip():
+                    raise ValueError('Reviewed context requires nonblank citations')
                 citations.append({field: citation[field] for field in
                                   ('source_id', 'sha256', 'start_line', 'end_line', 'excerpt')})
             review['citations'] = citations
@@ -205,7 +207,7 @@ class TaskContext:
                     self._load(source_id, True)
                 except Exception as error:
                     errors.append({'error_type': type(error).__name__})
-        invalid, unresolved, gaps = [], [], {}
+        invalid, unresolved, gaps, unassessed = [], [], {}, []
         for name in sorted(visited):
             item = self._records[name]
             if (any(self._sources.get(sid, {}).get('sha256') != digest
@@ -214,17 +216,20 @@ class TaskContext:
                            for dep, digest in item['dependencies'].items())):
                 invalid.append(name)
             unresolved.extend(item['unresolved_questions'])
+            if not item['required_context']:
+                unassessed.append(name)
             missing = [dimension for dimension in item['required_context']
                        if item['context_reviews'].get(dimension, {}).get('status') != 'reviewed']
             if missing:
                 gaps[name] = missing
-        status = 'stale' if invalid or errors else 'needs_review' if unresolved or gaps else 'snapshot_reusable'
+        snapshot_status = 'stale' if invalid or errors else 'snapshot_reusable'
+        closure_status = ('stale' if invalid or errors else 'needs_review' if unresolved or gaps else
+                          'not_assessed' if unassessed else 'declared_covered')
         record = self._records[key]
         fields = ('signature', 'source_bindings', 'source_locations') if compact else record.keys()
         return {'key': key, **{field: copy.deepcopy(record[field]) for field in fields},
-                'status': status, 'context_gaps': gaps,
-                'closure_status': (status if status != 'snapshot_reusable' else
-                                   'declared_covered' if record['required_context'] else 'not_assessed'),
+                'snapshot_status': snapshot_status, 'context_gaps': gaps,
+                'closure_status': closure_status, 'unassessed_records': unassessed,
                 'invalid_records': invalid, 'errors': errors, 'unresolved_questions_in_scope': unresolved,
                 'scope': 'Declared facts bound to task snapshots only; not semantic proof or cleanup authorization',
                 'metrics': self.metrics}

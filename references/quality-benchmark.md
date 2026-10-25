@@ -126,13 +126,13 @@ if batch['complete']:
     context.result('finding', fresh=True)  # 重读所选来源及依赖，变化则stale
 ```
 
-`excerpt`/`batch`返回source_id、字节哈希、行号及限长原文；`record`保留这些位置、事实声明、记录依赖与未决问题，不执行LLM自动抽取。`snapshot_reusable`只指已读快照，不能声明磁盘当前无变化；`fresh=True`失败或字节改变不会回退到旧缓存。根及opaque策略固定，改变目标/范围另建context。可信`source_resolver(id)->bytes`仅显式传入，保护项在调用前拒绝；其内部I/O无法计量，大小限制也不能阻止任意外部回调先行读取大文件。缓存不跨进程自动保存；多个工具往返使用同一个已持有context的会话，或将读/抽取/复核合批在一次进程内，不能重新启动Python后声称缓存命中。拟删除仍单独完成当前哈希、全来源覆盖和恢复验收。
+`excerpt`/`batch`返回source_id、字节哈希、行号及限长原文；`record`保留这些位置、事实声明、记录依赖与未决问题，不执行LLM自动抽取。`snapshot_status=snapshot_reusable`只指已读快照，不能声明磁盘当前无变化；`fresh=True`失败或字节改变不会回退到旧缓存。根及opaque策略固定，改变目标/范围另建context。可信`source_resolver(id)->bytes`仅显式传入，保护项在调用前拒绝；其内部I/O无法计量，大小限制也不能阻止任意外部回调先行读取大文件。缓存不跨进程自动保存；多个工具往返使用同一个已持有context的会话，或将读/抽取/复核合批在一次进程内，不能重新启动Python后声称缓存命中。拟删除仍单独完成当前哈希、全来源覆盖和恢复验收。
 
 #### 证据闭包与紧凑输出
 
 对本轮受影响的重要结论，在阅读前按实际问题确定必要维度；通常包括结果、条件、协议、证据等级、限制与执行状态，涉及历史重放再加入重放边界。不适用项在已有审阅中说明理由，不能为获得通过而缩减必要维度。优先核对缺项对应的原文及反例，未知保持待复核；不要重新读无关全文。拟替代/删除资料的全文覆盖规则不变。
 
-`record(required_context=..., context_reviews=...)`在现有任务记录内保存此声明，不建立另一套事实库。维度名称由调用者选择，每项审阅包含`status`（`reviewed`或`unknown`）、具体`note`及非空`citations`。引文使用`excerpt`返回值，工具核对来源归属、已返回的行范围、SHA256和原文；未读、篡改或失效的摘录不能作为新审阅依据。缺失和`unknown`均进入`context_gaps`，依赖中的缺口也使结果保持`needs_review`。
+`record(required_context=..., context_reviews=...)`在现有任务记录内保存此声明，不建立另一套事实库。维度名称由调用者选择，每项审阅包含`status`（`reviewed`或`unknown`）、具体`note`及非空`citations`。引文使用`excerpt`返回值，工具核对来源归属、已返回的行范围、SHA256和原文；未读、篡改或失效的摘录不能作为新审阅依据。缺失和`unknown`均进入`context_gaps`，依赖中的缺口也使`closure_status`保持`needs_review`。`reviewed`引文不能是纯空白。
 
 ```python
 context = TaskContext(root, opaque=('data/raw', 'sealed'))
@@ -148,7 +148,7 @@ brief = context.result('finding', compact=True)
 
 `result(compact=True)`省去事实正文和审阅引文，保留签名、来源哈希/位置、所有未决问题、缺失维度和失效状态；仅在具体决策需要时请求完整结果。它是所选记录的紧凑状态，不是跨调用自动增量传输；调用者只输出本轮需要的记录。`record`返回完整记录便于调试，正常流程不必打印该返回值。完整变化清单仍保存在外部并处理全部影响，不能将stdout预览当作全量。
 
-`closure_status=declared_covered`仅表示已声明的维度有绑定原文且无未决项；它不证明维度选择完整、引文支持解释、报告覆盖充分或审阅独立发生。未声明必要维度时为`not_assessed`，即使`snapshot_reusable`也不能作为重要结论验收。`fresh=True`只重读字节并撤销失效绑定，不自动更新事实或完成语义审阅。阅读侧缺口关闭后，报告仍按`claim_coverage.py`及独立内容审阅核验；这两种检查不能互代。
+`result`不再返回含混的通用`status`：`snapshot_status`仅回答缓存绑定是否可复用，`closure_status`回答整个依赖闭包的已声明维度是否完成。任一传递依赖未声明必要维度，会列入`unassessed_records`并阻止`declared_covered`；无其他缺口时返回`not_assessed`。`closure_status=declared_covered`仅表示声明绑定齐备，它不证明维度选择完整、引文支持解释、报告覆盖充分或审阅独立发生，也不是任务完成许可。重要报告由独立内容审阅者从原始资料重新检查条件与反例，不能只核对同一整理者声明的维度。审阅缺口须补齐或明确部分完成，不能由缓存状态放行。`fresh=True`只重读字节并撤销失效绑定，不自动更新事实或完成语义审阅。阅读侧缺口关闭后，报告仍按`claim_coverage.py`及独立内容审阅核验；这两种检查不能互代。
 
 结束一个修改步骤时，将已核验输入、命令/环境身份和修改后产物摘要记入外部任务状态一次，后续复用同一条记录；只有源文件摘要而缺少修改后报告绑定，不能直接继承报告验收。使用`TaskContext`时，先摘录修改后报告，将报告路径与来源一起列入验收记录的`source_ids`，需要当前身份时调用`result(..., fresh=True, compact=True)`；报告变更也会使记录stale。范围/环境改变则另行复核，不能只靠字节判定。这些状态用于本任务接续，不是项目内新增报告；无法匹配时补足必要核验，而非默认再次全文综合。
 

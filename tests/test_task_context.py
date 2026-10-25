@@ -41,9 +41,9 @@ def test_fresh_reads_detect_same_size_and_restored_mtime_changes(tmp_path):
     path.write_bytes(b'new result\n')
     os.utime(path, ns=(metadata.st_atime_ns, metadata.st_mtime_ns))
     assert context.excerpt('report.md')['sha256'] == initial['sha256']
-    assert context.result('claim')['status'] == 'snapshot_reusable'
+    assert context.result('claim')['snapshot_status'] == 'snapshot_reusable'
     result = context.result('claim', fresh=True)
-    assert result['status'] == 'stale'
+    assert result['snapshot_status'] == 'stale'
     assert context.metrics['payload_files_opened'] == 2
 
 
@@ -55,10 +55,10 @@ def test_dependencies_and_unresolved_questions_control_reuse(tmp_path):
     context.record('report', ['result.txt'], facts={'decision': 'stop'}, dependencies=['experiment'])
     context.record('experiment', ['result.txt'], facts={'outcome': 'unresolved'}, unresolved_questions=['Which protocol?'])
     result = context.result('report')
-    assert result['status'] == 'stale' and result['invalid_records'] == ['report']
+    assert result['snapshot_status'] == 'stale' and result['invalid_records'] == ['report']
     assert result['unresolved_questions_in_scope'] == ['Which protocol?']
     context.record('report', ['result.txt'], facts={'decision': 'pending'}, dependencies=['experiment'])
-    assert context.result('report')['status'] == 'needs_review'
+    assert context.result('report')['closure_status'] == 'needs_review'
 
 
 @pytest.mark.parametrize('sid', ['sealed/outcome.txt', 'Data/Raw/input.txt', '.git/config',
@@ -90,8 +90,8 @@ def test_batch_partial_failure_and_fresh_failure_cannot_reuse_old_source(tmp_pat
     assert [r['request_index'] for r in result['results']] == [0, 1]
     context.record('claim', ['report.md'], facts={'result': 'old'})
     path.unlink()
-    assert context.result('claim', fresh=True)['status'] == 'stale'
-    assert context.result('claim')['status'] == 'stale'
+    assert context.result('claim', fresh=True)['snapshot_status'] == 'stale'
+    assert context.result('claim')['snapshot_status'] == 'stale'
 
 
 def test_returned_facts_cannot_mutate_record_and_new_task_rereads(tmp_path):
@@ -163,7 +163,7 @@ def test_updating_record_cannot_introduce_dependency_cycle(tmp_path):
     context.record('B', ['report.md'], facts={'step': 'B'}, dependencies=['A'])
     with pytest.raises(ValueError, match='cycle'):
         context.record('A', ['report.md'], facts={'step': 'A'}, dependencies=['B'])
-    assert context.result('B')['status'] == 'snapshot_reusable'
+    assert context.result('B')['snapshot_status'] == 'snapshot_reusable'
 
 
 def test_nonregular_path_rejected_before_payload_open(tmp_path):
@@ -187,7 +187,7 @@ def test_record_iterators_cannot_silently_drop_sources_or_questions(tmp_path):
     result = context.record('claim', iter(['report.md']), facts={'result': 'pending'},
                             unresolved_questions=iter(['What condition?']))
     assert result['source_bindings'].keys() == {'report.md'}
-    assert result['status'] == 'needs_review'
+    assert result['closure_status'] == 'needs_review'
     with pytest.raises(ValueError, match='selected sources'):
         context.record('empty', iter([]), facts={})
 
@@ -199,12 +199,12 @@ def test_required_context_gaps_survive_compaction_and_dependencies(tmp_path):
     recorded = context.record('claim', ['report.md'], facts={'result': 0.70},
                               required_context=iter(['result', 'conditions', 'replay']),
                               context_reviews={'result': {'status': 'reviewed', 'note': 'Observed value', 'citations': [result]}})
-    assert recorded['status'] == 'needs_review'
+    assert recorded['closure_status'] == 'needs_review'
     assert recorded['context_gaps'] == {'claim': ['conditions', 'replay']}
     context.record('report', ['report.md'], facts={'text': 'x' * 10000}, dependencies=['claim'])
     brief = context.result('report', compact=True)
     full = context.result('report')
-    for field in ('status', 'closure_status', 'context_gaps', 'signature', 'source_bindings', 'source_locations'):
+    for field in ('snapshot_status', 'closure_status', 'unassessed_records', 'context_gaps', 'signature', 'source_bindings', 'source_locations'):
         assert brief[field] == full[field]
     assert brief['closure_status'] == 'needs_review'
     assert 'facts' not in brief and 'context_reviews' not in brief
@@ -264,9 +264,9 @@ def test_new_review_invalidates_dependent_record_until_rebound(tmp_path):
     context.record('summary', ['report.md'], facts={}, dependencies=['claim'])
     context.record('claim', ['report.md'], facts={}, required_context=['conditions'], context_reviews={
         'conditions': {'status': 'reviewed', 'note': 'Limited to shared latents', 'citations': [citation]}})
-    assert context.result('summary', compact=True)['status'] == 'stale'
+    assert context.result('summary', compact=True)['snapshot_status'] == 'stale'
     context.record('summary', ['report.md'], facts={}, dependencies=['claim'])
-    assert context.result('summary')['status'] == 'snapshot_reusable'
+    assert context.result('summary')['snapshot_status'] == 'snapshot_reusable'
     assert context.result('summary')['closure_status'] == 'not_assessed'
 
 
@@ -281,7 +281,7 @@ def test_questions_and_failed_refresh_remain_visible_in_compact_output(tmp_path)
     assert context.result('claim', compact=True)['closure_status'] == 'needs_review'
     path.unlink()
     result = context.result('claim', fresh=True, compact=True)
-    assert result['status'] == 'stale' and result['errors']
+    assert result['snapshot_status'] == 'stale' and result['errors']
     assert result['unresolved_questions_in_scope'] == ['Which protocol produced this result?']
 
 
@@ -292,7 +292,8 @@ def test_unknown_context_cannot_pass_even_without_an_extra_question(tmp_path):
     context.record('claim', ['report.md'], facts={}, required_context=['protocol'], context_reviews={
         'protocol': {'status': 'unknown', 'note': 'No protocol in retained record', 'citations': [citation]}})
     result = context.result('claim', fresh=True, compact=True)
-    assert result['status'] == result['closure_status'] == 'needs_review'
+    assert result['snapshot_status'] == 'snapshot_reusable'
+    assert result['closure_status'] == 'needs_review'
     assert result['context_gaps'] == {'claim': ['protocol']}
 
 
@@ -310,3 +311,32 @@ def test_unchanged_refresh_preserves_citations_but_changed_bytes_reject_them(tmp
     context.result('claim', fresh=True)
     with pytest.raises(ValueError, match='citations'):
         context.record('claim', ['report.md'], facts={}, required_context=['conditions'], context_reviews=review)
+
+
+def test_unassessed_transitive_dependency_cannot_close_reviewed_result(tmp_path):
+    (tmp_path / 'source.md').write_text('Effect only at low dose\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    quote = context.excerpt('source.md')
+    review = {'result': {'status': 'reviewed', 'note': 'Observed effect', 'citations': [quote]}}
+    context.record('dose', ['source.md'], facts={'dose': 'not checked'})
+    context.record('experiment', ['source.md'], facts={}, dependencies=['dose'],
+                   required_context=['result'], context_reviews=review)
+    context.record('report', ['source.md'], facts={}, dependencies=['experiment'],
+                   required_context=['result'], context_reviews=review)
+    result = context.result('report', fresh=True, compact=True)
+    assert result['snapshot_status'] == 'snapshot_reusable'
+    assert result['closure_status'] == 'not_assessed'
+    assert result['unassessed_records'] == ['dose']
+    assert 'status' not in result  # No ambiguous generic success flag.
+
+
+def test_blank_citation_cannot_mark_context_reviewed(tmp_path):
+    (tmp_path / 'source.md').write_text('Result\n \t\n', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    quote = context.excerpt('source.md', 2, 2)
+    review = {'conditions': {'status': 'reviewed', 'note': 'Missing', 'citations': [quote]}}
+    with pytest.raises(ValueError, match='nonblank'):
+        context.record('claim', ['source.md'], facts={}, required_context=['conditions'], context_reviews=review)
+    review['conditions']['status'] = 'unknown'
+    result = context.record('claim', ['source.md'], facts={}, required_context=['conditions'], context_reviews=review)
+    assert result['closure_status'] == 'needs_review'
