@@ -13,6 +13,7 @@ import hashlib
 import json
 
 import evidence_index as evidence
+from workspace_scout import _sensitive
 
 
 def _signature(value):
@@ -47,7 +48,8 @@ class TaskContext:
 
     def _load(self, source_id, fresh=False):
         evidence.relative_path(source_id)
-        if evidence.exclusion_reason(source_id, self.opaque):
+        if (evidence.exclusion_reason(source_id, self.opaque)
+                or any(_sensitive(part) for part in source_id.split('/'))):
             raise ValueError('Protected or opaque source is outside the read boundary')
         if not fresh and source_id in self._sources:
             self._metrics['cache_hits'] += 1

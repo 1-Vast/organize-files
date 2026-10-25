@@ -60,13 +60,23 @@ def test_dependencies_and_unresolved_questions_control_reuse(tmp_path):
     assert context.result('report')['status'] == 'needs_review'
 
 
-@pytest.mark.parametrize('sid', ['sealed/outcome.txt', 'Data/Raw/input.txt', '.git/config', 'passwords.txt', '../outside'])
+@pytest.mark.parametrize('sid', ['sealed/outcome.txt', 'Data/Raw/input.txt', '.git/config',
+                                'passwords.txt', '../outside', '.npmrc', '.pypirc', 'tokens/session.txt'])
 def test_protected_and_opaque_sources_never_call_resolver(tmp_path, sid):
     calls = []
     context = tool.TaskContext(tmp_path, opaque=('data/raw',), source_resolver=lambda name: calls.append(name) or b'data')
     result = context.batch([{'source_id': sid}])
     assert result['complete'] is False and not calls
     assert context.metrics['resolver_calls'] == 0
+
+
+@pytest.mark.parametrize('sid', ['.npmrc', '.pypirc'])
+def test_sensitive_configuration_is_rejected_before_local_open(tmp_path, sid):
+    (tmp_path / sid).write_text('synthetic-config', encoding='utf-8')
+    context = tool.TaskContext(tmp_path)
+    with pytest.raises(ValueError, match='Protected or opaque'):
+        context.excerpt(sid)
+    assert context.metrics['payload_files_opened'] == 0
 
 
 def test_batch_partial_failure_and_fresh_failure_cannot_reuse_old_source(tmp_path):
