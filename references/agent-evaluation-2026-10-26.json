@@ -1958,5 +1958,23 @@
         "skill_unchanged": true
       }
     }
-  ]
+  ],
+  "evidence_availability": {
+    "observed_utc": "2026-10-26T00:43:10.221822+00:00",
+    "raw_call_traces": "not_available_at_last_scoped_check",
+    "original_trial_payloads": "not_available_at_last_scoped_check",
+    "cause": "unknown",
+    "historical_measurements_retained": true,
+    "raw_recomputation_currently_available": false,
+    "semantic_rereview_original_outputs_currently_available": false,
+    "hashes_do_not_recover_raw_payloads": true,
+    "surviving_evidence_copy": {
+      "files": 22,
+      "hash_verification": "passed",
+      "raw_evidence_recovered": false,
+      "location": "private durable external directory"
+    },
+    "handoff_materials": "not_available_at_last_scoped_check",
+    "scope": "Availability correction only; historical audited numerical results unchanged. Original private research project was not the missing temporary trial directory."
+  }
 }

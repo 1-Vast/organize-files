@@ -72,12 +72,14 @@ python scripts/benchmark_organization.py --trace C:/temporary/rollout.jsonl
 
 此入口只在明确评价Skill时运行，日常整理不调用。`scripts/create_agent_fixture.py`生成由独立评价者编写的两个合成科研项目、三阶段输入与隐藏答案；它们不是未见真实项目，也不是15个独立案例。初次整理、无变化、局部增量各5组配对，同一阶段从相同独立快照开始，维护阶段也是新上下文，不能代表延续聊天的暖缓存收益。
 
+评价根使用授权的项目外持久目录，不把系统Temp当作原始轨迹、输入、产物和独立答案的唯一保留点。归档后核对文件清单、实际可读字节与哈希；再次汇总前重查原件是否仍在。只剩汇总或哈希时保留历史观察，但明确不能重算原调用或重审原产物，不能据此声称评价已可复现。此要求仅用于评价材料，不给普通整理增加归档流程。
+
 ```powershell
-python scripts/create_agent_fixture.py --out D:/temporary/agent-suite/oracle
+python scripts/create_agent_fixture.py --out D:/Evaluation/organize-files/study-001/oracle
 # 把两个已审阅的固定Git提交分别导出到项目外variants/baseline及variants/candidate
 # 在suite根写variants.json：{"baseline":["baseline","<commit>"],"candidate":["candidate","<commit>"]}
-python scripts/run_agent_benchmark.py --suite-root D:/temporary/agent-suite --model <固定模型名>
-python scripts/benchmark_agent_results.py --suite-root D:/temporary/agent-suite
+python scripts/run_agent_benchmark.py --suite-root D:/Evaluation/organize-files/study-001 --model <固定模型名>
+python scripts/benchmark_agent_results.py --suite-root D:/Evaluation/organize-files/study-001
 ```
 
 运行器使用已安装并已认证的Codex CLI，固定high推理设置，种子20261025随机安排顺序。两个独立配对并发，每对内部两版本顺序执行；共享服务调度仍会影响耗时。每次整理/评价调用上限240秒，每项失败最多追加一轮修复；超时、失败、重试和评价成本全部保留。旧的工具读取预试验与正式完整快照评价分开，不混算。比较版本必须在启动前冻结，不把后来修改的规则套用到较早测量。
