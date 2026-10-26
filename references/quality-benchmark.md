@@ -16,63 +16,9 @@ python -m pytest tests/test_research_benchmark.py tests/test_organization_ops.py
 
 **自动验收边界**：参考报告由测试预设，工具不会自行判断每句话是否完整、结论是否正确或接手者是否理解。结构化 `coverage` / `review` 字段只是审查声明；不是独立审查已经发生的证明。回滚包能恢复原文，也不能证明综合报告覆盖了原文。
 
-## 工具的最小输入与调用
+## 工具性能与工程回归
 
-需要精确文件操作时，准备 JSON 计划。下例中的哈希必须替换为实际源文件 SHA256；工作根必须为真实绝对目录。目标不能覆盖既有文件：
-
-```json
-{
-  "schema": 1,
-  "root": "D:/Research",
-  "protected_sources": ["data/raw", "frozen", "reserved"],
-  "operations": [{
-    "op": "move", "source": "notes/result.md", "target": "reports/result.md",
-    "sha256": "<64位小写SHA256>", "reason": "归入现行报告位置"
-  }]
-}
-```
-
-`remove` 不需 target，但必须增加 `evidence: {"coverage": "保留位置与逐项覆盖依据", "review": "审查记录"}`；`replace` 还需 `replacement` 和 `replacement_sha256`，指向工作根内预先准备的替代文件。声明不能取代实际审阅。每个计划按可独立核验的范围编制，不以一个巨型计划替代小批次。
-
-`protected_sources` 是项目相对路径前缀，同时限制源、目标和替代源，工具在读取payload前检查；默认还保护明显封存、凭据、Git与环境文件名。必须声明项目中名字不可识别的保护范围，工具不能自行推断所有科研语义。新版恢复包封存计划/保护前缀，回滚拒绝仅编辑state放宽范围；旧版无此绑定的包不自动回滚，可在隔离位置审查恢复，不能宣称与新版具有同等保证。
-
-```powershell
-python scripts/organization_ops.py dry-run D:/temporary/plan.json
-python scripts/organization_ops.py apply D:/temporary/plan.json --state-dir D:/temporary/new-recovery-state
-python scripts/organization_ops.py rollback D:/temporary/new-recovery-state
-```
-
-状态目录必须是工作根外的新目录。恢复包须保留到验收完成；回滚会检查恢复包和当前文件，遇后续修改或无法判明的丢失状态会拒绝自动覆盖。需要从完整恢复包取回独立文件时，先恢复到隔离位置再审阅，不把自动拒绝当成恢复包已丢失。该工具不管理空目录、不保留旧路径接口，也不解除环境审批。
-
-关键证据关系可加入现有索引，最小结构如下；同一份 JSON 可保留其他业务字段：
-
-```json
-{
-  "schema_version": 1,
-  "objects": [
-    {"id": "experiment:01", "kind": "experiment", "status": "completed", "stage": "exploration", "sources": [{"path": "results/run.json"}]},
-    {"id": "claim:01", "kind": "claim", "status": "scoped", "sources": [{"path": "reports/findings.md"}]}
-  ],
-  "relations": [{"from": "experiment:01", "to": "claim:01", "type": "supports"}],
-  "excluded_sources": ["sealed"]
-}
-```
-
-来源 path 使用项目相对 POSIX 路径，可增加 sha256 约束或 `protected: true` 声明。supports/contradicts/supersedes 从 from 向 to 传播复核，depends_on 从 to 向 from 传播。stage 可选 exploration、validated_method、formal_result；这是已有研究状态的登记，不由工具自动晋升。
-
-```powershell
-# 需要快照时只调用snapshot并检查errors/verification_complete；不保存快照时才改用validate
-python scripts/evidence_index.py snapshot --index D:/Research/INDEX.json --root D:/Research --out D:/temporary/before.json
-# 只筛选候选，不读取来源payload；所有对象仍未验证
-python scripts/evidence_index.py scan --index D:/Research/INDEX.json --root D:/Research --previous D:/temporary/before.json --out D:/temporary/candidates.json
-# 在实际新增/修改发生后重新生成 after 快照
-python scripts/evidence_index.py snapshot --index D:/Research/INDEX.json --root D:/Research --out D:/temporary/after.json
-python scripts/evidence_index.py impact --before D:/temporary/before.json --after D:/temporary/after.json
-```
-
-`direct_changes` 是严格快照的实际变化；`invalid_objects` 包含当前仍缺失或哈希错误的对象，即使两次快照相同也进入 `review_required`。`reusable_objects` 只说明此索引中严格校验后的结构未变、无绑定错误且无未验证来源依赖；保护来源及其依赖保持 `unverified_objects`，不列入可复用。`impact` 拒绝metadata scan输入。
-
-`scan` 比较size、mtime/ctime和文件身份等元数据，返回candidate_sources/changed_sources/needs_strict_verification；旧快照缺元数据时作为需严格复核候选。即使元数据一致，内容仍可能变更，全部对象继续未验证，不能拿scan替代删除前哈希或冻结证据认证。validate/snapshot保留完整哈希及读取前后状态检查。metrics仅统计来源payload读取/哈希和显式stat，不包括索引JSON读取、路径检查、操作系统缓存和Agent阅读开销。
+日常参数及最小输入见[工具示例](tool-recipes.md)，普通整理无需加载本评价协议。
 
 使用 `python scripts/benchmark_organization.py --index D:/Research/INDEX.json --root D:/Research --repeats 3` 对同一选择范围输出两次strict和一次scan的耗时与I/O。固定顺序受缓存影响；零payload读取不证明内容未变，也不证明整个整理或LLM Token提速。规模操作比较可将7b54715的脚本导出为外部本地baseline，在相同输入/路径深度/磁盘比较预演；不得为提高成绩移除并发检查或恢复验证。时间报告观测值，不在回归中断言脆弱秒数。
 
@@ -95,7 +41,7 @@ python scripts/benchmark_organization.py --operations 100 --baseline-ops "$env:T
 
 #### 质量约束下的配对性能评价
 
-PR #3的单次真实文本试用存在两版条件遗漏及不同重试，不能作为同质量提速结论。下一轮先在合成反例上调试，再固定未用于开发的项目、事实答案、初始字节、模型、环境、预算和验收规则，评价者单独持有答案。至少覆盖首次整理、无变化、局部增量和条件缺失/矛盾情形。当前自动回归只检验预设声明及绑定行为，不算未见项目Agent评价。
+PR #3的单次真实文本试用存在两版条件遗漏及不同重试，不能作为同质量提速结论。下一轮先在合成反例上调试，再固定未用于开发的项目、事实答案、初始字节、模型、provider／调用入口、环境、预算和验收规则，评价者单独持有答案。至少覆盖首次整理、无变化、局部增量和条件缺失/矛盾情形。当前自动回归只检验预设声明及绑定行为，不算未见项目Agent评价。
 
 需要决定保留哪些优化时，用同一修复版本作配对消融：固定质量义务，比较完整策略与分别关闭自适应阅读、任务内复用、紧凑输出的变体，每次只改变一项。所有变体仍须处理完整变化清单，不能用截断清单作为对照。先检查实际调用轨迹确实触发差异；未调用某接口的运行不能证明其收益。跨进程缓存仅在轨迹证实重复读取成本后另作设计。
 
@@ -103,19 +49,11 @@ PR #3的单次真实文本试用存在两版条件遗漏及不同重试，不能
 
 从真实用量记录分别报告输入、缓存输入、输出Token、调用数、源读取/哈希次数及读取字节；缺测写N/A，序列化字节减少不等于Token减少。保存代码提交、输入/产物身份和匿名结果于外部任务目录，必要汇总进入仓库既有报告。30%–50%仅为待检验目标；没有完成这些对照时，交付明确标注“工程验证通过，端到端收益未测”。
 
+工具计量区分外层编排调用、实际提交的底层命令和带退出状态的结构化回执；一个编排调用可以合批多个命令。只打印工具返回的正文会丢失回执元数据，回执数不能当作命令数，也不能把缺失退出码填0。仅从命令文本可确定的循环展开计为已提交调用，并保留审计依据；实际文件读取次数、字节和重复I/O没有可靠观测仍为N/A。新[真实代码增量试验](code-incremental-evaluation-2026-10-26.md)展示了此区别，仅供评价时参考。
+
 真实比较分别固定首次深度整理、无变化二次检查、局部增量三个任务。每类用同一初始快照、模型、工具/质量约束和预算，对比原版与新版，评价者单独持有事实答案；记录从接收任务到验收的墙钟、实际调用/Token、重复读取、事实覆盖、证据恢复与当前行为。局部增量应检查受影响对象没有漏查、无关主题没有重写；快速结束应检查未决问题和深度请求不会被跳过。未执行同条件Agent对照时，工具计时与人工策略描述不能填作端到端收益。
 
-先读入口与存储政策，明确 `--opaque` 后盘点一次；本轮无目录变化就复用结果。示例快照必须在项目外，包含文件元数据及必要排除范围，不能上传原始会话日志：
-
-```powershell
-python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --snapshot-out C:/temporary/before.json
-# 一次遍历同时保存after及全部变化；输出均在项目外且互不覆盖
-python scripts/workspace_scout.py --root D:/Research --opaque data/raw --opaque data/external --opaque tmp --previous C:/temporary/before.json --snapshot-out C:/temporary/after.json --changes-out C:/temporary/changes.json
-```
-
-第二次仍遍历未排除目录，变化报告只用于挑选候选。`entry_stat_calls` 是目录项stat接口调用次数，未等价于底层磁盘I/O；`source_payload_files_opened=0`仅针对盘点。默认保护不能识别项目所有语义，必须先显式排除数据/包/环境；快照大小写按平台规则处理，不能借父级链接写回项目内。
-
-默认stdout只保留`change_preview`及每类`change_preview_truncated`，截断不是变化范围。API调用`delta(..., include_changes=True)`取得完整`change_paths`，或读取`--changes-out`中的`changes`；仅含baseline/added/metadata_changed/missing，不把未变全量路径再次送入上下文。敏感文件、目录和链接均仅计数，不记录敏感相对名。
+盘点与完整变化清单的命令见[元数据盘点](tool-recipes.md#元数据盘点)。
 
 将实际流程分段记录在外部任务目录：盘点/快照，来源读取与哈希，Agent理解/综合，计划执行/恢复同步，质量检查及发布等待。记录工具调用、分析对象和重复读取；没有可靠的文件读取/模型计量时，相关指标写N/A，不用字符数推算Token。只重查变化对象及依赖；批量读必要引文并保留来源/行号，避免先输出整份报告、随后逐段重读。严格快照、事实门控可在同一短进程共享已固定身份的来源字节；活文件、删除前或无法证实稳定时仍重新核验。源读取器调用数、唯一源读取数及缓存命中分别记录，不能混为零读取。
 
@@ -136,12 +74,14 @@ python scripts/benchmark_organization.py --trace C:/temporary/rollout.jsonl
 
 此入口只在明确评价Skill时运行，日常整理不调用。`scripts/create_agent_fixture.py`生成由独立评价者编写的两个合成科研项目、三阶段输入与隐藏答案；它们不是未见真实项目，也不是15个独立案例。初次整理、无变化、局部增量各5组配对，同一阶段从相同独立快照开始，维护阶段也是新上下文，不能代表延续聊天的暖缓存收益。
 
+评价根使用授权的项目外持久目录，不把系统Temp当作原始轨迹、输入、产物和独立答案的唯一保留点。归档后核对文件清单、实际可读字节与哈希；再次汇总前重查原件是否仍在。只剩汇总或哈希时保留历史观察，但明确不能重算原调用或重审原产物，不能据此声称评价已可复现。此要求仅用于评价材料，不给普通整理增加归档流程。
+
 ```powershell
-python scripts/create_agent_fixture.py --out D:/temporary/agent-suite/oracle
+python scripts/create_agent_fixture.py --out D:/Evaluation/organize-files/study-001/oracle
 # 把两个已审阅的固定Git提交分别导出到项目外variants/baseline及variants/candidate
 # 在suite根写variants.json：{"baseline":["baseline","<commit>"],"candidate":["candidate","<commit>"]}
-python scripts/run_agent_benchmark.py --suite-root D:/temporary/agent-suite --model <固定模型名>
-python scripts/benchmark_agent_results.py --suite-root D:/temporary/agent-suite
+python scripts/run_agent_benchmark.py --suite-root D:/Evaluation/organize-files/study-001 --model <固定模型名>
+python scripts/benchmark_agent_results.py --suite-root D:/Evaluation/organize-files/study-001
 ```
 
 运行器使用已安装并已认证的Codex CLI，固定high推理设置，种子20261025随机安排顺序。两个独立配对并发，每对内部两版本顺序执行；共享服务调度仍会影响耗时。每次整理/评价调用上限240秒，每项失败最多追加一轮修复；超时、失败、重试和评价成本全部保留。旧的工具读取预试验与正式完整快照评价分开，不混算。比较版本必须在启动前冻结，不把后来修改的规则套用到较早测量。
@@ -149,6 +89,10 @@ python scripts/benchmark_agent_results.py --suite-root D:/temporary/agent-suite
 评价者使用单独的新上下文，取得完整的前后文本快照、行号、哈希、文件清单和隐藏答案；按语义审阅，不以关键词或整理者自评替代。保护二进制不进入模型上下文，由运行器独立核对其路径和字节；同时核对无关主题、Skill字节及无变化阶段的改写。原草稿可按任务修订，不能以原草稿字节变化直接判为科学信息丢失；可恢复性及更正历史由内容审阅检查。无变化阶段使用严格操作门槛：任一尝试结束时观察到字节变化，即使后续尝试恢复，也保留失败；它不判断改动是否必要，合理引用修补也可能触发，不能直接等同科学内容错误。同一次尝试内写后恢复可能逃过字节门槛，须另查mtime和执行轨迹；仅mtime变化单列为操作扰动。执行轨迹仍需独立审查，才能判断是否违反实验/联网/读取范围限制。
 
 `result.json`保存各次worker和review的真实用量及时长，汇总器保留失败分母、全部纠错和评价成本，Token缺测为null；不接受缺臂、缺结果、空完成标记、遗漏质量字段或低于串行调用总成本的端到端时间。性能差值只取输入与设置匹配、双方最终质量门槛均通过的配对；同时报告全部运行的分布和正确完成率，避免挑选幸存样本。结果身份和检查有效性是声明绑定，自动评价仍需独立抽查。仅发布匿名统计、协议和复现资源，原始模型日志留在外部。
+
+外部中断已确认终止时，保留该计划任务为失败及原轨迹，不删除或伪装成未运行。若只剩最后事件的耗时下界，在结果中声明`duration_complete=false`，已有`seconds`值仅作为下界；汇总将精确耗时置null、另存`duration_lower_bounds`，组内分布明确观测/缺测数。即使后续内容通过，计时不全的配对仍不能用于性能结论。未发生的评价调用标明`not_called=true`，无调用的用量为0；已调用但缺测的worker用量保持null。进程或工具句柄仍存活时先观察原运行，不能因一次观察超时就另起重复试验。
+
+CLI明确返回用量／额度限制时，运行器保留已发生的失败调用，跳过尚未调用的评价者，不追加修复，也不启动后续计划任务；并发中已经开始的调用仍保留其结果。未启动项留在原调度表，不能充作成功或内容失败。普通内容缺陷仍允许一轮修复，普通连接错误不自动等同额度耗尽。资源恢复前不连续重试；额度拒绝耗时只算终止成本，不得解释为更快完成科研整理。
 
 ## 三组同输入对照
 

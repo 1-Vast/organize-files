@@ -1958,5 +1958,51 @@
         "skill_unchanged": true
       }
     }
-  ]
+  ],
+  "evidence_availability": {
+    "observed_utc": "2026-10-26T01:06:22.723714+00:00",
+    "initial_loss_observation_utc": "2026-10-26T00:43:10.221822+00:00",
+    "raw_call_traces": "original_cli_streams_unavailable_native_session_logs_recovered",
+    "original_trial_payloads": "partial_exact_sha256_objects_and_snapshots_recovered",
+    "cause": "unknown",
+    "historical_measurements_retained": true,
+    "raw_recomputation_currently_available": false,
+    "raw_recomputation_scope": "Complete original CLI invocation ledger and external clocks not restored. Bounded native response usage is recomputable separately.",
+    "semantic_rereview_original_outputs_currently_available": false,
+    "semantic_rereview_scope": "Some exact snapshots can be rereviewed; complete original-cohort coverage is not restored.",
+    "hashes_do_not_recover_raw_payloads": true,
+    "surviving_evidence_copy": {
+      "files": 22,
+      "hash_verification": "passed",
+      "raw_evidence_recovered": false,
+      "location": "private durable external directory"
+    },
+    "native_session_recovery": {
+      "joint_archive_files": 256,
+      "joint_archive_bytes": 71096936,
+      "this_report_family_files": 77,
+      "copy_sha256_verification": "passed_and_independently_rehashed",
+      "joint_unique_response_usage_records": 472,
+      "joint_multi_turn_sessions": 60,
+      "duplicate_session_hash_or_response_ids_found": false,
+      "limit": "Session counts are not invocation or trial counts. Native session logs are not byte-identical missing CLI stdout streams or external process timing."
+    },
+    "joint_exact_object_recovery": {
+      "objects": 114,
+      "project_objects": 112,
+      "original_rubric_and_guide_objects": 2,
+      "limit": "Objects span both studies and repeated snapshots; not 114 whole inputs or experiments. Three mixed-newline source objects recovered from native tool raw output, all matching pre-loss SHA256."
+    },
+    "handoff_materials": {
+      "public_prompt": "literal_size_and_readback_supported_original_independent_hash_not_found",
+      "private_rubric": "new_recovered_version_original_byte_identity_not_claimed",
+      "questions": 4,
+      "citations_verified_against_exact_sources": 26,
+      "initial_packet_files_exact": 11,
+      "original_file_metadata_recovered": false,
+      "fresh_handoff_evaluation": "separate_study_if_executed_not_implied_by_recovery"
+    },
+    "scope": "Private durable external recovery only. Original temporary-root disappearance remains observed; no recovered private content uploaded. Original research project not modified.",
+    "legacy_input_limit": "Text objects recovered; each synthetic input still lacks one omitted protected binary payload. No complete raw-cohort recomputation claimed."
+  }
 }
