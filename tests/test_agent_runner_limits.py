@@ -31,7 +31,7 @@ def prepared(tmp_path, monkeypatch):
     return {'run_id': 'one', 'pair_id': 'first-1', 'stage': 'first', 'case': 'example', 'arm': 'candidate'}
 
 
-def fake_process(monkeypatch, *, limit_role=None):
+def fake_process(monkeypatch, *, limit_role=None, limit_message='You have hit your usage limit.'):
     calls = []
 
     class Process:
@@ -43,7 +43,7 @@ def fake_process(monkeypatch, *, limit_role=None):
 
         def communicate(self, prompt, timeout):
             if self.role == limit_role:
-                event = {'type': 'error', 'message': 'You have hit your usage limit.'}
+                event = {'type': 'error', 'message': limit_message}
                 self.output.write(json.dumps(event) + '\n')
             else:
                 self.output.write(json.dumps({'type': 'thread.started', 'thread_id': 'test-session'}) + '\n')
@@ -63,15 +63,28 @@ def test_actual_error_event_detects_explicit_usage_limit():
     assert runner.resource_limited([{'type': 'turn.failed', 'error': {'message': 'usage_limit_exceeded'}}])
 
 
+@pytest.mark.parametrize('event', [
+    {'type': 'error', 'message': 'Your workspace is out of credits. Add credits to continue.'},
+    {'type': 'turn.failed', 'error': {'message': 'Your workspace is out of credits. Add credits to continue.'}},
+])
+def test_workspace_credit_exhaustion_stops_calls(event):
+    assert runner.resource_limited([event])
+
+
 def test_source_mentions_and_transient_errors_do_not_stop_the_suite():
     assert not runner.resource_limited([
         {'type': 'item.completed', 'item': {'type': 'agent_message', 'text': 'usage limit'}},
+        {'type': 'item.completed', 'item': {'type': 'agent_message', 'text': 'Your workspace is out of credits.'}},
         {'type': 'error', 'message': 'Temporary connection error'},
     ])
 
 
-def test_worker_limit_preserves_failure_without_review_repair_or_new_trial(prepared, monkeypatch):
-    calls = fake_process(monkeypatch, limit_role='worker')
+@pytest.mark.parametrize('limit_message', [
+    'You have hit your usage limit.',
+    'Your workspace is out of credits. Add credits to continue.',
+])
+def test_worker_limit_preserves_failure_without_review_repair_or_new_trial(prepared, monkeypatch, limit_message):
+    calls = fake_process(monkeypatch, limit_role='worker', limit_message=limit_message)
     runner.run_trial(prepared)
     record = json.loads((runner.ROOT / 'trials/one/result.json').read_text())
     assert calls == ['worker']

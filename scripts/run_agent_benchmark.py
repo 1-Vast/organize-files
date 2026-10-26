@@ -39,7 +39,9 @@ def resource_limited(events):
         if row.get('type') not in ('error', 'turn.failed'):
             continue
         message = str(row.get('message', '') or row.get('error', {}).get('message', '')).lower()
-        if 'usage limit' in message or 'usage_limit_exceeded' in message or 'insufficient_quota' in message:
+        if any(marker in message for marker in (
+                'usage limit', 'usage_limit_exceeded', 'insufficient_quota',
+                'your workspace is out of credits')):
             return True
     return False
 

@@ -4588,8 +4588,5531 @@
       "result": null
     },
     "quota_stop_live_retest": {
-      "status": "not_done_resources_unavailable",
-      "offline_regression": "passed"
+      "status": "New credit wording bypassed first fix; observed runtime error now recognized offline.",
+      "offline_regression": "8 focused runner tests passed; final full tree validation reported separately.",
+      "live_postfix_retest": null
     }
+  },
+  "supplementary_cohort": {
+    "schema_version": 1,
+    "runs": [
+      {
+        "run_id": "follow-001",
+        "pair_id": "first-follow-3",
+        "stage": "first",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": true,
+        "attempts": 1,
+        "first_pass": true,
+        "content_review_passed": true,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 156.49708069999906,
+        "worker_seconds": 136.09057619999658,
+        "review_seconds": 20.32578060000378,
+        "repair_seconds": 0,
+        "tokens": {
+          "input_tokens": 240504,
+          "cached_input_tokens": 158208,
+          "output_tokens": 5328
+        },
+        "worker_tokens": {
+          "input_tokens": 198675,
+          "cached_input_tokens": 158208,
+          "output_tokens": 5066
+        },
+        "review_tokens": {
+          "input_tokens": 41829,
+          "cached_input_tokens": 0,
+          "output_tokens": 262
+        },
+        "worker_tool_calls": 5
+      },
+      {
+        "run_id": "follow-002",
+        "pair_id": "first-follow-3",
+        "stage": "first",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": true,
+        "attempts": 1,
+        "first_pass": true,
+        "content_review_passed": true,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 143.7040565999996,
+        "worker_seconds": 119.76022799999919,
+        "review_seconds": 23.898126899999625,
+        "repair_seconds": 0,
+        "tokens": {
+          "input_tokens": 196115,
+          "cached_input_tokens": 112768,
+          "output_tokens": 4937
+        },
+        "worker_tokens": {
+          "input_tokens": 153512,
+          "cached_input_tokens": 112768,
+          "output_tokens": 4543
+        },
+        "review_tokens": {
+          "input_tokens": 42603,
+          "cached_input_tokens": 0,
+          "output_tokens": 394
+        },
+        "worker_tool_calls": 4
+      },
+      {
+        "run_id": "follow-003",
+        "pair_id": "first-follow-1",
+        "stage": "first",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": true,
+        "attempts": 1,
+        "first_pass": true,
+        "content_review_passed": true,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 170.23393000000215,
+        "worker_seconds": 148.98065259999566,
+        "review_seconds": 21.17872989999887,
+        "repair_seconds": 0,
+        "tokens": {
+          "input_tokens": 243545,
+          "cached_input_tokens": 162304,
+          "output_tokens": 5980
+        },
+        "worker_tokens": {
+          "input_tokens": 201633,
+          "cached_input_tokens": 162304,
+          "output_tokens": 5706
+        },
+        "review_tokens": {
+          "input_tokens": 41912,
+          "cached_input_tokens": 0,
+          "output_tokens": 274
+        },
+        "worker_tool_calls": 5
+      },
+      {
+        "run_id": "follow-004",
+        "pair_id": "first-follow-1",
+        "stage": "first",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": true,
+        "attempts": 1,
+        "first_pass": true,
+        "content_review_passed": true,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 158.17071769999893,
+        "worker_seconds": 139.9934996000011,
+        "review_seconds": 18.12270040000294,
+        "repair_seconds": 0,
+        "tokens": {
+          "input_tokens": 191435,
+          "cached_input_tokens": 126976,
+          "output_tokens": 5396
+        },
+        "worker_tokens": {
+          "input_tokens": 149443,
+          "cached_input_tokens": 114432,
+          "output_tokens": 5127
+        },
+        "review_tokens": {
+          "input_tokens": 41992,
+          "cached_input_tokens": 12544,
+          "output_tokens": 269
+        },
+        "worker_tool_calls": 4
+      },
+      {
+        "run_id": "follow-005",
+        "pair_id": "complex-follow-2",
+        "stage": "complex",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 379.2462678000011,
+        "worker_seconds": 365.03490059999604,
+        "review_seconds": 14.123044499996467,
+        "repair_seconds": 14.022516400000313,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 4,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-006",
+        "pair_id": "complex-follow-2",
+        "stage": "complex",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.151800200001162,
+        "worker_seconds": 13.79009390000283,
+        "review_seconds": 14.267057500001101,
+        "repair_seconds": 14.369164600000659,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-007",
+        "pair_id": "unchanged-follow-4",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": true,
+        "attempts": 1,
+        "first_pass": true,
+        "content_review_passed": true,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 65.4703212999957,
+        "worker_seconds": 46.35586940000212,
+        "review_seconds": 19.06398280000576,
+        "repair_seconds": 0,
+        "tokens": {
+          "input_tokens": 173580,
+          "cached_input_tokens": 100864,
+          "output_tokens": 1735
+        },
+        "worker_tokens": {
+          "input_tokens": 132134,
+          "cached_input_tokens": 100864,
+          "output_tokens": 1470
+        },
+        "review_tokens": {
+          "input_tokens": 41446,
+          "cached_input_tokens": 0,
+          "output_tokens": 265
+        },
+        "worker_tool_calls": 4
+      },
+      {
+        "run_id": "follow-008",
+        "pair_id": "unchanged-follow-4",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": true,
+        "attempts": 1,
+        "first_pass": true,
+        "content_review_passed": true,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 65.0437224999987,
+        "worker_seconds": 45.159905600005004,
+        "review_seconds": 19.834354300000996,
+        "repair_seconds": 0,
+        "tokens": {
+          "input_tokens": 164044,
+          "cached_input_tokens": 94208,
+          "output_tokens": 1858
+        },
+        "worker_tokens": {
+          "input_tokens": 122598,
+          "cached_input_tokens": 94208,
+          "output_tokens": 1596
+        },
+        "review_tokens": {
+          "input_tokens": 41446,
+          "cached_input_tokens": 0,
+          "output_tokens": 262
+        },
+        "worker_tool_calls": 4
+      },
+      {
+        "run_id": "follow-009",
+        "pair_id": "incremental-follow-3",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 159.7441647999949,
+        "worker_seconds": 145.00217300000077,
+        "review_seconds": 14.681185900000855,
+        "repair_seconds": 14.594418100001349,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 4,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-010",
+        "pair_id": "incremental-follow-3",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 27.890957499999786,
+        "worker_seconds": 13.78252899999643,
+        "review_seconds": 14.032773800005089,
+        "repair_seconds": 13.723687099998642,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-011",
+        "pair_id": "incremental-follow-5",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.343374299998686,
+        "worker_seconds": 13.928390500004753,
+        "review_seconds": 14.339941199999885,
+        "repair_seconds": 14.146734900008596,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-012",
+        "pair_id": "incremental-follow-5",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.74495699999534,
+        "worker_seconds": 13.687090299994452,
+        "review_seconds": 14.991307700001926,
+        "repair_seconds": 14.792273200000636,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-013",
+        "pair_id": "first-follow-4",
+        "stage": "first",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.61274240000057,
+        "worker_seconds": 14.406024800002342,
+        "review_seconds": 14.128754299992579,
+        "repair_seconds": 14.019381500002055,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-014",
+        "pair_id": "first-follow-4",
+        "stage": "first",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 27.632609599997522,
+        "worker_seconds": 13.603773499999079,
+        "review_seconds": 13.955503400000453,
+        "repair_seconds": 13.595236700006353,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-015",
+        "pair_id": "unchanged-follow-5",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 29.416898999996192,
+        "worker_seconds": 13.94062579999445,
+        "review_seconds": 15.404509800006053,
+        "repair_seconds": 15.512751399997796,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-016",
+        "pair_id": "unchanged-follow-5",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.83563629999844,
+        "worker_seconds": 14.668368799997552,
+        "review_seconds": 14.085584800006473,
+        "repair_seconds": 14.261276299999736,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-017",
+        "pair_id": "complex-follow-1",
+        "stage": "complex",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 27.932017600003746,
+        "worker_seconds": 13.656024900003104,
+        "review_seconds": 14.19360250000318,
+        "repair_seconds": 13.542657099998905,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-018",
+        "pair_id": "complex-follow-1",
+        "stage": "complex",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 29.251049400001648,
+        "worker_seconds": 14.028134400003182,
+        "review_seconds": 15.147068899997976,
+        "repair_seconds": 14.623602700004994,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-019",
+        "pair_id": "complex-follow-3",
+        "stage": "complex",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.221443800000998,
+        "worker_seconds": 13.920290900001419,
+        "review_seconds": 14.214200900001742,
+        "repair_seconds": 14.310419200002798,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-020",
+        "pair_id": "complex-follow-3",
+        "stage": "complex",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "43c01400bda5a37a5d46961861338ca5553f356153056c037c18cee372c89467",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.808463300003496,
+        "worker_seconds": 14.348432600003434,
+        "review_seconds": 14.353113699995447,
+        "repair_seconds": 14.562495799997123,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-021",
+        "pair_id": "incremental-follow-1",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 29.976433700001508,
+        "worker_seconds": 14.71418260000064,
+        "review_seconds": 14.79133020000154,
+        "repair_seconds": 14.277143200000864,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-022",
+        "pair_id": "incremental-follow-1",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 27.112809799997194,
+        "worker_seconds": 13.449222800001735,
+        "review_seconds": 13.578807699996105,
+        "repair_seconds": 13.323236599993834,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-023",
+        "pair_id": "unchanged-follow-1",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 30.679677599997376,
+        "worker_seconds": 14.421894799997972,
+        "review_seconds": 15.56086189999769,
+        "repair_seconds": 14.401885100000072,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-024",
+        "pair_id": "unchanged-follow-1",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.68123480000213,
+        "worker_seconds": 13.734630899998592,
+        "review_seconds": 14.8694531000001,
+        "repair_seconds": 14.240900899996632,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-025",
+        "pair_id": "unchanged-follow-3",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 32.247819700001855,
+        "worker_seconds": 14.138625699997647,
+        "review_seconds": 17.99088689999917,
+        "repair_seconds": 17.958710300001258,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-026",
+        "pair_id": "unchanged-follow-3",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 29.095960899998317,
+        "worker_seconds": 13.929484400003275,
+        "review_seconds": 15.08083679999254,
+        "repair_seconds": 14.690947600000072,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-027",
+        "pair_id": "incremental-follow-4",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.033963499998208,
+        "worker_seconds": 13.571124000001873,
+        "review_seconds": 14.355934200000775,
+        "repair_seconds": 13.808788400005142,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-028",
+        "pair_id": "incremental-follow-4",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 29.16404610000609,
+        "worker_seconds": 14.342592000000877,
+        "review_seconds": 14.739640499996312,
+        "repair_seconds": 14.766156499994395,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-029",
+        "pair_id": "first-follow-2",
+        "stage": "first",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 30.247590500002843,
+        "worker_seconds": 15.732188500005577,
+        "review_seconds": 14.40608329999668,
+        "repair_seconds": 15.76713000000018,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-030",
+        "pair_id": "first-follow-2",
+        "stage": "first",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "f94453363617eb863d916f50fbf6aacf8ef0943a1c2c01c2008228e50e4664e9",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.059520700000576,
+        "worker_seconds": 14.005786800000351,
+        "review_seconds": 13.952236199991603,
+        "repair_seconds": 13.903765499999281,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-031",
+        "pair_id": "unchanged-follow-2",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 28.732272699999157,
+        "worker_seconds": 14.498356900010549,
+        "review_seconds": 14.107812300004298,
+        "repair_seconds": 14.622542500008421,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-032",
+        "pair_id": "unchanged-follow-2",
+        "stage": "unchanged",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "c7b5509e1d9cae9b5a5e02dd2136c5f635c10c5fec2e3864660a54866853f34c",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 29.91274529999646,
+        "worker_seconds": 15.637785700004315,
+        "review_seconds": 14.175886099998024,
+        "repair_seconds": 15.457022500006133,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-033",
+        "pair_id": "incremental-follow-2",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "baseline",
+        "skill_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 29.945009199997003,
+        "worker_seconds": 14.894072100003541,
+        "review_seconds": 14.952074699998775,
+        "repair_seconds": 14.409428600003594,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      },
+      {
+        "run_id": "follow-034",
+        "pair_id": "incremental-follow-2",
+        "stage": "incremental",
+        "case": "real-literature-subset-01",
+        "arm": "candidate",
+        "skill_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+        "input_sha256": "32f1a4bb340f646ffd5d94dd9ab05fa4de022ad64271d3b8ed1ad0803037454f",
+        "model": "gpt-6-astra",
+        "reasoning": "high",
+        "passed": false,
+        "attempts": 2,
+        "first_pass": false,
+        "content_review_passed": false,
+        "operational_gates_passed": true,
+        "end_to_end_seconds": 43.35760559999471,
+        "worker_seconds": 14.401279300007445,
+        "review_seconds": 28.86632709999685,
+        "repair_seconds": 14.597932800003036,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "review_tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls": 0,
+        "execution_status": "resource_limited_detected_offline"
+      }
+    ],
+    "groups": [
+      {
+        "stage": "complex",
+        "arm": "baseline",
+        "runs": 3,
+        "first_pass": 0,
+        "final_pass": 0,
+        "content_review_pass": 0,
+        "operational_gates_pass": 3,
+        "end_to_end_seconds_all_runs": {
+          "observed": 3,
+          "missing": 0,
+          "median": 28.808463300003496,
+          "min": 28.151800200001162,
+          "max": 29.251049400001648
+        },
+        "worker_seconds_all_runs": {
+          "observed": 3,
+          "missing": 0,
+          "median": 14.028134400003182,
+          "min": 13.79009390000283,
+          "max": 14.348432600003434
+        },
+        "repair_seconds_all_runs": {
+          "observed": 3,
+          "missing": 0,
+          "median": 14.562495799997123,
+          "min": 14.369164600000659,
+          "max": 14.623602700004994
+        },
+        "input_tokens_all_runs": {
+          "observed": 0,
+          "missing": 3,
+          "median": null,
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "stage": "complex",
+        "arm": "candidate",
+        "runs": 3,
+        "first_pass": 0,
+        "final_pass": 0,
+        "content_review_pass": 0,
+        "operational_gates_pass": 3,
+        "end_to_end_seconds_all_runs": {
+          "observed": 3,
+          "missing": 0,
+          "median": 28.221443800000998,
+          "min": 27.932017600003746,
+          "max": 379.2462678000011
+        },
+        "worker_seconds_all_runs": {
+          "observed": 3,
+          "missing": 0,
+          "median": 13.920290900001419,
+          "min": 13.656024900003104,
+          "max": 365.03490059999604
+        },
+        "repair_seconds_all_runs": {
+          "observed": 3,
+          "missing": 0,
+          "median": 14.022516400000313,
+          "min": 13.542657099998905,
+          "max": 14.310419200002798
+        },
+        "input_tokens_all_runs": {
+          "observed": 0,
+          "missing": 3,
+          "median": null,
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "stage": "first",
+        "arm": "baseline",
+        "runs": 4,
+        "first_pass": 2,
+        "final_pass": 2,
+        "content_review_pass": 2,
+        "operational_gates_pass": 4,
+        "end_to_end_seconds_all_runs": {
+          "observed": 4,
+          "missing": 0,
+          "median": 92.55491154999982,
+          "min": 28.059520700000576,
+          "max": 170.23393000000215
+        },
+        "worker_seconds_all_runs": {
+          "observed": 4,
+          "missing": 0,
+          "median": 75.24830049999946,
+          "min": 14.005786800000351,
+          "max": 148.98065259999566
+        },
+        "repair_seconds_all_runs": {
+          "observed": 4,
+          "missing": 0,
+          "median": 6.9518827499996405,
+          "min": 0,
+          "max": 14.019381500002055
+        },
+        "input_tokens_all_runs": {
+          "observed": 2,
+          "missing": 2,
+          "median": 242024.5,
+          "min": 240504,
+          "max": 243545
+        }
+      },
+      {
+        "stage": "first",
+        "arm": "candidate",
+        "runs": 4,
+        "first_pass": 2,
+        "final_pass": 2,
+        "content_review_pass": 2,
+        "operational_gates_pass": 4,
+        "end_to_end_seconds_all_runs": {
+          "observed": 4,
+          "missing": 0,
+          "median": 86.97582355000122,
+          "min": 27.632609599997522,
+          "max": 158.17071769999893
+        },
+        "worker_seconds_all_runs": {
+          "observed": 4,
+          "missing": 0,
+          "median": 67.74620825000238,
+          "min": 13.603773499999079,
+          "max": 139.9934996000011
+        },
+        "repair_seconds_all_runs": {
+          "observed": 4,
+          "missing": 0,
+          "median": 6.797618350003177,
+          "min": 0,
+          "max": 15.76713000000018
+        },
+        "input_tokens_all_runs": {
+          "observed": 2,
+          "missing": 2,
+          "median": 193775.0,
+          "min": 191435,
+          "max": 196115
+        }
+      },
+      {
+        "stage": "incremental",
+        "arm": "baseline",
+        "runs": 5,
+        "first_pass": 0,
+        "final_pass": 0,
+        "content_review_pass": 0,
+        "operational_gates_pass": 5,
+        "end_to_end_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 29.16404610000609,
+          "min": 27.890957499999786,
+          "max": 29.976433700001508
+        },
+        "worker_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.342592000000877,
+          "min": 13.687090299994452,
+          "max": 14.894072100003541
+        },
+        "repair_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.409428600003594,
+          "min": 13.723687099998642,
+          "max": 14.792273200000636
+        },
+        "input_tokens_all_runs": {
+          "observed": 0,
+          "missing": 5,
+          "median": null,
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "stage": "incremental",
+        "arm": "candidate",
+        "runs": 5,
+        "first_pass": 0,
+        "final_pass": 0,
+        "content_review_pass": 0,
+        "operational_gates_pass": 5,
+        "end_to_end_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 28.343374299998686,
+          "min": 27.112809799997194,
+          "max": 159.7441647999949
+        },
+        "worker_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 13.928390500004753,
+          "min": 13.449222800001735,
+          "max": 145.00217300000077
+        },
+        "repair_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.146734900008596,
+          "min": 13.323236599993834,
+          "max": 14.597932800003036
+        },
+        "input_tokens_all_runs": {
+          "observed": 0,
+          "missing": 5,
+          "median": null,
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "stage": "unchanged",
+        "arm": "baseline",
+        "runs": 5,
+        "first_pass": 1,
+        "final_pass": 1,
+        "content_review_pass": 1,
+        "operational_gates_pass": 5,
+        "end_to_end_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 29.095960899998317,
+          "min": 28.68123480000213,
+          "max": 65.4703212999957
+        },
+        "worker_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 13.94062579999445,
+          "min": 13.734630899998592,
+          "max": 46.35586940000212
+        },
+        "repair_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.622542500008421,
+          "min": 0,
+          "max": 15.512751399997796
+        },
+        "input_tokens_all_runs": {
+          "observed": 1,
+          "missing": 4,
+          "median": 173580,
+          "min": 173580,
+          "max": 173580
+        }
+      },
+      {
+        "stage": "unchanged",
+        "arm": "candidate",
+        "runs": 5,
+        "first_pass": 1,
+        "final_pass": 1,
+        "content_review_pass": 1,
+        "operational_gates_pass": 5,
+        "end_to_end_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 30.679677599997376,
+          "min": 28.83563629999844,
+          "max": 65.0437224999987
+        },
+        "worker_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.668368799997552,
+          "min": 14.138625699997647,
+          "max": 45.159905600005004
+        },
+        "repair_seconds_all_runs": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.401885100000072,
+          "min": 0,
+          "max": 17.958710300001258
+        },
+        "input_tokens_all_runs": {
+          "observed": 1,
+          "missing": 4,
+          "median": 164044,
+          "min": 164044,
+          "max": 164044
+        }
+      }
+    ],
+    "pairs": [
+      {
+        "pair_id": "complex-follow-1",
+        "stage": "complex",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "complex-follow-2",
+        "stage": "complex",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "complex-follow-3",
+        "stage": "complex",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "first-follow-1",
+        "stage": "first",
+        "eligible": true,
+        "reason": null,
+        "seconds_difference": -12.063212300003215,
+        "input_tokens_difference": -52110
+      },
+      {
+        "pair_id": "first-follow-2",
+        "stage": "first",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "first-follow-3",
+        "stage": "first",
+        "eligible": true,
+        "reason": null,
+        "seconds_difference": -12.793024099999457,
+        "input_tokens_difference": -44389
+      },
+      {
+        "pair_id": "first-follow-4",
+        "stage": "first",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-1",
+        "stage": "incremental",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-2",
+        "stage": "incremental",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-3",
+        "stage": "incremental",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-4",
+        "stage": "incremental",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-5",
+        "stage": "incremental",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "unchanged-follow-1",
+        "stage": "unchanged",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "unchanged-follow-2",
+        "stage": "unchanged",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "unchanged-follow-3",
+        "stage": "unchanged",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      },
+      {
+        "pair_id": "unchanged-follow-4",
+        "stage": "unchanged",
+        "eligible": true,
+        "reason": null,
+        "seconds_difference": -0.42659879999700934,
+        "input_tokens_difference": -9536
+      },
+      {
+        "pair_id": "unchanged-follow-5",
+        "stage": "unchanged",
+        "eligible": false,
+        "reason": "resource_exhaustion_and_unavailable_review",
+        "seconds_difference": null,
+        "input_tokens_difference": null
+      }
+    ],
+    "scope": "All completed trials and all attempts retained. Wall time includes organizer, independent review and repairs. Token totals include cached input and evaluator usage; missing usage stays null. Pair differences only for identical inputs/settings with both quality gates passed. Semantic verdicts require independent audit; no general speedup is inferred.",
+    "protocol": {
+      "schema_version": 1,
+      "seed": 2026102602,
+      "cases": 1,
+      "paired_repeats_per_stage": {
+        "first": 4,
+        "unchanged": 5,
+        "incremental": 5,
+        "complex": 3
+      },
+      "stages": [
+        "first",
+        "unchanged",
+        "incremental",
+        "complex"
+      ],
+      "trials": 34,
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "cli_version": "0.159.2",
+      "call_timeout_seconds": 360,
+      "max_repair_attempts": 1,
+      "concurrent_pairs": 2,
+      "runner_sha256": "e3f08719279e41b43c01047b3b68b6f3130c748edb86630674542f0fa5b109ff",
+      "runner_adjustments": [
+        "Real held-out document subset and four-stage schedule",
+        "Explicit nonreport source path/byte retention gate, matching public instructions",
+        "External runner retains the original skill checkout guard as an absolute location",
+        "Symmetric parent-session worker permissions on initial/repair calls avoid Windows scratch ACL incompatibility.",
+        "Absolute-path/workdir guidance removes observed shell-startup cwd ambiguity.",
+        "Remove generic movement permission that contradicted stage-specific source path preservation.",
+        "Calibrated 360-second call budget before formal trials; pilot used 240 seconds."
+      ],
+      "raw_material_policy": "External only; no source text, original paths or hidden answers published",
+      "attribution_limit": "Bundled document change; no component ablation or general speedup inference",
+      "repeated_read_measurement": null,
+      "repeated_read_limit": "No OS-level read instrumentation; command audit is separate, not exact file I/O.",
+      "worker_permissions": "Same as parent session, danger-full-access in both arms and initial/repair calls. Scope is prompt-limited to copied project, skill and scratch, with separate command/path audit; not OS-isolated from private answers or original project.",
+      "evaluator_permissions": "read-only; all evidence transported in prompt, no tool use permitted",
+      "source_preservation": "Every nonreport source path and byte hash must remain unchanged.",
+      "calibration_policy": "Earlier cancelled pilot remains separate with all known and missing costs, not silently dropped or mixed into this formal cohort.",
+      "cohort": "Separate prospective supplement after resource restoration; original40trial ledger remains unchanged.",
+      "selection_rule": "Predeclared17newpairs: original3eligiblepairs left4first/5unchanged/5incremental/3complex pairs to reach5quality-comparable pairs per stage if all supplement pairs pass; all new failures remain in denominator, no adaptive replacing-to-pass.",
+      "interpretation": "Report this cohort separately, including failures; pooled counts do not remove original interruptions/quota failures or prove independent-project generalization.",
+      "source_runner_commit": "e1412d33ea5b91ba28de77b91ce3603a678a6f10",
+      "quota_policy": "Explicit provider usage limit stops new worker/review/repair/dispatch; existing calls preserved; unstarted schedule remains explicit."
+    },
+    "preflight_verification": {
+      "observed_utc": "2026-10-26T00:03:03.153049+00:00",
+      "oracle_resources_identical": 57,
+      "worker_snapshots_identical": true,
+      "planned_trials": 34,
+      "pairs": 17,
+      "source_model_and_stage_budgets_unchanged": true,
+      "same_initial_inputs_between_arms": true
+    },
+    "call_measurements": [
+      {
+        "run_id": "follow-001",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 136.09057619999658,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 198675,
+          "cached_input_tokens": 158208,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5066,
+          "reasoning_output_tokens": 409
+        },
+        "tool_calls": 5,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-001",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 20.32578060000378,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 41829,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 262,
+          "reasoning_output_tokens": 116
+        },
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-002",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 119.76022799999919,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 153512,
+          "cached_input_tokens": 112768,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4543,
+          "reasoning_output_tokens": 248
+        },
+        "tool_calls": 4,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-002",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 23.898126899999625,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 42603,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 394,
+          "reasoning_output_tokens": 228
+        },
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-003",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 148.98065259999566,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 201633,
+          "cached_input_tokens": 162304,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5706,
+          "reasoning_output_tokens": 551
+        },
+        "tool_calls": 5,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-003",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 21.17872989999887,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 41912,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 274,
+          "reasoning_output_tokens": 120
+        },
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-004",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 139.9934996000011,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 149443,
+          "cached_input_tokens": 114432,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5127,
+          "reasoning_output_tokens": 654
+        },
+        "tool_calls": 4,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-004",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 18.12270040000294,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 41992,
+          "cached_input_tokens": 12544,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 269,
+          "reasoning_output_tokens": 107
+        },
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-005",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 358.02932289999444,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 4,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-005",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.106105799997749,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-005",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.005577700001595,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-005",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.016938699998718,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-006",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.83147160000226,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-006",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 6.856515200001013,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-006",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.95862230000057,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-006",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.410542300000088,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-007",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 46.35586940000212,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 132134,
+          "cached_input_tokens": 100864,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1470,
+          "reasoning_output_tokens": 79
+        },
+        "tool_calls": 4,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-007",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 19.06398280000576,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 41446,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 265,
+          "reasoning_output_tokens": 114
+        },
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-008",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 45.159905600005004,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 122598,
+          "cached_input_tokens": 94208,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1596,
+          "reasoning_output_tokens": 91
+        },
+        "tool_calls": 4,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-008",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 19.834354300000996,
+        "returncode": 0,
+        "timed_out": false,
+        "usage": {
+          "input_tokens": 41446,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 262,
+          "reasoning_output_tokens": 100
+        },
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-009",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 137.7915015000035,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 4,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-009",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.297439299996768,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-009",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.210671499997261,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-009",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.383746600004088,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-010",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.887991600000532,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-010",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.203624100002344,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-010",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.894537399995897,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-010",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 6.829149700002745,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-011",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.072583699999086,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-011",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.049013099996955,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-011",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.8558068000056664,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-011",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.29092810000293,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-012",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.876537999996799,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-012",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.009586799998942,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-012",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.810552299997653,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-012",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.981720900002983,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-013",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.336774299998069,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-013",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.178623299994797,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-013",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.069250500004273,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-013",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 6.950130999997782,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-014",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.859728899995389,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-014",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.104311299997789,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-014",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.74404460000369,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-014",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 6.851192100002663,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-015",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.746185399999376,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-015",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.086198800003331,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-015",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.194440399995074,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-015",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 8.318311000002723,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-016",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.310576399999263,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-016",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.182100900005025,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-016",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.357792399998289,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-016",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 6.903483900001447,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-017",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.06225980000454,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-017",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.244710500002839,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-017",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.5937650999985635,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-017",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 6.948892000000342,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-018",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.079703499999596,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-018",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.471897099996568,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-018",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.948430900003586,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-018",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.675171800001408,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-019",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.856043300002057,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-019",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 6.968029299998307,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-019",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.064247599999362,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-019",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.246171600003436,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-020",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.187787200004095,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-020",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 6.951263299997663,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-020",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.160645399999339,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-020",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.401850399997784,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-021",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.530494099999487,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-021",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.697875500001828,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-021",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.183688500001153,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-021",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.093454699999711,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-022",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.807137800002238,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-022",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 6.897656100001768,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-022",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.642084999999497,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-022",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 6.681151599994337,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-023",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.249363499999163,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-023",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 8.331508099996427,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-023",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.172531299998809,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-023",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.229353800001263,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-024",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.848156400003063,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-024",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.515026699998998,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-024",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.886474499995529,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-024",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.354426400001103,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-025",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.003198699996574,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-025",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.1676035999989836,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-025",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.135427000001073,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-025",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 10.823283300000185,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-026",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.015487199998461,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-026",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.303886399997282,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-026",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.913997200004815,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-026",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.776950399995258,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-027",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.811664599998039,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-027",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.306605199999467,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-027",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 6.759459400003834,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-027",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.049329000001308,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-028",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.199850500001048,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-028",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.116225500001747,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-028",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.142741499999829,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-028",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.623414999994566,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-029",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.057200300005206,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-029",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.313941499996872,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-029",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 8.67498820000037,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-029",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.092141799999808,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-030",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 6.874076699998113,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-030",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.1801807999945595,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-030",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.131710100002238,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-030",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 6.772055399997043,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-031",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.111966400007077,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-031",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 6.871660299999348,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-031",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.386390500003472,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-031",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.2361520000049495,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-032",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.089670800000022,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-032",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.266978499996185,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-032",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 8.548114900004293,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-032",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 6.9089076000018395,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-033",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.660522400001355,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-033",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 7.776195799997367,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-033",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.233549700002186,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-033",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.175878900001408,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-034",
+        "attempt": 1,
+        "role": "worker",
+        "seconds": 7.267274800004088,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-034",
+        "attempt": 1,
+        "role": "evaluation",
+        "seconds": 21.402398799997172,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-034",
+        "attempt": 2,
+        "role": "worker",
+        "seconds": 7.134004500003357,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      },
+      {
+        "run_id": "follow-034",
+        "attempt": 2,
+        "role": "evaluation",
+        "seconds": 7.463928299999679,
+        "returncode": 1,
+        "timed_out": false,
+        "usage": null,
+        "tool_calls": 0,
+        "not_called": false
+      }
+    ],
+    "trace_hashes": [
+      {
+        "run_id": "follow-001",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "cdfebd22bc716d8ac5f29dbf416bb4af645e7c3978eaa36c0506126091474125"
+      },
+      {
+        "run_id": "follow-001",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "21bf5b341f1316f09006f8bf57c94301dc91dcc7acce62b26068bdbf19971e88"
+      },
+      {
+        "run_id": "follow-002",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "9df66c412d06162f17a2fe518ee0ce9d11d918e2d470d063eb8faf448793d0a3"
+      },
+      {
+        "run_id": "follow-002",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "39b3f510c4912f53bfd98ecef8fe2bf4d687a12aaff5bf24b9e6ae262aaa2729"
+      },
+      {
+        "run_id": "follow-003",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "b5c2efe8a7960b9b451304432a0cd27216df5b8eafc37301f62d7a01c990f65f"
+      },
+      {
+        "run_id": "follow-003",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "dd998f5e578b06f48461a371432af38fd7c97c6805c3d805e7ce9a5d33da49cb"
+      },
+      {
+        "run_id": "follow-004",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "df6627c9b5681ab723a915be11cbea3c5e6832cf874e6fa1806b85abd20a6093"
+      },
+      {
+        "run_id": "follow-004",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "3fbc15edd30ac073ac9fb133b792fd099cd457dcd334ef55b2e9e9fce27f948f"
+      },
+      {
+        "run_id": "follow-005",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "398ed8e5206c07a229993e456f4d664f5c72b63eb581baf3b0ebfa0989967044"
+      },
+      {
+        "run_id": "follow-005",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "6926c75757013cd38aeb45478b128ca6c987c6a977dafb6bdd3125f48cf0ef73"
+      },
+      {
+        "run_id": "follow-005",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "5e5ce26c9c974978c64b91805d2bc467522cf0ded4c849c4a5c4d617d3d336b1"
+      },
+      {
+        "run_id": "follow-005",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "40b093d6e8cc07e7c251c5e08b88742c0f8b9a55c7dd9227eee5b75089854e20"
+      },
+      {
+        "run_id": "follow-006",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "dc50db21c7ea9fff42e61f56fe2673b2a45e5570fccf9f77bd8df7d5b3f6627a"
+      },
+      {
+        "run_id": "follow-006",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "7ac5a577bf4014dc65fac00ffe0a6ef3785b3707cbb3b7a80d67a04fc39e4c18"
+      },
+      {
+        "run_id": "follow-006",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "dc50db21c7ea9fff42e61f56fe2673b2a45e5570fccf9f77bd8df7d5b3f6627a"
+      },
+      {
+        "run_id": "follow-006",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "5a0365f378e73485be4ca76db9be2b1e040e42b7d7dd40c81ea0e2f8d8aa3f68"
+      },
+      {
+        "run_id": "follow-007",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "0816b6791d5c6abd7e4497cefe688b29e518de9c45018531c493264a0c0e9cf4"
+      },
+      {
+        "run_id": "follow-007",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "de5d35c07935f69003a104547258edf8024cef23da52fca2970b4abb68627405"
+      },
+      {
+        "run_id": "follow-008",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "4f75678a6f94b6a29b7644ec96eb1fa8395b184e52e9e7dfe89d1c7b84c0e393"
+      },
+      {
+        "run_id": "follow-008",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "bbcf38cdd99c82155cfc2507acb67217ef7b6d69e880c57e0634c459dbeb4132"
+      },
+      {
+        "run_id": "follow-009",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "b3c81d5c12af0582d2af44ddcdb762531c28c2b46c6b1b86f583bdd565412a92"
+      },
+      {
+        "run_id": "follow-009",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "f13c7f5dcb0ccfa128ec2fcb63cfc642f16a34ccf9188c7dd1151385a148497e"
+      },
+      {
+        "run_id": "follow-009",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "0bb1e62226dbafa5465518e4c33b38826671b41ea8ecead1530909f599657ab2"
+      },
+      {
+        "run_id": "follow-009",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "d31d4d0ea5894893b7a4c0b33f8a7d2f09ff52583d474969545aa4829ba1ffb6"
+      },
+      {
+        "run_id": "follow-010",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "46d5cd635789bb6575e92d5a87353c3797fe3ad1a0f719fa5d63f743157ac8ed"
+      },
+      {
+        "run_id": "follow-010",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "66e1170cf8ad081501d4487430f468d3c70c021031e92ad20dcc277337c6b06a"
+      },
+      {
+        "run_id": "follow-010",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "46d5cd635789bb6575e92d5a87353c3797fe3ad1a0f719fa5d63f743157ac8ed"
+      },
+      {
+        "run_id": "follow-010",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "5f1a3a1a009816896c1c46824352b28710d134b9ec5c5e945839c57677d7f314"
+      },
+      {
+        "run_id": "follow-011",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "5116efd1301c690202c37a714dced8bdf8de30ed2e0cb100be3f52badaf3fb6b"
+      },
+      {
+        "run_id": "follow-011",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "be84331d3ac0ce070239961490090c763164d992b470b84eea5ddf19def7e4b9"
+      },
+      {
+        "run_id": "follow-011",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "5116efd1301c690202c37a714dced8bdf8de30ed2e0cb100be3f52badaf3fb6b"
+      },
+      {
+        "run_id": "follow-011",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "0779c25a4036098eeca9bda16e1ffb124421144aab84048947a0baf7257c8cbd"
+      },
+      {
+        "run_id": "follow-012",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "4a53100deb8c06ecdf21ce7d177034d494462cf2d68cc17b3c3dd90ad2221368"
+      },
+      {
+        "run_id": "follow-012",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "13016966daccee5a833bbd6b2a5d387a30f435e2174339b00b0178e461c18b6b"
+      },
+      {
+        "run_id": "follow-012",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "4a53100deb8c06ecdf21ce7d177034d494462cf2d68cc17b3c3dd90ad2221368"
+      },
+      {
+        "run_id": "follow-012",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "9151e2d4d14db8b4864c3d3527db93f2dfa41f21ad772cb38e1da4b1bcf0d5b7"
+      },
+      {
+        "run_id": "follow-013",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "2cd7ddf3bb525885f80d00e5cef59c570addebc04aaa3b1713c617b3b37a0c22"
+      },
+      {
+        "run_id": "follow-013",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "a9975998bc219ff662602c8701ba61ec5b160912be06a523c2c9f56992c4fe6d"
+      },
+      {
+        "run_id": "follow-013",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "2cd7ddf3bb525885f80d00e5cef59c570addebc04aaa3b1713c617b3b37a0c22"
+      },
+      {
+        "run_id": "follow-013",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "cfce69b36d0488d8494467445769493256ed18a4b9a130f5cb416db391e0593a"
+      },
+      {
+        "run_id": "follow-014",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "154fd53f6d021800096dbff18eb36b963993590df5694eb575238e4625a25c62"
+      },
+      {
+        "run_id": "follow-014",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "bf38a0b89bd23eb29589463b91d199eb893ec1d18ec28486e250c2ab28a3946c"
+      },
+      {
+        "run_id": "follow-014",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "154fd53f6d021800096dbff18eb36b963993590df5694eb575238e4625a25c62"
+      },
+      {
+        "run_id": "follow-014",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "008dd2651c18f2d48d36f9663959d3e1f83c48aee5ebe801b2224e08ce893cfc"
+      },
+      {
+        "run_id": "follow-015",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "125cffe88ee9081f920500e915aebed077df76296e4295313822086676bab0d4"
+      },
+      {
+        "run_id": "follow-015",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "030c7a96ccdff191536e7bfd69675c5d3c0ee8d29c6d032c1ba80083375a5dd3"
+      },
+      {
+        "run_id": "follow-015",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "125cffe88ee9081f920500e915aebed077df76296e4295313822086676bab0d4"
+      },
+      {
+        "run_id": "follow-015",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "701a6ccf0fae75c953916cd954fc9f59722ad9baaab8c43aad2a550889579729"
+      },
+      {
+        "run_id": "follow-016",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "f5a398792643cd683d7a1b14f47b018a8ce9fdd3cd01daa12ef221d5953edbe5"
+      },
+      {
+        "run_id": "follow-016",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "586d81a3f04e42db17fa8d73c7df9c3b942b134b49d424921ac2c4e1683f96ab"
+      },
+      {
+        "run_id": "follow-016",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "f5a398792643cd683d7a1b14f47b018a8ce9fdd3cd01daa12ef221d5953edbe5"
+      },
+      {
+        "run_id": "follow-016",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "ae3dc4b0fc2ada6a61456d004d45e5782544608b818078cd886ce3647665eca8"
+      },
+      {
+        "run_id": "follow-017",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "e653a61a8602d1b3191df4702b289f68a81b44456219e87234c1e01f79b4dc00"
+      },
+      {
+        "run_id": "follow-017",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "b3d2a24a02d90f48bd5f922ebc7c132d913818164964ae023b2b68e8a7676ece"
+      },
+      {
+        "run_id": "follow-017",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "e653a61a8602d1b3191df4702b289f68a81b44456219e87234c1e01f79b4dc00"
+      },
+      {
+        "run_id": "follow-017",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "6fdc5df35141445a42c25a483e8a241736c17d8b0458d05445d277d90441b829"
+      },
+      {
+        "run_id": "follow-018",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "15637585cb46b7c8a3a6cb6de69a2d4f7b0f778a148652712843d629c1ecec94"
+      },
+      {
+        "run_id": "follow-018",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "d66a89fa3fd73b1302c60d4a8c59f60a0147f0bf9e6de05c1a27be6277df6783"
+      },
+      {
+        "run_id": "follow-018",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "15637585cb46b7c8a3a6cb6de69a2d4f7b0f778a148652712843d629c1ecec94"
+      },
+      {
+        "run_id": "follow-018",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "13378c7bc3d81f87c1516ec0a99fabfb62e7adb8549151475f971403b56f0c58"
+      },
+      {
+        "run_id": "follow-019",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "871f85bf6da512faf53cbe079ae7210e6c08963812116603823d7fb7aadfdb4a"
+      },
+      {
+        "run_id": "follow-019",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "fe3e16a4319252f8391ca1d9a30e374f91661fbb8e2cd3ced4fe89b11fa0b673"
+      },
+      {
+        "run_id": "follow-019",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "871f85bf6da512faf53cbe079ae7210e6c08963812116603823d7fb7aadfdb4a"
+      },
+      {
+        "run_id": "follow-019",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "0cfce67776775ece3228e87fbdb1a318dfd4de6b686604a076924f234b0e1f83"
+      },
+      {
+        "run_id": "follow-020",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "2d9e6e4f18baa45cef51c30ecddaa36956093f45a2c2a7aac1e107de34684d88"
+      },
+      {
+        "run_id": "follow-020",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "af24b8ccfe864ee1b5c792aeae064773278652c3db7c3ee9157618ad90c42aa6"
+      },
+      {
+        "run_id": "follow-020",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "2d9e6e4f18baa45cef51c30ecddaa36956093f45a2c2a7aac1e107de34684d88"
+      },
+      {
+        "run_id": "follow-020",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "eb239f1c389961529bdf52d4a0c8f8a58f0b99e3b6b1f26ac2943e7dc0293d90"
+      },
+      {
+        "run_id": "follow-021",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "72a5043525a30072dcc065a55e2aac43e3ba2bec40b94bfff0342463893e547f"
+      },
+      {
+        "run_id": "follow-021",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "76ebffecdc9b0f7c5873286a9ad5b75798327854da115fc1dbacff0da5409684"
+      },
+      {
+        "run_id": "follow-021",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "72a5043525a30072dcc065a55e2aac43e3ba2bec40b94bfff0342463893e547f"
+      },
+      {
+        "run_id": "follow-021",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "abf690324abed820e41dbd58b60d9ceba92b3b30ba5ca19a5c6a03502414aa3c"
+      },
+      {
+        "run_id": "follow-022",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "4a46dd7e312624e30cd1134feafbd7307b56de196b78f1a30eeabbe5a49a4b1e"
+      },
+      {
+        "run_id": "follow-022",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "b80a50b938d9c68a13097630f76e5db74d1ac9e4464d81fba3d51e8e0e9b8e9c"
+      },
+      {
+        "run_id": "follow-022",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "4a46dd7e312624e30cd1134feafbd7307b56de196b78f1a30eeabbe5a49a4b1e"
+      },
+      {
+        "run_id": "follow-022",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "e77756b8a305a83f87a8a9109529e09b72df9effe39b5f5b93a2c17f2e3d6ea8"
+      },
+      {
+        "run_id": "follow-023",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "00210887e51271232135c2cedded689f0af1a15b7e62c5502c5d845d7e2f65ca"
+      },
+      {
+        "run_id": "follow-023",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "ffd32c5f2c6f7e722c11319b0db16bf1a48fcca826d5a31e3d443bc44de6f910"
+      },
+      {
+        "run_id": "follow-023",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "00210887e51271232135c2cedded689f0af1a15b7e62c5502c5d845d7e2f65ca"
+      },
+      {
+        "run_id": "follow-023",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "f8c43107a256e9550eedb3f2f0536563279a21f10eda112d3c67a1737ad5475d"
+      },
+      {
+        "run_id": "follow-024",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "302b648bd26ce1181a0d083ee9184dd1a927c66c09f60ff5a98c836371389e7a"
+      },
+      {
+        "run_id": "follow-024",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "c35278bfc0bf03871b6df8d819414e08e39f45a83cff005e729aa3d951b8f3d7"
+      },
+      {
+        "run_id": "follow-024",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "302b648bd26ce1181a0d083ee9184dd1a927c66c09f60ff5a98c836371389e7a"
+      },
+      {
+        "run_id": "follow-024",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "4d46a42775632aef6c133f2756629ee3013524329071b6fd24fc62d4fbaf56a1"
+      },
+      {
+        "run_id": "follow-025",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "a4185667d3983255a494ba01328893ed0847f1658b58645d3dd0bf7d0a2ee8a9"
+      },
+      {
+        "run_id": "follow-025",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "a5132090374dcd8d8037d3aeba80a0f30019e810fdceda4efbd77232a2195778"
+      },
+      {
+        "run_id": "follow-025",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "a4185667d3983255a494ba01328893ed0847f1658b58645d3dd0bf7d0a2ee8a9"
+      },
+      {
+        "run_id": "follow-025",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "a560bf26120d6d1a2e534dc4c7f4f94d6bb3c3db3460073c5c005c9b08c5d9f8"
+      },
+      {
+        "run_id": "follow-026",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "cfb9a02bb71a13f101002071cd2cad35af9ace2d258d72a436bc17a56229902c"
+      },
+      {
+        "run_id": "follow-026",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "6de0e42479ac4aa65b5f157a9d70f62c0f6e79db8f61b1c9338101339be12da7"
+      },
+      {
+        "run_id": "follow-026",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "cfb9a02bb71a13f101002071cd2cad35af9ace2d258d72a436bc17a56229902c"
+      },
+      {
+        "run_id": "follow-026",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "efdf045bd1dca11c6610545c36179a2dfd4066a8fc4d5b1db685636b51c094d1"
+      },
+      {
+        "run_id": "follow-027",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "cb8b8eeef5e240d1e8efbdb12fc88e84ef8c8f27bb16b12c38a7a3973b51eadd"
+      },
+      {
+        "run_id": "follow-027",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "6a39efcbf035eae272014615a026b3035cc2fc36e1d81393272ea33745c206b1"
+      },
+      {
+        "run_id": "follow-027",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "cb8b8eeef5e240d1e8efbdb12fc88e84ef8c8f27bb16b12c38a7a3973b51eadd"
+      },
+      {
+        "run_id": "follow-027",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "bb904f80426b88d703ff8cf0e15c6729d6ebe5a84a9105bbc6b558995621feba"
+      },
+      {
+        "run_id": "follow-028",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "e0389e74163044088cc723dd5cdd491723477b71d3adbf0127e757aa7df488c5"
+      },
+      {
+        "run_id": "follow-028",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "13ea450d93c4b1763f205b039e3ae1f3b2604250c916843d5c60d53404ef46b1"
+      },
+      {
+        "run_id": "follow-028",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "e0389e74163044088cc723dd5cdd491723477b71d3adbf0127e757aa7df488c5"
+      },
+      {
+        "run_id": "follow-028",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "9fb7f3486e2e5bb7ad3532737049fdc858d09863d08eee501cbdbde9d21e135e"
+      },
+      {
+        "run_id": "follow-029",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "7086a63c989731f7bbc99bae5e056f4ef296c372f3d20d5b2a7f77227f5678e3"
+      },
+      {
+        "run_id": "follow-029",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "0c2cb98c37df8fd8e9c6d347fa2d709fc99f1cbed0083d466983ed05b364fda6"
+      },
+      {
+        "run_id": "follow-029",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "7086a63c989731f7bbc99bae5e056f4ef296c372f3d20d5b2a7f77227f5678e3"
+      },
+      {
+        "run_id": "follow-029",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "5a5d722057d76619944679ffac31811fd889ffd28fc49de867cde325372af317"
+      },
+      {
+        "run_id": "follow-030",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "ca22757a85d06c5ee06e3d085bf2119850cb9e6ba2232e5b2203b29006c8698e"
+      },
+      {
+        "run_id": "follow-030",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "6228835687ae33df6413cf51daed1dee3ddf61cfe76d458e3fb5a04f597e64cf"
+      },
+      {
+        "run_id": "follow-030",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "ca22757a85d06c5ee06e3d085bf2119850cb9e6ba2232e5b2203b29006c8698e"
+      },
+      {
+        "run_id": "follow-030",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "7d8df03ab14af4a6f829ccf3583fd0270e1469f6dbdb5baeeb7ee525f0838925"
+      },
+      {
+        "run_id": "follow-031",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "e8e81a135024f6648cb79ec0fbd9a71114e7b0e579eb4e5d0be1821bc9ed6aae"
+      },
+      {
+        "run_id": "follow-031",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "80cd2204098e31e40b9a248625d95f12e39804de773e7e6172eb2cbec2e1195d"
+      },
+      {
+        "run_id": "follow-031",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "e8e81a135024f6648cb79ec0fbd9a71114e7b0e579eb4e5d0be1821bc9ed6aae"
+      },
+      {
+        "run_id": "follow-031",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "12d707302e71d2eb5a847efb033a5b6434614908c7b485fbc2f044c0e800581a"
+      },
+      {
+        "run_id": "follow-032",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "fc9cd7364e0323407a35668fbca8c8ee25e0a6b70f1ef56dba9d42116010db42"
+      },
+      {
+        "run_id": "follow-032",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "9ea3f5adcf01926df89dda04fce0a86ddca6ae8fff1240db5fe4f5a19e292b44"
+      },
+      {
+        "run_id": "follow-032",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "fc9cd7364e0323407a35668fbca8c8ee25e0a6b70f1ef56dba9d42116010db42"
+      },
+      {
+        "run_id": "follow-032",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "d6f37be94768171fcfac7c966c6093c31d080907a0138d8364457c7e495b7ff1"
+      },
+      {
+        "run_id": "follow-033",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "479a9597bdf26fe2eb1a903fc8e91ced6be3e4d405c43c49b46191ac7176af22"
+      },
+      {
+        "run_id": "follow-033",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "5738ef7680530fe518dea10a9009f626efc2beaa64401e52823c0b80c544207b"
+      },
+      {
+        "run_id": "follow-033",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "479a9597bdf26fe2eb1a903fc8e91ced6be3e4d405c43c49b46191ac7176af22"
+      },
+      {
+        "run_id": "follow-033",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "720dd4bfbff8a6aae778c681defa8e945fb29a311ec6847ac48007a7161ed208"
+      },
+      {
+        "run_id": "follow-034",
+        "attempt": 1,
+        "role": "worker",
+        "sha256": "0d932bc300b82143f46a8f836e321fed7804cfcacbd2b237e24a5da52ca42a3b"
+      },
+      {
+        "run_id": "follow-034",
+        "attempt": 1,
+        "role": "evaluation",
+        "sha256": "f52dbb9791a750df72ab270dc8111ee222efb097696f0381e2b737148b20f5de"
+      },
+      {
+        "run_id": "follow-034",
+        "attempt": 2,
+        "role": "worker",
+        "sha256": "0d932bc300b82143f46a8f836e321fed7804cfcacbd2b237e24a5da52ca42a3b"
+      },
+      {
+        "run_id": "follow-034",
+        "attempt": 2,
+        "role": "evaluation",
+        "sha256": "47c836302a171bdd7ea89d90fd764d8901ab38299bafcdb033577fe26968ee96"
+      }
+    ],
+    "cost_dimensions": [
+      {
+        "stage": "complex",
+        "arm": "baseline",
+        "runs": 3,
+        "tokens": {
+          "input_tokens": {
+            "observed": 0,
+            "missing": 3,
+            "median": null,
+            "min": null,
+            "max": null
+          },
+          "cached_input_tokens": {
+            "observed": 0,
+            "missing": 3,
+            "median": null,
+            "min": null,
+            "max": null
+          },
+          "output_tokens": {
+            "observed": 0,
+            "missing": 3,
+            "median": null,
+            "min": null,
+            "max": null
+          }
+        },
+        "worker_tool_calls": {
+          "observed": 3,
+          "missing": 0,
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "review_seconds": {
+          "observed": 3,
+          "missing": 0,
+          "median": 14.353113699995447,
+          "min": 14.267057500001101,
+          "max": 15.147068899997976
+        },
+        "repair_seconds": {
+          "observed": 3,
+          "missing": 0,
+          "median": 14.562495799997123,
+          "min": 14.369164600000659,
+          "max": 14.623602700004994
+        }
+      },
+      {
+        "stage": "complex",
+        "arm": "candidate",
+        "runs": 3,
+        "tokens": {
+          "input_tokens": {
+            "observed": 0,
+            "missing": 3,
+            "median": null,
+            "min": null,
+            "max": null
+          },
+          "cached_input_tokens": {
+            "observed": 0,
+            "missing": 3,
+            "median": null,
+            "min": null,
+            "max": null
+          },
+          "output_tokens": {
+            "observed": 0,
+            "missing": 3,
+            "median": null,
+            "min": null,
+            "max": null
+          }
+        },
+        "worker_tool_calls": {
+          "observed": 3,
+          "missing": 0,
+          "median": 0,
+          "min": 0,
+          "max": 4
+        },
+        "review_seconds": {
+          "observed": 3,
+          "missing": 0,
+          "median": 14.19360250000318,
+          "min": 14.123044499996467,
+          "max": 14.214200900001742
+        },
+        "repair_seconds": {
+          "observed": 3,
+          "missing": 0,
+          "median": 14.022516400000313,
+          "min": 13.542657099998905,
+          "max": 14.310419200002798
+        }
+      },
+      {
+        "stage": "first",
+        "arm": "baseline",
+        "runs": 4,
+        "tokens": {
+          "input_tokens": {
+            "observed": 2,
+            "missing": 2,
+            "median": 242024.5,
+            "min": 240504,
+            "max": 243545
+          },
+          "cached_input_tokens": {
+            "observed": 2,
+            "missing": 2,
+            "median": 160256.0,
+            "min": 158208,
+            "max": 162304
+          },
+          "output_tokens": {
+            "observed": 2,
+            "missing": 2,
+            "median": 5654.0,
+            "min": 5328,
+            "max": 5980
+          }
+        },
+        "worker_tool_calls": {
+          "observed": 4,
+          "missing": 0,
+          "median": 2.5,
+          "min": 0,
+          "max": 5
+        },
+        "review_seconds": {
+          "observed": 4,
+          "missing": 0,
+          "median": 17.22726744999818,
+          "min": 13.952236199991603,
+          "max": 21.17872989999887
+        },
+        "repair_seconds": {
+          "observed": 4,
+          "missing": 0,
+          "median": 6.9518827499996405,
+          "min": 0,
+          "max": 14.019381500002055
+        }
+      },
+      {
+        "stage": "first",
+        "arm": "candidate",
+        "runs": 4,
+        "tokens": {
+          "input_tokens": {
+            "observed": 2,
+            "missing": 2,
+            "median": 193775.0,
+            "min": 191435,
+            "max": 196115
+          },
+          "cached_input_tokens": {
+            "observed": 2,
+            "missing": 2,
+            "median": 119872.0,
+            "min": 112768,
+            "max": 126976
+          },
+          "output_tokens": {
+            "observed": 2,
+            "missing": 2,
+            "median": 5166.5,
+            "min": 4937,
+            "max": 5396
+          }
+        },
+        "worker_tool_calls": {
+          "observed": 4,
+          "missing": 0,
+          "median": 2.0,
+          "min": 0,
+          "max": 4
+        },
+        "review_seconds": {
+          "observed": 4,
+          "missing": 0,
+          "median": 16.26439184999981,
+          "min": 13.955503400000453,
+          "max": 23.898126899999625
+        },
+        "repair_seconds": {
+          "observed": 4,
+          "missing": 0,
+          "median": 6.797618350003177,
+          "min": 0,
+          "max": 15.76713000000018
+        }
+      },
+      {
+        "stage": "incremental",
+        "arm": "baseline",
+        "runs": 5,
+        "tokens": {
+          "input_tokens": {
+            "observed": 0,
+            "missing": 5,
+            "median": null,
+            "min": null,
+            "max": null
+          },
+          "cached_input_tokens": {
+            "observed": 0,
+            "missing": 5,
+            "median": null,
+            "min": null,
+            "max": null
+          },
+          "output_tokens": {
+            "observed": 0,
+            "missing": 5,
+            "median": null,
+            "min": null,
+            "max": null
+          }
+        },
+        "worker_tool_calls": {
+          "observed": 5,
+          "missing": 0,
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "review_seconds": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.79133020000154,
+          "min": 14.032773800005089,
+          "max": 14.991307700001926
+        },
+        "repair_seconds": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.409428600003594,
+          "min": 13.723687099998642,
+          "max": 14.792273200000636
+        }
+      },
+      {
+        "stage": "incremental",
+        "arm": "candidate",
+        "runs": 5,
+        "tokens": {
+          "input_tokens": {
+            "observed": 0,
+            "missing": 5,
+            "median": null,
+            "min": null,
+            "max": null
+          },
+          "cached_input_tokens": {
+            "observed": 0,
+            "missing": 5,
+            "median": null,
+            "min": null,
+            "max": null
+          },
+          "output_tokens": {
+            "observed": 0,
+            "missing": 5,
+            "median": null,
+            "min": null,
+            "max": null
+          }
+        },
+        "worker_tool_calls": {
+          "observed": 5,
+          "missing": 0,
+          "median": 0,
+          "min": 0,
+          "max": 4
+        },
+        "review_seconds": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.355934200000775,
+          "min": 13.578807699996105,
+          "max": 28.86632709999685
+        },
+        "repair_seconds": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.146734900008596,
+          "min": 13.323236599993834,
+          "max": 14.597932800003036
+        }
+      },
+      {
+        "stage": "unchanged",
+        "arm": "baseline",
+        "runs": 5,
+        "tokens": {
+          "input_tokens": {
+            "observed": 1,
+            "missing": 4,
+            "median": 173580,
+            "min": 173580,
+            "max": 173580
+          },
+          "cached_input_tokens": {
+            "observed": 1,
+            "missing": 4,
+            "median": 100864,
+            "min": 100864,
+            "max": 100864
+          },
+          "output_tokens": {
+            "observed": 1,
+            "missing": 4,
+            "median": 1735,
+            "min": 1735,
+            "max": 1735
+          }
+        },
+        "worker_tool_calls": {
+          "observed": 5,
+          "missing": 0,
+          "median": 0,
+          "min": 0,
+          "max": 4
+        },
+        "review_seconds": {
+          "observed": 5,
+          "missing": 0,
+          "median": 15.08083679999254,
+          "min": 14.107812300004298,
+          "max": 19.06398280000576
+        },
+        "repair_seconds": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.622542500008421,
+          "min": 0,
+          "max": 15.512751399997796
+        }
+      },
+      {
+        "stage": "unchanged",
+        "arm": "candidate",
+        "runs": 5,
+        "tokens": {
+          "input_tokens": {
+            "observed": 1,
+            "missing": 4,
+            "median": 164044,
+            "min": 164044,
+            "max": 164044
+          },
+          "cached_input_tokens": {
+            "observed": 1,
+            "missing": 4,
+            "median": 94208,
+            "min": 94208,
+            "max": 94208
+          },
+          "output_tokens": {
+            "observed": 1,
+            "missing": 4,
+            "median": 1858,
+            "min": 1858,
+            "max": 1858
+          }
+        },
+        "worker_tool_calls": {
+          "observed": 5,
+          "missing": 0,
+          "median": 0,
+          "min": 0,
+          "max": 4
+        },
+        "review_seconds": {
+          "observed": 5,
+          "missing": 0,
+          "median": 15.56086189999769,
+          "min": 14.085584800006473,
+          "max": 19.834354300000996
+        },
+        "repair_seconds": {
+          "observed": 5,
+          "missing": 0,
+          "median": 14.401885100000072,
+          "min": 0,
+          "max": 17.958710300001258
+        }
+      }
+    ],
+    "paired_cost_dimensions": [
+      {
+        "pair_id": "complex-follow-1",
+        "stage": "complex",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "complex-follow-2",
+        "stage": "complex",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "complex-follow-3",
+        "stage": "complex",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "first-follow-1",
+        "stage": "first",
+        "eligible": true,
+        "tokens": {
+          "input_tokens": -52110,
+          "cached_input_tokens": -35328,
+          "output_tokens": -584
+        },
+        "worker_tool_calls_difference": -1,
+        "repair_seconds_difference": 0
+      },
+      {
+        "pair_id": "first-follow-2",
+        "stage": "first",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "first-follow-3",
+        "stage": "first",
+        "eligible": true,
+        "tokens": {
+          "input_tokens": -44389,
+          "cached_input_tokens": -45440,
+          "output_tokens": -391
+        },
+        "worker_tool_calls_difference": -1,
+        "repair_seconds_difference": 0
+      },
+      {
+        "pair_id": "first-follow-4",
+        "stage": "first",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-1",
+        "stage": "incremental",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-2",
+        "stage": "incremental",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-3",
+        "stage": "incremental",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-4",
+        "stage": "incremental",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "incremental-follow-5",
+        "stage": "incremental",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "unchanged-follow-1",
+        "stage": "unchanged",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "unchanged-follow-2",
+        "stage": "unchanged",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "unchanged-follow-3",
+        "stage": "unchanged",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      },
+      {
+        "pair_id": "unchanged-follow-4",
+        "stage": "unchanged",
+        "eligible": true,
+        "tokens": {
+          "input_tokens": -9536,
+          "cached_input_tokens": -6656,
+          "output_tokens": 123
+        },
+        "worker_tool_calls_difference": 0,
+        "repair_seconds_difference": 0
+      },
+      {
+        "pair_id": "unchanged-follow-5",
+        "stage": "unchanged",
+        "eligible": false,
+        "tokens": {
+          "input_tokens": null,
+          "cached_input_tokens": null,
+          "output_tokens": null
+        },
+        "worker_tool_calls_difference": null,
+        "repair_seconds_difference": null
+      }
+    ],
+    "incurred_costs": {
+      "actual_calls": 124,
+      "tokens": {
+        "input_tokens": null,
+        "cached_input_tokens": null,
+        "output_tokens": null
+      },
+      "repair_attempts": 28,
+      "terminal_task_seconds_sum": 2065.198901899981,
+      "observed_token_subtotals": {
+        "input_tokens": {
+          "known_call_subtotal": 1209223,
+          "observed_calls": 12,
+          "missing_calls": 112
+        },
+        "cached_input_tokens": {
+          "known_call_subtotal": 755328,
+          "observed_calls": 12,
+          "missing_calls": 112
+        },
+        "output_tokens": {
+          "known_call_subtotal": 25234,
+          "observed_calls": 12,
+          "missing_calls": 112
+        }
+      },
+      "worker_calls": 62,
+      "evaluator_calls": 62
+    },
+    "limits": [
+      "Prospective supplementarycohort; original40trial ledger and failedcosts retained separately.",
+      "Same one authenticliterature subset reused, not new independentproject generalization.",
+      "No component ablation or OS-level repeatedread instrumentation; no automatic scientificproof.",
+      "Summed parallel tasktimes are not studywallclock or optimizerdevelopmenttime.",
+      "Terminal schedule is not complete quality evaluation; failed-pair exclusions here reflect unavailable review after credit exhaustion, not semantic findings. All-run termination medians include refusals and are not successful-task performance."
+    ],
+    "resource_error_reconciliation": {
+      "scope": "Offline annotations; raw records preserved.",
+      "affected_trial_count": 28,
+      "affected_call_count": 112,
+      "calls": [
+        {
+          "run_id": "follow-001",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-001",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-002",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-002",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-003",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-003",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-004",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-004",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-005",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-005",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-005",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-005",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-006",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-006",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-006",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-006",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-007",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-007",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-008",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-008",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": false
+        },
+        {
+          "run_id": "follow-009",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-009",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-009",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-009",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-010",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-010",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-010",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-010",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-011",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-011",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-011",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-011",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-012",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-012",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-012",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-012",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-013",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-013",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-013",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-013",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-014",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-014",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-014",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-014",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-015",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-015",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-015",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-015",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-016",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-016",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-016",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-016",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-017",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-017",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-017",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-017",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-018",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-018",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-018",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-018",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-019",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-019",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-019",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-019",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-020",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-020",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-020",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-020",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-021",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-021",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-021",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-021",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-022",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-022",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-022",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-022",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-023",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-023",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-023",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-023",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-024",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-024",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-024",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-024",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-025",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-025",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-025",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-025",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-026",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-026",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-026",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-026",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-027",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-027",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-027",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-027",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-028",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-028",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-028",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-028",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-029",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-029",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-029",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-029",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-030",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-030",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-030",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-030",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-031",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-031",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-031",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-031",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-032",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-032",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-032",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-032",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-033",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-033",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-033",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-033",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-034",
+          "attempt": 1,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-034",
+          "attempt": 1,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-034",
+          "attempt": 2,
+          "role": "worker",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        },
+        {
+          "run_id": "follow-034",
+          "attempt": 2,
+          "role": "evaluation",
+          "recorded_resource_limited": false,
+          "resource_limit_detected_from_trace": true
+        }
+      ]
+    },
+    "completion": {
+      "planned": 34,
+      "attempted": 34,
+      "terminal": 34,
+      "passed": 6,
+      "first_pass": 6,
+      "resource_affected": 28,
+      "unstarted": 0,
+      "timed_out_calls": 0,
+      "quality_performance_study_complete": false
+    },
+    "payload_verification": {
+      "selected_original_sources": 8,
+      "sha256_size_mtime_unchanged": true,
+      "frozen_oracle_files": 57,
+      "frozen_oracle_unchanged": true,
+      "attempted_trial_source_bindings": 270,
+      "source_paths_and_bytes_unchanged": true,
+      "attempted_trial_skill_payload_bindings": 1326,
+      "skill_payloads_unchanged": true,
+      "scope": "Selected original sources and final copied payloads only, not filesystem-wide no-write proof."
+    },
+    "command_screening": {
+      "worker_command_events": 34,
+      "evaluator_command_events": 0,
+      "file_change_events": 0,
+      "mcp_tool_events": 0,
+      "failed_command_events": 1,
+      "exact_duplicate_command_strings": 0,
+      "pattern_flags": [],
+      "limit": "Programmatic command/path screening, not OS I/O tracing."
+    },
+    "additional_checks": {
+      "blinded_content_spot_checks": {
+        "runs": [
+          "follow-001",
+          "follow-002",
+          "follow-007",
+          "follow-008"
+        ],
+        "passed": true,
+        "scope": "Independent content, provenance, links and final payload audit; no method labels or traces viewed."
+      },
+      "fresh_agent_handoff": {
+        "status": "not_started_after_observed_credit_exhaustion",
+        "result": null
+      }
+    },
+    "execution_counterexamples": [
+      {
+        "run_id": "follow-005",
+        "attempt": 1,
+        "command_index": 4,
+        "error": "Windows process creation error206: command too long",
+        "approximate_characters": 34226,
+        "corrected": false,
+        "project_final_bytes_equal_input": true,
+        "scope": "Independent execution error within a credit-exhaustion affected trial, not a semantic verdict or timeout."
+      }
+    ]
+  },
+  "resumption_overhead": {
+    "resource_probe": {
+      "seconds": 17.166840899997624,
+      "returncode": 0,
+      "usage": [
+        {
+          "input_tokens": 19852,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "tool_calls": 0
+    },
+    "scope": "Availability probe, separate from organization performance."
   }
 }
