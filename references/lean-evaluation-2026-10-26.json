@@ -10114,5 +10114,31 @@
       "tool_calls": 0
     },
     "scope": "Availability probe, separate from organization performance."
+  },
+  "poststudy_transport_probe": {
+    "scope": "Synthetic local transport only, not Agent instruction adherence, scientific quality or end-to-end performance.",
+    "small_inline_control": {
+      "returncode": 0,
+      "winerror": null,
+      "seconds": 0.48099419999925885
+    },
+    "large_inline": {
+      "returncode": null,
+      "winerror": 206,
+      "seconds": 0.004334600002039224
+    },
+    "large_command_characters": 33916,
+    "short_file_transport": {
+      "returncode": 0,
+      "winerror": null,
+      "seconds": 0.5460212000034517
+    },
+    "outputs": 2,
+    "output_bytes": 36269,
+    "expected_output_bytes_match": true,
+    "frozen_evidence_unchanged": true,
+    "source_or_project_payload_used": false,
+    "boundary": "Same authorized shell and output paths; no policy rejection or permission change.",
+    "prior_probe_failure": "First file transport used Python default newline translation and failed exact LF-byte comparison. Explicit newline preservation corrected this synthetic transport; no original sources used."
   }
 }
