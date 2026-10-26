@@ -10142,13 +10142,16 @@
     "prior_probe_failure": "First file transport used Python default newline translation and failed exact LF-byte comparison. Explicit newline preservation corrected this synthetic transport; no original sources used."
   },
   "evidence_availability": {
-    "observed_utc": "2026-10-26T00:43:10.221822+00:00",
-    "raw_call_traces": "not_available_at_last_scoped_check",
-    "original_trial_payloads": "not_available_at_last_scoped_check",
+    "observed_utc": "2026-10-26T01:06:22.723714+00:00",
+    "initial_loss_observation_utc": "2026-10-26T00:43:10.221822+00:00",
+    "raw_call_traces": "original_cli_streams_unavailable_native_session_logs_recovered",
+    "original_trial_payloads": "partial_exact_sha256_objects_and_snapshots_recovered",
     "cause": "unknown",
     "historical_measurements_retained": true,
     "raw_recomputation_currently_available": false,
+    "raw_recomputation_scope": "Complete original CLI invocation ledger and external clocks not restored. Bounded native response usage is recomputable separately.",
     "semantic_rereview_original_outputs_currently_available": false,
+    "semantic_rereview_scope": "Some exact snapshots can be rereviewed; complete original-cohort coverage is not restored.",
     "hashes_do_not_recover_raw_payloads": true,
     "surviving_evidence_copy": {
       "files": 22,
@@ -10156,7 +10159,260 @@
       "raw_evidence_recovered": false,
       "location": "private durable external directory"
     },
-    "handoff_materials": "not_available_at_last_scoped_check",
-    "scope": "Availability correction only; historical audited numerical results unchanged. Original private research project was not the missing temporary trial directory."
+    "native_session_recovery": {
+      "joint_archive_files": 256,
+      "joint_archive_bytes": 71096936,
+      "this_report_family_files": 179,
+      "copy_sha256_verification": "passed_and_independently_rehashed",
+      "joint_unique_response_usage_records": 472,
+      "joint_multi_turn_sessions": 60,
+      "duplicate_session_hash_or_response_ids_found": false,
+      "limit": "Session counts are not invocation or trial counts. Native session logs are not byte-identical missing CLI stdout streams or external process timing."
+    },
+    "joint_exact_object_recovery": {
+      "objects": 114,
+      "project_objects": 112,
+      "original_rubric_and_guide_objects": 2,
+      "limit": "Objects span both studies and repeated snapshots; not 114 whole inputs or experiments. Three mixed-newline source objects recovered from native tool raw output, all matching pre-loss SHA256."
+    },
+    "handoff_materials": {
+      "public_prompt": "literal_size_and_readback_supported_original_independent_hash_not_found",
+      "private_rubric": "new_recovered_version_original_byte_identity_not_claimed",
+      "questions": 4,
+      "citations_verified_against_exact_sources": 26,
+      "initial_packet_files_exact": 11,
+      "original_file_metadata_recovered": false,
+      "fresh_handoff_evaluation": "two_new_desktop_one_shot_answers_reviewed_separately_see_postrecovery_handoff_study"
+    },
+    "scope": "Private durable external recovery only. Original temporary-root disappearance remains observed; no recovered private content uploaded. Original research project not modified.",
+    "lean_snapshot_recovery": {
+      "before_envelopes_exact": 110,
+      "before_envelopes_observed": 110,
+      "after_envelopes_exact": 103,
+      "after_envelopes_observed": 110,
+      "distinct_stage_inputs": [
+        {
+          "stage": "first",
+          "files": 8,
+          "exact_files": 8,
+          "restored_bytes": 16778,
+          "path_sha256_manifest_digest": "d476dd2125d2abf0e284f14a4739d5247ccdbb15b8ee7783660f4574afc54ac0"
+        },
+        {
+          "stage": "unchanged",
+          "files": 9,
+          "exact_files": 9,
+          "restored_bytes": 20661,
+          "path_sha256_manifest_digest": "cd5d35c37637a26ddec22bcffd6ca2d2c55320dbdfaa5cac38ec1aa3b549fca8"
+        },
+        {
+          "stage": "incremental",
+          "files": 11,
+          "exact_files": 11,
+          "restored_bytes": 25009,
+          "path_sha256_manifest_digest": "71bb58d70745588c728b5c663e369f08161be3333eab93dd5a48d82960a280ff"
+        },
+        {
+          "stage": "complex",
+          "files": 11,
+          "exact_files": 11,
+          "restored_bytes": 24034,
+          "path_sha256_manifest_digest": "3fca3cc0bd86eb9904a4035b5c9fd143254434d9eef94ee91161f2870eee2985"
+        }
+      ],
+      "limit": "Includes pilot and repeated evaluator snapshot envelopes, not 110 independent trials. Seven after envelopes still lack some exact report or README bytes. Original timestamps absent."
+    }
+  },
+  "recovered_native_observations": {
+    "scope": "Offline supplementary observations only; original call usage=null, incurred-cost fields, success/failure denominators and eligible pairs unchanged.",
+    "failed_worker_partial_usage": {
+      "cohort": "followup-20261026",
+      "run_id": "follow-005",
+      "attempt": 1,
+      "role": "worker",
+      "native_response_records": 5,
+      "usage": {
+        "input_tokens": 148682,
+        "cached_input_tokens": 113664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15248,
+        "reasoning_output_tokens": 621,
+        "total_tokens": 163930
+      },
+      "native_task_duration_ms": 355512,
+      "native_terminal_error": "usage_limit_exceeded",
+      "completion_or_total_billing_proven": false,
+      "original_cli_usage": null,
+      "resume_attempt_2_new_native_usage_records": 0,
+      "resume_attempt_2_usage": null,
+      "limit": "Second turn repeats cumulative 163930 only. Do not add it again, infer zero billing, replace external CLI clocks, or claim successful completion. No corrected whole-cohort total claimed."
+    },
+    "eligible_pair_identity_audit": {
+      "sessions": 24,
+      "task_starts": 24,
+      "no_error_completes": 24,
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "cli": "0.159.2",
+      "worker_sandbox": "danger-full-access",
+      "reviewer_sandbox": "read-only",
+      "approval": "never",
+      "settings_change_events": 0,
+      "pairs": [
+        {
+          "cohort": "formal",
+          "pair_id": "complex-2",
+          "identities_equal_by_role": true,
+          "worker_provider": "codex_local_access"
+        },
+        {
+          "cohort": "formal",
+          "pair_id": "complex-5",
+          "identities_equal_by_role": true,
+          "worker_provider": "codex_local_access"
+        },
+        {
+          "cohort": "formal",
+          "pair_id": "first-3",
+          "identities_equal_by_role": true,
+          "worker_provider": "codex_local_access"
+        },
+        {
+          "cohort": "followup-20261026",
+          "pair_id": "first-follow-1",
+          "identities_equal_by_role": true,
+          "worker_provider": "openai"
+        },
+        {
+          "cohort": "followup-20261026",
+          "pair_id": "first-follow-3",
+          "identities_equal_by_role": true,
+          "worker_provider": "openai"
+        },
+        {
+          "cohort": "followup-20261026",
+          "pair_id": "unchanged-follow-4",
+          "identities_equal_by_role": true,
+          "worker_provider": "openai"
+        }
+      ],
+      "limit": "Recorded identities symmetric by role within each pair. Original three use codex_local_access; supplement three use openai. Cohorts are not identical transport conditions and must not be pooled as homogeneous. Labels do not establish equal backend load or cache."
+    }
+  },
+  "postrecovery_handoff_study": {
+    "status": "two_one_shot_handoff_answers_reviewed_no_stable_performance_claim",
+    "protocol_sha256": "7fd4dbbe4a90dd63070175f6c059bcd18ce7ac916192bc8594f20f25fd248d8d",
+    "public_prompt_sha256": "fb72009808b3470cdfcdccfcb0736fae230f7ee5f96b572b58503181af765044",
+    "recovered_rubric_sha256": "26070755a0c83bea5a8576c54f0fefaf84eaef4bd732cfa15855d6389b7d4760",
+    "audit_sha256": "585babe0bdb636c0582dbe8b57636369cde587f1115246e34fb61cec90fcca84",
+    "baseline_commit": "ab7efd890d862274b5859dae24f7b0c64c49ac5d",
+    "candidate_commit": "41b6134ef840075342b3f5eb76d5fcad463f827d",
+    "selection": "Post-hoc availability-selected complex-5 pair. Both complete outputs restored from their historical after snapshots. First complex pair has missing baseline bytes. Not unseen-project or confirmatory sampling.",
+    "prospective_execution": {
+      "protocol_before_dispatch_verified": true,
+      "seed": 2026102603,
+      "workers": 2,
+      "attempts_per_arm": 1,
+      "repairs_or_replacements": 0
+    },
+    "worker_identity": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "provider": "codex_local_access",
+      "cli": "0.164.0-alpha.11.1",
+      "approval": "never",
+      "sandbox": {
+        "type": "danger-full-access"
+      }
+    },
+    "settings_symmetric": true,
+    "context_boundary": "fork_turns=none and no model override verified; common plaintext system/developer/AGENTS contexts byte-identical. Actual task bodies encrypted in native archive; cannot independently re-read them to establish absence of answer/version leakage. Public-question-only dispatch design and command audit are separate evidence.",
+    "review_boundary": "Reviewer blind to arm labels/costs, but statically recovered the pre-authored rubric in an earlier turn and reviewed A then B. Not an entirely fresh unrelated evaluator. Substantive facts and citations checked, no fixed wording requirement.",
+    "runs": [
+      {
+        "arm": "baseline",
+        "source_run_id": "run-004",
+        "output_manifest_sha256": "06e227b7b199b13fb6f33044d4eb3da7b00e52c29e4d039148a942511257ea2c",
+        "worker_native_log_sha256": "a59f4934e8601aaaa583548e55aa45635f9a30533bda0a5a5b1b608ee771fb04",
+        "answer_sha256": "8a7bc55c1b154da6d3e079c4aeb9c566cef7c25bffe89311c44d8d5ae0be2d40",
+        "review_sha256": "31d6d26bcb516e16d053402a23559194a37704cab14710b1f65ac8d95f264cbf",
+        "questions_passed": 4,
+        "questions": 4,
+        "packet_files": 11,
+        "final_packet_unchanged": true,
+        "attempts": 1,
+        "repairs": 0,
+        "runtime_errors": 0,
+        "worker_native_duration_ms": 65075,
+        "parent_dispatch_receipt_record_interval_seconds": 114.921983,
+        "worker_usage": {
+          "input_tokens": 107422,
+          "cached_input_tokens": 59648,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2033,
+          "reasoning_output_tokens": 187,
+          "total_tokens": 109455
+        },
+        "worker_unique_response_records": 4,
+        "worker_exec_wrappers": 3,
+        "worker_nested_commands": 4,
+        "observed_command_scope": "Read-only assigned packet; no network/write commands. Not OS I/O isolation."
+      },
+      {
+        "arm": "candidate",
+        "source_run_id": "run-003",
+        "output_manifest_sha256": "d14b72aaa17b3d5258b22d3095d9b05d72277e15ab7d61d1a5d1bda8046b9ab1",
+        "worker_native_log_sha256": "5084b5bea574c3fb782a742d1d6c3aa6daad336bb3b2a370046abd21b6351972",
+        "answer_sha256": "a45cc32d23946d053cdea3f9b206a4e518f0861a35d34d1a66dfd581e588ef19",
+        "review_sha256": "94d1a6e5959e16aeddbecde65743851c76627bc91650e9906db5c984bc18f7fa",
+        "questions_passed": 4,
+        "questions": 4,
+        "packet_files": 11,
+        "final_packet_unchanged": true,
+        "attempts": 1,
+        "repairs": 0,
+        "runtime_errors": 0,
+        "worker_native_duration_ms": 75481,
+        "parent_dispatch_receipt_record_interval_seconds": 102.945664,
+        "worker_usage": {
+          "input_tokens": 106205,
+          "cached_input_tokens": 91776,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2551,
+          "reasoning_output_tokens": 481,
+          "total_tokens": 108756
+        },
+        "worker_unique_response_records": 4,
+        "worker_exec_wrappers": 3,
+        "worker_nested_commands": 8,
+        "observed_command_scope": "Read-only assigned packet; no network/write commands. Not OS I/O isolation."
+      }
+    ],
+    "shared_review_overhead": {
+      "native_duration_ms": 221790,
+      "usage": {
+        "input_tokens": 959160,
+        "cached_input_tokens": 925440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7505,
+        "reasoning_output_tokens": 588,
+        "total_tokens": 966665
+      },
+      "unique_response_records": 10,
+      "native_snapshot_sha256": "089a3eaba4cd77125af916d359770a9370014d0f58a71a6effc8d3e518e009a9",
+      "exec_wrappers": 7,
+      "nested_commands": 9,
+      "coordination_messages": 2,
+      "scope": "One shared followup turn for both answers, includes local review and communication. Excludes previous static recovery turn. Not arbitrarily allocated per arm."
+    },
+    "preparation_recovery_and_whole_research_cost": null,
+    "whole_research_cost_missing_reason": "No complete attributable ledger. Worker plus selected review observations are not whole research cost.",
+    "limits": [
+      "New Desktop gpt-6.1-sol/high, codex_local_access, CLI0.164.0-alpha.11.1; previous organizing cohorts gpt-6-astra/high CLI0.159.2. No pooling, CLI credit recovery or original benchmark continuation claimed.",
+      "Native worker duration and manually recorded parent dispatch/receipt interval are different clocks; latter includes scheduling/observation delay, not exact worker or historical CLI task walltime.",
+      "Cache differs despite equal setting labels. No whole-study or per-arm acceptance walltime inferred by summing concurrent review/parent intervals.",
+      "Both 4/4 only supports these four questions on this literature subset. No independent paper authenticity, replication, general scientific completeness or cross-project validation.",
+      "One pair: candidate native time and output rise, input slightly falls, actual commands double despite equal wrappers. No stable time/Token improvement; no new ordinary Skill rule added."
+    ]
   }
 }
