@@ -7,6 +7,14 @@ description: 科学重构本地文件或文件夹，核实内容，整合零散�
 
 按实际用途组织资料，让人和后续 agent 找到有效结论、核验依据并继续研究。按问题综合报告，不以搬目录、导航或打包代替内容理解。
 
+## 研究重构与物理清理边界
+
+For a full-scope research reorganization, include reports, source records, code, generated outputs, tests, caches and temporary files in the inventory. Classify by function and evidence role rather than date alone. Keep the current user-facing surface small: extend the existing authoritative report/index and route readers to sources; do not create parallel `INDEX`, `SYNTHESIS`, `HANDOFF`, `AUDIT` or final-summary files when an existing maintained surface can carry the information.
+
+Physical deletion requires the user’s current request and existing session authorization, plus evidence coverage and dependency checks; byte deduplication also requires full-content hashes. A byte duplicate may be deleted only when the retained canonical copy is readable and its path/identity is recorded. Preserve unique source IDs, frozen records, failed or negative evidence and recovery metadata. Report actual same-volume disk savings separately from files recoverable elsewhere or moved within the same volume.
+
+Before and after a move, inspect the visible file surface and validate current consumers (imports, configurations, links, test paths and user-facing entries). Do not perform blanket substring path rewriting: update only confirmed live consumers, and leave historical source identities as historical references.
+
 ## 先确定本轮深度
 
 从目标、授权、风险及已有证据选择必要工作，不要求所有任务走完重构流程：
@@ -35,7 +43,9 @@ description: 科学重构本地文件或文件夹，核实内容，整合零散�
 
 **综合保留研究含义。** 报告按问题整合假设、方法与条件、对照和准确数值、采用／弃用依据、失败、更正、限制、当前使用和已有下一步。关键条件进入现行正文，非决策性细节可引用可读来源；原文可恢复不等于报告覆盖。拟替代／删除文本须全文审阅并寻找遗漏反例。重要报告需独立内容审阅，不能仅凭整理者自选维度通过；见[科研治理](references/research-governance.md)。
 
-**破坏性操作严格验证。** 明确去向、保护范围、现行影响、覆盖依据及外置恢复位置，小批次预演。完整哈希与恢复来源验证通过再执行，禁止静默覆盖；跨卷复制验证后删源，空目录单独检查，Windows 文件操作用 LiteralPath。覆盖不足保留源件。大型混杂目录读[深度流程](references/deep-organization.md)，特殊资料读[场景规则](references/scenarios.md)；遇占用、拒绝或内容变化按[故障处理](references/cleanup-troubleshooting.md)只停止受影响动作。
+**整理产物使用英文。** 新写或重写的报告、索引、交接文件、说明及新文件名使用英文，用户明确另行指定时从其要求；对话可用用户语言。原始引文、来源标识与冻结证据保留原样，必要时附英文解释，不为语言统一改写实验历史。接收 `innovation-research` 的阶段成果时，按[阶段研究交接](references/research-governance.md#stage-handoff-from-innovation-research)处理。
+
+**破坏性操作严格验证。** 明确去向、保护范围、现行影响、覆盖依据及外置恢复位置，小批次预演。对保留证据的迁移或删除，完整哈希与可读恢复来源验证通过再执行；已确认可再生且无独有记录的缓存可直接清理，无需另存恢复副本。禁止静默覆盖；跨卷复制验证后删源，空目录单独检查，Windows 文件操作用 LiteralPath。覆盖不足保留源件。大型混杂目录读[深度流程](references/deep-organization.md)，特殊资料读[场景规则](references/scenarios.md)；遇占用、拒绝或内容变化按[故障处理](references/cleanup-troubleshooting.md)只停止受影响动作。
 
 ## 按需要选工具
 

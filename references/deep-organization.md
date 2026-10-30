@@ -27,6 +27,12 @@
 
 “可再生”须有具体生成入口和保留输入，不等于曾经生成过。训练检查点、昂贵实验和不稳定外部下载不能按普通缓存处置；仅以默认配置可以重新训练，不足以证明原运行可重建。
 
+### 功能组织与 visible-surface check
+
+Use functional routes such as current synthesis, source/protocol, adopted results, failed or invalid runs, reusable code, tests, caches and temporary workbench material. Dates may disambiguate versions but should not be the primary hierarchy when they obscure the task. Keep one visible entry per maintained route; link detailed evidence rather than generating a second parallel summary.
+
+Record a before/after visible-surface check: top-level files and directories, entry-point links, representative route paths and user-facing navigation. Validate live consumers after moves with targeted path/import/config checks. Historical mentions and source IDs are not live consumers unless a current tool resolves them.
+
 ## 2. 选分类结构并深入落位
 
 先辨明用户找文件时的主要问题，再选择分类轴：
@@ -59,11 +65,17 @@
 
 可用的简表字段：`问题/研究 | 状态 | 主要结果及条件 | 证据位置`。状态采用项目已有术语，缺失写未核验，不编造统一成功状态。长路径放链接目标，显示标签简短明确。
 
+### Full-hash deduplication and deletion
+
+For authorized duplicate deletion, hash the complete file bytes on both source and retained candidate, check the retained path is readable, and record the source identity, retained identity, hash, size and reason. Recheck source bytes immediately before mutation. Do not delete merely because names, sizes, dates or summaries match. Do not hash or traverse protected environments, nested Git metadata, sealed/confirmation payloads or active application state unless explicitly in scope.
+
+For same-volume moves, report organization and disk usage separately: a move preserves bytes but does not create disk savings. For external recovery copies, state whether they are verified and actually accessible; do not count an audit manifest or same-drive duplicate as backup capacity.
+
 ## 4. 移动、修复、验证
 
 先进行小批次移动并检查重命名引用，再扩展；跨卷先复制校验再按授权删源。路径重写要识别上下文，不对整个仓库盲目替换字符串；冻结文件或含内容哈希的清单不能静默改写。
 
-读取验证现有脚本的用途与成本再运行，不为整理触发训练、实验数据或模型的批量下载、昂贵基准；为查证具体问题定向读取原论文或官方资料不在此限。集中保存原文时保留原始路径身份、精确字节和必要元信息，提供能实际读取/恢复的方法；先全量核对再删散件。选文字及二进制样本真实恢复并核对哈希和所保留的时间，冻结验证还应在恢复环境运行代表性历史检查，不能只因“存在容器”就称可复现。归档内部依赖、相对链接和文件存在性可静态检查；代码入口运行轻量检查。
+读取验证现有脚本的用途与成本再运行，不为整理触发训练、实验数据或模型的批量下载、昂贵基准；为查证具体问题定向读取原论文或官方资料不在此限。集中保存原文时保留原始路径身份、精确字节和必要元信息，提供能实际读取/恢复的方法；先全量核对再删散件。选文字及二进制样本真实恢复并核对哈希和所保留的时间，若声称历史实验可复现，还应在恢复环境运行代表性历史检查；仅做字节保全时报告静态和哈希核验边界，不为整理额外启动实验。不能只因“存在容器”就称可复现。归档内部依赖、相对链接和文件存在性可静态检查；代码入口运行轻量检查。
 
 配置相对路径按程序实际基准解析，统一到新结构并验证数据/权重引用。历史命令允许退役，旧路径仅为来源身份；不建立联接、别名、转发脚本或平行新旧入口来维持兼容。
 
@@ -100,7 +112,7 @@
 
 ## 确定性执行与增量维护
 
-需要执行可回退的文件级变更时，用 `scripts/organization_ops.py` 的 dry-run/apply/rollback。计划显式指定工作根、文件操作、源哈希、理由；移除/替换同时提供覆盖与独立审查依据。工具先验证单一恢复包再修改，校验失败停止并保留状态；回滚遇到执行后的外部修改拒绝覆盖。不会自己判断科学语义或扩大授权，也不维护旧路径兼容。
+需要执行可回退的批量文件变更时，可用 `scripts/organization_ops.py` 的 dry-run/apply/rollback，也可使用已核验的显式操作计划。计划显式指定工作根、文件操作、源哈希、理由；移除/替换同时提供覆盖与独立审查依据。该工具要求先验证单一恢复包；使用其他方式时，可读且哈希相同的保留原件也可作为恢复源，不要求重复复制大文件。校验失败停止并保留状态；回滚遇到执行后的外部修改拒绝覆盖。不会自己判断科学语义或扩大授权，也不维护旧路径兼容。
 
 关键科研关系复用已有索引，可增加对象稳定ID、kind/status/stage、sources及supports/contradicts/supersedes/depends_on，不强制所有文件图谱化。用 `scripts/evidence_index.py` validate/snapshot/impact：比较明确来源和索引变化，沿关系传播待复核范围；无当前绑定错误的未改对象可复用，不自动重写报告。持续缺失或哈希不符进入 `invalid_objects`，即使快照未变化也需要复核。封存/凭据来源只登记未核验，不打开payload；`reusable_objects` 仅代表所选索引内结构未变且无当前绑定错误，不证明所有来源已经核验。影响闭包是重审清单，不是自动改判科学结论。
 

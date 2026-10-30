@@ -16,6 +16,14 @@
 
 ## 报告：现行入口、权威章节、精确来源
 
+### Consolidation and retirement gate
+
+Consolidate by research question or user task, not by calendar. First identify the one current report or chapter that readers and downstream tasks actually use; add a compact correction or route paragraph there when it can carry the new fact. Create a separate report only when the question, evidence contract or audience materially diverges and the existing surface would become harder to use.
+
+Before replacing different scientific narratives with a consolidated report, build a claim-scoped coverage map for unique numbers, conditions, protocol identity, evidence level, limitations and execution status. Confirm every current consumer and preserve stable source IDs, exact recoverable originals and correction/supersession links. A summary, hash, or navigation link alone is not semantic coverage.
+
+Use a staged disposition: retain, integrate unique findings into the current report with explicit source links, quarantine invalid material, or delete only after the applicable coverage and dependency gates pass. Archiving originals and adding pointers is physical organization; label semantic reconciliation as pending until unique findings and corrections are integrated. Exact byte duplicates use hash, source-identity and dependency checks rather than narrative coverage maps. Keep the old path only as provenance when it is no longer a live interface.
+
 沿用现有入口和按问题维护的详细报告，不强制单一巨型报告或固定数量。只有问题实质分化、当前使用确有收益时才拆分；拆分必须修引用，不复制同一长段。来源层保留运行、原文、修订及冻结版本，以稳定身份引用，不把全部原文反复嵌入现行报告。
 
 每次更新先判断：
@@ -42,6 +50,14 @@
 | 修订 | 支持、反驳、收窄、更正、取代与受影响决定 |
 
 分开验收：**完整性**是独有事实和精确资产可取得；**真实性**是陈述与对应输入/协议/计算吻合；**适用有效性**是证据等级、当前状态和可推广范围没有被扩大。可读哈希/链接/关系图主要验证前者，不替代后两者。负结果、工程失败、未执行和未知必须分别保留；独立审查按具体来源与条件给结果，不以另一个agent自称通过作证明。
+
+## Stage handoff from innovation-research
+
+When `innovation-research` requests a stage synthesis, use its current brief, authoritative project report/index, affected episodes, source locators, corrections and recorded next steps. This is bounded research organization. Update the existing editable synthesis in English; retain original evidence and exact identifiers. Shared entries have one coordinator as writer; return proposed edits when another researcher owns the active files.
+
+Preserve the chain from an earlier finding to a changed premise or design and its later test. Distinguish demonstrated reuse from a proposed future use, and retain useful partial observations even when the main advantage failed. Carry corrections into the current interpretation and flag decisions that depend on the corrected claim, without rewriting frozen results or overturning unrelated findings. State the conditions under which a lesson can be reused and the researcher's existing restart condition or open question.
+
+The research lead owns new mechanisms, hypothesis selection and scientific decisions. Organization may correct supported errors in editable summaries and surface contradictions; it does not invent experiments, change acceptance thresholds or certify scientific benefit. New hypotheses or unresolved scientific choices return to the research lead. Keep physical cleanup and publication within their existing authorization; neither is required for a stage handoff. A later reader should recover the question, evidence, corrected status and next unresolved decision from this synthesis and its source links. Apply the existing content and independent-review checks to important reports, without creating a parallel research ledger.
 
 ## 发布与接续
 
