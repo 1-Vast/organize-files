@@ -2,6 +2,10 @@
 
 > 当前目标：科学重构并形成详细报告，分别压减报告、代码/脚本、配置、日志和产物散件；保全科研证据与当前行为，不默认兼容旧路径、旧文件或历史命令。本文的旧路径/恢复示例仅解释来源追溯，不要求维护旧接口。以 SKILL.md 的科研知识资产目标为准。
 
+## Tests and temporary workspaces
+
+Treat tests, temporary files and caches as part of the research asset boundary. Distinguish regenerable caches from unique run receipts, source downloads, correction scripts and failed/negative outputs. A cache is removable only when its generator and required inputs remain available; a temporary name does not make evidence disposable. Check current test configuration and active processes before moving or deleting. Preserve environments, nested Git checkouts and protected payloads as opaque boundaries unless the task explicitly includes them.
+
 ## 研究实验与模型资料
 
 - 初稿、修订和探索按实际用途区分，沿用当前实验计划编号。多个模型可以按模型→数据集组织，自有模型与对照资产的范围由用户决定。

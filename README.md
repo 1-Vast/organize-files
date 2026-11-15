@@ -28,13 +28,14 @@
 | 最小命令与工具适用条件 | [工具示例](references/tool-recipes.md) |
 | 数值冲突、条件差异、证据纠错 | [内容判断](references/evidence-review.md) |
 | 代码退役、报告生命周期、事实绑定 | [科研治理](references/research-governance.md) |
+| 目录结构、命名规范与冗余清理 | [整齐与命名标准](references/tidy-standard.md) |
 | 大型混杂目录、特殊资料或操作受阻 | [深度流程](references/deep-organization.md) · [场景规则](references/scenarios.md) · [故障处理](references/cleanup-troubleshooting.md) |
 | 工程回归和独立 Agent 评价 | [质量基准](references/quality-benchmark.md) |
 | 历史实践及版本变化 | [MAESTRO 案例](references/maestro-example.md) · [更新日志](CHANGELOG.md) |
 
 ## 安装
 
-仓库为私人仓库，需要具有访问权限的 GitHub 账号。以下 PowerShell 示例适用于默认 skills 位置，目标已存在时停止，避免覆盖本地修改：
+The repository is public. The following PowerShell example installs it in the default skills location and stops if the destination already exists to protect local changes:
 
 ```powershell
 $skillRoot = if ($env:CODEX_HOME) {
