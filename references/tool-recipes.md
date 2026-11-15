@@ -62,6 +62,36 @@ python scripts/evidence_index.py impact --before D:/temporary/before.json --afte
 
 `scan` 比较size、mtime/ctime和文件身份等元数据，返回candidate_sources/changed_sources/needs_strict_verification；旧快照缺元数据时作为需严格复核候选。即使元数据一致，内容仍可能变更，全部对象继续未验证，不能拿scan替代删除前哈希或冻结证据认证。validate/snapshot保留完整哈希及读取前后状态检查。metrics仅统计来源payload读取/哈希和显式stat，不包括索引JSON读取、路径检查、操作系统缓存和Agent阅读开销。
 
+## 整齐度体检
+
+深度重构或用户要求整齐、规范命名时，整理前后各运行一次；只读，不修改文件：
+
+```powershell
+python scripts/tidy_audit.py --tree D:/Project
+python scripts/tidy_audit.py D:/Project --exclude data/raw --json
+```
+
+发现项包括系统残留、缓存、空目录、单子目录中间层、按格式命名的目录、完整哈希重复、副本／版本标记、模糊名、同级混用命名风格、偏离全项目主导风格的名字、序号未补零、非 ISO 日期、扩展名大小写、根目录散件和过挤目录。`.git`、虚拟环境、`node_modules`、`.idea` 等只列为不透明目录，不进入。发现项是候选：按[整齐与命名标准](tidy-standard.md)处理或写明保留理由；`--exclude` 只用于确实不应改动的范围（原始数据、冻结证据）。
+
+## 按清单删除
+
+所有删除都走这一入口；不要在 shell 里用 `Remove-Item`、`rm`、`del`、`rmdir`（Codex 不能审批时会直接拒绝并中断任务）。清单放在项目外的临时目录：
+
+```json
+{"root": "D:/Project", "items": [
+  {"path": "copies/report (1).docx", "sha256": "<64位小写SHA256>", "reason": "duplicate of reports/report.docx"},
+  {"path": "Thumbs.db", "reason": "OS thumbnail cache"},
+  {"path": "model/__pycache__", "kind": "cache-dir", "reason": "regenerable cache"},
+  {"path": "tmp", "kind": "empty-dir", "reason": "emptied by moves"}]}
+```
+
+```powershell
+python scripts/delete_paths.py D:/temporary/delete.json
+python scripts/delete_paths.py D:/temporary/delete.json --apply
+```
+
+普通文件必须带完整 SHA256（系统残留和 `.pyc` 除外）；`cache-dir` 只接受 `__pycache__` 等已知缓存名；`empty-dir` 在删除时必须为空，清单中先删的内容可计入。任一项检查失败则整份清单不删除；中断后重跑时已不存在的项计为完成。`.git`、虚拟环境及凭据类名字一律拒绝。需要恢复包和回滚时改用 `organization_ops.py`。
+
 ## 元数据盘点
 
 跨目录重构或需要完整变化候选时，先读入口与存储政策，明确 `--opaque` 后盘点一次；本轮无目录变化就复用结果。范围明确的只读检查无需新建快照。示例快照必须在项目外，包含文件元数据及必要排除范围，不能上传原始会话日志：
