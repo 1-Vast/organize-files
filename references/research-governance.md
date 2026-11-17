@@ -59,6 +59,17 @@ Preserve the chain from an earlier finding to a changed premise or design and it
 
 The research lead owns new mechanisms, hypothesis selection and scientific decisions. Organization may correct supported errors in editable summaries and surface contradictions; it does not invent experiments, change acceptance thresholds or certify scientific benefit. New hypotheses or unresolved scientific choices return to the research lead. Keep physical cleanup and publication within their existing authorization; neither is required for a stage handoff. A later reader should recover the question, evidence, corrected status and next unresolved decision from this synthesis and its source links. Apply the existing content and independent-review checks to important reports, without creating a parallel research ledger.
 
+## 复现资料核查
+
+用户询问某论文或科研项目“资料是否齐全、能否复现”时，先确定目标结论、图表或流程及复现层级，再从现行入口追查对应来源。只读核查不自动变成整理、下载或实验执行；目标不明时先核对可见入口，并说明尚未覆盖的结果范围。
+
+- **按适用资产核对。** 将目标结果对应到实际代码版本、输入及预处理、配置与执行入口、必要环境、评价或分析协议和预期产物；按项目需要检查模型权重、检查点、仪器或外部服务条件等，不把所有资产类别设为必需。核对切分、种子、单位、统计口径等实际适用条件；README 列出文件或命令不等于资料齐备。
+- **确认取得与身份。** 检查本地实物能否读取、是否只是占位或失效路径，及其版本、来源与目标运行是否对应；复用可信清单，必要时核对实际内容。对外部资产记录已知来源、版本、访问条件及是否实际取得；本地缺失、仅有链接、受限访问、尚未核验与确认缺失分别说明，不凭本地状态推定远端状态。来源身份或清单哈希不能替代未执行的内容核验。
+- **核对最短重放链。** 从输入到目标产物检查当前入口、参数、路径、依赖和执行顺序能否衔接，留意未跟踪或忽略文件、个人绝对路径、隐含手工步骤及生成脚本缺失。已有产物可支持结果追溯，但其存在不证明生成流程能够重放；缺少中间产物也不必然阻断从已有输入重新生成。
+- **分开报告资料与验证。** 按目标给出已取得且核验的资料、可取得但未验证的依赖、缺失或受阻项及最小补齐动作，并标明实际做过的检查。静态核查、导入或小样例运行、已有结果复算、原协议重放的覆盖不同；未执行就保持未验证，不能仅因环境文件、测试或历史结果存在而声称复现成功。必要输入或执行条件不足时，说明具体阻断点及仍能完成的核查，不把整个项目笼统判为不可复现。
+
+沿用现有报告或登记表承载用户要求保存的核查结果；仅检查时直接回答，不新建复现台账。已有授权包含运行时，沿用既有执行边界，以目标结果和预先确定的容差核验输出，保留环境、输入及执行身份；不在看到结果后修改成功标准。
+
 ## 发布与接续
 
 用户要求上传整理成果时，先将本地改动、Git已跟踪历史、忽略规则和远端实际内容对应起来，按既有授权核对发布差异。不能把所有既存删除都当成错误，也不能用全量暂存把封存副本、数据和环境带入远端。关键来源优先复用已有版本；无须为本地大包复制一套平台或强制引入LFS。
