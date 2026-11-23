@@ -1,5 +1,12 @@
 # 更新日志
 
+### 2026-11-23 · 全范围整理闭环与发布验收
+
+- 深度整理请求现在要求按根目录、资产类别和 tidy finding 记录计划处置与实际处置，区分删除、归档后删源、真实移出、复制保留源、保留、排除和受阻状态。最后一次文件操作或分支切换后必须重跑同口径目录、链接和消费者检查。
+- `delete_paths.py` 增加空清单检查、重复路径识别、`--partition` 分类、删除后路径缺失验证、实际删除字节统计和独立失败结果。默认严格模式保留全量预检，`--continue-independent` 仅在明确选择时继续无关项。
+- 新增 `release_audit.py` 和回归测试，校验整理报告的范围、排除、前后盘点、tidy finding 覆盖、finding 处置、操作结果、链接、测试、恢复与删除覆盖、独立审核和远程提交一致性；`--check-git` 会实际读取工作树状态。
+- 本轮测试结果为 349 passed、1 skipped。
+
 ### 2026-11-13 · 删除不再被 Codex 拦截中断
 
 - 依据本机 Codex 会话记录：在 `approval_policy = never` 的会话中，含 `Remove-Item` 的 shell 命令（包括对单个已核验空目录的非递归删除）被直接拒绝为 `blocked by policy`，任务随之停止；同期通过 Python 或 `apply_patch` 的删除均正常执行。`codex execpolicy check` 显示 allow 规则只能匹配未经 `pwsh -Command` 包装的命令，因此不以改规则为解决办法。

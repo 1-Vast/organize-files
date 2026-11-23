@@ -46,6 +46,8 @@ Before and after a move, inspect the visible file surface and validate current c
 
 **结构与命名一次做到位。** 深度重构或用户要求整齐、美观、规范命名时，按[整齐与命名标准](references/tidy-standard.md)执行：每层一个分类轴，同级命名风格一致，根目录只留入口，不留空目录、杂物桶、副本或版本后缀、缓存及系统残留；脚本内写死的路径随迁移更新。整理前后各跑一次 `tidy_audit.py`，剩余发现逐条说明理由。原始数据名、冻结证据及外部引用的名字不为统一而改。
 
+**深度整理必须闭环。** 用户要求全局、彻底、全面或尽可能精简时，逐个登记请求根目录和资产类别。每个类别以及每条 `tidy_audit.py` finding 必须落入一个实际处置状态：`resolved`、`retained_with_reason`、`deferred`、`blocked` 或 `excluded`。仅复制到待删除目录不算删除，源文件保留时必须同时记录副本和零源端节省；归档后删源必须记录恢复位置、源缺失验证和实际删除字节。受保护或未读边界必须登记路径、可见元数据、原因和未知计数。第一次批次完成后继续处理所有仍可授权的类别，不能用“历史资料”“大型目录”或一次 tidy 输出代替处置。最后一次移动、删除、分支切换或索引恢复后，重新运行同口径的目录、链接和消费者检查。
+
 **整理产物使用英文。** 新写或重写的报告、索引、交接文件、说明及新文件名使用英文，用户明确另行指定时从其要求；对话可用用户语言。原始引文、来源标识与冻结证据保留原样，必要时附英文解释，不为语言统一改写实验历史。接收 `innovation-research` 的阶段成果时，按[阶段研究交接](references/research-governance.md#stage-handoff-from-innovation-research)处理。
 
 **破坏性操作严格验证。** 明确去向、保护范围、现行影响、覆盖依据及外置恢复位置，小批次预演。对保留证据的迁移或删除，完整哈希与可读恢复来源验证通过再执行；已确认可再生且无独有记录的缓存可直接清理，无需另存恢复副本。禁止静默覆盖；跨卷复制验证后删源，空目录单独检查，Windows 文件操作用 LiteralPath。**删除一律写入清单，用 `delete_paths.py` 预演再 `--apply`**，不用 shell 的 `Remove-Item`、`rm`、`del`、`rmdir`：Codex 在不能发起审批的会话里按命令文本拦截这些删除（`blocked by policy`），任务随之中断。执行器本身被拒绝，或审查给出拒绝理由时，停止该删除并报告，不换其他方式重试。覆盖不足保留源件。大型混杂目录读[深度流程](references/deep-organization.md)，特殊资料读[场景规则](references/scenarios.md)；遇占用、拒绝或内容变化按[故障处理](references/cleanup-troubleshooting.md)只停止受影响动作。
@@ -63,6 +65,7 @@ Before and after a move, inspect the visible file surface and validate current c
 | `evidence_index.py` | 已有索引的严格校验及影响传播；scan 仅筛选 |
 | `task_context.py` | 同进程重复来源的批量摘录与复用；单次读取通常不用 |
 | `claim_coverage.py` / `research_navigation.py` | 重要报告事实绑定／已有索引导航检查 |
+| `release_audit.py` | 机器核验整理完成报告、findings 处置、测试、审核和 Git 发布状态 |
 
 快照可复用、声明闭包完整、任务可验收是三回事；需要 API 时读[证据闭包](references/task-execution.md#证据闭包与紧凑输出)。工具状态不自动判定科学结论。
 
@@ -75,3 +78,5 @@ Before and after a move, inspect the visible file surface and validate current c
 复用检查须匹配当前树、环境、输入、范围及修改后产物；变更、失效或疑点触发相关复核，不为局部只读检查重跑全套测试。缓存、哈希或工程通过不能代替科学语义验收。
 
 必要检查通过且无验收缺口即收口。分别说明科研重构与物理清理的已完成、保留和受阻项；有缺口交付部分完成，必要条件不足说明受阻。发生整理时同口径统计文件、目录、字节变化，包成员另计，并附整理后目录树、删除清单及 `tidy_audit.py` 的剩余项与理由；仅检查直接回答。临时计划、恢复与评价记录放项目外，验收前不移除唯一恢复源。
+
+**发布到 Git 时增加独立门槛。** 生成一份机器可读的整理报告，至少包含 `scope`、同口径 `inventory.before/after`（`files`、`dirs`、`bytes`、`root_entries`）、逐条 `tidy_audit` finding、每条 finding 的 path、disposition 和 evidence、带结果的操作清单、链接检查、非空测试退出码、恢复清单、findings/archive/delete 覆盖、独立审核者和 Git commit。用 `scripts/release_audit.py` 验证报告。发布前在最终工作树重新检查，确认核心工作区干净、接受的 commit 等于远程目标分支 tip，随后再推送并重新 fetch 核对。`COMPLETE` 只允许 `resolved` 或 `retained_with_reason`，不能带 unresolved 项；嵌套仓库、运行时目录和明确保护项必须单独声明。使用 `--check-git` 时必须由工具实际读取工作树、分支、HEAD 和远程分支状态。

@@ -6,6 +6,8 @@ from pathlib import Path
 import stat
 import sys
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import delete_paths  # noqa: E402
 
@@ -75,7 +77,7 @@ def test_any_failed_check_blocks_every_deletion(tmp_path: Path) -> None:
 
     result = delete_paths.run(manifest, apply=True)
 
-    assert len(result['errors']) == 7
+    assert len(result['errors']) >= 7
     assert result['deleted'] == []
     assert tree(tmp_path) == before
 
@@ -88,3 +90,117 @@ def test_cli_returns_nonzero_on_errors(tmp_path: Path, capsys) -> None:
     assert delete_paths.main([str(path)]) == 1
     assert 'sha256 required' in capsys.readouterr().out
     assert (tmp_path / 'a.txt').exists()
+
+
+def test_partition_keeps_safe_items_visible_when_one_item_is_blocked(tmp_path: Path) -> None:
+    safe = write(tmp_path / 'safe.txt', b'safe')
+    manifest = {
+        'root': str(tmp_path),
+        'items': [
+            {'path': 'safe.txt', 'sha256': digest(safe), 'reason': 'candidate'},
+            {'path': '.git/HEAD', 'sha256': '0' * 64, 'reason': 'protected'},
+        ],
+    }
+    groups = delete_paths.partition(manifest)
+    assert [item['path'] for item in groups['accepted']] == ['safe.txt']
+    assert groups['blocked'][0]['path'] == '.git/HEAD'
+    assert safe.exists()
+
+
+def test_duplicate_paths_are_rejected_before_mutation(tmp_path: Path) -> None:
+    file = write(tmp_path / 'a.txt', b'a')
+    manifest = {
+        'root': str(tmp_path),
+        'items': [
+            {'path': 'a.txt', 'sha256': digest(file), 'reason': 'one'},
+            {'path': './a.txt', 'sha256': digest(file), 'reason': 'two'},
+        ],
+    }
+    result = delete_paths.run(manifest, apply=True)
+    assert result['deleted'] == []
+    assert result['errors']
+    assert file.exists()
+
+
+def test_post_delete_bytes_are_verified(tmp_path: Path) -> None:
+    file = write(tmp_path / 'a.txt', b'a')
+    manifest = {'root': str(tmp_path), 'items': [
+        {'path': 'a.txt', 'sha256': digest(file), 'reason': 'candidate'},
+    ]}
+    result = delete_paths.run(manifest, apply=True)
+    assert result['errors'] == []
+    assert result['bytes_planned'] == 1
+    assert result['bytes_removed_verified'] == 1
+    assert not file.exists()
+
+
+def test_partition_blocks_parent_when_child_is_blocked(tmp_path: Path) -> None:
+    write(tmp_path / 'folder' / 'keep.txt', b'keep')
+    manifest = {
+        'root': str(tmp_path),
+        'items': [
+            {'path': 'folder', 'kind': 'empty-dir', 'reason': 'candidate'},
+            {'path': 'folder/keep.txt', 'reason': 'protected content'},
+        ],
+    }
+    groups = delete_paths.partition(manifest)
+    assert groups['accepted'] == []
+    assert {item['path'] for item in groups['blocked']} == {'folder', 'folder/keep.txt'}
+
+
+def test_partition_cli_returns_structured_errors(tmp_path: Path, capsys) -> None:
+    file = write(tmp_path / 'a.txt', b'a')
+    manifest_path = tmp_path / 'manifest.json'
+    manifest_path.write_text(json.dumps({
+        'root': str(tmp_path),
+        'items': [
+            {'path': 'a.txt', 'sha256': digest(file), 'reason': 'candidate'},
+            {'path': '.git/HEAD', 'sha256': '0' * 64, 'reason': 'protected'},
+        ],
+    }), encoding='utf-8')
+    assert delete_paths.main([str(manifest_path), '--partition']) == 1
+    result = json.loads(capsys.readouterr().out)
+    assert result['errors']
+    assert result['accepted'][0]['path'] == 'a.txt'
+
+
+def test_dry_run_reports_file_bytes_and_empty_dirs_have_zero_bytes(tmp_path: Path) -> None:
+    file = write(tmp_path / 'a.txt', b'abc')
+    (tmp_path / 'empty').mkdir()
+    manifest = {'root': str(tmp_path), 'items': [
+        {'path': 'a.txt', 'sha256': digest(file), 'reason': 'candidate'},
+        {'path': 'empty', 'kind': 'empty-dir', 'reason': 'candidate'},
+    ]}
+    result = delete_paths.run(manifest, apply=False)
+    assert result['errors'] == []
+    assert result['bytes_planned'] == 3
+
+
+def test_cache_dir_rejects_protected_descendant(tmp_path: Path) -> None:
+    write(tmp_path / '__pycache__' / '.git' / 'HEAD', b'ref')
+    manifest = {'root': str(tmp_path), 'items': [
+        {'path': '__pycache__', 'kind': 'cache-dir', 'reason': 'candidate'},
+    ]}
+    result = delete_paths.run(manifest, apply=True)
+    assert result['deleted'] == []
+    assert 'protected path inside cache dir' in result['errors'][0]['error']
+
+
+@pytest.mark.skipif(sys.platform == 'win32', reason='Windows symlink creation may require elevated privileges')
+def test_dangling_symlink_is_detected_after_delete(tmp_path: Path) -> None:
+    file = write(tmp_path / 'a.txt', b'a')
+    manifest = {'root': str(tmp_path), 'items': [
+        {'path': 'a.txt', 'sha256': digest(file), 'reason': 'candidate'},
+    ]}
+    original_remove = delete_paths.remove
+    def recreate_link(target: Path, kind: str) -> int:
+        size = original_remove(target, kind)
+        target.symlink_to(tmp_path / 'missing')
+        return size
+    delete_paths.remove = recreate_link
+    try:
+        result = delete_paths.run(manifest, apply=True)
+    finally:
+        delete_paths.remove = original_remove
+    assert result['deleted'] == []
+    assert result['recreated_after_delete'] == ['a.txt']

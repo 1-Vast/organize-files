@@ -18,6 +18,9 @@ kind defaults to "file". A file needs its full SHA-256 unless it is OS/editor
 junk or compiled cache. A cache-dir must carry a known cache name and is
 removed with its contents. An empty-dir must be empty when it is removed.
 Paths already absent count as done, so a re-run after an interruption is safe.
+The ``partition`` helper separates safe, blocked and already-absent entries
+without mutating the tree.  ``run`` remains strict by default.  Callers that
+want to continue independent cleanup batches must opt into ``continue_independent``.
 """
 from __future__ import annotations
 
@@ -52,7 +55,7 @@ def is_link(path: Path) -> bool:
 
 
 def norm(rel: str) -> str:
-    return str(rel).replace('\\', '/').strip('/').casefold()
+    return PurePosixPath(str(rel).replace('\\', '/')).as_posix().strip('/').casefold()
 
 
 def check(root: Path, item: dict, planned: frozenset[str] = frozenset()) -> tuple[Path | None, str]:
@@ -95,9 +98,62 @@ def check(root: Path, item: dict, planned: frozenset[str] = frozenset()) -> tupl
         for sub in target.rglob('*'):
             if is_link(sub):
                 return None, f'link inside cache dir: {sub}'
+            relative_parts = sub.relative_to(root).parts
+            if any(part.casefold() in PROTECTED for part in relative_parts):
+                return None, f'protected path inside cache dir: {sub}'
+            if any(SENSITIVE.search(part) for part in relative_parts):
+                return None, f'sensitive path inside cache dir: {sub}'
     elif any(norm(c.relative_to(root).as_posix()) not in planned for c in target.iterdir()):
         return None, 'directory is not empty'
     return target, 'ok'
+
+
+def _normalized_items(items: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Return items and manifest-level validation errors."""
+    seen: dict[str, int] = {}
+    errors: list[dict] = []
+    for index, item in enumerate(items):
+        key = norm(item.get('path', ''))
+        if key in seen:
+            errors.append({
+                'path': item.get('path'),
+                'error': f'duplicate normalized path also used by item {seen[key]}',
+                'item_index': index,
+            })
+        else:
+            seen[key] = index
+    return items, errors
+
+
+def partition(manifest: dict) -> dict:
+    """Classify a manifest without mutating it.
+
+    The returned groups are explicit so a protected or stale item cannot hide
+    unrelated safe work.  Applying a partition is still a separate operation.
+    """
+    root = Path(manifest.get('root', '')).resolve(strict=True)
+    items = manifest.get('items') or []
+    items, manifest_errors = _normalized_items(items)
+    order = {'file': 0, 'cache-dir': 1, 'empty-dir': 2}
+    items = sorted(items, key=lambda i: (order.get(i.get('kind', 'file'), 9),
+                                         -str(i.get('path', '')).replace('\\', '/').count('/')))
+    planned: set[str] = set()
+    groups = {'accepted': [], 'blocked': [], 'absent': [], 'manifest_errors': manifest_errors}
+    for index, item in enumerate(items):
+        target, status = check(root, item, frozenset(planned))
+        record = dict(item)
+        record['item_index'] = index
+        record['normalized_path'] = norm(item.get('path', ''))
+        if status == 'ok':
+            groups['accepted'].append(record)
+            planned.add(norm(item.get('path', '')))
+        elif status == 'absent':
+            groups['absent'].append(record)
+            planned.add(norm(item.get('path', '')))
+        else:
+            record['error'] = status
+            groups['blocked'].append(record)
+    return groups
 
 
 def _writable_and_retry(func, path, _exc):
@@ -121,25 +177,46 @@ def remove(target: Path, kind: str) -> int:
     return 0
 
 
-def run(manifest: dict, apply: bool) -> dict:
+def run(manifest: dict, apply: bool, continue_independent: bool = False) -> dict:
     root = Path(manifest.get('root', ''))
     if not root.is_absolute() or not root.is_dir() or is_link(root):
         raise ValueError(f'root must be an existing absolute directory, not a link: {root}')
     root = root.resolve(strict=True)
     items = manifest.get('items') or []
+    if not items:
+        raise ValueError('manifest items must be non-empty')
+    _, manifest_errors = _normalized_items(items)
     order = {'file': 0, 'cache-dir': 1, 'empty-dir': 2}
     # Files first, then caches, then empty directories from the deepest up.
     items = sorted(items, key=lambda i: (order.get(i.get('kind', 'file'), 9),
                                          -str(i.get('path', '')).replace('\\', '/').count('/')))
     planned = frozenset(norm(i.get('path', '')) for i in items)
     checked = [(item, *check(root, item, planned)) for item in items]
-    errors = [{'path': i.get('path'), 'error': s} for i, _, s in checked if s not in ('ok', 'absent')]
+    errors = manifest_errors + [
+        {'path': i.get('path'), 'error': s} for i, _, s in checked if s not in ('ok', 'absent')
+    ]
     result = {'root': str(root), 'mode': 'apply' if apply else 'dry-run', 'items': len(items),
               'to_delete': sum(s == 'ok' for _, _, s in checked),
               'already_absent': sum(s == 'absent' for _, _, s in checked),
-              'errors': errors, 'deleted': [], 'bytes_freed': 0}
+              'errors': errors, 'deleted': [], 'bytes_freed': 0,
+              'bytes_planned': 0, 'bytes_removed_verified': 0,
+              'failed': [], 'recreated_after_delete': [], 'not_attempted': 0}
+    def byte_size(item: dict, target: Path) -> int:
+        kind = item.get('kind', 'file')
+        if kind == 'cache-dir':
+            return sum(path.stat().st_size for path in target.rglob('*') if path.is_file())
+        if kind == 'file':
+            return target.stat().st_size
+        return 0
+
+    result['bytes_planned'] = sum(
+        byte_size(item, target)
+        for item, target, status in checked
+        if status == 'ok' and target is not None
+    )
     if errors or not apply:
         return result
+    result['bytes_planned'] = 0
     for item, target, status in checked:
         if status != 'ok':
             continue
@@ -150,14 +227,30 @@ def run(manifest: dict, apply: bool) -> dict:
             continue
         if again != 'ok':
             result['errors'].append({'path': item['path'], 'error': again})
-            break
+            result['failed'].append({'path': item['path'], 'error': again})
+            if not continue_independent:
+                break
+            continue
         try:
+            planned_bytes = byte_size(item, target)
+            result['bytes_planned'] += planned_bytes
             result['bytes_freed'] += remove(target, kind)
         except OSError as exc:
             result['errors'].append({'path': item['path'], 'error': f'{type(exc).__name__}: {exc}'})
-            break
+            result['failed'].append({'path': item['path'], 'error': f'{type(exc).__name__}: {exc}'})
+            if not continue_independent:
+                break
+            continue
+        if os.path.lexists(target):
+            result['recreated_after_delete'].append(item['path'])
+            result['errors'].append({'path': item['path'], 'error': 'recreated_after_delete'})
+            result['failed'].append({'path': item['path'], 'error': 'recreated_after_delete'})
+            if not continue_independent:
+                break
+            continue
+        result['bytes_removed_verified'] += planned_bytes
         result['deleted'].append(item['path'])
-    result['not_attempted'] = result['to_delete'] - len(result['deleted']) - len(result['errors'])
+    result['not_attempted'] = result['to_delete'] - len(result['deleted']) - len(result['failed'])
     return result
 
 
@@ -165,11 +258,22 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('manifest', type=Path)
     parser.add_argument('--apply', action='store_true', help='delete (default is a dry-run)')
+    parser.add_argument('--partition', action='store_true',
+                        help='classify accepted, blocked and absent items without mutation')
+    parser.add_argument('--continue-independent', action='store_true',
+                        help='continue independent items after a runtime deletion failure')
     args = parser.parse_args(argv)
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8')
     manifest = json.loads(args.manifest.read_text(encoding='utf-8-sig'))
-    result = run(manifest, args.apply)
+    if args.partition:
+        result = partition(manifest)
+        result['errors'] = result['manifest_errors'] + [
+            {'path': item.get('path'), 'error': item.get('error')}
+            for item in result['blocked']
+        ]
+    else:
+        result = run(manifest, args.apply, continue_independent=args.continue_independent)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 1 if result['errors'] else 0
 
